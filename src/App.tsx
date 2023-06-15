@@ -1,32 +1,39 @@
-import { Menu } from './components/menu/menu.tsx';
-import { CustomDatePicker } from './components/common/custom-date-picker.tsx';
-import { Panel } from './components/common/panel.tsx';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
+import { HomeView } from './routes/home.tsx';
+import { DiaryView } from './routes/diary.tsx';
+import { ProtectedRoutes } from './components/protected-routes.tsx';
+
+const DIARY_ROUTE = '/diary'
+const DIARY_SEARCH_ROUTE = '/diary/search'
+
+// const router = createBrowserRouter(
+//     createRoutesFromElements(<Route path="/" element={ <HomeView/> }/>),
+// )
+// <Link to={'home'}>Home</Link>
+
 
 export const App = () =>
     (
-        <div className="flex min-h-screen justify-center">
-            <div className="flex w-full flex-col px-5 pt-16 pb-0 max-w-screen-3xl md:pt-10 lg:px-10">
-                <header className="mb-8 flex w-full flex-col lg:mb-16 lg:flex-row">
-                    <div className="mb-10 flex w-80 items-center lg:mb-0">
-                        <h1 className="text-2xl font-bold text-cyan-300 md:text-3xl">Nutriscore</h1>
-                    </div>
-                    <div className="flex grow lg:justify-end">
-                        <CustomDatePicker/>
-                    </div>
-                </header>
+        <div>
+            {/*<RouterProvider router={ router }/>*/ }
 
-                <div className="flex w-full grow flex-col lg:flex-row">
-                    <Menu/>
-                    <main className="mb-32 flex h-fit grow gap-10 lg:mb-10 lg:ml-10">
-                        <Panel>
-                            <h3 className='text-lg font-medium text-gray-600 lg:text-xl'>Calories</h3>
-                        </Panel>
+            <BrowserRouter>
+                <Routes>
+                    <Route path="/" element={ <HomeView/> }/>
+                    <Route path="/home" element={ <HomeView/> }>
+                        <Route path="" element={ <HomeView/> }></Route>
+                    </Route>
 
-                        <Panel>
-                            <h3 className='text-lg font-medium text-gray-600 lg:text-xl'>Macro Intake</h3>
-                        </Panel>
-                    </main>
-                </div>
-            </div>
+                    <Route path={ DIARY_ROUTE } element={ <DiaryView/> }>
+                        <Route path={ DIARY_SEARCH_ROUTE } element={ <div>DiarySearch</div> }></Route>
+                        <Route path="/diary/search2" element={ <div>DiarySearch2</div> }></Route>
+                    </Route>
+
+                    {/*this is protected*/ }
+                    <Route element={ <ProtectedRoutes/> }>
+                        <Route path={ 'profile' } element={ <div>Profile</div> }></Route>
+                    </Route>
+                </Routes>
+            </BrowserRouter>
         </div>
     )

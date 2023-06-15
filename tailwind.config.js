@@ -13,10 +13,6 @@ export default {
             fontFamily: {
                 'sans': ['Roboto', ...defaultTheme.fontFamily.sans],
             },
-            maxWidth: {
-                'xxs': '8rem',
-                'screen-3xl': '1680px',
-            },
             colors: {
                 cyan: {
                     50: '#F2FCF8',
@@ -37,6 +33,20 @@ export default {
                     500: '#6B7280',
                     600: '#1F2937',
                 },
+            },
+            maxWidth: {
+                'xxs': '8rem',
+                'screen-3xl': '1680px',
+            },
+            flexGrow: {
+                9999: '9999',
+            },
+            transitionTimingFunction: {
+                'fill-expo': 'cubic-bezier(.93,.41,.53,.87)',
+            },
+            transitionProperty: {
+                'width': 'width',
+                'stroke-dashoffset': 'stroke-dashoffset',
             },
         },
     },

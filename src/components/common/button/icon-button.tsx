@@ -1,10 +1,10 @@
-import { ButtonProps } from './button/button-props.ts';
+import { ButtonProps } from './button-props.ts';
 
 interface IconButtonProps extends ButtonProps {
-    icon?: string
+    icon: string
 }
 
-export const IconButton = ({ icon, level, action }: IconButtonProps) => {
+export const IconButton = ({ icon, level = 'secondary', action }: IconButtonProps) => {
     const primaryStyles = 'text-gray-50 bg-cyan-200 hover:bg-cyan-300'
     const secondaryStyles = 'text-gray-500 bg-gray-200 hover:text-gray-600 hover:bg-gray-300'
     return (

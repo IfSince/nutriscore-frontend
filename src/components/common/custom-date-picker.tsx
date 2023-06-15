@@ -1,8 +1,8 @@
-import { IconButton } from './icon-button.tsx';
 import { useState } from 'react';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import DatePicker from 'tailwind-datepicker-react';
+import { IconButton } from './button/icon-button.tsx';
 
 
 export const CustomDatePicker = () => {
