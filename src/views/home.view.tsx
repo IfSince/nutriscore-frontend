@@ -7,8 +7,9 @@ import { MealPanelProps } from '../components/home/meal-panel/meal-panel-props.t
 import { MacroPanel } from '../components/home/macro-panel/macro-panel.tsx';
 import { CaloriePanel } from '../components/home/calorie-panel/calorie-panel.tsx';
 import { WeeklyHistoryPanel } from '../components/home/weekly-history/weekly-history-panel.tsx';
+import { WeeklyHistoryPanelProps } from '../components/home/weekly-history/weekly-history-panel-props.ts';
 
-const calorieCircle: ProgressProps = {
+const calorieData: ProgressProps = {
     size: 200,
     name: 'Remaining',
     value: 1112,
@@ -17,7 +18,7 @@ const calorieCircle: ProgressProps = {
     width: 12,
     trackStyles: 'stroke-white',
 }
-const macroCircles: ProgressProps[] = [
+const macroData: ProgressProps[] = [
     { size: 160, name: 'Protein', value: 89, total: 100, unit: 'g', indicatorStyles: 'stroke-red bg-red' },
     { size: 160, name: 'Carbs', value: 41, total: 100, unit: 'g', indicatorStyles: 'stroke-green bg-green' },
     { size: 160, name: 'Fats', value: 22, total: 100, unit: 'g', indicatorStyles: 'stroke-yellow bg-yellow' },
@@ -36,29 +37,39 @@ const createMealPanelProps = (apiProps: { name: string, value: number, total: nu
     }
 )
 
-const mealPanels: MealPanelProps[] = [
+const mealPanelData: MealPanelProps[] = [
     createMealPanelProps({ name: 'Breakfast', value: 220, total: 350 }),
     createMealPanelProps({ name: 'Lunch', value: 250, total: 500 }),
     createMealPanelProps({ name: 'Dinner', value: 500, total: 650 }),
     createMealPanelProps({ name: 'Snacks', value: 75, total: 200 }),
 ]
 
+const weeklyHistoryPanelData: WeeklyHistoryPanelProps[] = [
+    { 'name': 'Monday', 'uv': 4000, 'pv': 2400, 'amt': 2400 },
+    { 'name': 'Tuesday', 'uv': 2000, 'pv': 9800, 'amt': 2290 },
+    { 'name': 'Wednesday', 'uv': 3000, 'pv': 1398, 'amt': 2210 },
+    { 'name': 'Thursday', 'uv': 2780, 'pv': 3908, 'amt': 2000 },
+    { 'name': 'Friday', 'uv': 1890, 'pv': 4800, 'amt': 2181 },
+    { 'name': 'Saturday', 'uv': 2390, 'pv': 3800, 'amt': 2500 },
+    { 'name': 'Sunday', 'uv': 3490, 'pv': 4300, 'amt': 2100 },
+]
+
 export const HomeView = () =>
     <>
         <div className="flex-layout-row">
             <div className="grow">
-                <CaloriePanel progressProps={ calorieCircle }/>
+                <CaloriePanel progressProps={ calorieData }/>
             </div>
 
 
             <div className="hidden grow-9999 lg:flex">
-                <MacroPanel macroCircles={ macroCircles }/>
+                <MacroPanel macroCircles={ macroData }/>
             </div>
         </div>
 
         <div className="grid grid-cols-2 grid-rows-2 gap-5 lg:hidden lg:gap-5">
             {
-                macroCircles.map(circle =>
+                macroData.map(circle =>
                     <Panel key={ circle.name }>
                         <ProgressLinear { ...circle }/>
                     </Panel>,
@@ -68,11 +79,11 @@ export const HomeView = () =>
 
         <div className={ 'flex-layout-row flex-col xl:flex-row' }>
             <div className={ 'grow' }>
-                <WeeklyHistoryPanel/>
+                <WeeklyHistoryPanel data={weeklyHistoryPanelData}/>
             </div>
 
-            <div className="flex xl:max-w-sm flex-col gap-5 grow-9999">
-                <MealPanelList mealPanels={ mealPanels }/>
+            <div className="flex flex-col gap-5 grow-9999 xl:max-w-sm">
+                <MealPanelList mealPanels={ mealPanelData }/>
             </div>
         </div>
     </>
