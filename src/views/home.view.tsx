@@ -6,6 +6,7 @@ import { MealPanelList } from '../components/home/meal-panel/meal-panel-list.tsx
 import { MealPanelProps } from '../components/home/meal-panel/meal-panel-props.ts';
 import { MacroPanel } from '../components/home/macro-panel/macro-panel.tsx';
 import { CaloriePanel } from '../components/home/calorie-panel/calorie-panel.tsx';
+import { WeeklyHistoryPanel } from '../components/home/weekly-history/weekly-history-panel.tsx';
 
 const calorieCircle: ProgressProps = {
     size: 200,
@@ -65,14 +66,12 @@ export const HomeView = () =>
             }
         </div>
 
-        <div className="flex-layout-row">
-            <div className="grow">
-                <Panel>
-                    <div>Week History</div>
-                </Panel>
+        <div className={ 'flex-layout-row flex-col xl:flex-row' }>
+            <div className={ 'grow' }>
+                <WeeklyHistoryPanel/>
             </div>
 
-            <div className="flex flex-col gap-5">
+            <div className="flex xl:max-w-sm flex-col gap-5 grow-9999">
                 <MealPanelList mealPanels={ mealPanels }/>
             </div>
         </div>

@@ -8,7 +8,7 @@ export const MealPanel = ({ size, name, link, value, total, unit, indicatorStyle
 
     return (
         <div className="flex items-center justify-between">
-            <div className="mr-28 flex items-center">
+            <div className="flex items-center">
                 <ProgressCircle value={ value }
                                 total={ total }
                                 unit={ unit }
