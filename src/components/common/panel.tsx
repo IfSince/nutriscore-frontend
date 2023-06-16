@@ -3,12 +3,12 @@ import { ReactNode } from 'react';
 interface PanelProps {
     children: ReactNode
     highlighted?: boolean
-    additionalStyles?: string
+    className?: string
 }
 
-export const Panel = ({ children, highlighted = false, additionalStyles = '' }: PanelProps) =>
+export const Panel = ({ children, highlighted = false, className = '' }: PanelProps) =>
     (
-        <section className={ `p-4 w-full lg:p-7 h-full rounded-xl ${ additionalStyles }
+        <section className={ `p-4 w-full h-full lg:p-7 rounded-xl ${ className }
                              ${ highlighted ? 'bg-cyan-200' : 'bg-white border-2 border-gray-200' }` }>
             { children }
         </section>

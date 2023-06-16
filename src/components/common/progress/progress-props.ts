@@ -1,4 +1,3 @@
-
 export interface ProgressProps {
     name?: string
     size?: number
