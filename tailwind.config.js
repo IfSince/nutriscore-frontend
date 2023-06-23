@@ -23,7 +23,10 @@ export default {
                 green: '#CCDEC0',
                 yellow: '#FCC984',
                 blue: '#B2F4FC',
-                red: '#F6AB95',
+                red: {
+                    DEFAULT: '#F6AB95',
+                    600: '#e39680',
+                },
                 gray: {
                     50: '#F9FAFB',
                     100: '#F3F4F6',

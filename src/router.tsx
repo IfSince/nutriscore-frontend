@@ -5,6 +5,8 @@ import { RootView } from './views/root.view.tsx';
 import { NotFoundView } from './views/error.view.tsx';
 import { DIARY_ROUTE, HOME_ROUTE, PROFILE_ROUTE, STATISTICS_ROUTE } from './routes.ts';
 import { StatisticsView } from './views/statistics.view.tsx';
+import { ProfileView } from './views/profile.view.tsx';
+import { DiaryOverview } from './components/diary/diary-overview.tsx';
 
 export const router = createBrowserRouter([
     {
@@ -12,11 +14,36 @@ export const router = createBrowserRouter([
         element: <RootView/>,
         errorElement: <NotFoundView/>,
         children: [
-            { index: true, element: <Navigate to={ HOME_ROUTE } replace/> },
-            { path: HOME_ROUTE, element: <HomeView/> },
-            { path: DIARY_ROUTE, element: <DiaryView/> },
-            { path: STATISTICS_ROUTE, element: <StatisticsView/> },
-            { path: PROFILE_ROUTE, element: <DiaryView/> },
+            {
+                index: true,
+                element: <Navigate to={ HOME_ROUTE } replace/>,
+            },
+            {
+                path: HOME_ROUTE,
+                element: <HomeView/>,
+            },
+            {
+                path: DIARY_ROUTE,
+                element: <DiaryView/>,
+                children: [
+                    {
+                        index: true,
+                        element: <DiaryOverview/>,
+                    },
+                    {
+                        path: '/diary/search',
+                        element: <div>SearchViewsdfsdf</div>,
+                    },
+                ],
+            },
+            {
+                path: STATISTICS_ROUTE,
+                element: <StatisticsView/>,
+            },
+            {
+                path: PROFILE_ROUTE,
+                element: <ProfileView/>,
+            },
         ],
     },
 ])

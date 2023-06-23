@@ -15,20 +15,13 @@ export const ProgressCircle = ({
     indicatorStyles = 'stroke-gray-600',
     children,
 }: CircleProgressProps) => {
-    const percentage = Math.round((
-        value / total
-    ) * 100)
+    const percentage = Math.round((value / total) * 100)
     const center = size / 2
     const radius = center - width
     const strokeDasharray = 2 * Math.PI * radius
 
     const [strokeDashoffset, setStrokeDashoffset] = useState(strokeDasharray)
-    useEffect(() => setStrokeDashoffset(strokeDasharray *
-        (
-            (
-                100 - percentage
-            ) / 100
-        )), [strokeDasharray, percentage])
+    useEffect(() => setStrokeDashoffset(strokeDasharray * ((100 - percentage) / 100)), [strokeDasharray, percentage])
 
     return (
         <div className="flex flex-col items-center">

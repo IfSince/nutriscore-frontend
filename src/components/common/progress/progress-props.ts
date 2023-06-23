@@ -3,7 +3,7 @@ export interface ProgressProps {
     size?: number
     value: number
     total: number
-    unit: string
+    unit?: string
     width?: number
     trackStyles?: string
     indicatorStyles?: string
