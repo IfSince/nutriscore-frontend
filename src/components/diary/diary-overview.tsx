@@ -67,7 +67,7 @@ export const DiaryOverview = () =>
 
         {
             diaryData.map(data =>
-                <div className="flex-layout-row">
+                <div key={ data.name } className="flex-layout-row">
                     <MealTimeOfDay name={ data.name } progress={ data.progress } items={ data.items }/>
                 </div>,
             )

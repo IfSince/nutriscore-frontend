@@ -27,7 +27,7 @@ export const MealTimeOfDay = ({ name, progress, items }: MealTimeOfDayProps) =>
             </div>
 
             <div className="flex flex-col gap-3">
-                { items.map(item => <MealItem { ...item }/>) }
+                { items.map(item => <MealItem key={ item.name } { ...item }/>) }
             </div>
         </div>
     </Panel>
