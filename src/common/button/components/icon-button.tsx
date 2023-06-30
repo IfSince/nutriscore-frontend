@@ -2,10 +2,10 @@ import { ButtonProps } from '../models/button-props.ts';
 
 interface IconButtonProps extends ButtonProps {
     icon: string
-    iconSize?: string
+    iconStyles?: string
 }
 
-export const IconButton = ({ icon, iconSize = '', size = 'medium', level = 'secondary', action }: IconButtonProps) => {
+export const IconButton = ({ icon, iconStyles = '', size = 'medium', level = 'secondary', action }: IconButtonProps) => {
     const height = size == 'medium' ? 'h-10 lg:h-12' : 'h-8 lg:h-10'
 
     let styles;
@@ -26,7 +26,7 @@ export const IconButton = ({ icon, iconSize = '', size = 'medium', level = 'seco
         <button
             onClick={ action }
             className={ `flex aspect-square ${ height } ${ styles } items-center justify-center rounded-md transition-colors` }>
-            <span className={ `${ iconSize ? iconSize : 'text-xl' } material-icons-round` }>{ icon }</span>
+            <span className={ `${ iconStyles ? iconStyles : 'text-xl' } material-icons-round` }>{ icon }</span>
         </button>
     );
 }

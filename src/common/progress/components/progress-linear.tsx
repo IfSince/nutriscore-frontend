@@ -1,5 +1,5 @@
-import { ProgressProps } from '../progress-props.ts';
 import { useEffect, useState } from 'react';
+import { ProgressProps } from '../models/progress-props.ts';
 
 export const ProgressLinear = ({
     value,
