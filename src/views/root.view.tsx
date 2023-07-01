@@ -1,17 +1,25 @@
-import { Outlet } from 'react-router-dom';
+import { Outlet, useMatch, useNavigate } from 'react-router-dom';
 import { CustomDatePicker } from '../common/custom-date-picker.tsx';
 import { MENU_ITEMS } from '../features/menu/model/menu-items.ts';
 import { Menu } from '../features/menu/components/menu.tsx';
+import { IconButton } from '../common/button/components/icon-button.tsx';
 
-export const RootView = () =>
-    <div className="flex justify-center lg:min-h-screen">
+export const RootView = () => {
+    const isMatch = useMatch('diary/search')
+    const navigate = useNavigate()
+
+    return <div className="flex justify-center lg:min-h-screen">
         <div className="flex w-full flex-col px-5 pt-16 pb-0 max-w-screen-3xl md:pt-10 lg:px-10">
             <header className="mb-8 flex w-full flex-col lg:mb-16 lg:flex-row">
                 <div className="mb-10 flex h-10 w-80 items-center lg:mb-0 lg:h-12">
-                    <h1 className="text-2xl font-bold text-cyan-300 md:text-3xl">Nutriscore</h1>
+                    {
+                        !isMatch ?
+                            <h1 className="text-2xl font-bold text-cyan-300 md:text-3xl">Nutriscore</h1> :
+                            <IconButton icon="arrow_back" level="primary" action={ () => navigate(-1) }/>
+                    }
                 </div>
                 <div className="box-border flex grow lg:justify-end">
-                    <CustomDatePicker/>
+                    { !isMatch && <CustomDatePicker/> }
                 </div>
             </header>
 
@@ -22,4 +30,5 @@ export const RootView = () =>
                 </main>
             </div>
         </div>
-    </div>
+    </div>;
+}

@@ -13,6 +13,7 @@ const calorieData: ProgressProps = {
     width: 15,
     trackStyles: 'stroke-white',
 }
+
 const macroData: ProgressProps[] = [
     { size: 160, width: 13, name: 'Protein', value: 89, total: 100, unit: 'g', indicatorStyles: 'stroke-red bg-red' },
     { size: 160, width: 13, name: 'Carbs', value: 41, total: 100, unit: 'g', indicatorStyles: 'stroke-green bg-green' },

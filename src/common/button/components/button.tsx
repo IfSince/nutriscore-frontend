@@ -1,11 +1,13 @@
 import { AbstractButtonProps } from '../models/abstract-button-props.ts';
+import { ReactNode } from 'react';
 
-interface IconButtonProps extends AbstractButtonProps {
-    icon: string
-    iconStyles?: string
+interface ButtonProps extends AbstractButtonProps {
+    children: ReactNode
+    className?: string
+    type?: 'button' | 'submit' | 'reset'
 }
 
-export const IconButton = ({ icon, iconStyles = '', size = 'medium', level = 'secondary', action }: IconButtonProps) => {
+export const Button = ({ className, children, size = 'medium', level = 'secondary', action, type = 'button' }: ButtonProps) => {
     const height = size == 'medium' ? 'h-10 lg:h-12' : 'h-8 lg:h-10'
 
     let styles;
@@ -20,13 +22,12 @@ export const IconButton = ({ icon, iconStyles = '', size = 'medium', level = 'se
             styles = 'text-gray-50 bg-red hover:bg-red-600'
             break
     }
-
-
     return (
         <button
+            type={ type }
             onClick={ action }
-            className={ `flex aspect-square ${ height } ${ styles } items-center justify-center rounded-md transition-colors` }>
-            <span className={ `${ iconStyles ? iconStyles : 'text-xl' } material-icons-round` }>{ icon }</span>
+            className={ `flex ${ height } ${ styles } items-center justify-center rounded-md transition-colors ${ className }` }>
+            { children }
         </button>
     );
 }
