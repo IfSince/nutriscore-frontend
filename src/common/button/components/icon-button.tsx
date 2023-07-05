@@ -14,7 +14,7 @@ export const IconButton = ({ icon, iconStyles = '', size = 'medium', level = 'se
             styles = 'text-gray-50 bg-cyan-200 hover:bg-cyan-300'
             break
         case 'secondary':
-            styles = 'text-gray-500 bg-gray-200 hover:text-gray-600 hover:bg-gray-300'
+            styles = 'text-gray-500 bg-gray-100 hover:text-gray-600 hover:bg-gray-200'
             break
         case 'delete':
             styles = 'text-gray-50 bg-red hover:bg-red-600'
@@ -25,7 +25,7 @@ export const IconButton = ({ icon, iconStyles = '', size = 'medium', level = 'se
     return (
         <button
             onClick={ action }
-            className={ `flex aspect-square ${ height } ${ styles } items-center justify-center rounded-md transition-colors` }>
+            className={ `flex aspect-square ${ height } ${ styles } items-center justify-center rounded-md transition-colors group` }>
             <span className={ `${ iconStyles ? iconStyles : 'text-xl' } material-icons-round` }>{ icon }</span>
         </button>
     );

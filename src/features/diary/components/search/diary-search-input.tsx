@@ -23,12 +23,12 @@ export const DiarySearchInput = ({ filterText, onFilterTextChange }: DiarySearch
             </div>
             <Button action={ console.log } type="button" level="primary" className="ml-2 aspect-square text-gray-50 md:ml-4 md:aspect-auto md:px-4">
                 <span className="text-2xl material-icons-round">add</span>
-                <span className="hidden whitespace-nowrap px-2 text-base font-medium md:inline lg:text-lg">New entry</span>
+                <span className="hidden whitespace-nowrap px-2 text-base font-medium md:inline tracking-wide">New entry</span>
             </Button>
 
             <Button action={ console.log } type="button" level="primary" className="ml-2 aspect-square text-gray-50 md:ml-4 md:aspect-auto md:px-4">
                 <span className="text-lg material-icons-round">qr_code_scanner</span>
-                <span className="hidden whitespace-nowrap px-2 text-base font-medium md:inline lg:text-lg">Scan code</span>
+                <span className="hidden whitespace-nowrap px-2 text-base font-medium md:inline tracking-wide">Scan code</span>
             </Button>
         </form>
     )

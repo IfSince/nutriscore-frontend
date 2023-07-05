@@ -5,7 +5,7 @@ import { Menu } from '../features/menu/components/menu.tsx';
 import { IconButton } from '../common/button/components/icon-button.tsx';
 
 export const RootView = () => {
-    const isMatch = useMatch('diary/search')
+    const isMatch = useMatch('diary/*')
     const navigate = useNavigate()
 
     return <div className="flex justify-center lg:min-h-screen">
@@ -15,7 +15,10 @@ export const RootView = () => {
                     {
                         !isMatch ?
                             <h1 className="text-2xl font-bold text-cyan-300 md:text-3xl">Nutriscore</h1> :
-                            <IconButton icon="arrow_back" level="primary" action={ () => navigate(-1) }/>
+                            <IconButton icon="arrow_back"
+                                        level="primary"
+                                        action={ () => navigate(-1) }
+                                        iconStyles="text-2xl lg:text-3xl -ml-0.5 lg:ml-0"/>
                     }
                 </div>
                 <div className="box-border flex grow lg:justify-end">

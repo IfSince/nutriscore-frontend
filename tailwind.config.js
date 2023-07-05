@@ -37,7 +37,12 @@ export default {
                     600: '#1F2937',
                 },
             },
+            height: {
+                '18': '4.5rem',
+            },
             maxWidth: {
+                'sm': '20rem',
+                'xs': '12rem',
                 'xxs': '8rem',
                 'screen-3xl': '1680px',
             },
@@ -51,6 +56,9 @@ export default {
                 'width': 'width',
                 'stroke-dashoffset': 'stroke-dashoffset',
             },
+            screens: {
+                '1.5xl': '1450px'
+            }
         },
     },
     plugins: [require('flowbite/plugin')],

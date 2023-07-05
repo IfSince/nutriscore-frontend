@@ -35,16 +35,7 @@ const diaryData: MealOverviewProps[] = [
                 fats: '15g',
             },
             {
-                name: 'Espresso coffee',
-                progress: { size: 50, value: 100, total: 200, width: 8, indicatorStyles: 'stroke-cyan-200' },
-                amount: '100 kcal',
-                calories: '100 kcal',
-                protein: '21g',
-                carbs: '36g',
-                fats: '15g',
-            },
-            {
-                name: 'Espresso coffee',
+                name: 'Apple',
                 progress: { size: 50, value: 100, total: 200, width: 8, indicatorStyles: 'stroke-cyan-200' },
                 amount: '100 kcal',
                 calories: '100 kcal',
