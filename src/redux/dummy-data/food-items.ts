@@ -1,8 +1,9 @@
-import { IFoodItem } from '../../food/models/food-item.ts';
+import { generateUuid } from '../../utils/generate-uuid.ts';
+import { FoodItem } from '../models/food-item.ts';
 
-export const dummyFoodItems: IFoodItem[] = [
+export const dummyFoodItems: FoodItem[] = [
     {
-        id: 1,
+        id: generateUuid(),
         description: 'Espresso coffee',
         unit: 'ml',
         amount: 100,
@@ -32,7 +33,7 @@ export const dummyFoodItems: IFoodItem[] = [
         ],
     },
     {
-        id: 2,
+        id: generateUuid(),
         description: 'Apple',
         unit: 'g',
         amount: 40,

@@ -1,16 +1,16 @@
-import { IFoodItem } from '../models/food-item.ts';
 import { ItemCategoryBadge } from './item-category-badge.tsx';
 import { IconButton } from '../../../common/button/components/icon-button.tsx';
 import { ReactNode } from 'react';
 import { FoodItemValueCard } from './food-item-value-card.tsx';
 import { DesktopPanel } from '../../../common/desktop-panel.tsx';
+import { FoodItem } from '../../../redux/models/food-item.ts';
 
 interface FoodItemProps {
     children: ReactNode
-    item: IFoodItem
+    item: FoodItem
 }
 
-export const FoodItem = ({
+export const FoodItemComponent = ({
     item: {
         description,
         calories,

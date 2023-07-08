@@ -1,19 +1,21 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store.ts';
+import { dummyFoodItems } from '../dummy-data/food-items.ts';
+import { FoodItem } from '../models/food-item.ts';
 
 interface FoodItemsState {
-    items: object[]
+    items: FoodItem[]
 }
 
 const initialState: FoodItemsState = {
-    items: [],
+    items: dummyFoodItems,
 }
 
 export const foodItemsSlice = createSlice({
     name: 'foodItems',
     initialState,
     reducers: {
-        addItem: (state, action: PayloadAction<object>) => {
+        addItem: (state, action: PayloadAction<FoodItem>) => {
             state.items.push(action.payload)
         },
     },

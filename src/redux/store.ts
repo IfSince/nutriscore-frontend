@@ -1,7 +1,10 @@
 import { configureStore } from '@reduxjs/toolkit';
+import { foodItemsSlice } from './slices/food-items-slice.ts';
 
 export const store = configureStore({
-    reducer: {},
+    reducer: {
+        foodItems: foodItemsSlice.reducer,
+    },
 })
 
 export type RootState = ReturnType<typeof store.getState>
