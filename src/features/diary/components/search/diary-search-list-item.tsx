@@ -1,8 +1,8 @@
 import { IconButton } from '../../../../common/button/components/icon-button.tsx';
 import { Link } from 'react-router-dom';
-import { FoodItem } from '../../../../redux/models/food-item.ts';
+import { Item } from '../../../../redux/models/item.ts';
 
-export const DiarySearchListItem = ({ id, description, amount, unit }: FoodItem) =>
+export const DiarySearchListItem = ({ id, description, amount, unit }: Item) =>
     <Link to={ `/diary/food/${ id }` }
           className="flex cursor-pointer items-center justify-between rounded-lg border-2 border-gray-100 py-2 pr-3 pl-4 hover:bg-gray-50 md:pl-5 lg:pr-4">
         <div className="flex items-start gap-x-4 tracking-tight sm:flex-col">

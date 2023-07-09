@@ -1,52 +1,132 @@
 import { ProgressProps } from '../../../common/progress/models/progress-props.ts';
-import { WeeklyOverviewPanel, WeeklyOverviewPanelProps } from '../components/weekly-overview-panel.tsx';
+import { WeeklyOverviewPanel } from '../components/weekly-overview-panel.tsx';
 import { MealPanelList } from '../components/meal-panel-list.tsx';
 import { CaloriePanel } from '../../../common/calorie-panel/components/calorie-panel.tsx';
 import { MacroPanel } from '../../../common/macro-panel/components/macro-panel.tsx';
+import { useAppSelector } from '../../../redux/hooks.ts';
+import { selectUserMetadata } from '../../../redux/slices/user-metadata-slice.ts';
+import { selectDate } from '../../../redux/slices/date-slice.ts';
+import { ValueTotalPair } from '../../../redux/models/value-total-pair.ts';
 
-const calorieData: ProgressProps = {
-    size: 200,
-    name: 'Remaining',
-    value: 1112,
-    total: 2000,
-    unit: 'kcal',
-    width: 15,
-    trackStyles: 'stroke-white',
-}
+export const HomeView = () => {
+    const date = new Date(useAppSelector(selectDate))
+    const metadata = useAppSelector(selectUserMetadata)
 
-const macroData: ProgressProps[] = [
-    { size: 160, width: 13, name: 'Protein', value: 89, total: 100, unit: 'g', indicatorStyles: 'stroke-red bg-red' },
-    { size: 160, width: 13, name: 'Carbs', value: 41, total: 100, unit: 'g', indicatorStyles: 'stroke-green bg-green' },
-    { size: 160, width: 13, name: 'Fats', value: 22, total: 100, unit: 'g', indicatorStyles: 'stroke-yellow bg-yellow' },
-    { size: 160, width: 13, name: 'Water', value: 1.6, total: 2, unit: 'l', indicatorStyles: 'stroke-blue bg-blue' },
-]
+    const metadataByDate = metadata[date.getFullYear()][date.getMonth() + 1].data[date.getDate()]
+    const weightRecordings = metadata[date.getFullYear()][date.getMonth() + 1].weightRecordings
 
-const mealData: ProgressProps[] = [
-    { size: 75, width: 12, name: 'Breakfast', value: 220, total: 350, unit: 'kcal', indicatorStyles: 'stroke-cyan-200' },
-    { size: 75, width: 12, name: 'Lunch', value: 250, total: 500, unit: 'kcal', indicatorStyles: 'stroke-cyan-200' },
-    { size: 75, width: 12, name: 'Dinner', value: 500, total: 650, unit: 'kcal', indicatorStyles: 'stroke-cyan-200' },
-    { size: 75, width: 12, name: 'Snacks', value: 75, total: 200, unit: 'kcal', indicatorStyles: 'stroke-cyan-200' },
-]
+    const totalCaloriesValuePair =
+        Object
+            .values(metadataByDate.calories)
+            .reduce((prev: ValueTotalPair, curr: ValueTotalPair): ValueTotalPair => (
+                {
+                    value: prev.value + curr.value,
+                    total: prev.total + curr.total,
+                }
+            ), { value: 0, total: 0 })
 
-const weightData: WeeklyOverviewPanelProps[] = [
-    { day: 'Monday', value: 80.5 },
-    { day: 'Tuesday', value: 80.5 },
-    { day: 'Wednesday', value: 80.4 },
-    { day: 'Thursday', value: 80.2 },
-    { day: 'Friday', value: 80.6 },
-    { day: 'Saturday', value: 80 },
-    { day: 'Sunday', value: 80 },
-]
+    const calorieData: ProgressProps = {
+        size: 200,
+        width: 15,
+        name: 'Remaining',
+        unit: 'kcal',
+        value: totalCaloriesValuePair.value,
+        total: totalCaloriesValuePair.total,
+        trackStyles: 'stroke-white',
+        indicatorStyles: 'stroke-gray-600',
+    }
 
-export const HomeView = () =>
-    <>
+    const macroData = [
+        {
+            size: 160,
+            width: 13,
+            name: 'Protein',
+            unit: 'g',
+            value: metadataByDate.protein.value,
+            total: metadataByDate.protein.total,
+            trackStyles: '',
+            indicatorStyles: 'stroke-red bg-red',
+        },
+        {
+            size: 160,
+            width: 13,
+            name: 'Carbs',
+            unit: 'g',
+            value: metadataByDate.carbohydrates.value,
+            total: metadataByDate.carbohydrates.total,
+            trackStyles: '',
+            indicatorStyles: 'stroke-green bg-green',
+        },
+        {
+            size: 160,
+            width: 13,
+            name: 'Fats',
+            unit: 'g',
+            value: metadataByDate.fats.value,
+            total: metadataByDate.fats.total,
+            trackStyles: '',
+            indicatorStyles: 'stroke-yellow bg-yellow',
+        },
+        {
+            size: 160,
+            width: 13,
+            name: 'Water',
+            unit: 'g',
+            value: metadataByDate.water.value,
+            total: metadataByDate.water.total,
+            trackStyles: '',
+            indicatorStyles: 'stroke-blue bg-blue',
+        },
+    ]
+
+    const mealData: ProgressProps[] = [
+        {
+            size: 75,
+            width: 12,
+            name: 'Breakfast',
+            value: metadataByDate.calories.breakfast.value,
+            total: metadataByDate.calories.breakfast.total,
+            unit: 'kcal',
+            indicatorStyles: 'stroke-cyan-200',
+        },
+        {
+            size: 75,
+            width: 12,
+            name: 'Lunch',
+            value: metadataByDate.calories.lunch.value,
+            total: metadataByDate.calories.lunch.total,
+            unit: 'kcal',
+            indicatorStyles: 'stroke-cyan-200',
+        },
+        {
+            size: 75,
+            width: 12,
+            name: 'Dinner',
+            value: metadataByDate.calories.dinner.value,
+            total: metadataByDate.calories.dinner.total,
+            unit: 'kcal',
+            indicatorStyles: 'stroke-cyan-200',
+        },
+        {
+            size: 75,
+            width: 12,
+            name: 'Snacks',
+            value: metadataByDate.calories.snacks.value,
+            total: metadataByDate.calories.snacks.total,
+            unit: 'kcal',
+            indicatorStyles: 'stroke-cyan-200',
+        },
+    ]
+
+    return <>
         <div className="flex-layout-row">
             <CaloriePanel data={ calorieData }/>
             <MacroPanel data={ macroData }/>
         </div>
 
         <div className="flex-layout-row">
-            <WeeklyOverviewPanel data={ weightData }/>
+            <WeeklyOverviewPanel data={ weightRecordings }/>
             <MealPanelList data={ mealData }/>
         </div>
-    </>
+    </>;
+}

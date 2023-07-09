@@ -12,7 +12,7 @@ export const ProgressCircle = ({
     total,
     width,
     trackStyles,
-    indicatorStyles = 'stroke-gray-600',
+    indicatorStyles,
     children,
 }: CircleProgressProps) => {
     const percentage = Math.round((value / total) * 100)

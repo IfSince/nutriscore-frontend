@@ -3,9 +3,14 @@ import { useState } from 'react';
 // @ts-ignore
 import DatePicker from 'tailwind-datepicker-react';
 import { IconButton } from './button/components/icon-button.tsx';
+import { useAppDispatch, useAppSelector } from '../redux/hooks.ts';
+import { selectDate, update } from '../redux/slices/date-slice.ts';
 
 
 export const CustomDatePicker = () => {
+    const date = useAppSelector(selectDate)
+    const dispatch = useAppDispatch()
+
     const options = {
         autoHide: true,
         todayBtn: true,
@@ -29,20 +34,18 @@ export const CustomDatePicker = () => {
         //     next: () => <span>Next</span>,
         // },
         datepickerClassNames: 'top-11 left-0 lg:right-0 lg:left-auto',
-        defaultDate: new Date(),
+        defaultDate: new Date(date),
         language: 'de',
     }
     const [show, setShow] = useState(false)
-    const handleChange = (selectedDate: Date) => {
-        console.log(selectedDate)
-    }
+
     const handleClose = (state: boolean) => {
         setShow(state)
     }
 
     return (
         <div className="relative flex items-center">
-            <DatePicker options={ options } onChange={ handleChange } show={ show } setShow={ handleClose }/>
+            <DatePicker options={ options } onChange={ (date: Date) => dispatch(update(date.toString())) } show={ show } setShow={ handleClose }/>
             <IconButton icon={ 'calendar_month' } level={ 'primary' } action={ handleClose }/>
         </div>
     );

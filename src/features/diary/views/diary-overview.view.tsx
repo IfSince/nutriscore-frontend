@@ -1,24 +1,11 @@
-import { ProgressProps } from '../../../common/progress/models/progress-props.ts';
 import { DiaryMealPanel, MealOverviewProps } from '../components/diary-meal-panel.tsx';
 import { CaloriePanel } from '../../../common/calorie-panel/components/calorie-panel.tsx';
 import { MacroPanel } from '../../../common/macro-panel/components/macro-panel.tsx';
-
-
-const calorieData: ProgressProps = {
-    size: 200,
-    name: 'Remaining',
-    value: 1112,
-    total: 2000,
-    unit: 'kcal',
-    width: 12,
-    trackStyles: 'stroke-white',
-}
-const macroData: ProgressProps[] = [
-    { size: 160, width: 10, name: 'Protein', value: 89, total: 100, unit: 'g', indicatorStyles: 'stroke-red bg-red' },
-    { size: 160, width: 10, name: 'Carbs', value: 41, total: 100, unit: 'g', indicatorStyles: 'stroke-green bg-green' },
-    { size: 160, width: 10, name: 'Fats', value: 22, total: 100, unit: 'g', indicatorStyles: 'stroke-yellow bg-yellow' },
-    { size: 160, width: 10, name: 'Water', value: 1.6, total: 2, unit: 'l', indicatorStyles: 'stroke-blue bg-blue' },
-]
+import { useAppSelector } from '../../../redux/hooks.ts';
+import { selectDate } from '../../../redux/slices/date-slice.ts';
+import { selectUserMetadata } from '../../../redux/slices/user-metadata-slice.ts';
+import { ValueTotalPair } from '../../../redux/models/value-total-pair.ts';
+import { ProgressProps } from '../../../common/progress/models/progress-props.ts';
 
 const diaryData: MealOverviewProps[] = [
     {
@@ -92,8 +79,77 @@ const diaryData: MealOverviewProps[] = [
     },
 ]
 
-export const DiaryOverviewView = () =>
-    <>
+export const DiaryOverviewView = () => {
+    const date = new Date(useAppSelector(selectDate))
+    const metadata = useAppSelector(selectUserMetadata)
+
+    const metadataByDate = metadata[date.getFullYear()][date.getMonth() + 1].data[date.getDate()]
+
+    const totalCaloriesValuePair =
+        Object
+            .values(metadataByDate.calories)
+            .reduce((prev: ValueTotalPair, curr: ValueTotalPair): ValueTotalPair => (
+                {
+                    value: prev.value + curr.value,
+                    total: prev.total + curr.total,
+                }
+            ), { value: 0, total: 0 })
+
+    const calorieData: ProgressProps = {
+        size: 200,
+        width: 15,
+        name: 'Remaining',
+        unit: 'kcal',
+        value: totalCaloriesValuePair.value,
+        total: totalCaloriesValuePair.total,
+        trackStyles: 'stroke-white',
+        indicatorStyles: 'stroke-gray-600',
+    }
+
+    const macroData = [
+        {
+            size: 160,
+            width: 13,
+            name: 'Protein',
+            unit: 'g',
+            value: metadataByDate.protein.value,
+            total: metadataByDate.protein.total,
+            trackStyles: '',
+            indicatorStyles: 'stroke-red bg-red',
+        },
+        {
+            size: 160,
+            width: 13,
+            name: 'Carbs',
+            unit: 'g',
+            value: metadataByDate.carbohydrates.value,
+            total: metadataByDate.carbohydrates.total,
+            trackStyles: '',
+            indicatorStyles: 'stroke-green bg-green',
+        },
+        {
+            size: 160,
+            width: 13,
+            name: 'Fats',
+            unit: 'g',
+            value: metadataByDate.fats.value,
+            total: metadataByDate.fats.total,
+            trackStyles: '',
+            indicatorStyles: 'stroke-yellow bg-yellow',
+        },
+        {
+            size: 160,
+            width: 13,
+            name: 'Water',
+            unit: 'g',
+            value: metadataByDate.water.value,
+            total: metadataByDate.water.total,
+            trackStyles: '',
+            indicatorStyles: 'stroke-blue bg-blue',
+        },
+    ]
+
+    return <>
         <div className="flex-layout-row">
             <CaloriePanel data={ calorieData }/>
             <MacroPanel data={ macroData }/>
@@ -106,4 +162,5 @@ export const DiaryOverviewView = () =>
                 </div>,
             )
         }
-    </>
+    </>;
+}
