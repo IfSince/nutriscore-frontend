@@ -1,5 +1,5 @@
 export interface AbstractButtonProps {
-    level?: 'primary' | 'secondary' | 'delete'
-    size?: 'small' | 'medium'
+    type?: 'button' | 'submit' | 'reset'
+    className?: string
     action: (...args: any[]) => unknown | string
 }

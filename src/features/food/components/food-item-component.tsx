@@ -1,9 +1,9 @@
 import { ItemCategoryBadge } from './item-category-badge.tsx';
-import { IconButton } from '../../../common/button/components/icon-button.tsx';
 import { ReactNode } from 'react';
 import { FoodItemValueCard } from './food-item-value-card.tsx';
 import { DesktopPanel } from '../../../common/desktop-panel.tsx';
 import { FoodItem } from '../../../redux/models/food-item.ts';
+import { DefaultIconButton } from '../../../common/button/components/icon/default-icon-button.tsx';
 
 interface FoodItemProps {
     children: ReactNode
@@ -37,7 +37,7 @@ export const FoodItemComponent = ({
                         }
                     </div>
                     <div>
-                        <IconButton icon="favorite" action={ console.log } iconStyles="text-red group-hover:text-red-600 transition-colors"/>
+                        <DefaultIconButton icon="favorite" action={ console.log }/>
                     </div>
                 </div>
 

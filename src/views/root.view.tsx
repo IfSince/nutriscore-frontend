@@ -2,7 +2,7 @@ import { Outlet, useMatch, useNavigate } from 'react-router-dom';
 import { CustomDatePicker } from '../common/custom-date-picker.tsx';
 import { MENU_ITEMS } from '../features/menu/model/menu-items.ts';
 import { Menu } from '../features/menu/components/menu.tsx';
-import { IconButton } from '../common/button/components/icon-button.tsx';
+import { PrimaryIconButton } from '../common/button/components/icon/primary-icon-button.tsx';
 
 export const RootView = () => {
     const isMatch = useMatch('diary/*')
@@ -15,10 +15,7 @@ export const RootView = () => {
                     {
                         !isMatch ?
                             <h1 className="text-2xl font-bold text-cyan-300 md:text-3xl">Nutriscore</h1> :
-                            <IconButton icon="arrow_back"
-                                        level="primary"
-                                        action={ () => navigate(-1) }
-                                        iconStyles="text-2xl lg:text-3xl -ml-0.5 lg:ml-0"/>
+                            <PrimaryIconButton icon="arrow_back" action={ () => navigate(-1) }/>
                     }
                 </div>
                 <div className="box-border flex grow lg:justify-end">

@@ -2,10 +2,10 @@ import { ProgressProps } from '../../../common/progress/models/progress-props.ts
 import { MealListItemProps } from './meal-list-item.tsx';
 import { Panel } from '../../../common/panel.tsx';
 import { ProgressCircle } from '../../../common/progress/components/progress-circle.tsx';
-import { IconButton } from '../../../common/button/components/icon-button.tsx';
 import { useNavigate } from 'react-router-dom';
 import { DIARY_SEARCH_ROUTE } from '../../../routes.ts';
 import { MealList } from './meal-list.tsx';
+import { PrimaryIconButton } from '../../../common/button/components/icon/primary-icon-button.tsx';
 
 export interface MealOverviewProps {
     name: string
@@ -22,7 +22,7 @@ export const DiaryMealPanel = ({ name, progress, items }: MealOverviewProps) => 
                 <ProgressCircle { ...progress }/>
                 <h3 className="ml-4 lg:ml-8 text-xl lg:text-2xl font-medium text-gray-600">{ name }</h3>
             </div>
-            <IconButton level="primary" action={ () => navigate(DIARY_SEARCH_ROUTE) } icon="add" iconStyles="text-2xl lg:text-3xl"/>
+            <PrimaryIconButton action={ () => navigate(DIARY_SEARCH_ROUTE) } icon="add"/>
         </div>
 
         <div className="flex justify-center">

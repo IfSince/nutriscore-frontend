@@ -2,9 +2,9 @@ import { useState } from 'react';
 // eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import DatePicker from 'tailwind-datepicker-react';
-import { IconButton } from './button/components/icon-button.tsx';
 import { useAppDispatch, useAppSelector } from '../redux/hooks.ts';
 import { selectDate, update } from '../redux/slices/date-slice.ts';
+import { PrimaryIconButton } from './button/components/icon/primary-icon-button.tsx';
 
 
 export const CustomDatePicker = () => {
@@ -46,7 +46,7 @@ export const CustomDatePicker = () => {
     return (
         <div className="relative flex items-center">
             <DatePicker options={ options } onChange={ (date: Date) => dispatch(update(date.toString())) } show={ show } setShow={ handleClose }/>
-            <IconButton icon={ 'calendar_month' } level={ 'primary' } action={ handleClose }/>
+            <PrimaryIconButton icon="calendar_month" action={ handleClose }/>
         </div>
     );
 }

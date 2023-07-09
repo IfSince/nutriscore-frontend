@@ -2,10 +2,10 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { FoodItemComponent } from '../../food/components/food-item-component.tsx';
 import { FoodItemAmountSelector } from '../../food/components/food-item-amount-selector.tsx';
 import { useState } from 'react';
-import { Button } from '../../../common/button/components/button.tsx';
 import { DIARY_ROUTE } from '../../../routes.ts';
 import { useAppSelector } from '../../../redux/hooks.ts';
 import { selectFoodItems } from '../../../redux/slices/food-items-slice.ts';
+import { PrimaryButton } from '../../../common/button/components/primary-button.tsx';
 
 export const DiaryFoodItemView = () => {
     const navigate = useNavigate()
@@ -25,12 +25,11 @@ export const DiaryFoodItemView = () => {
             <div className="my-4 border-t-2 border-gray-100 lg:my-6"></div>
             <div className="flex flex-row justify-between">
                 <FoodItemAmountSelector amount={ amount } unit={ foodItem.unit } onRemove={ () => onRemove(10) } onAdd={ () => onAdd(10) }/>
-                <Button className="ml-2 px-4 text-gray-50 md:ml-4"
-                        type="button"
-                        level="primary"
-                        action={ () => onSubmit(foodItem.id, amount) }>
+                <PrimaryButton className="ml-2 px-4 text-gray-50 md:ml-4"
+                               type="button"
+                               action={ () => onSubmit(foodItem.id, amount) }>
                     <span className="whitespace-nowrap px-2 text-base font-medium tracking-wide">Add to diary</span>
-                </Button>
+                </PrimaryButton>
             </div>
         </FoodItemComponent>
     )

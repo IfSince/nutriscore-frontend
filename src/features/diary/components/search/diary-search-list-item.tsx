@@ -1,6 +1,6 @@
-import { IconButton } from '../../../../common/button/components/icon-button.tsx';
 import { Link } from 'react-router-dom';
 import { Item } from '../../../../redux/models/item.ts';
+import { DefaultIconButton } from '../../../../common/button/components/icon/default-icon-button.tsx';
 
 export const DiarySearchListItem = ({ id, description, amount, unit }: Item) =>
     <Link to={ `/diary/food/${ id }` }
@@ -9,5 +9,5 @@ export const DiarySearchListItem = ({ id, description, amount, unit }: Item) =>
             <span className="font-medium text-gray-600 lg:text-lg">{ description }</span>
             <span className="font-medium text-gray-400">{ amount } { unit }</span>
         </div>
-        <IconButton size="small" icon="more_horiz" action={ console.log } iconStyles="text-2xl"></IconButton>
+        <DefaultIconButton icon="more_horiz" action={ console.log }></DefaultIconButton>
     </Link>

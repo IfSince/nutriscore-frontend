@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { ProgressProps } from '../../../common/progress/models/progress-props.ts';
 import { ProgressCircle } from '../../../common/progress/components/progress-circle.tsx';
-import { IconButton } from '../../../common/button/components/icon-button.tsx';
+import { DefaultIconButton } from '../../../common/button/components/icon/default-icon-button.tsx';
 
 export const MealPanel = ({ data: { size, name, value, total, unit, indicatorStyles, width }, link }: { data: ProgressProps, link: string }) => {
     const navigate = useNavigate()
@@ -21,7 +21,7 @@ export const MealPanel = ({ data: { size, name, value, total, unit, indicatorSty
                 </div>
             </div>
 
-            <IconButton action={ () => navigate(link) } icon="arrow_forward_ios"/>
+            <DefaultIconButton action={ () => navigate(link) } icon="arrow_forward_ios"/>
         </div>
     )
 }

@@ -1,4 +1,5 @@
-import { Button } from '../../../../common/button/components/button.tsx';
+import { DefaultButton } from '../../../../common/button/components/default-button.tsx';
+import { PrimaryButton } from '../../../../common/button/components/primary-button.tsx';
 
 interface DiarySearchInputProps {
     filterText: string
@@ -21,15 +22,15 @@ export const DiarySearchInput = ({ filterText, onFilterTextChange }: DiarySearch
                        onChange={ (e) => onFilterTextChange(e.target.value) }
                 ></input>
             </div>
-            <Button action={ console.log } type="button" level="primary" className="ml-2 aspect-square text-gray-50 md:ml-4 md:aspect-auto md:px-4">
+            <DefaultButton action={ console.log } type="button" className="ml-2 aspect-square text-gray-50 md:ml-4 md:aspect-auto md:px-4">
                 <span className="text-2xl material-icons-round">add</span>
-                <span className="hidden whitespace-nowrap px-2 text-base font-medium md:inline tracking-wide">New entry</span>
-            </Button>
+                <span className="hidden whitespace-nowrap px-2 text-base font-medium tracking-wide md:inline">New entry</span>
+            </DefaultButton>
 
-            <Button action={ console.log } type="button" level="primary" className="ml-2 aspect-square text-gray-50 md:ml-4 md:aspect-auto md:px-4">
+            <PrimaryButton action={ console.log } type="button" className="ml-2 aspect-square text-gray-50 md:ml-4 md:aspect-auto md:px-4">
                 <span className="text-lg material-icons-round">qr_code_scanner</span>
-                <span className="hidden whitespace-nowrap px-2 text-base font-medium md:inline tracking-wide">Scan code</span>
-            </Button>
+                <span className="hidden whitespace-nowrap px-2 text-base font-medium tracking-wide md:inline">Scan code</span>
+            </PrimaryButton>
         </form>
     )
 }
