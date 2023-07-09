@@ -1,4 +1,11 @@
-import { ValueTotalPair } from './value-total-pair.ts';
+import { ValueObject } from './value-object.ts';
+
+interface CalorieMealValues {
+    breakfast: ValueObject
+    lunch: ValueObject
+    dinner: ValueObject
+    snacks: ValueObject
+}
 
 export interface UserMetadata {
     [year: string]: {
@@ -6,27 +13,13 @@ export interface UserMetadata {
             data: {
                 [day: string]: {
                     calories: CalorieMealValues
-                    protein: ValueTotalPair
-                    carbohydrates: ValueTotalPair
-                    fats: ValueTotalPair
-                    water: ValueTotalPair
+                    protein: ValueObject
+                    carbohydrates: ValueObject
+                    fats: ValueObject
+                    water: ValueObject
                 }
             }
             weightRecordings: []
         }
     }
-}
-
-export interface UserMetadataDayData {
-    calories: ValueTotalPair
-    protein: ValueTotalPair
-    carbohydrates: ValueTotalPair
-    fats: ValueTotalPair
-}
-
-interface CalorieMealValues {
-    breakfast: ValueTotalPair
-    lunch: ValueTotalPair
-    dinner: ValueTotalPair
-    snacks: ValueTotalPair
 }

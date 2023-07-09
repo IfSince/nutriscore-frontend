@@ -6,16 +6,14 @@ interface CircleProgressProps extends ProgressProps {
 }
 
 export const ProgressCircle = ({
-    name,
     size,
-    value,
-    total,
+    valueObject,
     width,
     trackStyles,
     indicatorStyles,
     children,
 }: CircleProgressProps) => {
-    const percentage = Math.round((value / total) * 100)
+    const percentage = Math.round((valueObject.value / valueObject.total) * 100)
     const center = size / 2
     const radius = center - width
     const strokeDasharray = 2 * Math.PI * radius
@@ -46,7 +44,6 @@ export const ProgressCircle = ({
                     { children }
                 </div>
             </div>
-            { name && <h3 className="pt-2 text-lg font-medium text-gray-600">{ name }</h3> }
         </div>
     )
 }

@@ -1,20 +1,20 @@
 import { DiaryMealPanel, MealOverviewProps } from '../components/diary-meal-panel.tsx';
 import { CaloriePanel } from '../../../common/calorie-panel/components/calorie-panel.tsx';
-import { MacroPanel } from '../../../common/macro-panel/components/macro-panel.tsx';
+import { MacroPanelGroup } from '../../../common/macro-panel/components/macro-panel-group.tsx';
 import { useAppSelector } from '../../../redux/hooks.ts';
 import { selectDate } from '../../../redux/slices/date-slice.ts';
 import { selectUserMetadata } from '../../../redux/slices/user-metadata-slice.ts';
-import { ValueTotalPair } from '../../../redux/models/value-total-pair.ts';
+import { ValueObject } from '../../../redux/models/value-object.ts';
 import { ProgressProps } from '../../../common/progress/models/progress-props.ts';
 
 const diaryData: MealOverviewProps[] = [
     {
         name: 'Breakfast',
-        progress: { size: 70, value: 100, total: 200, width: 10, indicatorStyles: 'stroke-cyan-200' },
+        progress: { size: 70, valueObject: { value: 100, total: 200 }, width: 10, indicatorStyles: 'stroke-cyan-200' },
         items: [
             {
                 name: 'Espresso coffee',
-                progress: { size: 50, value: 100, total: 200, width: 8, indicatorStyles: 'stroke-cyan-200' },
+                progress: { size: 50, valueObject: { value: 100, total: 200 }, width: 8, indicatorStyles: 'stroke-cyan-200' },
                 amount: '100 kcal',
                 calories: '100 kcal',
                 protein: '21g',
@@ -23,7 +23,7 @@ const diaryData: MealOverviewProps[] = [
             },
             {
                 name: 'Apple',
-                progress: { size: 50, value: 100, total: 200, width: 8, indicatorStyles: 'stroke-cyan-200' },
+                progress: { size: 50, valueObject: { value: 100, total: 200 }, width: 8, indicatorStyles: 'stroke-cyan-200' },
                 amount: '100 kcal',
                 calories: '100 kcal',
                 protein: '21g',
@@ -34,11 +34,11 @@ const diaryData: MealOverviewProps[] = [
     },
     {
         name: 'Lunch',
-        progress: { size: 70, value: 100, total: 200, width: 10, indicatorStyles: 'stroke-cyan-200' },
+        progress: { size: 70, valueObject: { value: 100, total: 200 }, width: 10, indicatorStyles: 'stroke-cyan-200' },
         items: [
             {
                 name: 'Espresso coffee',
-                progress: { size: 50, value: 100, total: 200, width: 8, indicatorStyles: 'stroke-cyan-200' },
+                progress: { size: 50, valueObject: { value: 100, total: 200 }, width: 8, indicatorStyles: 'stroke-cyan-200' },
                 amount: '100 kcal',
                 calories: '100 kcal',
                 protein: '21g',
@@ -49,11 +49,11 @@ const diaryData: MealOverviewProps[] = [
     },
     {
         name: 'Dinner',
-        progress: { size: 70, value: 100, total: 200, width: 10, indicatorStyles: 'stroke-cyan-200' },
+        progress: { size: 70, valueObject: { value: 100, total: 200 }, width: 10, indicatorStyles: 'stroke-cyan-200' },
         items: [
             {
                 name: 'Espresso coffee',
-                progress: { size: 50, value: 100, total: 200, width: 8, indicatorStyles: 'stroke-cyan-200' },
+                progress: { size: 50, valueObject: { value: 100, total: 200 }, width: 8, indicatorStyles: 'stroke-cyan-200' },
                 amount: '100 kcal',
                 calories: '100 kcal',
                 protein: '21g',
@@ -64,11 +64,11 @@ const diaryData: MealOverviewProps[] = [
     },
     {
         name: 'Snacks',
-        progress: { size: 70, value: 100, total: 200, width: 10, indicatorStyles: 'stroke-cyan-200' },
+        progress: { size: 70, valueObject: { value: 100, total: 200 }, width: 10, indicatorStyles: 'stroke-cyan-200' },
         items: [
             {
                 name: 'Espresso coffee',
-                progress: { size: 50, value: 100, total: 200, width: 8, indicatorStyles: 'stroke-cyan-200' },
+                progress: { size: 50, valueObject: { value: 100, total: 200 }, width: 8, indicatorStyles: 'stroke-cyan-200' },
                 amount: '100 kcal',
                 calories: '100 kcal',
                 protein: '21g',
@@ -85,10 +85,10 @@ export const DiaryOverviewView = () => {
 
     const metadataByDate = metadata[date.getFullYear()][date.getMonth() + 1].data[date.getDate()]
 
-    const totalCaloriesValuePair =
+    const totalCaloriesValueObject =
         Object
             .values(metadataByDate.calories)
-            .reduce((prev: ValueTotalPair, curr: ValueTotalPair): ValueTotalPair => (
+            .reduce((prev: ValueObject, curr: ValueObject): ValueObject => (
                 {
                     value: prev.value + curr.value,
                     total: prev.total + curr.total,
@@ -98,61 +98,30 @@ export const DiaryOverviewView = () => {
     const calorieData: ProgressProps = {
         size: 200,
         width: 15,
-        name: 'Remaining',
-        unit: 'kcal',
-        value: totalCaloriesValuePair.value,
-        total: totalCaloriesValuePair.total,
+        valueObject: totalCaloriesValueObject,
         trackStyles: 'stroke-white',
         indicatorStyles: 'stroke-gray-600',
     }
 
-    const macroData = [
-        {
-            size: 160,
-            width: 13,
-            name: 'Protein',
-            unit: 'g',
-            value: metadataByDate.protein.value,
-            total: metadataByDate.protein.total,
-            trackStyles: '',
-            indicatorStyles: 'stroke-red bg-red',
-        },
-        {
-            size: 160,
-            width: 13,
-            name: 'Carbs',
-            unit: 'g',
-            value: metadataByDate.carbohydrates.value,
-            total: metadataByDate.carbohydrates.total,
-            trackStyles: '',
-            indicatorStyles: 'stroke-green bg-green',
-        },
-        {
-            size: 160,
-            width: 13,
-            name: 'Fats',
-            unit: 'g',
-            value: metadataByDate.fats.value,
-            total: metadataByDate.fats.total,
-            trackStyles: '',
-            indicatorStyles: 'stroke-yellow bg-yellow',
-        },
-        {
-            size: 160,
-            width: 13,
-            name: 'Water',
-            unit: 'g',
-            value: metadataByDate.water.value,
-            total: metadataByDate.water.total,
-            trackStyles: '',
-            indicatorStyles: 'stroke-blue bg-blue',
-        },
-    ]
+    const proteinProgress: ProgressProps =
+        { size: 160, width: 13, valueObject: metadataByDate.protein, trackStyles: '', indicatorStyles: 'stroke-red bg-red' }
+
+    const carbsProgress: ProgressProps =
+        { size: 160, width: 13, valueObject: metadataByDate.carbohydrates, trackStyles: '', indicatorStyles: 'stroke-green bg-green' }
+
+    const fatsProgress: ProgressProps =
+        { size: 160, width: 13, valueObject: metadataByDate.carbohydrates, trackStyles: '', indicatorStyles: 'stroke-yellow bg-yellow' }
+
+    const waterProgress: ProgressProps =
+        { size: 160, width: 13, valueObject: metadataByDate.carbohydrates, trackStyles: '', indicatorStyles: 'stroke-blue bg-blue' }
 
     return <>
         <div className="flex-layout-row">
             <CaloriePanel data={ calorieData }/>
-            <MacroPanel data={ macroData }/>
+            <MacroPanelGroup protein={ proteinProgress }
+                             carbs={ carbsProgress }
+                             fats={ fatsProgress }
+                             water={ waterProgress }/>
         </div>
 
         {

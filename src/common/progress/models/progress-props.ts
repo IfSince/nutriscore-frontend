@@ -1,10 +1,9 @@
+import { ValueObject } from '../../../redux/models/value-object.ts';
+
 export interface ProgressProps {
-    name?: string
     size: number
-    value: number
-    total: number
-    unit?: string
     width: number
+    valueObject: ValueObject
     trackStyles?: string
     indicatorStyles?: string
 }
