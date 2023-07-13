@@ -1,9 +1,16 @@
 import { ButtonProps } from '../models/button-props.ts';
+import React from 'react';
 
-export const Button = ({ type = 'button', action, children, className }: ButtonProps) =>
-    <button
+export const Button = ({ type = 'button', action, children, className, preventDefault = true }: ButtonProps) => {
+    const onClick = (event: React.SyntheticEvent) => {
+        preventDefault && event.preventDefault()
+        action()
+    }
+
+    return <button
         type={ type }
-        onClick={ action }
+        onClick={ onClick }
         className={ `flex h-10 lg:h-12 items-center justify-center rounded-md transition-colors ${ className }` }>
         { children }
-    </button>
+    </button>;
+}

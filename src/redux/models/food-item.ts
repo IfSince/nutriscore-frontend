@@ -4,6 +4,7 @@ import { Item } from './item.ts';
 
 export interface FoodItem extends Item {
     id: string
+    userId: string
     description: string
     unit: string
     amount: number

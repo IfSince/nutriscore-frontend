@@ -4,6 +4,7 @@ import { FoodItem } from '../models/food-item.ts';
 export const dummyFoodItems: FoodItem[] = [
     {
         id: generateUuid(),
+        userId: generateUuid(),
         description: 'Espresso coffee',
         unit: 'ml',
         amount: 100,
@@ -34,6 +35,7 @@ export const dummyFoodItems: FoodItem[] = [
     },
     {
         id: generateUuid(),
+        userId: generateUuid(),
         description: 'Apple',
         unit: 'g',
         amount: 40,
