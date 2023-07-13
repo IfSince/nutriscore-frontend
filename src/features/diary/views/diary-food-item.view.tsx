@@ -10,12 +10,12 @@ import { PrimaryButton } from '../../../common/button/components/primary-button.
 export const DiaryFoodItemView = () => {
     const navigate = useNavigate()
     const { id } = useParams()
-    const foodItem = useAppSelector(selectFoodItems).find(item => item.id === id)!
+    const foodItem = useAppSelector(selectFoodItems).find(item => item.id === (+id!))!
     const [amount, setAmount] = useState(foodItem?.amount)
 
     const onRemove = (value: number) => setAmount(currentAmount => currentAmount - value)
     const onAdd = (value: number) => setAmount(currentAmount => currentAmount + value)
-    const onSubmit = (id: string, amount: number) => {
+    const onSubmit = (id: number, amount: number) => {
         console.log(id, amount) // submit goes here
         navigate(DIARY_ROUTE)
     }

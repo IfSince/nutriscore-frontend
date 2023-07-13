@@ -3,8 +3,8 @@ import { Category } from './category.ts';
 import { Item } from './item.ts';
 
 export interface FoodItem extends Item {
-    id: string
-    userId: string
+    id: number
+    userId: number
     description: string
     unit: string
     amount: number

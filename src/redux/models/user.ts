@@ -1,7 +1,8 @@
 import { Gender } from './gender.ts';
 
 export interface User {
-    id: string
+    id: number
+    userTypeId: number
     email: string
     firstName: string
     lastName: string

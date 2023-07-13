@@ -5,13 +5,13 @@ import { PrimaryButton } from '../../../common/button/components/primary-button.
 import { useState } from 'react';
 import { useAppSelector } from '../../../redux/hooks.ts';
 import { selectUser } from '../../../redux/slices/user-slice.ts';
-import { generateUuid } from '../../../utils/generate-uuid.ts';
+import { NEW_ENTITY_ID } from '../../../redux/constants.ts';
 
 export const DiaryNewFoodItemView = () => {
     const userId = useAppSelector(selectUser).id
 
     const newFoodItem: FoodItem = {
-        id: generateUuid(),
+        id: NEW_ENTITY_ID,
         userId,
         description: 'New food item',
         amount: 0,

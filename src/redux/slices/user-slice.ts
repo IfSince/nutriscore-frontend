@@ -1,15 +1,15 @@
 import { User } from '../models/user.ts';
-import { generateUuid } from '../../utils/generate-uuid.ts';
 import { createSlice } from '@reduxjs/toolkit';
 import { RootState } from '../store.ts';
 
 const user: User = {
-    id: generateUuid(),
+    id: 1,
+    userTypeId: 1,
     email: 'leonlaade@gmx.de',
     firstName: 'Leon',
     lastName: 'Laade',
     image: null,
-    gender: { id: generateUuid(), description: 'Male' },
+    gender: { id: 1, description: 'Male' },
     dateOfBirth: '27.10.2000',
     height: 180,
     selectedHeightUnit: 'cm',
