@@ -4,7 +4,7 @@ import React from 'react';
 export const Button = ({ type = 'button', action, children, className, preventDefault = true }: ButtonProps) => {
     const onClick = (event: React.SyntheticEvent) => {
         preventDefault && event.preventDefault()
-        action()
+        action(event)
     }
 
     return <button

@@ -10,6 +10,7 @@ import { PrimaryIconButton } from './button/components/icon/primary-icon-button.
 export const CustomDatePicker = () => {
     const date = useAppSelector(selectDate)
     const dispatch = useAppDispatch()
+    const [show, setShow] = useState(false)
 
     const options = {
         autoHide: true,
@@ -37,11 +38,8 @@ export const CustomDatePicker = () => {
         defaultDate: new Date(date),
         language: 'de',
     }
-    const [show, setShow] = useState(false)
 
-    const handleClose = (state: boolean) => {
-        setShow(state)
-    }
+    const handleClose = (state: boolean) => setShow(state)
 
     return (
         <div className="relative flex items-center">

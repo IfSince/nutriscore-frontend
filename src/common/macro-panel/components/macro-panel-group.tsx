@@ -13,8 +13,7 @@ interface MacroPanelGroupProps {
 export const MacroPanelGroup = (data: MacroPanelGroupProps) =>
     <div className="grid w-full grid-cols-2 gap-5 grow-9999 xl:w-auto">
         {
-            Object.keys(data)
-                .map(key =>
+            Object.keys(data).map(key =>
                     <Panel key={ key } className="flex flex-col justify-center min-w-[150px]" title={ capitalizeFirst(key) }>
                         <ProgressLinear { ...data[key as keyof MacroPanelGroupProps] }/>
                     </Panel>,

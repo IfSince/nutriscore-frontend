@@ -1,11 +1,11 @@
-import { ProgressProps } from '../../../common/progress/models/progress-props.ts';
 import { MealListItemProps } from './meal-list-item.tsx';
-import { Panel } from '../../../common/panel.tsx';
-import { ProgressCircle } from '../../../common/progress/components/progress-circle.tsx';
 import { useNavigate } from 'react-router-dom';
-import { DIARY_SEARCH_ROUTE } from '../../../routes.ts';
 import { MealList } from './meal-list.tsx';
-import { PrimaryIconButton } from '../../../common/button/components/icon/primary-icon-button.tsx';
+import { ProgressProps } from '../../../../common/progress/models/progress-props.ts';
+import { Panel } from '../../../../common/panel.tsx';
+import { ProgressCircle } from '../../../../common/progress/components/progress-circle.tsx';
+import { PrimaryIconButton } from '../../../../common/button/components/icon/primary-icon-button.tsx';
+import { DIARY_SEARCH_ROUTE } from '../../../../routes.ts';
 
 export interface MealOverviewProps {
     name: string

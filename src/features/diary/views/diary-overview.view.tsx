@@ -1,4 +1,3 @@
-import { DiaryMealPanel, MealOverviewProps } from '../components/diary-meal-panel.tsx';
 import { CaloriePanel } from '../../../common/calorie-panel/components/calorie-panel.tsx';
 import { MacroPanelGroup } from '../../../common/macro-panel/components/macro-panel-group.tsx';
 import { useAppSelector } from '../../../redux/hooks.ts';
@@ -6,6 +5,7 @@ import { selectDate } from '../../../redux/slices/date-slice.ts';
 import { selectUserMetadata } from '../../../redux/slices/user-metadata-slice.ts';
 import { ValueObject } from '../../../redux/models/value-object.ts';
 import { ProgressProps } from '../../../common/progress/models/progress-props.ts';
+import { DiaryMealPanel, MealOverviewProps } from '../components/overview/diary-meal-panel.tsx';
 
 const diaryData: MealOverviewProps[] = [
     {

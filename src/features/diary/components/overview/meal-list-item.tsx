@@ -1,6 +1,7 @@
-import { ProgressProps } from '../../../common/progress/models/progress-props.ts';
-import { ProgressCircle } from '../../../common/progress/components/progress-circle.tsx';
-import { DeleteIconButton } from '../../../common/button/components/icon/delete-icon-button.tsx';
+import { ProgressProps } from '../../../../common/progress/models/progress-props.ts';
+import { ProgressCircle } from '../../../../common/progress/components/progress-circle.tsx';
+import { DeleteIconButton } from '../../../../common/button/components/icon/delete-icon-button.tsx';
+
 
 export interface MealListItemProps {
     name: string
