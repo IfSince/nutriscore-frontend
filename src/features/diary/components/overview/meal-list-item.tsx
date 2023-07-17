@@ -1,11 +1,11 @@
-import { ProgressProps } from '../../../../common/progress/models/progress-props.ts';
 import { ProgressCircle } from '../../../../common/progress/components/progress-circle.tsx';
 import { DeleteIconButton } from '../../../../common/button/components/icon/delete-icon-button.tsx';
+import { ValueObject } from '../../../../redux/models/value-object.ts';
 
 
 export interface MealListItemProps {
     name: string
-    progress: ProgressProps
+    valueObject: ValueObject
     amount: string
     calories: string
     protein: string
@@ -13,10 +13,13 @@ export interface MealListItemProps {
     fats: string
 }
 
-export const MealListItem = ({ amount, carbs, fats, calories, name, progress, protein }: MealListItemProps) =>
+export const MealListItem = ({ amount, carbs, fats, calories, name, valueObject, protein }: MealListItemProps) =>
     <div className="flex w-full cursor-pointer items-center justify-between rounded-lg px-2 py-2 hover:bg-gray-50 lg:px-4 lg:text-lg">
         <div className={ 'flex items-center' }>
-            <ProgressCircle { ...progress }/>
+            <ProgressCircle size={ 50 }
+                            width={ 8 }
+                            valueObject={ valueObject }
+                            indicatorStyles="stroke-cyan-200"/>
             <span className="ml-2 font-bold md:ml-6 lg:ml-8">{ name }</span>
         </div>
 

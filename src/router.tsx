@@ -8,6 +8,10 @@ import {
     DIARY_SEARCH_ROUTE,
     HOME_ROUTE,
     PROFILE_ROUTE,
+    REGISTER_DATE_OF_BIRTH_ROUTE,
+    REGISTER_GENDER_ROUTE,
+    REGISTER_GOAL_ROUTE,
+    REGISTER_ROUTE,
     STATISTICS_ROUTE,
 } from './routes.ts';
 import { StatisticsView } from './views/statistics.view.tsx';
@@ -18,8 +22,31 @@ import { DiaryOverviewView } from './features/diary/views/diary-overview.view.ts
 import { DiarySearchView } from './features/diary/views/diary-search.view.tsx';
 import { DiaryFoodItemView } from './features/diary/views/diary-food-item.view.tsx';
 import { DiaryNewFoodItemView } from './features/diary/views/diary-new-food-item.view.tsx';
+import { RegisterGoalStepView } from './features/register/views/register-goal-step.view.tsx';
+import { RegisterGenderStepView } from './features/register/views/register-gender-step.view.tsx';
+import { RegisterDateOfBirthStepView } from './features/register/views/register-date-of-birth-step.view.tsx';
+import { RegisterRootView } from './features/register/views/register-root.view.tsx';
 
 export const router = createBrowserRouter([
+    {
+        path: REGISTER_ROUTE,
+        element: <RegisterRootView/>,
+        errorElement: <NotFoundView/>,
+        children: [
+            {
+                path: REGISTER_GOAL_ROUTE,
+                element: <RegisterGoalStepView/>,
+            },
+            {
+                path: REGISTER_GENDER_ROUTE,
+                element: <RegisterGenderStepView/>,
+            },
+            {
+                path: REGISTER_DATE_OF_BIRTH_ROUTE,
+                element: <RegisterDateOfBirthStepView/>,
+            },
+        ],
+    },
     {
         path: '/',
         element: <RootView/>,
@@ -51,8 +78,8 @@ export const router = createBrowserRouter([
                     },
                     {
                         path: DIARY_NEW_FOOD_ITEM_ROUTE,
-                        element: <DiaryNewFoodItemView/>
-                    }
+                        element: <DiaryNewFoodItemView/>,
+                    },
                 ],
             },
             {

@@ -55,6 +55,7 @@ export default {
             transitionProperty: {
                 'width': 'width',
                 'stroke-dashoffset': 'stroke-dashoffset',
+                'selection': 'box-shadow, color, border-color'
             },
             screens: {
                 '1.5xl': '1450px'

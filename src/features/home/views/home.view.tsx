@@ -26,28 +26,19 @@ export const HomeView = () => {
 
     return <>
         <div className="flex-layout-row">
-            <CaloriePanel data={ {
-                size: 200,
-                width: 15,
-                valueObject: totalCaloriesValueObject,
-                trackStyles: 'stroke-white',
-                indicatorStyles: 'stroke-gray-600',
-            } }/>
-
-            <MacroPanelGroup
-                protein={ { size: 160, width: 13, valueObject: metadataByDate.protein, indicatorStyles: 'stroke-red bg-red' } }
-                carbs={ { size: 160, width: 13, valueObject: metadataByDate.carbohydrates, indicatorStyles: 'stroke-green bg-green' } }
-                fats={ { size: 160, width: 13, valueObject: metadataByDate.carbohydrates, indicatorStyles: 'stroke-yellow bg-yellow' } }
-                water={ { size: 160, width: 13, valueObject: metadataByDate.carbohydrates, indicatorStyles: 'stroke-blue bg-blue' } }/>
+            <CaloriePanel valueObject={ totalCaloriesValueObject }/>
+            <MacroPanelGroup protein={ metadataByDate.protein }
+                             carbs={ metadataByDate.carbohydrates }
+                             fats={ metadataByDate.fats }
+                             water={ metadataByDate.water }/>
         </div>
 
         <div className="flex-layout-row">
             <WeeklyOverviewPanel data={ weightRecordings }/>
-            <MealPanelList
-                breakfast={ { size: 75, width: 12, valueObject: metadataByDate.calories.breakfast, indicatorStyles: 'stroke-cyan-200' } }
-                lunch={ { size: 75, width: 12, valueObject: metadataByDate.calories.lunch, indicatorStyles: 'stroke-cyan-200' } }
-                dinner={ { size: 75, width: 12, valueObject: metadataByDate.calories.dinner, indicatorStyles: 'stroke-cyan-200' } }
-                snacks={ { size: 75, width: 12, valueObject: metadataByDate.calories.snacks, indicatorStyles: 'stroke-cyan-200' } }/>
+            <MealPanelList breakfast={ metadataByDate.calories.breakfast }
+                           lunch={ metadataByDate.calories.lunch }
+                           dinner={ metadataByDate.calories.dinner }
+                           snacks={ metadataByDate.calories.snacks }/>
         </div>
     </>;
 }

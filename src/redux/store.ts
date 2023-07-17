@@ -3,9 +3,11 @@ import { foodItemsSlice } from './slices/food-items-slice.ts';
 import { userSlice } from './slices/user-slice.ts';
 import { userMetadataSlice } from './slices/user-metadata-slice.ts';
 import { dateSlice } from './slices/date-slice.ts';
+import { registerSlice } from './slices/register-slice.ts';
 
 export const store = configureStore({
     reducer: {
+        register: registerSlice.reducer,
         user: userSlice.reducer,
         userMetadata: userMetadataSlice.reducer,
         foodItems: foodItemsSlice.reducer,

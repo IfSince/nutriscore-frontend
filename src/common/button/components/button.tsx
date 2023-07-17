@@ -10,7 +10,7 @@ export const Button = ({ type = 'button', action, children, className, preventDe
     return <button
         type={ type }
         onClick={ onClick }
-        className={ `flex h-10 lg:h-12 items-center justify-center rounded-md transition-colors ${ className }` }>
+        className={ `flex h-11 lg:h-12 items-center justify-center rounded-md transition-colors ${ className }` }>
         { children }
     </button>;
 }

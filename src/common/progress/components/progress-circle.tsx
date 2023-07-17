@@ -1,7 +1,8 @@
 import { ReactNode, useEffect, useState } from 'react';
 import { ProgressProps } from '../models/progress-props.ts';
 
-interface CircleProgressProps extends ProgressProps {
+interface ProgressCircleProps extends ProgressProps {
+    size: number
     children?: ReactNode
 }
 
@@ -12,7 +13,7 @@ export const ProgressCircle = ({
     trackStyles,
     indicatorStyles,
     children,
-}: CircleProgressProps) => {
+}: ProgressCircleProps) => {
     const percentage = Math.round((valueObject.value / valueObject.total) * 100)
     const center = size / 2
     const radius = center - width
