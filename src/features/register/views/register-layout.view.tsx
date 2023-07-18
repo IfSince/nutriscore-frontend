@@ -47,7 +47,7 @@ export const RegisterLayoutView = () => {
 
                     <div className="mt-2 flex flex-col items-center lg:mt-4">
                         <div className="flex w-full max-w-xl flex-col items-center">
-                            <Outlet context={ [registerDataRef, updateRegisterRef] }/>
+                            <Outlet context={ [registerDataRef.current, updateRegisterRef] }/>
                         </div>
                     </div>
                 </div>

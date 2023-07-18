@@ -1,8 +1,8 @@
 import { Outlet, useMatch, useNavigate } from 'react-router-dom';
-import { CustomDatePicker } from '../common/custom-date-picker.tsx';
 import { MENU_ITEMS } from '../features/menu/model/menu-items.ts';
 import { Menu } from '../features/menu/components/menu.tsx';
 import { PrimaryIconButton } from '../common/button/components/icon/primary-icon-button.tsx';
+import { GlobalDatePicker } from '../common/date-picker/global-date-picker.tsx';
 
 export const RootView = () => {
     const isMatch = useMatch('diary/*')
@@ -19,7 +19,7 @@ export const RootView = () => {
                     }
                 </div>
                 <div className="box-border flex grow lg:justify-end">
-                    { !isMatch && <CustomDatePicker/> }
+                    { !isMatch && <GlobalDatePicker/> }
                 </div>
             </header>
 
