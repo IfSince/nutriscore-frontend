@@ -6,4 +6,13 @@
   .flex-layout-row {
     @apply flex w-full gap-10 flex-wrap;
   }
+
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
 }

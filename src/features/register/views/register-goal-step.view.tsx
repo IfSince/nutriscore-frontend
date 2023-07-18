@@ -19,7 +19,7 @@ export const RegisterGoalStepView = () => {
             <SelectListField name="gender"
                              options={ options }
                              onChange={ (goal: string) => updateState({ goal }) }
-                             value={ `${ registerData.goal }` }
+                             value={ registerData.goal }
                              className="flex flex-col items-center gap-2 md:gap-3"
                              optionsClassName="w-full items-center"
                              iconClassName="text-3xl lg:text-4xl"

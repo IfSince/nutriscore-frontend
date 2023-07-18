@@ -8,6 +8,8 @@ const REGISTER_STEPS: QuestStep[] = [
     { index: 0, route: 'goal' },
     { index: 1, route: 'gender' },
     { index: 2, route: 'date-of-birth' },
+    { index: 3, route: 'height' },
+    { index: 4, route: 'weight' },
 ]
 
 interface RegisterState {
@@ -20,6 +22,11 @@ const initialState: RegisterState = {
     data: {
         goal: GoalEnum.LOOSE,
         genderId: 1,
+        dateOfBirth: new Date('2000-01-01').toString(),
+        height: 180,
+        heightUnit: 'cm',
+        weight: 80,
+        weightUnit: 'kg',
         allergenicIds: [],
     },
     currentStepIndex: 0,

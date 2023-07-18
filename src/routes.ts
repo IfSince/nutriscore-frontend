@@ -3,6 +3,8 @@ export const REGISTER_ROUTE = '/register'
 export const REGISTER_GOAL_ROUTE = '/register/goal'
 export const REGISTER_GENDER_ROUTE = '/register/gender'
 export const REGISTER_DATE_OF_BIRTH_ROUTE = '/register/date-of-birth'
+export const REGISTER_HEIGHT_ROUTE = '/register/height'
+export const REGISTER_WEIGHT_ROUTE = '/register/weight'
 
 // Home
 export const HOME_ROUTE = '/home'

@@ -11,7 +11,9 @@ import {
     REGISTER_DATE_OF_BIRTH_ROUTE,
     REGISTER_GENDER_ROUTE,
     REGISTER_GOAL_ROUTE,
+    REGISTER_HEIGHT_ROUTE,
     REGISTER_ROUTE,
+    REGISTER_WEIGHT_ROUTE,
     STATISTICS_ROUTE,
 } from './routes.ts';
 import { StatisticsView } from './views/statistics.view.tsx';
@@ -25,6 +27,8 @@ import { DiaryNewFoodItemView } from './features/diary/views/diary-new-food-item
 import { RegisterGoalStepView } from './features/register/views/register-goal-step.view.tsx';
 import { RegisterGenderStepView } from './features/register/views/register-gender-step.view.tsx';
 import { RegisterDateOfBirthStepView } from './features/register/views/register-date-of-birth-step.view.tsx';
+import { RegisterHeightStepView } from './features/register/views/register-height-step.view.tsx';
+import { RegisterWeightStepView } from './features/register/views/register-weight-step.view.tsx';
 import { RegisterRootView } from './features/register/views/register-root.view.tsx';
 
 export const router = createBrowserRouter([
@@ -44,6 +48,14 @@ export const router = createBrowserRouter([
             {
                 path: REGISTER_DATE_OF_BIRTH_ROUTE,
                 element: <RegisterDateOfBirthStepView/>,
+            },
+            {
+                path: REGISTER_HEIGHT_ROUTE,
+                element: <RegisterHeightStepView/>,
+            },
+            {
+                path: REGISTER_WEIGHT_ROUTE,
+                element: <RegisterWeightStepView/>,
             },
         ],
     },

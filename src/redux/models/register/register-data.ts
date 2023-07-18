@@ -9,11 +9,11 @@
 export interface RegisterData {
     goal: string
     genderId: number
-    dateOfBirth?: string
-    height?: number
-    heightUnit?: string
-    weight?: number
-    weightUnit?: string
+    dateOfBirth: string
+    height: number
+    heightUnit: string
+    weight: number
+    weightUnit: string
     allergenicIds: number[]
 
     nutritionTypeId?: number
