@@ -1,15 +1,19 @@
 import { PrimaryIconButton } from '../../../common/button/components/icon/primary-icon-button.tsx';
 import { ProgressLinear } from '../../../common/progress/components/progress-linear.tsx';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks.ts';
-import { routeToStep, selectRegister, submitStepData } from '../../../redux/slices/register-slice.ts';
+import { routeToStep, selectRegister, submit, submitStepData } from '../../../redux/slices/register-slice.ts';
 import { PrimaryButton } from '../../../common/button/components/primary-button.tsx';
 import { Link, Outlet, useMatch, useNavigate } from 'react-router-dom';
 import { RegisterData } from '../../../redux/models/register/register-data.ts';
 import { useRef } from 'react';
-import { REGISTER_NUTRITION_INTRO_ROUTE } from '../../../routes.ts';
+import { REGISTER_NUTRITION_INTRO_ROUTE, REGISTER_OVERVIEW_ROUTE } from '../../../routes.ts';
 
 export const RegisterLayoutView = () => {
-    const submit = (data: RegisterData) => {
+
+    const submitRegisterForm = () => {
+        dispatch(submit())
+    }
+    const submitRefAndGoToNextStep = (data: RegisterData) => {
         dispatch(submitStepData(data))
         navigate(`/register/${ registerState.steps[registerState.currentStepIndex + 1].route }`)
     }
@@ -30,6 +34,7 @@ export const RegisterLayoutView = () => {
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const isNutritionIntroRoute = useMatch(REGISTER_NUTRITION_INTRO_ROUTE)
+    const isOverviewRoute = useMatch(REGISTER_OVERVIEW_ROUTE)
 
     const registerState = useAppSelector(selectRegister)
     const registerDataRef = useRef(registerState.data)
@@ -55,14 +60,17 @@ export const RegisterLayoutView = () => {
 
                     <div className="mt-2 flex flex-col items-center lg:mt-4">
                         <div className="flex w-full max-w-xl flex-col items-center">
-                            <Outlet context={ [registerDataRef.current, updateRegisterRef ] }/>
+                            <Outlet context={ [registerDataRef.current, updateRegisterRef] }/>
                         </div>
                     </div>
                 </div>
 
                 <div className="mt-10 flex w-full justify-center items-center lg:mt-14 xl:mt-20 flex-col">
-                    <PrimaryButton action={ () => submit(registerDataRef.current) } className="w-full max-w-md">
-                        <span className="font-medium whitespace-nowraptext-base">Continue</span>
+                    <PrimaryButton className="w-full max-w-md"
+                                   action={ () => isOverviewRoute ? submitRegisterForm() : submitRefAndGoToNextStep(registerDataRef.current) }>
+                        <span className="font-medium whitespace-nowraptext-base">
+                            { isOverviewRoute ? 'Register' : 'Continue' }
+                        </span>
                     </PrimaryButton>
                     {
                         isNutritionIntroRoute &&

@@ -4,11 +4,16 @@ export const Validations = {
             return 'This field is required'
         }
     },
-    minLength: (minLength: number) => {
-        return (value?: string) => {
-            if (value && value?.length <= minLength) {
+    minLength: (minLength: number) =>
+        (value?: string) => {
+            if (value && value?.length < minLength) {
                 return `This field needs at least ${ minLength } characters`
             }
+        },
+    emailFormat: (value?: string) => {
+        const validRegex = /^(?![_.-])((?![_.-][_.-])[a-zA-Z\d_.-]){0,63}[a-zA-Z\d]@((?!-)((?!--)[a-zA-Z\d-]){0,63}[a-zA-Z\d]\.){1,2}([a-zA-Z]{2,14}\.)?[a-zA-Z]{2,14}$/
+        if (value && !value.match(validRegex)) {
+            return 'This field needs to be in a valid email format'
         }
     },
 }

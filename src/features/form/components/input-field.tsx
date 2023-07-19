@@ -3,9 +3,20 @@ import { useState } from 'react';
 import { validate } from '../subfeatures/validation/utils/validate.ts';
 import { FormFieldData } from '../models/form-field-data.tsx';
 
-export const InputField = ({ displayName, name, validations, value }: FormFieldData) => {
+interface InputFieldProps extends FormFieldData {
+    onChange: (value: string) => void
+    type?: string
+}
+
+export const InputField = ({ displayName, name, validations, value, onChange, type = 'text' }: InputFieldProps) => {
     const [currentValue, setCurrentValue] = useState(value)
-    const [errors, setErrors] = useState(validate(value, validations))
+    const [errors, setErrors] = useState<string[]>(value ? validate(value, validations) : [])
+
+    const updateAndValidate = (value: string) => {
+        setCurrentValue(value)
+        setErrors(validate(value, validations))
+        onChange(value)
+    }
 
     return (
         <FormField name={ name }
@@ -20,11 +31,11 @@ export const InputField = ({ displayName, name, validations, value }: FormFieldD
                               hover:border-cyan-200 hover:ring-1 hover:ring-cyan-200
                               focus:border-cyan-300 focus:ring-1 focus:ring-cyan-300
                               lg:h-12"
-                   type="text"
+                   type={ type }
                    id={ name }
                    value={ currentValue }
                    onChange={ (event) => setCurrentValue(event.target.value) }
-                   onBlur={ (event) => setErrors(validate(event.target.value, validations)) }/>
+                   onBlur={ (event) => updateAndValidate(event.target.value) }/>
         </FormField>
     );
 }
