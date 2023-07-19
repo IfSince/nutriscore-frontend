@@ -5,6 +5,8 @@ export const REGISTER_GENDER_ROUTE = '/register/gender'
 export const REGISTER_DATE_OF_BIRTH_ROUTE = '/register/date-of-birth'
 export const REGISTER_HEIGHT_ROUTE = '/register/height'
 export const REGISTER_WEIGHT_ROUTE = '/register/weight'
+export const REGISTER_ALLERGENIC_ROUTE = '/register/allergenic'
+export const REGISTER_NUTRITION_INTRO_ROUTE = '/register/nutrition'
 
 // Home
 export const HOME_ROUTE = '/home'

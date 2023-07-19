@@ -19,6 +19,7 @@ export default {
                     100: '#DEF7EC',
                     200: '#BCF0DA',
                     300: '#9BE4C5',
+                    400: '#79d2b0',
                 },
                 green: '#CCDEC0',
                 yellow: '#FCC984',

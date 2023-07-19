@@ -10,6 +10,8 @@ const REGISTER_STEPS: QuestStep[] = [
     { index: 2, route: 'date-of-birth' },
     { index: 3, route: 'height' },
     { index: 4, route: 'weight' },
+    { index: 5, route: 'allergenic' },
+    { index: 6, route: 'nutrition' },
 ]
 
 interface RegisterState {

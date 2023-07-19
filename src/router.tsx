@@ -8,10 +8,12 @@ import {
     DIARY_SEARCH_ROUTE,
     HOME_ROUTE,
     PROFILE_ROUTE,
+    REGISTER_ALLERGENIC_ROUTE,
     REGISTER_DATE_OF_BIRTH_ROUTE,
     REGISTER_GENDER_ROUTE,
     REGISTER_GOAL_ROUTE,
     REGISTER_HEIGHT_ROUTE,
+    REGISTER_NUTRITION_INTRO_ROUTE,
     REGISTER_ROUTE,
     REGISTER_WEIGHT_ROUTE,
     STATISTICS_ROUTE,
@@ -29,6 +31,8 @@ import { RegisterGenderStepView } from './features/register/views/register-gende
 import { RegisterDateOfBirthStepView } from './features/register/views/register-date-of-birth-step.view.tsx';
 import { RegisterHeightStepView } from './features/register/views/register-height-step.view.tsx';
 import { RegisterWeightStepView } from './features/register/views/register-weight-step.view.tsx';
+import { RegisterAllergenicStepView } from './features/register/views/register-allergenic-step.view.tsx';
+import { RegisterNutritionIntroStepView } from './features/register/views/register-nutrition-intro-step.view.tsx';
 import { RegisterRootView } from './features/register/views/register-root.view.tsx';
 
 export const router = createBrowserRouter([
@@ -56,6 +60,14 @@ export const router = createBrowserRouter([
             {
                 path: REGISTER_WEIGHT_ROUTE,
                 element: <RegisterWeightStepView/>,
+            },
+            {
+                path: REGISTER_ALLERGENIC_ROUTE,
+                element: <RegisterAllergenicStepView/>,
+            },
+            {
+                path: REGISTER_NUTRITION_INTRO_ROUTE,
+                element: <RegisterNutritionIntroStepView/>,
             },
         ],
     },

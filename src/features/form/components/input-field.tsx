@@ -1,13 +1,9 @@
-import { FormFieldData } from '../models/form-field-data.tsx';
 import { FormField } from './form-field.tsx';
 import { useState } from 'react';
 import { validate } from '../subfeatures/validation/utils/validate.ts';
+import { FormFieldData } from '../models/form-field-data.tsx';
 
-interface InputFieldProps extends FormFieldData {
-    displayName?: string
-}
-
-export const InputField = ({ displayName, name, validations, value }: InputFieldProps) => {
+export const InputField = ({ displayName, name, validations, value }: FormFieldData) => {
     const [currentValue, setCurrentValue] = useState(value)
     const [errors, setErrors] = useState(validate(value, validations))
 

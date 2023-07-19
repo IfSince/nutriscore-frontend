@@ -3,9 +3,10 @@ import { ProgressLinear } from '../../../common/progress/components/progress-lin
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks.ts';
 import { goToStep, selectRegister, submitStep } from '../../../redux/slices/register-slice.ts';
 import { PrimaryButton } from '../../../common/button/components/primary-button.tsx';
-import { Outlet, useNavigate } from 'react-router-dom';
+import { Link, Outlet, useMatch, useNavigate } from 'react-router-dom';
 import { RegisterData } from '../../../redux/models/register/register-data.ts';
 import { useRef } from 'react';
+import { REGISTER_NUTRITION_INTRO_ROUTE } from '../../../routes.ts';
 
 export const RegisterLayoutView = () => {
     const submit = (data: RegisterData) => {
@@ -22,6 +23,7 @@ export const RegisterLayoutView = () => {
 
     const navigate = useNavigate()
     const dispatch = useAppDispatch()
+    const isNutritionIntroRoute = useMatch(REGISTER_NUTRITION_INTRO_ROUTE)
 
     const registerState = useAppSelector(selectRegister)
     const registerDataRef = useRef(registerState.data)
@@ -52,10 +54,14 @@ export const RegisterLayoutView = () => {
                     </div>
                 </div>
 
-                <div className="mt-10 flex w-full justify-center lg:mt-14 xl:mt-20">
+                <div className="mt-10 flex w-full justify-center items-center lg:mt-14 xl:mt-20 flex-col">
                     <PrimaryButton action={ () => submit(registerDataRef.current) } className="w-full max-w-md">
                         <span className="font-medium whitespace-nowraptext-base">Continue</span>
                     </PrimaryButton>
+                    {
+                        isNutritionIntroRoute &&
+                        <Link to={ '/register/overview' } className="mt-6 text-cyan-300 hover:text-cyan-400 transition-colors">No thanks</Link>
+                    }
                 </div>
             </div>
         </div>
