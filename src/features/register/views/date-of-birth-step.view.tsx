@@ -3,7 +3,7 @@ import { SelectDateField } from '../../form/components/select-date-field.tsx';
 import { RegisterData } from '../../../redux/models/register/register-data.ts';
 import { useOutletContext } from 'react-router-dom';
 
-export const RegisterDateOfBirthStepView = () => {
+export const DateOfBirthStepView = () => {
     const [registerStateRef, updateStateRef]: [RegisterData, (data: Partial<RegisterData>) => void] = useOutletContext()
 
     return (

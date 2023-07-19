@@ -5,7 +5,7 @@ import { useOutletContext } from 'react-router-dom';
 import { ScalePickerField } from '../../form/components/scale-picker/scale-picker-field.tsx';
 import { useState } from 'react';
 
-export const RegisterHeightStepView = () => {
+export const HeightStepView = () => {
     const [registerStateRef, updateStateRef]: [RegisterData, (data: Partial<RegisterData>) => void] = useOutletContext()
 
     const [heightUnit, setHeightUnit] = useState(registerStateRef.heightUnit)

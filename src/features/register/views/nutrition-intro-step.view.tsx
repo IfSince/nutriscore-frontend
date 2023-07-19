@@ -1,6 +1,6 @@
 import { RegisterHeader } from '../components/register-header.tsx';
 
-export const RegisterNutritionIntroStepView = () => {
+export const NutritionIntroStepView = () => {
 
     return (
         <>

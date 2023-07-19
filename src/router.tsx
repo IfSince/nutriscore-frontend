@@ -26,13 +26,13 @@ import { DiaryOverviewView } from './features/diary/views/diary-overview.view.ts
 import { DiarySearchView } from './features/diary/views/diary-search.view.tsx';
 import { DiaryFoodItemView } from './features/diary/views/diary-food-item.view.tsx';
 import { DiaryNewFoodItemView } from './features/diary/views/diary-new-food-item.view.tsx';
-import { RegisterGoalStepView } from './features/register/views/register-goal-step.view.tsx';
-import { RegisterGenderStepView } from './features/register/views/register-gender-step.view.tsx';
-import { RegisterDateOfBirthStepView } from './features/register/views/register-date-of-birth-step.view.tsx';
-import { RegisterHeightStepView } from './features/register/views/register-height-step.view.tsx';
-import { RegisterWeightStepView } from './features/register/views/register-weight-step.view.tsx';
-import { RegisterAllergenicStepView } from './features/register/views/register-allergenic-step.view.tsx';
-import { RegisterNutritionIntroStepView } from './features/register/views/register-nutrition-intro-step.view.tsx';
+import { GoalStepView } from './features/register/views/goal-step.view.tsx';
+import { GenderStepView } from './features/register/views/gender-step.view.tsx';
+import { DateOfBirthStepView } from './features/register/views/date-of-birth-step.view.tsx';
+import { HeightStepView } from './features/register/views/height-step.view.tsx';
+import { WeightStepView } from './features/register/views/weight-step.view.tsx';
+import { AllergenicStepView } from './features/register/views/allergenic-step.view.tsx';
+import { NutritionIntroStepView } from './features/register/views/nutrition-intro-step.view.tsx';
 import { RegisterRootView } from './features/register/views/register-root.view.tsx';
 
 export const router = createBrowserRouter([
@@ -43,31 +43,31 @@ export const router = createBrowserRouter([
         children: [
             {
                 path: REGISTER_GOAL_ROUTE,
-                element: <RegisterGoalStepView/>,
+                element: <GoalStepView/>,
             },
             {
                 path: REGISTER_GENDER_ROUTE,
-                element: <RegisterGenderStepView/>,
+                element: <GenderStepView/>,
             },
             {
                 path: REGISTER_DATE_OF_BIRTH_ROUTE,
-                element: <RegisterDateOfBirthStepView/>,
+                element: <DateOfBirthStepView/>,
             },
             {
                 path: REGISTER_HEIGHT_ROUTE,
-                element: <RegisterHeightStepView/>,
+                element: <HeightStepView/>,
             },
             {
                 path: REGISTER_WEIGHT_ROUTE,
-                element: <RegisterWeightStepView/>,
+                element: <WeightStepView/>,
             },
             {
                 path: REGISTER_ALLERGENIC_ROUTE,
-                element: <RegisterAllergenicStepView/>,
+                element: <AllergenicStepView/>,
             },
             {
                 path: REGISTER_NUTRITION_INTRO_ROUTE,
-                element: <RegisterNutritionIntroStepView/>,
+                element: <NutritionIntroStepView/>,
             },
         ],
     },

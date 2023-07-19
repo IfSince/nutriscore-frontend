@@ -3,7 +3,7 @@ import { RegisterData } from '../../../redux/models/register/register-data.ts';
 import { RegisterHeader } from '../components/register-header.tsx';
 import { SelectListField } from '../../form/components/select-list-field.tsx';
 
-export const RegisterGenderStepView = () => {
+export const GenderStepView = () => {
     const [registerStateRef, updateStateRef]: [RegisterData, (data: Partial<RegisterData>) => void] = useOutletContext()
 
     const options = [

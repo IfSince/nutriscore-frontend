@@ -4,7 +4,7 @@ import { RegisterHeader } from '../components/register-header.tsx';
 import { SelectListField } from '../../form/components/select-list-field.tsx';
 import { GoalEnum } from '../../../redux/enums/goal.enum.ts';
 
-export const RegisterGoalStepView = () => {
+export const GoalStepView = () => {
     const [registerStateRef, updateStateRef]: [RegisterData, (data: Partial<RegisterData>) => void] = useOutletContext()
 
     const options = [

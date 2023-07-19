@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { SelectListField } from '../../form/components/select-list-field.tsx';
 import { ScalePickerField } from '../../form/components/scale-picker/scale-picker-field.tsx';
 
-export const RegisterWeightStepView = () => {
+export const WeightStepView = () => {
     const [registerStateRef, updateStateRef]: [RegisterData, (data: Partial<RegisterData>) => void] = useOutletContext()
 
     const [weightUnit, setWeightUnit] = useState(registerStateRef.weightUnit)

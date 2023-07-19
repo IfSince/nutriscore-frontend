@@ -3,7 +3,7 @@ import { MultiSelectPicker } from '../../form/components/multi-select/multi-sele
 import { RegisterData } from '../../../redux/models/register/register-data.ts';
 import { useOutletContext } from 'react-router-dom';
 
-export const RegisterAllergenicStepView = () => {
+export const AllergenicStepView = () => {
     const [registerStateRef, updateStateRef]: [RegisterData, (data: Partial<RegisterData>) => void] = useOutletContext()
 
     const options = [
