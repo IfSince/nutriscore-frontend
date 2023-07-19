@@ -6,19 +6,19 @@ import { ScalePickerField } from '../../form/components/scale-picker/scale-picke
 import { useState } from 'react';
 
 export const RegisterHeightStepView = () => {
-    const [registerData, updateState]: [RegisterData, (data: Partial<RegisterData>) => void] = useOutletContext()
+    const [registerStateRef, updateStateRef]: [RegisterData, (data: Partial<RegisterData>) => void] = useOutletContext()
 
-    const [heightUnit, setHeightUnit] = useState(registerData.heightUnit)
-    const [height, setHeight] = useState(registerData.height)
+    const [heightUnit, setHeightUnit] = useState(registerStateRef.heightUnit)
+    const [height, setHeight] = useState(registerStateRef.height)
 
     const updateHeightUnit = (heightUnit: string) => {
         setHeightUnit(heightUnit)
-        updateState({ heightUnit })
+        updateStateRef({ heightUnit })
     }
 
     const updateHeight = (height: number) => {
         setHeight(height)
-        updateState({ height })
+        updateStateRef({ height })
     }
 
     const options = [

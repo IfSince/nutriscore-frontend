@@ -5,12 +5,12 @@ import { SelectListField } from '../../form/components/select-list-field.tsx';
 import { GoalEnum } from '../../../redux/enums/goal.enum.ts';
 
 export const RegisterGoalStepView = () => {
-    const [registerData, updateState]: [RegisterData, (data: Partial<RegisterData>) => void] = useOutletContext()
+    const [registerStateRef, updateStateRef]: [RegisterData, (data: Partial<RegisterData>) => void] = useOutletContext()
 
     const options = [
-        { value: GoalEnum.LOOSE, displayName: 'Loose', icon: 'trending_down' },
-        { value: GoalEnum.KEEP, displayName: 'Keep', icon: 'arrow_right_alt' },
-        { value: GoalEnum.GAIN, displayName: 'Gain', icon: 'trending_up' },
+        { value: GoalEnum.LOOSE, displayName: 'Loose weight', icon: 'trending_down' },
+        { value: GoalEnum.KEEP, displayName: 'Keep weight', icon: 'arrow_right_alt' },
+        { value: GoalEnum.GAIN, displayName: 'Gain weight', icon: 'trending_up' },
     ]
 
     return (
@@ -18,8 +18,8 @@ export const RegisterGoalStepView = () => {
             <RegisterHeader title="What is your main goal?"/>
             <SelectListField name="gender"
                              options={ options }
-                             onChange={ (goal: string) => updateState({ goal }) }
-                             value={ registerData.goal }
+                             onChange={ (goal: string) => updateStateRef({ goal }) }
+                             value={ registerStateRef.goal }
                              className="flex flex-col items-center gap-2 md:gap-3"
                              optionsClassName="w-full items-center"
                              iconClassName="text-3xl lg:text-4xl"

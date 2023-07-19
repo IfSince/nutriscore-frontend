@@ -4,7 +4,7 @@ import { RegisterData } from '../../../redux/models/register/register-data.ts';
 import { useOutletContext } from 'react-router-dom';
 
 export const RegisterAllergenicStepView = () => {
-    const [registerData, updateState]: [RegisterData, (data: Partial<RegisterData>) => void] = useOutletContext()
+    const [registerStateRef, updateStateRef]: [RegisterData, (data: Partial<RegisterData>) => void] = useOutletContext()
 
     const options = [
         { value: 1, displayName: 'Milk', icon: 'image' },
@@ -23,8 +23,8 @@ export const RegisterAllergenicStepView = () => {
             <RegisterHeader title="Do you have any food related allergies?"/>
             <MultiSelectPicker name="gender"
                                options={ options }
-                               onChange={ (allergenicIds) => updateState({ allergenicIds }) }
-                               selected={ registerData.allergenicIds }/>
+                               onChange={ (allergenicIds) => updateStateRef({ allergenicIds }) }
+                               selected={ registerStateRef.allergenicIds }/>
         </>
     )
 }

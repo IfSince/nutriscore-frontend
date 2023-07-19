@@ -4,14 +4,14 @@ import { RegisterData } from '../../../redux/models/register/register-data.ts';
 import { useOutletContext } from 'react-router-dom';
 
 export const RegisterDateOfBirthStepView = () => {
-    const [registerData, updateState]: [RegisterData, (data: Partial<RegisterData>) => void] = useOutletContext()
+    const [registerStateRef, updateStateRef]: [RegisterData, (data: Partial<RegisterData>) => void] = useOutletContext()
 
     return (
         <>
             <RegisterHeader title="What is your date of birth?"/>
             <SelectDateField name="dateOfBirth"
-                             value={ registerData.dateOfBirth }
-                             onChange={ (dateOfBirth: string) => updateState({ dateOfBirth }) }
+                             value={ registerStateRef.dateOfBirth }
+                             onChange={ (dateOfBirth: string) => updateStateRef({ dateOfBirth }) }
             />
         </>
     );

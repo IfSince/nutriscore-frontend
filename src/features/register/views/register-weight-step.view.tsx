@@ -6,19 +6,19 @@ import { SelectListField } from '../../form/components/select-list-field.tsx';
 import { ScalePickerField } from '../../form/components/scale-picker/scale-picker-field.tsx';
 
 export const RegisterWeightStepView = () => {
-    const [registerData, updateState]: [RegisterData, (data: Partial<RegisterData>) => void] = useOutletContext()
+    const [registerStateRef, updateStateRef]: [RegisterData, (data: Partial<RegisterData>) => void] = useOutletContext()
 
-    const [weightUnit, setWeightUnit] = useState(registerData.weightUnit)
-    const [weight, setWeight] = useState(registerData.weight)
+    const [weightUnit, setWeightUnit] = useState(registerStateRef.weightUnit)
+    const [weight, setWeight] = useState(registerStateRef.weight)
 
     const updateWeightUnit = (weightUnit: string) => {
         setWeightUnit(weightUnit)
-        updateState({ weightUnit })
+        updateStateRef({ weightUnit })
     }
 
     const updateWeight = (weight: number) => {
         setWeight(weight)
-        updateState({ weight })
+        updateStateRef({ weight })
     }
 
     const options = [
@@ -28,7 +28,7 @@ export const RegisterWeightStepView = () => {
 
     return (
         <>
-            <RegisterHeader title="What is your current height?"/>
+            <RegisterHeader title="What is your current weight?"/>
             <SelectListField name="gender"
                              options={ options }
                              onChange={ updateWeightUnit }

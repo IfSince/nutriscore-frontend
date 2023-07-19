@@ -12,6 +12,12 @@ const REGISTER_STEPS: QuestStep[] = [
     { index: 4, route: 'weight' },
     { index: 5, route: 'allergenic' },
     { index: 6, route: 'nutrition' },
+    { index: 7, route: 'activity-level' },
+    { index: 8, route: 'activity-per-week' },
+    { index: 8, route: 'pal' },
+    { index: 9, route: 'rmr' },
+    { index: 10, route: 'personal' },
+    { index: 11, route: 'overview' },
 ]
 
 interface RegisterState {
@@ -39,16 +45,16 @@ export const registerSlice = createSlice({
     name: 'register',
     initialState,
     reducers: {
-        submitStep: (state, action: PayloadAction<RegisterData>) => (
+        submitStepData: (state, action: PayloadAction<RegisterData>) => (
             { ...state, data: action.payload, currentStepIndex: state.currentStepIndex + 1 }
         ),
-        goToStep: (state, action: PayloadAction<number>) => (
+        routeToStep: (state, action: PayloadAction<number>) => (
             { ...state, currentStepIndex: action.payload }
         ),
     },
 })
 
-export const { submitStep, goToStep } = registerSlice.actions
+export const { submitStepData, routeToStep } = registerSlice.actions
 export const selectRegister = (state: RootState) => state.register
 
 export default registerSlice.reducer

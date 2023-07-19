@@ -1,7 +1,7 @@
 import { PrimaryIconButton } from '../../../common/button/components/icon/primary-icon-button.tsx';
 import { ProgressLinear } from '../../../common/progress/components/progress-linear.tsx';
 import { useAppDispatch, useAppSelector } from '../../../redux/hooks.ts';
-import { goToStep, selectRegister, submitStep } from '../../../redux/slices/register-slice.ts';
+import { routeToStep, selectRegister, submitStepData } from '../../../redux/slices/register-slice.ts';
 import { PrimaryButton } from '../../../common/button/components/primary-button.tsx';
 import { Link, Outlet, useMatch, useNavigate } from 'react-router-dom';
 import { RegisterData } from '../../../redux/models/register/register-data.ts';
@@ -10,13 +10,19 @@ import { REGISTER_NUTRITION_INTRO_ROUTE } from '../../../routes.ts';
 
 export const RegisterLayoutView = () => {
     const submit = (data: RegisterData) => {
-        dispatch(submitStep(data))
+        dispatch(submitStepData(data))
         navigate(`/register/${ registerState.steps[registerState.currentStepIndex + 1].route }`)
     }
 
     const goBack = () => {
-        dispatch(goToStep(registerState.currentStepIndex - 1))
-        navigate(-1)
+        const currentStepIndex = registerState.currentStepIndex
+        dispatch(routeToStep(registerState.currentStepIndex - 1))
+
+        if (currentStepIndex > 0) {
+            navigate(`/register/${ registerState.steps[currentStepIndex - 1].route }`)
+        } else {
+            navigate(-1)
+        }
     }
 
     const updateRegisterRef = (data: Partial<RegisterData>) => registerDataRef.current = { ...registerDataRef.current, ...data }
@@ -49,7 +55,7 @@ export const RegisterLayoutView = () => {
 
                     <div className="mt-2 flex flex-col items-center lg:mt-4">
                         <div className="flex w-full max-w-xl flex-col items-center">
-                            <Outlet context={ [registerDataRef.current, updateRegisterRef] }/>
+                            <Outlet context={ [registerDataRef.current, updateRegisterRef ] }/>
                         </div>
                     </div>
                 </div>
