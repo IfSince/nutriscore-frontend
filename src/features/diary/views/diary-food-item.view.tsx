@@ -4,13 +4,15 @@ import { FoodItemAmountSelector } from '../../food/components/food-item-amount-s
 import { useState } from 'react';
 import { DIARY_ROUTE } from '../../../routes.ts';
 import { useAppSelector } from '../../../redux/hooks.ts';
-import { selectFoodItems } from '../../../redux/slices/food-items-slice.ts';
 import { PrimaryButton } from '../../../common/button/components/primary-button.tsx';
+import { selectFoodItemById } from '../../../redux/slices/food-items-slice.ts';
 
 export const DiaryFoodItemView = () => {
     const navigate = useNavigate()
     const { id } = useParams()
-    const foodItem = useAppSelector(selectFoodItems).find(item => item.id === (+id!))!
+
+    const foodItem = useAppSelector(state => selectFoodItemById(state, Number(id)))!
+
     const [amount, setAmount] = useState(foodItem?.amount)
 
     const onRemove = (value: number) => setAmount(currentAmount => currentAmount - value)
