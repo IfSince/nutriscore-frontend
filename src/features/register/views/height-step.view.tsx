@@ -1,24 +1,34 @@
 import { RegisterHeader } from '../components/register-header.tsx';
 import { SelectListField } from '../../form/components/select-list-field.tsx';
-import { RegisterData } from '../../../redux/models/register/register-data.ts';
 import { useOutletContext } from 'react-router-dom';
 import { ScalePickerField } from '../../form/components/scale-picker/scale-picker-field.tsx';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
+import { RegisterOutletContext } from '../models/register-outlet-context.ts';
+import { REGISTER_STEP } from '../../../redux/slices/register-slice.ts';
 
 export const HeightStepView = () => {
-    const [registerStateRef, updateStateRef]: [RegisterData, (data: Partial<RegisterData>) => void] = useOutletContext()
+    const [registerState, updateState, backRef, nextRef]: RegisterOutletContext = useOutletContext()
 
-    const [heightUnit, setHeightUnit] = useState(registerStateRef.heightUnit)
-    const [height, setHeight] = useState(registerStateRef.height)
+    const [heightUnit, setHeightUnit] = useState(registerState.heightUnit)
+    const [height, setHeight] = useState(registerState.height)
+
+    const heightRef = useRef(registerState.height)
+    const heightUnitRef = useRef(registerState.heightUnit)
+
+    useEffect(() => {
+        backRef.current = REGISTER_STEP.DATE_OF_BIRTH
+        nextRef.current = REGISTER_STEP.WEIGHT
+        return () => updateState({ height: heightRef.current, heightUnit: heightUnitRef.current })
+    }, [backRef, nextRef])
 
     const updateHeightUnit = (heightUnit: string) => {
         setHeightUnit(heightUnit)
-        updateStateRef({ heightUnit })
+        heightUnitRef.current = heightUnit
     }
 
     const updateHeight = (height: number) => {
         setHeight(height)
-        updateStateRef({ height })
+        heightRef.current = height
     }
 
     const options = [

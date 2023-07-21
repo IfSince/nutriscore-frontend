@@ -8,7 +8,7 @@ import {
     DIARY_SEARCH_ROUTE,
     HOME_ROUTE,
     PROFILE_ROUTE,
-    REGISTER_ACTIVITY_LEVEL_ROUTE,
+    REGISTER_ACTIVITY_LEVEL_ROUTE, REGISTER_ACTIVITY_PER_WEEK_ROUTE,
     REGISTER_ALLERGENIC_ROUTE,
     REGISTER_CALORIE_RESTRICTION_ROUTE,
     REGISTER_DATE_OF_BIRTH_ROUTE,
@@ -16,9 +16,9 @@ import {
     REGISTER_GOAL_ROUTE,
     REGISTER_HEIGHT_ROUTE,
     REGISTER_NUTRITION_INTRO_ROUTE,
-    REGISTER_OVERVIEW_ROUTE,
+    REGISTER_OVERVIEW_ROUTE, REGISTER_PAL_ROUTE,
     REGISTER_PERSONAL_ROUTE,
-    REGISTER_RMR_ROUTE,
+    REGISTER_CALCULATION_TYPE_ROUTE,
     REGISTER_ROUTE,
     REGISTER_WEIGHT_ROUTE,
     STATISTICS_ROUTE,
@@ -40,10 +40,12 @@ import { AllergenicStepView } from './features/register/views/allergenic-step.vi
 import { NutritionIntroStepView } from './features/register/views/nutrition-intro-step.view.tsx';
 import { ActivityLevelStepView } from './features/register/views/activity-level-step.view.tsx';
 import { RegisterLayoutView } from './features/register/views/register-layout.view.tsx';
-import { CalculationTypeView } from './features/register/views/calculation-type.view.tsx';
-import { CalorieRestrictionView } from './features/register/views/calorie-restriction.view.tsx';
+import { CalculationTypeStepView } from './features/register/views/calculation-type-step.view.tsx';
+import { CalorieRestrictionStepView } from './features/register/views/calorie-restriction-step.view.tsx';
 import { PersonalStepView } from './features/register/views/personal-step.view.tsx';
 import { RegisterOverviewStepView } from './features/register/views/register-overview-step.view.tsx';
+import { ActivityPerWeekStepView } from './features/register/views/activity-per-week-step.view.tsx';
+import { PalStepView } from './features/register/views/pal-step.view.tsx';
 
 export const router = createBrowserRouter([
     {
@@ -83,21 +85,21 @@ export const router = createBrowserRouter([
                 path: REGISTER_ACTIVITY_LEVEL_ROUTE,
                 element: <ActivityLevelStepView/>,
             },
-            // {
-            //     path: REGISTER_ACTIVITY_PER_WEEK_ROUTE,
-            //     element: <ActivityPerWeekView/>,
-            // },
-            // {
-            //     path: REGISTER_PAL_ROUTE,
-            //     element: <PalView/>,
-            // },
             {
-                path: REGISTER_RMR_ROUTE,
-                element: <CalculationTypeView/>,
+                path: REGISTER_ACTIVITY_PER_WEEK_ROUTE,
+                element: <ActivityPerWeekStepView/>,
+            },
+            {
+                path: REGISTER_PAL_ROUTE,
+                element: <PalStepView/>,
+            },
+            {
+                path: REGISTER_CALCULATION_TYPE_ROUTE,
+                element: <CalculationTypeStepView/>,
             },
             {
                 path: REGISTER_CALORIE_RESTRICTION_ROUTE,
-                element: <CalorieRestrictionView/>,
+                element: <CalorieRestrictionStepView/>,
             },
             {
                 path: REGISTER_PERSONAL_ROUTE,

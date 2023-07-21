@@ -1,10 +1,17 @@
 import { RegisterHeader } from '../components/register-header.tsx';
 import { MultiSelectPicker } from '../../form/components/multi-select/multi-select-picker.tsx';
-import { RegisterData } from '../../../redux/models/register/register-data.ts';
 import { useOutletContext } from 'react-router-dom';
+import { RegisterOutletContext } from '../models/register-outlet-context.ts';
+import { useEffect } from 'react';
+import { REGISTER_STEP } from '../../../redux/slices/register-slice.ts';
 
 export const AllergenicStepView = () => {
-    const [registerStateRef, updateStateRef]: [RegisterData, (data: Partial<RegisterData>) => void] = useOutletContext()
+    const [registerState, updateState, backRef, nextRef]: RegisterOutletContext = useOutletContext()
+
+    useEffect(() => {
+        backRef.current = REGISTER_STEP.WEIGHT
+        nextRef.current = REGISTER_STEP.NUTRITION_INTRO
+    }, [backRef, nextRef])
 
     const options = [
         { value: 1, displayName: 'Milk', icon: 'image' },
@@ -23,8 +30,8 @@ export const AllergenicStepView = () => {
             <RegisterHeader title="Do you have any food related allergies?"/>
             <MultiSelectPicker name="gender"
                                options={ options }
-                               onChange={ (allergenicIds) => updateStateRef({ allergenicIds }) }
-                               selected={ registerStateRef.allergenicIds }/>
+                               onChange={ allergenicIds => updateState({ allergenicIds }) }
+                               selected={ registerState.allergenicIds }/>
         </>
     )
 }

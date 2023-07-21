@@ -1,6 +1,6 @@
 export const Validations = {
     required: (value?: string) => {
-        if (!value || value.length == 0) {
+        if (!value || value.length === 0) {
             return 'This field is required'
         }
     },
@@ -8,6 +8,13 @@ export const Validations = {
         (value?: string) => {
             if (value && value?.length < minLength) {
                 return `This field needs at least ${ minLength } characters`
+            }
+        },
+    notGreaterThan: (maxValue: number) =>
+        (value?: string) => {
+            const valueAsNumber = value ? Number(value): null
+            if (valueAsNumber && valueAsNumber > maxValue) {
+                return `This field cannot have a value greater than ${ maxValue }`
             }
         },
     emailFormat: (value?: string) => {

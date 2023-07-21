@@ -1,6 +1,16 @@
 import { RegisterHeader } from '../components/register-header.tsx';
+import { RegisterOutletContext } from '../models/register-outlet-context.ts';
+import { useOutletContext } from 'react-router-dom';
+import { useEffect } from 'react';
+import { REGISTER_STEP } from '../../../redux/slices/register-slice.ts';
 
 export const NutritionIntroStepView = () => {
+    const [, , backRef, nextRef]: RegisterOutletContext = useOutletContext()
+
+    useEffect(() => {
+        backRef.current = REGISTER_STEP.ALLERGENIC
+        nextRef.current = REGISTER_STEP.ACTIVITY_LEVEL
+    }, [backRef, nextRef])
 
     return (
         <>

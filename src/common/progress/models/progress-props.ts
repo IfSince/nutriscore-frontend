@@ -5,4 +5,5 @@ export interface ProgressProps {
     valueObject: ValueObject
     trackStyles?: string
     indicatorStyles?: string
+    animationStyle?: string
 }

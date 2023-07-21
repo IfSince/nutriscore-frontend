@@ -1,18 +1,18 @@
 import { FormField } from './form-field.tsx';
-import { FormFieldData } from '../models/form-field-data.tsx';
+import { FormFieldData, FormFieldValueTypes } from '../models/form-field-data.tsx';
 import { ISelectListOption } from '../models/select-list-option.ts';
 import { SelectListOption } from './select-list-option.tsx';
 
 
-interface SelectListFieldProps extends FormFieldData {
-    options: ISelectListOption[]
-    onChange: (value: string) => void
+interface SelectListFieldProps<T extends FormFieldValueTypes> extends FormFieldData<T> {
+    options: ISelectListOption<T>[]
+    onChange: (value: T) => void
     optionsClassName?: string
     className?: string
     iconClassName?: string
 }
 
-export const SelectListField = ({
+export const SelectListField = <T extends FormFieldValueTypes, >({
     name,
     value,
     onChange,
@@ -20,13 +20,13 @@ export const SelectListField = ({
     optionsClassName,
     className,
     iconClassName,
-}: SelectListFieldProps) =>
+}: SelectListFieldProps<T>) =>
     <FormField name={ name }
                value={ value }>
         <div className={ className || 'flex flex-col gap-2 lg:gap-3' }>
             {
                 options.map(option =>
-                    <SelectListOption key={ option.value }
+                    <SelectListOption key={ `${ option.value }` }
                                       name={ name }
                                       option={ option }
                                       onChange={ onChange }

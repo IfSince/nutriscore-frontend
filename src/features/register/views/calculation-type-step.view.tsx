@@ -1,10 +1,17 @@
-import { RegisterData } from '../../../redux/models/register/register-data.ts';
 import { useOutletContext } from 'react-router-dom';
 import { RegisterHeader } from '../components/register-header.tsx';
 import { SelectListField } from '../../form/components/select-list-field.tsx';
+import { RegisterOutletContext } from '../models/register-outlet-context.ts';
+import { useEffect } from 'react';
+import { REGISTER_STEP } from '../../../redux/slices/register-slice.ts';
 
-export const CalculationTypeView = () => {
-    const [registerStateRef, updateStateRef]: [RegisterData, (data: Partial<RegisterData>) => void] = useOutletContext()
+export const CalculationTypeStepView = () => {
+    const [registerState, updateState, backRef, nextRef]: RegisterOutletContext = useOutletContext()
+
+    useEffect(() => {
+        backRef.current = REGISTER_STEP.ACTIVITY_LEVEL
+        nextRef.current = REGISTER_STEP.CALORIE_RESTRICTION
+    }, [backRef, nextRef])
 
     const options = [
         { value: 1, displayName: 'Easy', icon: 'image' },
@@ -18,8 +25,8 @@ export const CalculationTypeView = () => {
             <RegisterHeader title="How should we calculate your RMR?"/>
             <SelectListField name="rmr"
                              options={ options }
-                             onChange={ (value: string) => updateStateRef({ calculationTypeId: +value }) }
-                             value={ `${ registerStateRef.calculationTypeId }` }/>
+                             onChange={ calculationTypeId => updateState({ calculationTypeId }) }
+                             value={ registerState.calculationTypeId }/>
         </>
     )
 }

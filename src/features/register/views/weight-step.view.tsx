@@ -1,24 +1,34 @@
 import { RegisterHeader } from '../components/register-header.tsx';
-import { RegisterData } from '../../../redux/models/register/register-data.ts';
 import { useOutletContext } from 'react-router-dom';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { SelectListField } from '../../form/components/select-list-field.tsx';
 import { ScalePickerField } from '../../form/components/scale-picker/scale-picker-field.tsx';
+import { RegisterOutletContext } from '../models/register-outlet-context.ts';
+import { REGISTER_STEP } from '../../../redux/slices/register-slice.ts';
 
 export const WeightStepView = () => {
-    const [registerStateRef, updateStateRef]: [RegisterData, (data: Partial<RegisterData>) => void] = useOutletContext()
+    const [registerState, updateState, backRef, nextRef]: RegisterOutletContext = useOutletContext()
 
-    const [weightUnit, setWeightUnit] = useState(registerStateRef.weightUnit)
-    const [weight, setWeight] = useState(registerStateRef.weight)
+    const [weightUnit, setWeightUnit] = useState(registerState.weightUnit)
+    const [weight, setWeight] = useState(registerState.weight)
+
+    const weightRef = useRef(registerState.weight)
+    const weightUnitRef = useRef(registerState.weightUnit)
+
+    useEffect(() => {
+        backRef.current = REGISTER_STEP.HEIGHT
+        nextRef.current = REGISTER_STEP.ALLERGENIC
+        return () => updateState({ weight: weightRef.current, weightUnit: weightUnitRef.current })
+    }, [backRef, nextRef])
 
     const updateWeightUnit = (weightUnit: string) => {
         setWeightUnit(weightUnit)
-        updateStateRef({ weightUnit })
+        weightUnitRef.current = weightUnit
     }
 
     const updateWeight = (weight: number) => {
         setWeight(weight)
-        updateStateRef({ weight })
+        weightRef.current = weight
     }
 
     const options = [

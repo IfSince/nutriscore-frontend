@@ -1,4 +1,4 @@
 export interface QuestStep {
-    index: number
+    sequence: number
     route: string
 }

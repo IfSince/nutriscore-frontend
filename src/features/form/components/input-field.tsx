@@ -1,18 +1,27 @@
 import { FormField } from './form-field.tsx';
 import { useState } from 'react';
 import { validate } from '../subfeatures/validation/utils/validate.ts';
-import { FormFieldData } from '../models/form-field-data.tsx';
+import { FormFieldData, FormFieldValueTypes } from '../models/form-field-data.tsx';
+import { convertToFormFieldType } from '../../../utils/convert-to-form-field-type.ts';
 
-interface InputFieldProps extends FormFieldData {
-    onChange: (value: string) => void
+interface InputFieldProps<T extends FormFieldValueTypes> extends FormFieldData<T> {
+    onChange: (value: T) => void
     type?: string
 }
 
-export const InputField = ({ displayName, name, validations, value, onChange, type = 'text' }: InputFieldProps) => {
-    const [currentValue, setCurrentValue] = useState(value)
-    const [errors, setErrors] = useState<string[]>(value ? validate(value, validations) : [])
+export const InputField = <T extends FormFieldValueTypes, >({
+    displayName,
+    name,
+    validations,
+    value,
+    onChange,
+    type = 'text',
+}: InputFieldProps<T>) => {
 
-    const updateAndValidate = (value: string) => {
+    const [currentValue, setCurrentValue] = useState(value)
+    const [errors, setErrors] = useState(value ? validate(value, validations) : [])
+
+    const updateAndValidate = (value: T) => {
         setCurrentValue(value)
         setErrors(validate(value, validations))
         onChange(value)
@@ -34,8 +43,8 @@ export const InputField = ({ displayName, name, validations, value, onChange, ty
                    type={ type }
                    id={ name }
                    value={ currentValue }
-                   onChange={ (event) => setCurrentValue(event.target.value) }
-                   onBlur={ (event) => updateAndValidate(event.target.value) }/>
+                   onChange={ (event) => setCurrentValue(convertToFormFieldType(event.target.value, value)) }
+                   onBlur={ (event) => updateAndValidate(convertToFormFieldType(event.target.value, value)) }/>
         </FormField>
     );
 }

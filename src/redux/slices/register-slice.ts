@@ -1,30 +1,43 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '../store.ts';
 import { RegisterData } from '../models/register/register-data.ts';
-import { QuestStep } from '../models/quest-step.ts';
 import { GoalEnum } from '../enums/goal.enum.ts';
+import {
+    REGISTER_ACTIVITY_LEVEL_ROUTE,
+    REGISTER_ACTIVITY_PER_WEEK_ROUTE,
+    REGISTER_ALLERGENIC_ROUTE,
+    REGISTER_CALCULATION_TYPE_ROUTE,
+    REGISTER_CALORIE_RESTRICTION_ROUTE,
+    REGISTER_DATE_OF_BIRTH_ROUTE,
+    REGISTER_GENDER_ROUTE,
+    REGISTER_GOAL_ROUTE,
+    REGISTER_HEIGHT_ROUTE,
+    REGISTER_NUTRITION_INTRO_ROUTE,
+    REGISTER_OVERVIEW_ROUTE,
+    REGISTER_PAL_ROUTE,
+    REGISTER_PERSONAL_ROUTE,
+    REGISTER_WEIGHT_ROUTE,
+} from '../../routes.ts';
 
-const REGISTER_STEPS: QuestStep[] = [
-    { index: 0, route: 'goal' },
-    { index: 1, route: 'gender' },
-    { index: 2, route: 'date-of-birth' },
-    { index: 3, route: 'height' },
-    { index: 4, route: 'weight' },
-    { index: 5, route: 'allergenic' },
-    { index: 6, route: 'nutrition' },
-    { index: 7, route: 'activity-level' },
-    // { index: 8, route: 'activity-per-week' },
-    // { index: 8, route: 'pal' },
-    { index: 8, route: 'rmr' },
-    { index: 9, route: 'calorie-restriction' },
-    { index: 9, route: 'personal' },
-    { index: 10, route: 'overview' },
-]
+export const REGISTER_STEP = {
+    GOAL: { sequence: 1, route: REGISTER_GOAL_ROUTE },
+    GENDER: { sequence: 2, route: REGISTER_GENDER_ROUTE },
+    DATE_OF_BIRTH: { sequence: 3, route: REGISTER_DATE_OF_BIRTH_ROUTE },
+    HEIGHT: { sequence: 4, route: REGISTER_HEIGHT_ROUTE },
+    WEIGHT: { sequence: 5, route: REGISTER_WEIGHT_ROUTE },
+    ALLERGENIC: { sequence: 6, route: REGISTER_ALLERGENIC_ROUTE },
+    NUTRITION_INTRO: { sequence: 7, route: REGISTER_NUTRITION_INTRO_ROUTE },
+    ACTIVITY_LEVEL: { sequence: 8, route: REGISTER_ACTIVITY_LEVEL_ROUTE },
+    ACTIVITY_PER_WEEK: { sequence: 8, route: REGISTER_ACTIVITY_PER_WEEK_ROUTE },
+    PAL: { sequence: 8, route: REGISTER_PAL_ROUTE },
+    CALCULATION_TYPE: { sequence: 9, route: REGISTER_CALCULATION_TYPE_ROUTE },
+    CALORIE_RESTRICTION: { sequence: 10, route: REGISTER_CALORIE_RESTRICTION_ROUTE },
+    PERSONAL: { sequence: 11, route: REGISTER_PERSONAL_ROUTE },
+    OVERVIEW: { sequence: 12, route: REGISTER_OVERVIEW_ROUTE },
+}
 
 interface RegisterState {
     data: RegisterData
-    currentStepIndex: number
-    steps: QuestStep[]
 }
 
 const initialState: RegisterState = {
@@ -37,30 +50,40 @@ const initialState: RegisterState = {
         weight: 80,
         weightUnit: 'kg',
         allergenicIds: [],
-        activityLevelId: 4,
+        nutritionTypeId: 1,
+        activityLevelId: 1,
+        physicalActivityLevelActivities: {
+            sleeping: 0,
+            onlySitting: 0,
+            occasionalActivities: 0,
+            mostlySittingOrStanding: 0,
+            mostlyWalkingOrStanding: 0,
+            physicallyDemanding: 0,
+        },
         calculationTypeId: 1,
+        calorieRestriction: 0,
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+        confirmPassword: '',
     },
-    currentStepIndex: 0,
-    steps: [...REGISTER_STEPS],
 }
 
 export const registerSlice = createSlice({
     name: 'register',
     initialState,
     reducers: {
-        submitStepData: (state, action: PayloadAction<RegisterData>) => (
-            { ...state, data: action.payload, currentStepIndex: state.currentStepIndex + 1 }
-        ),
-        routeToStep: (state, action: PayloadAction<number>) => (
-            { ...state, currentStepIndex: action.payload }
-        ),
+        updateStateData: (state, action: PayloadAction<Partial<RegisterData>>) => {
+            state.data = { ...state.data, ...action.payload }
+        },
         submit: (state) => {
             console.log(state.data)
         },
     },
 })
 
-export const { submitStepData, routeToStep, submit } = registerSlice.actions
+export const { updateStateData, submit } = registerSlice.actions
 export const selectRegister = (state: RootState) => state.register
 
 export default registerSlice.reducer

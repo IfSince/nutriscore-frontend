@@ -6,6 +6,8 @@
 //     allergenicIds: number[]
 // }
 
+import { PhysicalActivityLevelActivities } from './physical-activity-level-activities.ts';
+
 export interface RegisterData {
     goal: string
     genderId: number
@@ -16,16 +18,17 @@ export interface RegisterData {
     weightUnit: string
     allergenicIds: number[]
 
-    nutritionTypeId?: number
-    activityLevelId?: number
+    nutritionTypeId: number
+    activityLevelId: number
     activityPerWeekId?: number
-    physicalActivityLevel?: number
-    calculationTypeId?: number
-    calorieRestriction?: number
 
-    firstName?: string
-    lastName?: string
-    email?: string
-    password?: string
-    confirmPassword?: string
+    physicalActivityLevelActivities: PhysicalActivityLevelActivities
+    calculationTypeId: number
+    calorieRestriction: number
+
+    firstName: string
+    lastName: string
+    email: string
+    password: string
+    confirmPassword: string
 }

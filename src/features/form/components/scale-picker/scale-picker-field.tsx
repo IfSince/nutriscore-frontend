@@ -53,7 +53,6 @@ export const ScalePickerField = ({ minValue, maxValue, value, unit, onChange }: 
         }
     }
 
-
     return (
         <>
             <span className="relative mb-2 text-gray-600">

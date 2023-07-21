@@ -5,13 +5,13 @@ import { CustomDatePicker } from '../../../common/custom-date-picker.tsx';
 import { FormFieldData } from '../models/form-field-data.tsx';
 
 
-export const SelectDateField = ({
+export const SelectDateField = <T extends string>({
     displayName,
     name,
     validations,
-    value = '2000-01-01',
+    value,
     onChange,
-}: FormFieldData & { onChange: (date: string) => void }) => {
+}: FormFieldData<T> & { onChange: (date: string) => void }) => {
     const [errors, setErrors] = useState(validate(value, validations))
 
     const changeAndValidate = (date: string) => {
