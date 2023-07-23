@@ -1,0 +1,1 @@
+export type FlowbiteSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl'

@@ -1,18 +1,19 @@
 import { configureStore } from '@reduxjs/toolkit';
-import { foodItemsSlice } from './slices/food-items-slice.ts';
 import { userSlice } from './slices/user-slice.ts';
 import { userMetadataSlice } from './slices/user-metadata-slice.ts';
 import { dateSlice } from './slices/date-slice.ts';
 import { registerSlice } from './slices/register-slice.ts';
+import { apiSlice } from '../api/api-slice.ts';
 
 export const store = configureStore({
     reducer: {
         register: registerSlice.reducer,
         user: userSlice.reducer,
         userMetadata: userMetadataSlice.reducer,
-        foodItems: foodItemsSlice.reducer,
         date: dateSlice.reducer,
+        [apiSlice.reducerPath]: apiSlice.reducer,
     },
+    middleware: getDefaultMiddleware => getDefaultMiddleware().concat(apiSlice.middleware),
 })
 
 export type RootState = ReturnType<typeof store.getState>

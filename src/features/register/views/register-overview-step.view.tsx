@@ -13,12 +13,14 @@ export const RegisterOverviewStepView = () => {
         nextRef.current = REGISTER_STEP.OVERVIEW
     }, [backRef, nextRef])
 
+    // const everythingSet = [registerState.firstName, registerState.lastName].every(Boolean)
+
     return (
         <>
             <RegisterHeader title="Overview"/>
             {
                 Object.keys(registerState).map(key =>
-                    <div key={ key }>{ `${ key }: ${ registerState[key as keyof RegisterData] }` }</div>
+                    <div key={ key }>{ `${ key }: ${ registerState[key as keyof RegisterData] }` }</div>,
                 )
             }
         </>

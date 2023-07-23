@@ -1,20 +1,21 @@
-import { FormFieldData } from '../models/form-field-data.tsx';
+import { FormFieldData, FormFieldValueTypes } from '../models/form-field-data.tsx';
 import { FormField } from './form-field.tsx';
 import { useState } from 'react';
 import { validate } from '../subfeatures/validation/utils/validate.ts';
+import { convertToFormFieldType } from '../../../utils/convert-to-form-field-type.ts';
 
-interface SelectDropdownFieldProps extends FormFieldData {
+interface SelectDropdownFieldProps<T extends FormFieldValueTypes> extends FormFieldData<T> {
     displayName?: string
     nullable?: boolean
     options: string[]
 }
 
-export const SelectDropdownField = ({ displayName, name, options, validations, value, nullable }: SelectDropdownFieldProps) => {
+export const SelectDropdownField = <T extends FormFieldValueTypes, >({ displayName, name, options, validations, value, nullable }: SelectDropdownFieldProps<T>) => {
     const [currentValue, setCurrentValue] = useState(value)
     const [previousValue, setPreviousValue] = useState(value)
     const [errors, setErrors] = useState<string[]>(validate(value, validations))
 
-    const onBlur = (newValue: string) => {
+    const onBlur = (newValue: T) => {
         if (newValue !== previousValue) {
             setErrors(validate(value, validations))
             setPreviousValue(newValue)
@@ -37,8 +38,8 @@ export const SelectDropdownField = ({ displayName, name, options, validations, v
                               lg:h-12"
                     id={ name }
                     value={ currentValue }
-                    onChange={ (event) => setCurrentValue(event.target.value) }
-                    onBlur={ (event) => onBlur(event.target.value) }>
+                    onChange={ (event) => setCurrentValue(convertToFormFieldType(event.target.value, value)) }
+                    onBlur={ (event) => onBlur(convertToFormFieldType(event.target.value, value)) }>
                 { nullable && <option value=""></option> }
                 {
                     options.map(option => <option key={ option } value={ option }>{ option }</option>)
