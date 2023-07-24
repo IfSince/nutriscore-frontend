@@ -61,7 +61,7 @@ export const RegisterLayoutView = () => {
                 <div className="mt-10 flex w-full flex-col items-center justify-center lg:mt-14 xl:mt-20">
                     <PrimaryButton className="w-full max-w-md"
                                    action={ () => isOverviewRoute() ? submitRegisterForm() : routeToStep(nextRouteRef.current) }>
-                        <span className="font-medium whitespace-nowraptext-base">
+                        <span className="font-medium whitespace-nowrap text-base">
                             { isOverviewRoute() ? 'Register' : 'Continue' }
                         </span>
                     </PrimaryButton>

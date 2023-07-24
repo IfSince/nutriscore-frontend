@@ -37,6 +37,9 @@ export default {
                     500: '#6B7280',
                     600: '#1F2937',
                 },
+                error: {
+                    DEFAULT: '#EF4444FF',
+                }
             },
             height: {
                 '18': '4.5rem',
@@ -49,6 +52,11 @@ export default {
             },
             flexGrow: {
                 9999: '9999',
+            },
+            borderRadius: {
+                '4xl': '2rem',
+                '5xl': '3rem',
+                '6xl': '3.5rem',
             },
             transitionTimingFunction: {
                 'fill-expo': 'cubic-bezier(.93,.41,.53,.87)',

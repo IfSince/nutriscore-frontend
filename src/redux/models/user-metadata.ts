@@ -1,18 +1,16 @@
 import { ValueObject } from './value-object.ts';
 
-interface CalorieMealValues {
-    breakfast: ValueObject
-    lunch: ValueObject
-    dinner: ValueObject
-    snacks: ValueObject
-}
-
 export interface UserMetadata {
     [year: string]: {
         [month: string]: {
             data: {
                 [day: string]: {
-                    calories: CalorieMealValues
+                    calories: {
+                        breakfast: ValueObject
+                        lunch: ValueObject
+                        dinner: ValueObject
+                        snacks: ValueObject
+                    }
                     protein: ValueObject
                     carbohydrates: ValueObject
                     fats: ValueObject

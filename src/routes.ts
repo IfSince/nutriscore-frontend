@@ -1,3 +1,6 @@
+// Login
+export const LOGIN_ROUTE = '/login'
+
 // Register
 export const REGISTER_ROUTE = '/register'
 export const REGISTER_GOAL_ROUTE = '/register/goal'

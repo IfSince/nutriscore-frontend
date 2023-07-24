@@ -21,7 +21,7 @@ import {
     REGISTER_CALCULATION_TYPE_ROUTE,
     REGISTER_ROUTE,
     REGISTER_WEIGHT_ROUTE,
-    STATISTICS_ROUTE,
+    STATISTICS_ROUTE, LOGIN_ROUTE,
 } from './routes.ts';
 import { StatisticsView } from './views/statistics.view.tsx';
 import { ProfileView } from './views/profile.view.tsx';
@@ -46,8 +46,13 @@ import { PersonalStepView } from './features/register/views/personal-step.view.t
 import { RegisterOverviewStepView } from './features/register/views/register-overview-step.view.tsx';
 import { ActivityPerWeekStepView } from './features/register/views/activity-per-week-step.view.tsx';
 import { PalStepView } from './features/register/views/pal-step.view.tsx';
+import { LoginView } from './features/login/views/login.view.tsx';
 
 export const router = createBrowserRouter([
+    {
+        path: LOGIN_ROUTE,
+        element: <LoginView/>
+    },
     {
         path: REGISTER_ROUTE,
         element: <RegisterLayoutView/>,

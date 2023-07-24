@@ -5,4 +5,6 @@ export interface FormFieldData<T extends FormFieldValueTypes> {
     displayName?: string
     value: T
     validations?: ((value?: string) => string | undefined)[]
+    disabled?: boolean
+    errors?: string[]
 }

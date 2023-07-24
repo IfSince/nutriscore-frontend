@@ -4,8 +4,8 @@ import { Spinner } from 'flowbite-react';
 export interface SpinnerProps {
     size?: FlowbiteSize,
     fill?: string
-    background?: string
+    backgroundClr?: string
 }
 
-export const CustomSpinner = ({ size = 'lg', fill = 'fill-cyan-300', background = 'text-gray-300' }: SpinnerProps) =>
-    <Spinner className={ `${ fill } ${ background }` } size={ size }/>
+export const CustomSpinner = ({ size = 'lg', fill = 'fill-cyan-300', backgroundClr = 'text-gray-300' }: SpinnerProps) =>
+    <Spinner className={ `${ fill } ${ backgroundClr }` } size={ size }/>
