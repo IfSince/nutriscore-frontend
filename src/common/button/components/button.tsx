@@ -8,7 +8,7 @@ export const Button = ({
     className,
     preventDefault = true,
     disabled = false,
-}: ButtonProps & { disabled: boolean }) => {
+}: ButtonProps) => {
     const onClick = (event: React.SyntheticEvent) => {
         preventDefault && event.preventDefault()
         if (action) {action(event)}

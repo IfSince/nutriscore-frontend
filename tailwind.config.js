@@ -1,6 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 
 const defaultTheme = require('tailwindcss/defaultTheme')
+const plugin = require('tailwindcss/plugin')
 
 export default {
     content: [
@@ -39,7 +40,7 @@ export default {
                 },
                 error: {
                     DEFAULT: '#EF4444FF',
-                }
+                },
             },
             height: {
                 '18': '4.5rem',
@@ -64,13 +65,19 @@ export default {
             transitionProperty: {
                 'width': 'width',
                 'stroke-dashoffset': 'stroke-dashoffset',
-                'selection': 'box-shadow, color, border-color'
+                'selection': 'box-shadow, color, border-color',
             },
             screens: {
-                '1.5xl': '1450px'
-            }
+                '1.5xl': '1450px',
+            },
         },
     },
-    plugins: [require('flowbite/plugin')],
+    plugins: [
+        require('flowbite/plugin'),
+        plugin(function ({ addVariant }) {
+            addVariant('group-form-loading', ':merge(.form-group).loading &') // custom CSS
+            addVariant('group-form-enabled', ':merge(.form-group):not(.loading) &')
+        }),
+    ],
 }
 

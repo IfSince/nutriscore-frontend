@@ -6,23 +6,22 @@ import { useAppSelector } from '../../../redux/hooks.ts';
 import { selectUserMetadata } from '../../../redux/slices/user-metadata-slice.ts';
 import { selectDate } from '../../../redux/slices/date-slice.ts';
 import { ValueObject } from '../../../redux/models/value-object.ts';
-import { getLoggedUser } from '../../user/get-logged-user.ts';
-import { useGetUserByIdQuery, useLogoutMutation } from '../../user/user-api-slice.ts';
-import { PrimaryButton } from '../../../common/button/components/primary-button.tsx';
+import { useGetNutritionalMetadataByUserIdQuery } from '../../user-metadata/user-metadata-api-slice.ts';
+import { ApiErrorMessage } from '../../../common/messages/api-error-message.tsx';
 
 export const HomeView = () => {
     const date = new Date(useAppSelector(selectDate))
-    const user = getLoggedUser()
+    const userId = Number(localStorage.getItem('userId'))
 
-    const [logout] = useLogoutMutation()
+    const {
+        data: nutritionalMetaData,
+        isLoading,
+        isSuccess,
+        isError,
+        error
+    } = useGetNutritionalMetadataByUserIdQuery(userId)
 
-    // const {
-    //     data: nutritionalMetaData,
-    //     isLoading,
-    //     isSuccess,
-    //     isError,
-    //     error
-    // } = useGetNutritionalMetadataByUserIdQuery(user.id)
+    if (error) console.log(error)
 
     const metadata = useAppSelector(selectUserMetadata)
     const metadataByDate = metadata[date.getFullYear()][date.getMonth() + 1].data[date.getDate()]
@@ -39,7 +38,7 @@ export const HomeView = () => {
             ), { value: 0, total: 0 })
 
     return <>
-        <PrimaryButton action={logout}>Logout</PrimaryButton>
+        <ApiErrorMessage apiErrorResponse={ error }/>
         <div className="flex-layout-row">
             <CaloriePanel valueObject={ totalCaloriesValueObject }/>
             <MacroPanelGroup protein={ metadataByDate.protein }

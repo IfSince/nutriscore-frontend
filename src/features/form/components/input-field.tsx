@@ -28,22 +28,23 @@ export const InputField = <T extends FormFieldValueTypes, >({
 
     const hasErrors = !!validationErrors?.length || !!errors?.length
 
-    const updateAndValidate = (value: T) => {
-        setCurrentValue(value)
-        onChange(value)
-        if (value != currentValue) {
-            setValidationErrors(validate(value, validations))
+    const updateAndValidate = (fieldValue: T) => {
+        if (fieldValue != value) {
+            setValidationErrors(validate(fieldValue, validations))
         }
+        setCurrentValue(fieldValue)
+        onChange(fieldValue)
     }
 
     let content: ReactElement
     if (icon) {
         content =
-            <div className={ 'flex flex-row-reverse gap-2.5 md:gap-3 lg:gap-4' }>
+            <div className="flex flex-row-reverse gap-2.5 md:gap-3 lg:gap-4">
                 <input className={ `h-11 rounded-md border ${ hasErrors ? 'border-error' : 'border-gray-300' } transition-selection px-4 w-full peer text-base placeholder-gray-400 lg:h-12
                     ${ hasErrors ? 'hover:border-error hover:ring-1 hover:ring-error' : 'hover:border-cyan-200 hover:ring-1 hover:ring-cyan-200' }
                     focus:border-cyan-300 focus:ring-1 focus:ring-cyan-300
-                    disabled:text-gray-300 disabled:placeholder-gray-300 disabled:hover:border-gray-300 disabled:hover:ring-0 disabled:cursor-not-allowed
+                    disabled:text-gray-300 disabled:placeholder-gray-300 disabled:hover:border-gray-300
+                    disabled:hover:ring-0 disabled:cursor-not-allowed
                     ${ validationErrors?.length && '!border-red' }` }
                        type={ type }
                        id={ name }
@@ -55,7 +56,7 @@ export const InputField = <T extends FormFieldValueTypes, >({
                 <label className={ `flex cursor-pointer h-11 lg:h-12 items-center justify-center rounded-md transition-colors aspect-square w-fit text-gray-50 bg-cyan-200
                                     hover:bg-cyan-300
                                     peer-focus:bg-cyan-300
-                                    peer-disabled:bg-cyan-200/50`}
+                                    peer-disabled:bg-cyan-200/50` }
                        htmlFor={ name }>
                     <span className="text-xl material-icons-round">{ icon }</span>
                 </label>
@@ -70,6 +71,7 @@ export const InputField = <T extends FormFieldValueTypes, >({
                    id={ name }
                    value={ currentValue }
                    placeholder={ placeholder }
+                   disabled={ disabled }
                    onChange={ (event) => setCurrentValue(convertToFormFieldType(event.target.value, value)) }
                    onBlur={ (event) => updateAndValidate(convertToFormFieldType(event.target.value, value)) }/>
     }

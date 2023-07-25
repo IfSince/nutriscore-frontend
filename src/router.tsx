@@ -1,5 +1,4 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
-import { RootView } from './views/root.view.tsx';
 import { NotFoundView } from './views/error.view.tsx';
 import {
     DIARY_FOOD_ITEM_ROUTE,
@@ -7,21 +6,24 @@ import {
     DIARY_ROUTE,
     DIARY_SEARCH_ROUTE,
     HOME_ROUTE,
+    LOGIN_ROUTE,
     PROFILE_ROUTE,
-    REGISTER_ACTIVITY_LEVEL_ROUTE, REGISTER_ACTIVITY_PER_WEEK_ROUTE,
+    REGISTER_ACTIVITY_LEVEL_ROUTE,
+    REGISTER_ACTIVITY_PER_WEEK_ROUTE,
     REGISTER_ALLERGENIC_ROUTE,
+    REGISTER_CALCULATION_TYPE_ROUTE,
     REGISTER_CALORIE_RESTRICTION_ROUTE,
     REGISTER_DATE_OF_BIRTH_ROUTE,
     REGISTER_GENDER_ROUTE,
     REGISTER_GOAL_ROUTE,
     REGISTER_HEIGHT_ROUTE,
     REGISTER_NUTRITION_INTRO_ROUTE,
-    REGISTER_OVERVIEW_ROUTE, REGISTER_PAL_ROUTE,
+    REGISTER_OVERVIEW_ROUTE,
+    REGISTER_PAL_ROUTE,
     REGISTER_PERSONAL_ROUTE,
-    REGISTER_CALCULATION_TYPE_ROUTE,
     REGISTER_ROUTE,
     REGISTER_WEIGHT_ROUTE,
-    STATISTICS_ROUTE, LOGIN_ROUTE,
+    STATISTICS_ROUTE,
 } from './routes.ts';
 import { StatisticsView } from './views/statistics.view.tsx';
 import { ProfileView } from './views/profile.view.tsx';
@@ -47,17 +49,30 @@ import { RegisterOverviewStepView } from './features/register/views/register-ove
 import { ActivityPerWeekStepView } from './features/register/views/activity-per-week-step.view.tsx';
 import { PalStepView } from './features/register/views/pal-step.view.tsx';
 import { LoginView } from './features/login/views/login.view.tsx';
+import { RootView } from './views/root.view.tsx';
+import { NotLoggedInRoute } from './common/not-logged-in-route.tsx';
+import { ProtectedRoute } from './common/protected-route.tsx';
 
 export const router = createBrowserRouter([
     {
         path: LOGIN_ROUTE,
-        element: <LoginView/>
+        element: <NotLoggedInRoute><LoginView/></NotLoggedInRoute>,
+        children: [
+            {
+                index: true,
+                element: <LoginView/>,
+            },
+        ],
     },
     {
         path: REGISTER_ROUTE,
-        element: <RegisterLayoutView/>,
+        element: <NotLoggedInRoute><RegisterLayoutView/></NotLoggedInRoute>,
         errorElement: <NotFoundView/>,
         children: [
+            {
+                index: true,
+                element: <Navigate to={ REGISTER_GOAL_ROUTE } replace/>,
+            },
             {
                 path: REGISTER_GOAL_ROUTE,
                 element: <GoalStepView/>,
@@ -118,7 +133,7 @@ export const router = createBrowserRouter([
     },
     {
         path: '/',
-        element: <RootView/>,
+        element: <ProtectedRoute><RootView/></ProtectedRoute>,
         errorElement: <NotFoundView/>,
         children: [
             {
