@@ -25,7 +25,7 @@ export const RootView = () => {
 
             <div className="flex w-full grow flex-col lg:flex-row">
                 <Menu items={ MENU_ITEMS }/>
-                <main className="mb-32 flex h-fit w-full grow flex-col flex-wrap gap-10 lg:mb-10 lg:ml-10 lg:flex-row">
+                <main className="mb-32 flex h-fit w-full grow lg:mb-10 lg:ml-10">
                     <Outlet/>
                 </main>
             </div>

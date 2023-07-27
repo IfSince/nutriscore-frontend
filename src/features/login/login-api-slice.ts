@@ -12,7 +12,6 @@ export const loginApiSlice = apiSlice.injectEndpoints({
                     body: loginData,
                 }
             ),
-            transformResponse: (rawResult: { data: User }) => rawResult.data,
         }),
         logout: builder.mutation<void, void>({
             query: () => (

@@ -7,19 +7,21 @@ export const ProgressLinear = ({
     trackStyles,
     indicatorStyles = 'bg-cyan-200',
     animationStyle = 'ease-fill-expo duration-700 delay-100',
+    isLoading,
 }: ProgressProps) => {
     const [fillWidth, setFillWidth] = useState(0)
-    useEffect(() => setFillWidth(Math.round((
-        valueObject.value / valueObject.total
-    ) * 100)), [valueObject.value, valueObject.total])
+
+    useEffect(() => {
+        if (!isLoading) {
+            setFillWidth(Math.min(100, Math.round((valueObject.value / valueObject.total) * 100)));
+        }
+    }, [isLoading, valueObject.value, valueObject.total])
 
     return (
-        <>
-            <div className="relative w-full" style={ { height: `${ width }px` } }>
-                <div className={ `absolute h-full w-full rounded-full opacity-30 ${ trackStyles || indicatorStyles }` }></div>
-                <div className={ `absolute h-full rounded-full transition-width ${ animationStyle } ${ indicatorStyles }` }
-                     style={ { width: `${ fillWidth }%` } }></div>
-            </div>
-        </>
+        <div className="relative w-full" style={ { height: `${ width }px` } }>
+            <div className={ `absolute h-full w-full rounded-full opacity-30 ${ trackStyles || indicatorStyles }` }></div>
+            <div className={ `absolute h-full rounded-full transition-width ${ animationStyle } ${ indicatorStyles }` }
+                 style={ { width: `${ fillWidth }%` } }></div>
+        </div>
     )
 }

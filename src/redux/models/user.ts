@@ -1,4 +1,5 @@
 import { Gender } from './gender.ts';
+import { Unit } from '../../features/unit.ts';
 
 export interface User {
     id: number
@@ -10,6 +11,6 @@ export interface User {
     gender: Gender
     dateOfBirth: string
     height: number
-    selectedWeightUnit: string
-    selectedHeightUnit: string
+    selectedWeightUnit: Unit
+    selectedHeightUnit: Unit
 }

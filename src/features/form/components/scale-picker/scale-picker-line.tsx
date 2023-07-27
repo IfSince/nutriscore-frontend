@@ -14,7 +14,6 @@ export const ScalePickerLine = ({ value }: ScalePickerLineProps) => {
         }
     }
 
-
     return (
         <div className="relative flex h-24 shrink-0 items-center justify-center last-of-type:pr-1 first-of-type:pl-1 px-0.5" data-value={ value }>
             <div className={ getStyles() }></div>

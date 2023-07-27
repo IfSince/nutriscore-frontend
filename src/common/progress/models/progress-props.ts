@@ -6,4 +6,5 @@ export interface ProgressProps {
     trackStyles?: string
     indicatorStyles?: string
     animationStyle?: string
+    isLoading?: boolean
 }

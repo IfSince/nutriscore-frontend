@@ -8,9 +8,7 @@ export const InputField = ({ ...props }) => {
     const [apiErrors, setApiErrors] = useState<string[]>(getFieldErrors(props.errors, field.name))
     const isInvalid = (!!meta.error && meta.touched) || (props.errors?.length > 0 && apiErrors.length > 0)
 
-    useEffect(() => {
-        setApiErrors(props.errors)
-    }, [props.errors])
+    useEffect(() => setApiErrors(getFieldErrors(props.errors, field.name)), [field.name, props.errors])
 
     const onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
         props.onBlur(e)
@@ -32,7 +30,7 @@ export const InputField = ({ ...props }) => {
                        onBlur={e => onBlur(e)}
                 />
                 { (!!meta.error && meta.touched) && <FormValidationList errors={ [meta.error] || [] }/> }
-                { apiErrors?.length > 0 && <FormValidationList errors={ [...props.errors] || [] }/> }
+                { apiErrors?.length > 0 && <FormValidationList errors={ [...apiErrors] || [] }/> }
             </div>
             <label className={ `flex cursor-pointer h-11 lg:h-12 items-center justify-center rounded-md transition-colors aspect-square w-fit text-gray-50 bg-cyan-200
                                     hover:bg-cyan-300

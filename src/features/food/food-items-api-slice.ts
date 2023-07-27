@@ -6,7 +6,6 @@ export const foodItemsApiSlice = apiSlice.injectEndpoints({
         {
             getFoodItems: builder.query<FoodItem[], void>({
                 query: () => 'foods',
-                transformResponse: (rawResult: { data: FoodItem[] }) => rawResult.data,
                 providesTags: (result = []) => [
                     ...result.map(({ id }) => (
                         { type: FOOD_TAG, id }
@@ -16,7 +15,6 @@ export const foodItemsApiSlice = apiSlice.injectEndpoints({
             }),
             getFoodItemById: builder.query<FoodItem, number>({
                 query: (id: number) => `foods/${ id }`,
-                transformResponse: (rawResult: { data: FoodItem }) => rawResult.data,
                 providesTags: (_result, _error, arg) => [{ type: FOOD_TAG, id: arg }],
             }),
             addNewFoodItem: builder.mutation({

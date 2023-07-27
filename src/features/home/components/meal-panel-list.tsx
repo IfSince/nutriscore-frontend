@@ -1,24 +1,27 @@
 import { DIARY_ROUTE } from '../../../routes.ts';
 import { MealPanelListItem } from './meal-panel-list-item.tsx';
 import { Panel } from '../../../common/panel.tsx';
-import { capitalizeFirst } from '../../../utils/capitalize-first.ts';
 import { ValueObject } from '../../../redux/models/value-object.ts';
+import { CenteredSpinner } from '../../../common/spinner/components/centered-spinner.tsx';
+import { TimeOfDay } from '../../recordings/models/type-of-day.enum.ts';
+import { recordObjectKeys } from '../../../utils/object.ts';
 
-interface MealPanelListProps {
-    breakfast: ValueObject
-    dinner: ValueObject
-    lunch: ValueObject
-    snacks: ValueObject
-}
-
-export const MealPanelList = (data: MealPanelListProps) =>
-    <div className="flex flex-col gap-5 grow-9999 xl:max-w-sm">
+export const MealPanelList = ({ data, isLoading }: { data: Record<TimeOfDay, ValueObject>, isLoading: boolean }) =>
+    <div className="flex flex-col gap-5 grow-9999 xl:max-w-sm relative">
         {
-            Object.keys(data).map(key =>
+            isLoading && <CenteredSpinner className="absolute top-1/2 left-0 -translate-y-1/2"
+                                          backgroundClr="text-gray-50/80"
+                                          fill="fill-gray-600/80"
+                                          size="xl"/>
+        }
+        {
+            recordObjectKeys(data).map(key =>
                 <Panel key={ key } className="py-4 lg:py-4">
-                    <MealPanelListItem name={ capitalizeFirst(key) }
-                                       valueObject={ data[key as keyof MealPanelListProps] }
-                                       link={ DIARY_ROUTE }/>
-                </Panel>)
+                    <MealPanelListItem name={ key }
+                                       valueObject={ data[key] }
+                                       link={ DIARY_ROUTE }
+                                       isLoading={ isLoading }/>
+                </Panel>,
+            )
         }
     </div>

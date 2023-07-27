@@ -13,19 +13,25 @@ export const ProgressCircle = ({
     trackStyles,
     indicatorStyles,
     children,
+    isLoading,
 }: ProgressCircleProps) => {
-    const percentage = Math.round((valueObject.value / valueObject.total) * 100)
+    const percentage = Math.min(100, Math.round((valueObject.value / valueObject.total) * 100))
     const center = size / 2
     const radius = center - width
     const strokeDasharray = 2 * Math.PI * radius
 
     const [strokeDashoffset, setStrokeDashoffset] = useState(strokeDasharray)
-    useEffect(() => setStrokeDashoffset(strokeDasharray * ((100 - percentage) / 100)), [strokeDasharray, percentage])
+    useEffect(() => {
+        if (!isLoading) {
+            setStrokeDashoffset(strokeDasharray * ((100 - percentage) / 100));
+        }
+    }, [isLoading, strokeDasharray, percentage])
 
     return (
         <div className="flex flex-col items-center">
             <div className="relative flex">
-                <svg className="relative align-middle fill-none" style={ { strokeLinecap: 'round', width: size, height: size } }>
+                <svg className="relative align-middle fill-none"
+                     style={ { strokeLinecap: 'round', width: size, height: size } }>
                     <circle className={ `-rotate-90 translate-y-full opacity-30 ${ trackStyles || indicatorStyles }` }
                             r={ radius }
                             cx={ center }
@@ -38,11 +44,10 @@ export const ProgressCircle = ({
                         cy={ center }
                         strokeWidth={ width }
                         strokeDasharray={ strokeDasharray }
-                        strokeDashoffset={ strokeDashoffset }/>
+                        strokeDashoffset={ strokeDashoffset.toString() }/>
                 </svg>
-
                 <div className="absolute top-1/2 left-1/2 flex -translate-x-1/2 -translate-y-1/2 flex-wrap items-end justify-center gap-x-1">
-                    { children }
+                    { !isLoading && children }
                 </div>
             </div>
         </div>

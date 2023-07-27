@@ -12,7 +12,7 @@ export const ApiErrorMessage = ({ apiErrorResponse }: { apiErrorResponse: ApiErr
         visible && apiError &&
         <div className="flex items-center p-4 mb-6 text-gray-600 rounded-lg border-error bg-error/30 w-full">
             <span className="sr-only">Info</span>
-            <div className="ml-3 text-sm text-error/80 truncate">
+            <div className="ml-3 text-sm text-error/80">
                 { apiError.data.message }
             </div>
             <button type="button"

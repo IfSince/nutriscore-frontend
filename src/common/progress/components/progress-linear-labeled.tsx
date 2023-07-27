@@ -1,14 +1,15 @@
 import { ProgressProps } from '../models/progress-props.ts';
 import { ProgressLinear } from './progress-linear.tsx';
 
-export const ProgressLinearLabeled = (data: ProgressProps) => {
-    return (
+export const ProgressLinearLabeled = (props: ProgressProps) =>
+    (
         <>
             <div className="mt-2 mb-3">
-                <ProgressLinear { ...data }/>
+                <ProgressLinear { ...props }/>
             </div>
-            <span className="text-xl font-medium">{ data.valueObject.value }/{ data.valueObject.total } <span
-                className="text-base font-normal">{ data.valueObject.unit }</span></span>
+            <span className="text-xl font-medium text-gray-600">
+                { props.valueObject.value }/{ props.valueObject.total }
+                <span className="text-base font-normal">{ props.valueObject.unit }</span>
+            </span>
         </>
     )
-}

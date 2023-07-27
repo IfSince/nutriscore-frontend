@@ -7,9 +7,10 @@ interface MealPanelListItemProps {
     name: string
     valueObject: ValueObject
     link: string
+    isLoading: boolean
 }
 
-export const MealPanelListItem = ({ name, valueObject, link }: MealPanelListItemProps) => {
+export const MealPanelListItem = ({ name, valueObject, link, isLoading }: MealPanelListItemProps) => {
     const navigate = useNavigate()
 
     return (
@@ -18,9 +19,10 @@ export const MealPanelListItem = ({ name, valueObject, link }: MealPanelListItem
                 <ProgressCircle size={ 75 }
                                 width={ 12 }
                                 valueObject={ valueObject }
-                                indicatorStyles="stroke-cyan-200"/>
-                <div className="mr-4 ml-8 flex flex-col">
-                    <h3 className="text-xl font-bold">{ name }</h3>
+                                indicatorStyles="stroke-cyan-200"
+                                isLoading={ isLoading }/>
+                <div className="mr-4 ml-8 flex flex-col text-gray-600">
+                    <h3 className="text-xl font-bold capitalize">{ name.toLowerCase() }</h3>
                     <span>{ valueObject.value } { valueObject.unit }</span>
                 </div>
             </div>
