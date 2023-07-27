@@ -1,105 +1,68 @@
-// const diaryData: MealOverviewProps[] = [
-//     {
-//         name: 'Breakfast',
-//         valueObject: { value: 100, total: 200 },
-//         items: [
-//             {
-//                 name: 'Espresso coffee',
-//                 valueObject: { value: 100, total: 200 },
-//                 amount: '100 kcal',
-//                 calories: '100 kcal',
-//                 protein: '21g',
-//                 carbs: '36g',
-//                 fats: '15g',
-//             },
-//             {
-//                 name: 'Apple',
-//                 valueObject: { value: 100, total: 200 },
-//                 amount: '100 kcal',
-//                 calories: '100 kcal',
-//                 protein: '21g',
-//                 carbs: '36g',
-//                 fats: '15g',
-//             },
-//         ],
-//     },
-//     {
-//         name: 'Lunch',
-//         valueObject: { value: 100, total: 200 },
-//         items: [
-//             {
-//                 name: 'Espresso coffee',
-//                 valueObject: { value: 100, total: 200 },
-//                 amount: '100 kcal',
-//                 calories: '100 kcal',
-//                 protein: '21g',
-//                 carbs: '36g',
-//                 fats: '15g',
-//             },
-//         ],
-//     },
-//     {
-//         name: 'Dinner',
-//         valueObject: { value: 100, total: 200 },
-//         items: [
-//             {
-//                 name: 'Espresso coffee',
-//                 valueObject: { value: 100, total: 200 },
-//                 amount: '100 kcal',
-//                 calories: '100 kcal',
-//                 protein: '21g',
-//                 carbs: '36g',
-//                 fats: '15g',
-//             },
-//         ],
-//     },
-//     {
-//         name: 'Snacks',
-//         valueObject: { value: 100, total: 200 },
-//         items: [
-//             {
-//                 name: 'Espresso coffee',
-//                 valueObject: { value: 100, total: 200 },
-//                 amount: '100 kcal',
-//                 calories: '100 kcal',
-//                 protein: '21g',
-//                 carbs: '36g',
-//                 fats: '15g',
-//             },
-//         ],
-//     },
-// ]
+import { useAppSelector } from '../../../redux/hooks.ts';
+import { selectDate } from '../../../redux/slices/date-slice.ts';
+import { useGetNutritionalMetadataByUserIdQuery } from '../../user-metadata/user-metadata-api-slice.ts';
+import { getFormattedDate } from '../../../utils/format-date.ts';
+import { getNutritionalMetadataValueObjects } from '../../user-metadata/user-metadata.utils.ts';
+import { ApiErrorMessage } from '../../../common/messages/api-error-message.tsx';
+import { BlurOverlay } from '../../../common/blur-overlay.tsx';
+import { CaloriePanel } from '../../../common/calorie-panel/components/calorie-panel.tsx';
+import { MacroPanelGroup } from '../../../common/macro-panel/components/macro-panel-group.tsx';
+import { useGetNutritionalRecordingsByUserIdQuery } from '../../nutritional-recordings/nutritional-recordings-api-slice.ts';
+import { DiaryMealPanel } from '../components/overview/diary-meal-panel.tsx';
+import { TimeOfDay } from '../../recordings/models/type-of-day.enum.ts';
 
 export const DiaryOverviewView = () => {
-    // const date = new Date(useAppSelector(selectDate))
+    const date = new Date(useAppSelector(selectDate))
+    const userId = Number(localStorage.getItem('userId'))
 
-    // const metadataByDate = metadata[date.getFullYear()][date.getMonth() + 1].data[date.getDate()]
-    //
-    // const totalCaloriesValueObject = Object.values(metadataByDate.calories)
-    //     .reduce((prev: ValueObject, curr: ValueObject): ValueObject => (
-    //         {
-    //             value: prev.value + curr.value,
-    //             total: prev.total + curr.total,
-    //         }
-    //     ), { value: 0, total: 0 })
-    //
-    // return (
-    //     <>
-    //         <div className="flex-layout-row">
-    //             <CaloriePanel valueObject={ totalCaloriesValueObject }/>
-    //             <MacroPanelGroup protein={ metadataByDate.protein }
-    //                              carbs={ metadataByDate.carbohydrates }
-    //                              fats={ metadataByDate.fats }
-    //                              water={ metadataByDate.water }/>
-    //         </div>
-    //
-    //         {
-    //             diaryData.map(data =>
-    //                 <div key={ data.name } className="flex-layout-row">
-    //                     <DiaryMealPanel name={ data.name } valueObject={ data.valueObject } items={ data.items }/>
-    //                 </div>,
-    //             )
-    //         }
-    //     </>
-    // )
+    const nutritionalMetadataRequest = useGetNutritionalMetadataByUserIdQuery(userId)
+    const nutritionalRecordingsRequest = useGetNutritionalRecordingsByUserIdQuery(userId)
+
+    const metadata = nutritionalMetadataRequest.data?.recordings[getFormattedDate(date)]
+    const { calorieData, macroData, mealData } = getNutritionalMetadataValueObjects(metadata, nutritionalMetadataRequest.data)
+
+    const recordings = nutritionalRecordingsRequest?.data ? nutritionalRecordingsRequest.data[getFormattedDate(date)] : null
+
+    return (
+        <div className="w-full">
+            <ApiErrorMessage apiErrorResponse={ nutritionalMetadataRequest.error }/>
+            <ApiErrorMessage apiErrorResponse={ nutritionalRecordingsRequest.error }/>
+            <div className="relative flex flex-wrap lg:flex-row">
+                <BlurOverlay visible={ nutritionalMetadataRequest.isLoading || nutritionalMetadataRequest.isError }/>
+                <div className="flex-layout-row">
+                    <CaloriePanel valueObject={ calorieData } isLoading={ nutritionalMetadataRequest.isLoading }/>
+                    <MacroPanelGroup data={ macroData } isLoading={ nutritionalMetadataRequest.isLoading }/>
+                </div>
+
+                <div className="flex-layout-row mt-10">
+                    <DiaryMealPanel name="Breakfast"
+                                    valueObject={ mealData[TimeOfDay.BREAKFAST] }
+                                    items={ recordings?.filter(it => it.timeOfDay === TimeOfDay.BREAKFAST) || [] }
+                                    isLoading={ nutritionalRecordingsRequest.isLoading }/>
+                </div>
+
+                <div className="flex-layout-row mt-10">
+                    <DiaryMealPanel name="Lunch"
+                                    valueObject={ mealData[TimeOfDay.LUNCH] }
+                                    items={ recordings?.filter(it => it.timeOfDay === TimeOfDay.LUNCH) || [] }
+                                    isLoading={ nutritionalRecordingsRequest.isLoading }/>
+                </div>
+
+                <div className="flex-layout-row mt-10">
+                    <DiaryMealPanel name="Dinner"
+                                    valueObject={ mealData[TimeOfDay.DINNER] }
+                                    items={ recordings?.filter(it => it.timeOfDay === TimeOfDay.DINNER) || [] }
+                                    isLoading={ nutritionalRecordingsRequest.isLoading }/>
+                </div>
+
+                <div className="flex-layout-row mt-10">
+                    <DiaryMealPanel name="Lunch"
+                                    valueObject={ mealData[TimeOfDay.LUNCH] }
+                                    items={ recordings?.filter(it => it.timeOfDay === TimeOfDay.LUNCH) || [] }
+                                    isLoading={ nutritionalRecordingsRequest.isLoading }/>
+                </div>
+            </div>
+
+        </div>
+    )
 }

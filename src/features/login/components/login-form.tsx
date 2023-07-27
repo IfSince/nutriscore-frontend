@@ -29,7 +29,7 @@ export const LoginForm = ({ onSubmit, apiError, isLoading }: FormProps<LoginData
             validateOnBlur={ true }
             onSubmit={ ({ email, password }) => onSubmit({ email, password }) }>
             {
-                ({ isValid, handleBlur}) => (
+                ({ isValid, handleBlur }) => (
                     <Form className="flex min-h-screen justify-center lg:min-h-[750px]">
                         <div className="mb-10 flex w-full max-w-5xl flex-col justify-between">
                             <div className="relative flex h-24 w-full bg-cyan-200 rounded-b-6xl">
@@ -46,7 +46,7 @@ export const LoginForm = ({ onSubmit, apiError, isLoading }: FormProps<LoginData
                                         <InputField name="email"
                                                     type="text"
                                                     disabled={ isLoading }
-                                                    onBlur={handleBlur}
+                                                    onBlur={ handleBlur }
                                                     placeholder="your@email.de"
                                                     errors={ apiError }
                                                     icon="email"/>
@@ -57,7 +57,7 @@ export const LoginForm = ({ onSubmit, apiError, isLoading }: FormProps<LoginData
                                                     type="password"
                                                     disabled={ isLoading }
                                                     placeholder="••••••••••••"
-                                                    onBlur={handleBlur}
+                                                    onBlur={ handleBlur }
                                                     errors={ apiError }
                                                     icon="lock"/>
                                     </div>

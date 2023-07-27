@@ -29,10 +29,8 @@ export const HomeView = () => {
     } = getNutritionalMetadataValueObjects(recordings, nutritionalMetaData)
 
     return (
-        <div>
-            <div className="flex-layout-row">
-                <ApiErrorMessage apiErrorResponse={ error }/>
-            </div>
+        <div className="w-full">
+            <ApiErrorMessage apiErrorResponse={ error }/>
             <div className="relative flex flex-wrap lg:flex-row">
                 <BlurOverlay visible={ isLoading || isError }/>
                 <div className="flex-layout-row">

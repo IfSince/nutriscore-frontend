@@ -10,7 +10,7 @@ export const CaloriePanel = ({ valueObject, isLoading }: { valueObject: ValueObj
                 isLoading && <CenteredSpinner className="absolute top-1/2 left-0 -translate-y-1/2"
                                               backgroundClr="text-gray-50/80"
                                               fill="fill-gray-600/80"
-                                              size="xl"/>
+                                              size="lg"/>
             }
             <ProgressCircle size={ 200 }
                             width={ 15 }

@@ -17,9 +17,9 @@ export const MacroPanelGroup = ({ data, isLoading }: { data: Record<Macro, Value
         <div className="grid w-full grid-cols-2 gap-5 grow-9999 xl:w-auto relative">
             {
                 isLoading && <CenteredSpinner className="absolute top-1/2 left-0 -translate-y-1/2"
-                                              backgroundClr="text-gray-50/80"
-                                              fill="fill-gray-600/80"
-                                              size="xl"/>
+                                              backgroundClr="text-gray-300"
+                                              fill="fill-gray-600"
+                                              size="lg"/>
             }
             {
                 recordObjectKeys(data).map(macro => (

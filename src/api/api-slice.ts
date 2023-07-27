@@ -9,11 +9,12 @@ export type ApiErrorResponse = FetchBaseQueryError | SerializedError | undefined
 export const USER_TAG = 'user' as const
 export const FOOD_TAG = 'food' as const
 export const USER_METADATA_TAG = 'user-metadata' as const
+export const NUTRITIONAL_RECORDINGS_TAG = 'nutritional-data' as const
 
 
 export const apiSlice = createApi({
     reducerPath: 'api',
-    tagTypes: [USER_TAG, USER_METADATA_TAG, FOOD_TAG],
+    tagTypes: [USER_TAG, USER_METADATA_TAG, FOOD_TAG, NUTRITIONAL_RECORDINGS_TAG],
     baseQuery: fetchBaseQuery({
         baseUrl: `${ BASE_URL }/api/`,
         prepareHeaders: async (headers) => {
