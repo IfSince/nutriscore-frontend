@@ -12,8 +12,8 @@ export const WeeklyOverviewPanel = ({ weightRecordings, isLoading }: { weightRec
             <Panel className="absolute h-full w-full" title="Weekly Overview">
                 {
                     isLoading && <CenteredSpinner className="absolute top-1/2 left-0 -translate-y-1/2"
-                                                  backgroundClr="text-gray-300"
-                                                  fill="fill-gray-600"
+                                                  backgroundClr="text-gray-100"
+                                                  fill="fill-cyan-300"
                                                   size="lg"/>
                 }
                 <ResponsiveContainer>

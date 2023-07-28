@@ -1,8 +1,7 @@
 import { Allergenic } from './allergenics.ts';
 import { Category } from './category.ts';
-import { Item } from './item.ts';
 
-export interface FoodItem extends Item {
+export interface FoodItem {
     id: number
     userId: number
     description: string

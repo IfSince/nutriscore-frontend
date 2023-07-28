@@ -1,0 +1,1 @@
+export type NutritionalRecordingType = 'FOOD' | 'MEAL'

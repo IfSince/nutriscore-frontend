@@ -7,7 +7,7 @@ export const CenteredSpinner = ({
     className = '',
 }: SpinnerProps & { className?: string }) => {
     return (
-        <div className={ `flex justify-center items-center w-full ${ className }` }>
+        <div className={ `flex justify-center items-center w-full z-[9999] ${ className }` }>
             <CustomSpinner size={ size } fill={ fill } backgroundClr={ backgroundClr }></CustomSpinner>
         </div>
 

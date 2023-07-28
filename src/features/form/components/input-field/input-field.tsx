@@ -11,7 +11,7 @@ export const InputField = ({ ...props }) => {
     useEffect(() => setApiErrors(getFieldErrors(props.errors, field.name)), [field.name, props.errors])
 
     const onBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-        props.onBlur(e)
+        if (props.onBlur) props.onBlur(e)
         setApiErrors([])
     }
 
@@ -32,13 +32,16 @@ export const InputField = ({ ...props }) => {
                 { (!!meta.error && meta.touched) && <FormValidationList errors={ [meta.error] || [] }/> }
                 { apiErrors?.length > 0 && <FormValidationList errors={ [...apiErrors] || [] }/> }
             </div>
-            <label className={ `flex cursor-pointer h-11 lg:h-12 items-center justify-center rounded-md transition-colors aspect-square w-fit text-gray-50 bg-cyan-200
+            {
+                props.icon &&
+                <label className={ `flex cursor-pointer h-11 lg:h-12 items-center justify-center rounded-md transition-colors aspect-square w-fit text-gray-50 bg-cyan-200
                                     hover:bg-cyan-300
                                     peer-focus:bg-cyan-300
                                     peer-disabled:bg-cyan-200/50` }
-                   htmlFor={ field.name }>
-                <span className="text-xl material-icons-round">{ props.icon }</span>
-            </label>
+                       htmlFor={ field.name }>
+                    <span className="text-xl material-icons-round">{ props.icon }</span>
+                </label>
+            }
         </div>
     )
 }

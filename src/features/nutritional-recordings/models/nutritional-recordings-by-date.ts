@@ -1,7 +1,6 @@
 import { Unit } from '../../unit.ts';
 import { TimeOfDay } from '../../recordings/models/type-of-day.enum.ts';
-
-type NutritionalRecordingType = 'FOOD' | 'MEAL'
+import { NutritionalRecordingType } from './nutritional-recording-type.ts';
 
 export interface NutritionalRecording {
     id: number

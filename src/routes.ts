@@ -26,8 +26,8 @@ export const DIARY_ROUTE = '/diary'
 export const DIARY_SEARCH_ROUTE = '/diary/search'
 export const DIARY_FOOD_ITEM_ROUTE = '/diary/food/:id'
 export const DIARY_NEW_FOOD_ITEM_ROUTE = '/diary/food/new'
-export const DIARY_MEAL_ITEM_ROUTE = '/dairy/meal/:id'
-export const DIARY_NEW_MEAL_ITEM_ROUTE = '/dairy/meal/new'
+export const DIARY_MEAL_ITEM_ROUTE = '/diary/meal/:id'
+export const DIARY_NEW_MEAL_ITEM_ROUTE = '/diary/meal/new'
 
 // Statistics
 export const STATISTICS_ROUTE = '/statistics'
