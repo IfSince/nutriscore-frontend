@@ -68,7 +68,7 @@ export const LoginForm = ({ onSubmit, apiError, isLoading }: FormProps<LoginData
 
                             </div>
                             <div className="flex w-full flex-col items-center justify-center px-5">
-                                <SubmitButton text="Log in" disabled={ !isValid } submitting={ isLoading }/>
+                                <SubmitButton text="Log in" disabled={ !isValid } isSubmitting={ isLoading }/>
                                 <span className="mt-6 font-medium text-gray-500">
                                     Dont have an account yet?
                                     <CustomLink to="/register/goal" text="Sign up" className="ml-1"/>

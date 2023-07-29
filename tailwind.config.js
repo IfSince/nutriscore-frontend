@@ -39,7 +39,12 @@ export default {
                     600: '#1F2937',
                 },
                 error: {
-                    DEFAULT: '#EF4444FF',
+                    DEFAULT: '#FECACAFF',
+                    800: '#991B1BFF',
+                },
+                success: {
+                    DEFAULT: '#BBF7D0FF',
+                    800: '#166534FF',
                 },
             },
             height: {

@@ -5,4 +5,5 @@ export interface AbstractButtonProps {
     action?: (...args: any[]) => unknown | string
     preventDefault?: boolean
     disabled?: boolean
+    isSubmitting?: boolean
 }

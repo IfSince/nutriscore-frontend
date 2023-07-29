@@ -10,10 +10,12 @@ import { MacroPanelGroup } from '../../../common/macro-panel/components/macro-pa
 import { useGetNutritionalRecordingsByUserIdQuery } from '../../nutritional-recordings/nutritional-recordings-api-slice.ts';
 import { DiaryMealPanel } from '../components/overview/diary-meal-panel.tsx';
 import { TimeOfDay } from '../../recordings/models/type-of-day.enum.ts';
+import { useContext } from 'react';
+import { UserIdContext } from '../../../views/root.view.tsx';
 
 export const DiaryOverviewView = () => {
     const date = new Date(useAppSelector(selectDate))
-    const userId = Number(localStorage.getItem('userId'))
+    const userId = useContext(UserIdContext)
 
     const nutritionalMetadataRequest = useGetNutritionalMetadataByUserIdQuery(userId)
     const nutritionalRecordingsRequest = useGetNutritionalRecordingsByUserIdQuery(userId)

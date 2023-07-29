@@ -1,7 +1,7 @@
 import { PrimaryButton } from './primary-button.tsx';
 import { CenteredSpinner } from '../../spinner/components/centered-spinner.tsx';
 
-export const SubmitButton = ({ text, disabled, submitting }: { text: string, disabled: boolean, submitting: boolean }) => {
+export const SubmitButton = ({ text, disabled, isSubmitting }: { text: string, disabled: boolean, isSubmitting: boolean }) => {
     return (
         <PrimaryButton className="w-full max-w-md"
                        text={ text }
@@ -9,7 +9,7 @@ export const SubmitButton = ({ text, disabled, submitting }: { text: string, dis
                        disabled={ disabled }
                        type="submit">
             {
-                submitting ?
+                isSubmitting ?
                     <CenteredSpinner size="md" backgroundClr="text-gray-50" fill="fill-cyan-200"/> :
                     <span className="font-medium whitespace-nowrap text-base">{ text }</span>
             }

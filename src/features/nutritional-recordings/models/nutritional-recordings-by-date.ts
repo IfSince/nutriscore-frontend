@@ -4,7 +4,7 @@ import { NutritionalRecordingType } from './nutritional-recording-type.ts';
 
 export interface NutritionalRecording {
     id: number
-    recordingId: number
+    itemId: number
     description: string
     timeOfDay: TimeOfDay
     type: NutritionalRecordingType

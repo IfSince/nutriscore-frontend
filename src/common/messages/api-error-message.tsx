@@ -10,14 +10,12 @@ export const ApiErrorMessage = ({ apiErrorResponse }: { apiErrorResponse: ApiErr
 
     return (
         visible && apiError &&
-        <div className="flex items-center p-4 mb-6 text-gray-600 rounded-lg border-error bg-error/30 w-full">
-            <span className="sr-only">Info</span>
-            <div className="ml-3 text-sm text-error/80">
-                { apiError.data.message }
-            </div>
-            <button type="button"
-                    onClick={ () => setVisible(false) }
-                    className="ml-auto -mx-1.5 -my-1.5 text-gray-600 rounded-lg p-1.5 inline-flex items-center justify-center h-8 w-8">
+        <div className="flex items-center p-4 mb-4 text-error-800 rounded-lg bg-error/40 border-2 border-error/50">
+            <div className="ml-3 text-base font-medium">{ apiError.data.message }</div>
+            <button onClick={ () => setVisible(false) }
+                    type="button"
+                    className="ml-auto -mx-1.5 -my-1.5 bg-error/10 text-error-800 rounded-lg inline-flex items-center justify-center h-8 w-8 p-1.5
+                                           focus:ring-2 focus:ring-error hover:bg-error/50">
                 <span className="material-icons-round">close</span>
             </button>
         </div>

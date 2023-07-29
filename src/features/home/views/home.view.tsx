@@ -9,10 +9,12 @@ import { MacroPanelGroup } from '../../../common/macro-panel/components/macro-pa
 import { MealPanelList } from '../components/meal-panel-list.tsx';
 import { BlurOverlay } from '../../../common/blur-overlay.tsx';
 import { getNutritionalMetadataValueObjects } from '../../user-metadata/user-metadata.utils.ts';
+import { useContext } from 'react';
+import { UserIdContext } from '../../../views/root.view.tsx';
 
 export const HomeView = () => {
     const date = new Date(useAppSelector(selectDate))
-    const userId = Number(localStorage.getItem('userId'))
+    const userId = useContext(UserIdContext)
 
     const {
         data: nutritionalMetaData,
