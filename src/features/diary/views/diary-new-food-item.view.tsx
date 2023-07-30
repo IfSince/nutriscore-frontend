@@ -1,21 +1,35 @@
 import { FoodItem } from '../../../redux/models/food-item.ts';
-import { FoodItemComponent } from '../../food/components/food-item-component.tsx';
-import { PrimaryButton } from '../../../common/button/components/primary-button.tsx';
-import { useState } from 'react';
-import { useAppSelector } from '../../../redux/hooks.ts';
-import { selectUser } from '../../../redux/slices/user-slice.ts';
 import { NEW_ENTITY_ID } from '../../../redux/constants.ts';
-import { AmountSelector } from '../../form/components/amount-selector/amount-selector.tsx';
 import { Unit } from '../../unit.ts';
+import { FoodItemForm } from '../../food/components/food-item-form.tsx';
+import { useContext, useEffect } from 'react';
+import { UserIdContext } from '../../../views/root.view.tsx';
+import { useAddNewFoodItemMutation } from '../../food/food-items-api-slice.ts';
+import { useAppDispatch } from '../../../redux/hooks.ts';
+import { useNavigate } from 'react-router-dom';
+import { addSuccessMessage } from '../../messages/global-message-slice.ts';
+import { DIARY_ROUTE } from '../../../routes.ts';
 
 export const DiaryNewFoodItemView = () => {
-    const userId = useAppSelector(selectUser).id
+    const dispatch = useAppDispatch()
+    const navigate = useNavigate()
 
-    const newFoodItem: FoodItem = {
+    const userId = useContext(UserIdContext)
+
+    const [addNewFoodItem, { isLoading, isSuccess, error }] = useAddNewFoodItemMutation()
+
+    useEffect(() => {
+        if (isSuccess) {
+            dispatch(addSuccessMessage('Food item created successfully!'))
+            navigate(DIARY_ROUTE)
+        }
+    }, [dispatch, isSuccess, navigate])
+
+    const initialFoodItem: FoodItem = {
         id: NEW_ENTITY_ID,
         userId,
-        description: 'New food item',
-        amount: 0,
+        description: 'Title',
+        amount: 1,
         unit: Unit.AMOUNT,
         calories: 0,
         protein: 0,
@@ -25,22 +39,11 @@ export const DiaryNewFoodItemView = () => {
         allergenics: [],
     }
 
-    const [amount, setAmount] = useState(0)
-
-    const onRemove = (value: number) => setAmount(currentAmount => currentAmount - value)
-    const onAdd = (value: number) => setAmount(currentAmount => currentAmount + value)
-
     return (
-        <FoodItemComponent item={ newFoodItem }>
-            <div className="my-4 border-t-2 border-gray-100 lg:my-6"></div>
-            <div className="flex flex-row justify-between">
-                <AmountSelector amount={ amount } unit={ newFoodItem.unit } onRemove={ () => onRemove(10) } onAdd={ () => onAdd(10) }/>
-                <PrimaryButton className="ml-2 px-4 text-gray-50 md:ml-4"
-                               type="button"
-                               action={ () => console.log(newFoodItem) }>
-                    <span className="whitespace-nowrap px-2 text-base font-medium tracking-wide">Add to diary</span>
-                </PrimaryButton>
-            </div>
-        </FoodItemComponent>
+        <FoodItemForm form={ initialFoodItem }
+                      onSubmit={ addNewFoodItem }
+                      isLoading={ isLoading }
+                      apiError={ error }
+                      editable={ true }/>
     )
 }

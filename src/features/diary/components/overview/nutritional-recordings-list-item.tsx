@@ -9,7 +9,7 @@ import { useAppDispatch } from '../../../../redux/hooks.ts';
 import { addSuccessMessage } from '../../../messages/global-message-slice.ts';
 import { ApiErrorMessage } from '../../../../common/messages/api-error-message.tsx';
 
-export const NutritionalRecordingsListItem = ({ id, itemId, description, amount, type, calories, unit }: NutritionalRecording) => {
+export const NutritionalRecordingsListItem = ({ id, description, amount, type, calories, unit }: NutritionalRecording) => {
     const dispatch = useAppDispatch()
     const userId = useContext(UserIdContext)
 
@@ -29,8 +29,8 @@ export const NutritionalRecordingsListItem = ({ id, itemId, description, amount,
     })
 
     const routes = {
-        ['FOOD']: DIARY_FOOD_ITEM_ROUTE.replace(':id', itemId.toString()),
-        ['MEAL']: DIARY_MEAL_ITEM_ROUTE.replace(':id', itemId.toString()),
+        ['FOOD']: DIARY_FOOD_ITEM_ROUTE.replace(':id', id.toString()),
+        ['MEAL']: DIARY_MEAL_ITEM_ROUTE.replace(':id', id.toString()),
     }
     const actions = {
         ['FOOD']: () => deleteFoodRecording({ userId, foodRecordingId: id }),

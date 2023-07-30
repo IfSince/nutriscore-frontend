@@ -24,9 +24,17 @@ export const HOME_ROUTE = '/home'
 // Diary
 export const DIARY_ROUTE = '/diary'
 export const DIARY_SEARCH_ROUTE = '/diary/search'
+
+// Diary - Food
+export const DIARY_FOOD_PREFIX_ROUTE = '/diary/food'
 export const DIARY_FOOD_ITEM_ROUTE = '/diary/food/:id'
+export const DIARY_ADD_FOOD_ITEM_ROUTE = '/diary/food/add/:id'
 export const DIARY_NEW_FOOD_ITEM_ROUTE = '/diary/food/new'
+
+// Diary - Meal
+export const DIARY_MEAL_PREFIX_ROUTE = '/diary/meal'
 export const DIARY_MEAL_ITEM_ROUTE = '/diary/meal/:id'
+export const DIARY_ADD_MEAL_ITEM_ROUTE = '/diary/meal/add/:id'
 export const DIARY_NEW_MEAL_ITEM_ROUTE = '/diary/meal/new'
 
 // Statistics

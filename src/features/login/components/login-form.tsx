@@ -8,9 +8,7 @@ import { object, string } from 'yup';
 import { FormProps } from '../../form/models/form-props.ts';
 import LogoDark from '/logo_icon_dark.svg'
 
-export const LoginForm = ({ onSubmit, apiError, isLoading }: FormProps<LoginData>) => {
-    const initialForm = { email: '', password: '' }
-
+export const LoginForm = ({ form, onSubmit, apiError, isLoading }: FormProps<LoginData>) => {
     const LoginValidationSchema = object().shape({
         email: string()
             .min(2, 'Too short!')
@@ -23,7 +21,7 @@ export const LoginForm = ({ onSubmit, apiError, isLoading }: FormProps<LoginData
 
     return (
         <Formik
-            initialValues={ initialForm }
+            initialValues={ form }
             validationSchema={ LoginValidationSchema }
             validateOnChange={ false }
             validateOnBlur={ true }

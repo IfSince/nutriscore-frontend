@@ -1,5 +1,5 @@
 import { NutritionalRecordingSearchEntry } from '../models/nutritional-recordings-search-entry.ts';
-import { DIARY_FOOD_ITEM_ROUTE, DIARY_MEAL_ITEM_ROUTE } from '../../../../routes.ts';
+import { DIARY_ADD_FOOD_ITEM_ROUTE, DIARY_ADD_MEAL_ITEM_ROUTE } from '../../../../routes.ts';
 import { Link } from 'react-router-dom';
 import { DefaultIconButton } from '../../../../common/button/components/icon/default-icon-button.tsx';
 
@@ -11,8 +11,8 @@ export const NutritionalRecordingSearchListItem = ({
     unit,
 }: NutritionalRecordingSearchEntry) => {
     const routes = {
-        ['FOOD']: DIARY_FOOD_ITEM_ROUTE.replace(':id', id.toString()),
-        ['MEAL']: DIARY_MEAL_ITEM_ROUTE.replace(':id', id.toString()),
+        ['FOOD']: DIARY_ADD_FOOD_ITEM_ROUTE.replace(':id', id.toString()),
+        ['MEAL']: DIARY_ADD_MEAL_ITEM_ROUTE.replace(':id', id.toString()),
     }
 
     return (

@@ -1,7 +1,9 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
 import { NotFoundView } from './views/error.view.tsx';
 import {
+    DIARY_ADD_FOOD_ITEM_ROUTE,
     DIARY_FOOD_ITEM_ROUTE,
+    DIARY_FOOD_PREFIX_ROUTE,
     DIARY_NEW_FOOD_ITEM_ROUTE,
     DIARY_ROUTE,
     DIARY_SEARCH_ROUTE,
@@ -31,7 +33,7 @@ import { HomeView } from './features/home/views/home.view.tsx';
 import { DiaryView } from './features/diary/views/diary.view.tsx';
 import { DiaryOverviewView } from './features/diary/views/diary-overview.view.tsx';
 import { DiarySearchView } from './features/diary/views/diary-search.view.tsx';
-import { DiaryFoodItemView } from './features/diary/views/diary-food-item.view.tsx';
+import { DiaryAddFoodItemView } from './features/diary/views/diary-add-food-item.view.tsx';
 import { DiaryNewFoodItemView } from './features/diary/views/diary-new-food-item.view.tsx';
 import { GoalStepView } from './features/register/views/goal-step.view.tsx';
 import { GenderStepView } from './features/register/views/gender-step.view.tsx';
@@ -52,6 +54,7 @@ import { LoginView } from './features/login/views/login.view.tsx';
 import { RootView } from './views/root.view.tsx';
 import { NotLoggedInRoute } from './common/not-logged-in-route.tsx';
 import { ProtectedRoute } from './common/protected-route.tsx';
+import { DiaryFoodItemView } from './features/diary/views/diary-food-item.view.tsx';
 
 export const router = createBrowserRouter([
     {
@@ -157,12 +160,21 @@ export const router = createBrowserRouter([
                         element: <DiarySearchView/>,
                     },
                     {
-                        path: DIARY_FOOD_ITEM_ROUTE,
-                        element: <DiaryFoodItemView/>,
-                    },
-                    {
-                        path: DIARY_NEW_FOOD_ITEM_ROUTE,
-                        element: <DiaryNewFoodItemView/>,
+                        path: DIARY_FOOD_PREFIX_ROUTE,
+                        children: [
+                            {
+                                path: DIARY_FOOD_ITEM_ROUTE,
+                                element: <DiaryFoodItemView/>,
+                            },
+                            {
+                                path: DIARY_ADD_FOOD_ITEM_ROUTE,
+                                element: <DiaryAddFoodItemView/>,
+                            },
+                            {
+                                path: DIARY_NEW_FOOD_ITEM_ROUTE,
+                                element: <DiaryNewFoodItemView/>,
+                            },
+                        ],
                     },
                 ],
             },

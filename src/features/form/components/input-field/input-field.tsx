@@ -21,8 +21,8 @@ export const InputField = ({ ...props }) => {
                 <input className={ `h-11 rounded-md border transition-selection px-4 w-full peer lg:h-12 text-base font-medium text-gray-500 placeholder-gray-400
                     ${ isInvalid ?
                         'border-error hover:border-error hover:ring-1 hover:ring-error border-red' :
-                        'border-gray-300 hover:border-cyan-200 hover:ring-1 hover:ring-cyan-200' 
-                    }
+                        'border-gray-300 hover:border-cyan-200 hover:ring-1 hover:ring-cyan-200'
+                }
                     focus:border-cyan-300 focus:ring-1 focus:ring-cyan-300
                     disabled:text-gray-300 disabled:placeholder-gray-300 disabled:hover:border-gray-300 disabled:hover:ring-0 disabled:cursor-not-allowed` }
                        { ...field } { ...props }
@@ -35,9 +35,7 @@ export const InputField = ({ ...props }) => {
             {
                 props.icon &&
                 <label className={ `flex cursor-pointer h-11 lg:h-12 items-center justify-center rounded-md transition-colors aspect-square w-fit text-gray-50 bg-cyan-200
-                                    hover:bg-cyan-300
-                                    peer-focus:bg-cyan-300
-                                    peer-disabled:bg-cyan-200/50` }
+                                    hover:bg-cyan-300 peer-focus:bg-cyan-300 peer-disabled:bg-cyan-200/50` }
                        htmlFor={ field.name }>
                     <span className="text-xl material-icons-round">{ props.icon }</span>
                 </label>

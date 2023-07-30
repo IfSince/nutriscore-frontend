@@ -1,4 +1,4 @@
-import { apiSlice, FOOD_TAG } from '../../api/api-slice.ts';
+import { apiSlice, FOOD_TAG, NUTRITIONAL_RECORDINGS_SEARCH_TAG, NUTRITIONAL_RECORDINGS_TAG, USER_METADATA_TAG } from '../../api/api-slice.ts';
 import { FoodItem } from '../../redux/models/food-item.ts';
 
 export const foodItemsApiSlice = apiSlice.injectEndpoints({
@@ -17,7 +17,7 @@ export const foodItemsApiSlice = apiSlice.injectEndpoints({
                 query: (id: number) => `foods/${ id }`,
                 providesTags: (_result, _error, arg) => [{ type: FOOD_TAG, id: arg }],
             }),
-            addNewFoodItem: builder.mutation({
+            addNewFoodItem: builder.mutation<FoodItem, FoodItem>({
                 query: (foodItem: FoodItem) => (
                     {
                         url: 'foods',
@@ -25,9 +25,12 @@ export const foodItemsApiSlice = apiSlice.injectEndpoints({
                         body: foodItem,
                     }
                 ),
-                invalidatesTags: [{ type: FOOD_TAG, id: 'LIST' }],
+                invalidatesTags: [
+                    { type: FOOD_TAG, id: 'LIST' },
+                    { type: NUTRITIONAL_RECORDINGS_SEARCH_TAG, id: 'LIST' },
+                ],
             }),
-            editFoodItem: builder.mutation({
+            editFoodItem: builder.mutation<FoodItem, FoodItem>({
                 query: (foodItem: FoodItem) => (
                     {
                         url: `foods/${ foodItem.id }`,
@@ -35,7 +38,13 @@ export const foodItemsApiSlice = apiSlice.injectEndpoints({
                         body: foodItem,
                     }
                 ),
-                invalidatesTags: (_result, _error, { id }) => [{ type: FOOD_TAG, id }],
+                invalidatesTags: (_result, _error, { id, userId }) =>
+                    [
+                        { type: FOOD_TAG, id },
+                        { type: NUTRITIONAL_RECORDINGS_SEARCH_TAG, id: 'LIST' },
+                        { type: USER_METADATA_TAG, id: userId },
+                        { type: NUTRITIONAL_RECORDINGS_TAG, id: userId },
+                    ],
             }),
         }
     ),

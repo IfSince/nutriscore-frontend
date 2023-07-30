@@ -16,7 +16,7 @@ export const LoginView = () => {
             error,
         },
     ] = useLoginMutation()
-    
+
     useEffect(() => {
         if (isSuccess && user) {
             localStorage.setItem('userId', user.id.toString())
@@ -29,7 +29,8 @@ export const LoginView = () => {
     }
 
     return (
-        <LoginForm onSubmit={ (loginData) => login({ ...loginData }) }
+        <LoginForm form={ { email: '', password: '' } }
+                   onSubmit={ login }
                    isLoading={ isLoading }
                    apiError={ error }/>
     )

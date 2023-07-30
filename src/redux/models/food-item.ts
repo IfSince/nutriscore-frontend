@@ -1,6 +1,6 @@
-import { Allergenic } from './allergenics.ts';
-import { Category } from './category.ts';
 import { Unit } from '../../features/unit.ts';
+import { Category } from '../../features/categories/models/category.ts';
+import { Allergenic } from '../../features/allergenics/models/allergenic.ts';
 
 export interface FoodItem {
     id: number

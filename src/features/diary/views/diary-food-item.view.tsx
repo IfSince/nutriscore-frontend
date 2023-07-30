@@ -1,84 +1,64 @@
+import { useAppDispatch } from '../../../redux/hooks.ts';
 import { useNavigate, useParams } from 'react-router-dom';
-import { FoodItemComponent } from '../../food/components/food-item-component.tsx';
-import { ReactElement, useContext, useEffect } from 'react';
-import { useGetFoodItemByIdQuery } from '../../food/food-items-api-slice.ts';
-import { CenteredSpinner } from '../../../common/spinner/components/centered-spinner.tsx';
-import { ApiErrorMessage } from '../../../common/messages/api-error-message.tsx';
-import { NEW_ENTITY_ID } from '../../../redux/constants.ts';
-import { FoodRecording } from '../../food-recording/models/food-recording.ts';
-import { TimeOfDay } from '../../recordings/models/type-of-day.enum.ts';
-import { Form, Formik } from 'formik';
-import { SubmitButton } from '../../../common/button/components/submit-button.tsx';
-import { AmountSelector } from '../../form/components/amount-selector/amount-selector.tsx';
-import { useAddNewFoodRecordingMutation } from '../../food-recording/food-recording-api-slice.ts';
-import { getFormattedDate } from '../../../utils/format-date.ts';
+import { useGetFoodRecordingAndItemByFoodRecordingIdQuery, useUpdateFoodRecordingMutation } from '../../food-recording/food-recording-api-slice.ts';
+import { useEffect } from 'react';
 import { addSuccessMessage } from '../../messages/global-message-slice.ts';
 import { DIARY_ROUTE } from '../../../routes.ts';
-import { useAppDispatch } from '../../../redux/hooks.ts';
-import { UserIdContext } from '../../../views/root.view.tsx';
+import { CenteredSpinner } from '../../../common/spinner/components/centered-spinner.tsx';
+import { ApiErrorMessage } from '../../../common/messages/api-error-message.tsx';
+import { Form, Formik } from 'formik';
+import { AmountSelector } from '../../form/components/amount-selector/amount-selector.tsx';
+import { SubmitButton } from '../../../common/button/components/submit-button.tsx';
+import { FoodRecording } from '../../food-recording/models/food-recording.ts';
+import { FoodItemForm } from '../../food/components/food-item-form.tsx';
 
 export const DiaryFoodItemView = () => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
     const { id } = useParams()
 
-    const userId = useContext(UserIdContext)
-
-    const {
-        data: foodItem,
-        isLoading,
-        isSuccess,
-        isError,
-        error,
-    } = useGetFoodItemByIdQuery(Number(id))
+    const { data: foodRecording, isLoading, isSuccess, isError, error } =
+        useGetFoodRecordingAndItemByFoodRecordingIdQuery(Number(id))
 
     const [
-        addNewFoodRecording,
+        updateFoodRecording,
         {
-            isLoading: foodRecordingIsLoading,
-            isSuccess: foodRecordingIsSuccess,
-            error: foodRecordingError,
+            isLoading: updateIsLoading,
+            isSuccess: updateIsSuccess,
+            error: updateError,
         },
-    ] = useAddNewFoodRecordingMutation()
-    
+    ] = useUpdateFoodRecordingMutation()
+
     useEffect(() => {
-        if (foodRecordingIsSuccess) {
-            dispatch(addSuccessMessage('Recording created successfully!'))
+        if (updateIsSuccess) {
+            dispatch(addSuccessMessage('Recording updated successfully!'))
             navigate(DIARY_ROUTE)
         }
-    }, [dispatch, foodRecordingIsSuccess, navigate])
+    }, [dispatch, updateIsSuccess, navigate])
 
-    const onSubmit = (foodRecording: FoodRecording) => addNewFoodRecording(foodRecording)
+    const onSubmit = (foodRecording: FoodRecording) => updateFoodRecording(foodRecording)
 
-    let content: ReactElement = <></>
+    let content
     if (isLoading) {
         content = <CenteredSpinner/>
     } else if (isError) {
         content = <ApiErrorMessage apiErrorResponse={ error }/>
     } else if (isSuccess) {
-
-        const initialFoodRecording: FoodRecording = {
-            id: NEW_ENTITY_ID,
-            userId,
-            foodId: foodItem.id,
-            dateOfRecording: getFormattedDate(new Date()),
-            timeOfDay: TimeOfDay.BREAKFAST,
-            amount: foodItem.amount,
-        }
+        const foodItem = foodRecording.foodItem
 
         content =
-            <FoodItemComponent item={ foodItem }>
+            <FoodItemForm form={ foodItem } onSubmit={ () => null } apiError={ error } isLoading={ updateIsLoading } editable={ false }>
                 <div className="my-4 border-t-2 border-gray-100 lg:my-6"></div>
-                <Formik initialValues={ initialFoodRecording } onSubmit={ onSubmit }>
+                <Formik initialValues={ foodRecording } onSubmit={ onSubmit }>
                     <Form>
-                        <ApiErrorMessage apiErrorResponse={ foodRecordingError }/>
+                        <ApiErrorMessage apiErrorResponse={ updateError }/>
                         <div className="flex flex-row justify-between">
                             <AmountSelector name="amount" unit={ foodItem.unit }/>
-                            <SubmitButton text="Add to diary" disabled={ foodRecordingIsLoading } isSubmitting={ foodRecordingIsLoading }/>
+                            <SubmitButton text="Update" isSubmitting={ updateIsLoading }/>
                         </div>
                     </Form>
                 </Formik>
-            </FoodItemComponent>
+            </FoodItemForm>
     }
 
     return content

@@ -11,11 +11,24 @@ export const FOOD_TAG = 'food' as const
 export const USER_METADATA_TAG = 'user-metadata' as const
 export const NUTRITIONAL_RECORDINGS_TAG = 'nutritional-recordings' as const
 export const NUTRITIONAL_RECORDINGS_SEARCH_TAG = 'nutritional-recordings-search' as const
-
+export const FOOD_RECORDING_TAG = 'food-recording' as const
+export const MEAL_RECORDING_TAG = 'meal-recording' as const
+export const CATEGORIES_TAG = 'categories' as const
+export const ALLERGENICS_TAG = 'allergenics' as const
 
 export const apiSlice = createApi({
     reducerPath: 'api',
-    tagTypes: [USER_TAG, USER_METADATA_TAG, FOOD_TAG, NUTRITIONAL_RECORDINGS_TAG, NUTRITIONAL_RECORDINGS_SEARCH_TAG],
+    tagTypes: [
+        USER_TAG,
+        USER_METADATA_TAG,
+        FOOD_TAG,
+        NUTRITIONAL_RECORDINGS_TAG,
+        NUTRITIONAL_RECORDINGS_SEARCH_TAG,
+        FOOD_RECORDING_TAG,
+        MEAL_RECORDING_TAG,
+        CATEGORIES_TAG,
+        ALLERGENICS_TAG,
+    ],
     baseQuery: fetchBaseQuery({
         baseUrl: `${ BASE_URL }/api/`,
         prepareHeaders: async (headers) => {

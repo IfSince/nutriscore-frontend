@@ -1,9 +1,32 @@
-import { apiSlice, NUTRITIONAL_RECORDINGS_TAG, USER_METADATA_TAG } from '../../api/api-slice.ts';
+import { apiSlice, FOOD_RECORDING_TAG, NUTRITIONAL_RECORDINGS_TAG, USER_METADATA_TAG } from '../../api/api-slice.ts';
 import { FoodRecording } from './models/food-recording.ts';
 
 export const foodRecordingApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => (
         {
+            getFoodRecordingAndItemByFoodRecordingId: builder.query<FoodRecording, number>({
+                query: (id: number) => (
+                    {
+                        url: `food-recordings/${ id }`,
+                    }
+                ),
+                providesTags: (_result, _error, args) => [{ type: FOOD_RECORDING_TAG, id: args }],
+            }),
+            updateFoodRecording: builder.mutation<FoodRecording, FoodRecording>({
+                query: (foodRecording: FoodRecording) => (
+                    {
+                        url: `food-recordings/${ foodRecording.id }`,
+                        method: 'PUT',
+                        body: foodRecording,
+                    }
+                ),
+                invalidatesTags: (_result, _error, { id, userId }) =>
+                    [
+                        { type: FOOD_RECORDING_TAG, id },
+                        { type: USER_METADATA_TAG, userId },
+                        { type: NUTRITIONAL_RECORDINGS_TAG, userId },
+                    ],
+            }),
             addNewFoodRecording: builder.mutation<void, FoodRecording>({
                 query: (foodRecording: FoodRecording) => (
                     {
@@ -12,10 +35,10 @@ export const foodRecordingApiSlice = apiSlice.injectEndpoints({
                         body: foodRecording,
                     }
                 ),
-                invalidatesTags: (_result, _error, args) =>
+                invalidatesTags: (_result, _error, { userId }) =>
                     [
-                        { type: USER_METADATA_TAG, id: args.userId },
-                        { type: NUTRITIONAL_RECORDINGS_TAG, id: args.userId },
+                        { type: USER_METADATA_TAG, id: userId },
+                        { type: NUTRITIONAL_RECORDINGS_TAG, id: userId },
                     ],
             }),
             deleteFoodRecording: builder.mutation<void, { userId: number, foodRecordingId: number }>({
@@ -25,14 +48,20 @@ export const foodRecordingApiSlice = apiSlice.injectEndpoints({
                         method: 'DELETE',
                     }
                 ),
-                invalidatesTags: (_result, _error, args) =>
+                invalidatesTags: (_result, _error, { userId, foodRecordingId }) =>
                     [
-                        { type: USER_METADATA_TAG, id: args.userId },
-                        { type: NUTRITIONAL_RECORDINGS_TAG, id: args.userId },
+                        { type: FOOD_RECORDING_TAG, id: foodRecordingId },
+                        { type: USER_METADATA_TAG, id: userId },
+                        { type: NUTRITIONAL_RECORDINGS_TAG, id: userId },
                     ],
             }),
         }
     ),
 })
 
-export const { useAddNewFoodRecordingMutation, useDeleteFoodRecordingMutation } = foodRecordingApiSlice
+export const {
+    useGetFoodRecordingAndItemByFoodRecordingIdQuery,
+    useUpdateFoodRecordingMutation,
+    useAddNewFoodRecordingMutation,
+    useDeleteFoodRecordingMutation,
+} = foodRecordingApiSlice
