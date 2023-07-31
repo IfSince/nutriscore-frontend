@@ -9,7 +9,7 @@ export const ApiErrorMessage = ({ apiErrorResponse }: { apiErrorResponse: ApiErr
     useEffect(() => setVisible(true), [apiErrorResponse])
 
     return (
-        visible && apiError &&
+        visible && apiError && apiError.data.message &&
         <div className="flex items-center p-4 mb-4 text-error-800 rounded-lg bg-error/40 border-2 border-error/50">
             <div className="ml-3 text-sm md:text-base font-medium">{ apiError.data.message }</div>
             <button onClick={ () => setVisible(false) }
