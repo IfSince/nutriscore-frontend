@@ -14,7 +14,7 @@ export const dateSlice = createSlice({
     initialState,
     reducers: {
         update: (state, action: PayloadAction<string>) => {
-            state.date = action.payload.toString()
+            state.date = action.payload
         },
     },
 })

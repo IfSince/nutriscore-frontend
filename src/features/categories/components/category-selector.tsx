@@ -1,7 +1,7 @@
 import { useGetAllCategoriesQuery } from '../categories-api-slice.ts';
 import { ApiErrorMessage } from '../../../common/messages/api-error-message.tsx';
 import { CenteredSpinner } from '../../../common/spinner/components/centered-spinner.tsx';
-import { CustomFieldArray } from '../../form/components/field-array/custom-field-array.tsx';
+import { CustomArrayField } from '../../form/components/array-field/custom-array-field.tsx';
 
 export const CategorySelector = ({ disabled }: { disabled?: boolean }) => {
     const {
@@ -22,7 +22,7 @@ export const CategorySelector = ({ disabled }: { disabled?: boolean }) => {
     } else if (isSuccess) {
         content =
             <div className="mb-5 flex h-fit gap-2 flex-wrap">
-                <CustomFieldArray name="categories" values={ categories }>
+                <CustomArrayField name="categories" values={ categories }>
                     {
                         (value, isSelected, onSelect) => (
                             <button
@@ -41,7 +41,7 @@ export const CategorySelector = ({ disabled }: { disabled?: boolean }) => {
                             </button>
                         )
                     }
-                </CustomFieldArray>
+                </CustomArrayField>
             </div>
     }
 

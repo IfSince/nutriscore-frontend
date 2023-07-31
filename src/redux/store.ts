@@ -1,14 +1,12 @@
 import { configureStore } from '@reduxjs/toolkit';
 import { userSlice } from './slices/user-slice.ts';
 import { dateSlice } from './slices/date-slice.ts';
-import { registerSlice } from './slices/register-slice.ts';
 import { apiSlice } from '../api/api-slice.ts';
 import { globalMessageSlice } from '../features/messages/global-message-slice.ts';
 
 export const store = configureStore({
     reducer: {
         messages: globalMessageSlice.reducer,
-        register: registerSlice.reducer,
         user: userSlice.reducer,
         date: dateSlice.reducer,
         [apiSlice.reducerPath]: apiSlice.reducer,

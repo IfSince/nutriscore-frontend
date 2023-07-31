@@ -1,11 +1,12 @@
 import { ScalePickerLine } from './scale-picker-line.tsx';
 import { useEffect, useRef } from 'react';
+import { Unit, UNIT_ABBREVIATIONS } from '../../../unit.ts';
 
 interface ScalePickerFieldProps {
     minValue: number
     maxValue: number
     value: number
-    unit: string
+    unit: Unit
     onChange: (value: number) => void
 }
 
@@ -61,7 +62,7 @@ export const ScalePickerField = ({ minValue, maxValue, value, unit, onChange }: 
                        onChange={ (event) => onChangeValue(event.target.value) }
                        value={ value }/>
                 
-                <label htmlFor="scale-input" className="absolute right-0 bottom-1 translate-x-full pl-0.5">{ unit }</label>
+                <label htmlFor="scale-input" className="absolute right-0 bottom-1 translate-x-full pl-0.5">{ UNIT_ABBREVIATIONS[unit] }</label>
             </span>
             <div className="relative h-fit w-full">
                 <div className="absolute left-1/2 z-20 mt-2 w-1 -translate-x-1/2 bg-cyan-300 h-18" ref={ centerCollisionDivRef }>

@@ -1,28 +1,41 @@
-import { useOutletContext } from 'react-router-dom';
-import { RegisterHeader } from '../components/register-header.tsx';
 import { RegisterOutletContext } from '../models/register-outlet-context.ts';
-import { useEffect } from 'react';
+import { useOutletContext } from 'react-router-dom';
+import { useCallback, useEffect } from 'react';
 import { REGISTER_STEP } from '../register-steps.ts';
+import { RegisterHeader } from '../components/register-header.tsx';
 import { RadioField } from '../../form/components/radio-field/radio-field.tsx';
-import { useGetAllCalculationTypesQuery } from '../../calculation-type/calculation-type-api-slice.ts';
+import { useFormikContext } from 'formik';
+import { RegisterForm } from '../models/register-form.ts';
+import { useGetAllNutritionTypesQuery } from '../../nutrition-type/nutrition-type-api-slice.ts';
 import { CenteredSpinner } from '../../../common/spinner/components/centered-spinner.tsx';
 import { ApiErrorMessage } from '../../../common/messages/api-error-message.tsx';
 
-export const CalculationTypeStepView = () => {
+export const NutritionTypeStepView = () => {
     const [backRef, nextRef]: RegisterOutletContext = useOutletContext()
+    const { values: registerForm } = useFormikContext<RegisterForm>()
+
+    const updateRoutes = useCallback((activityLevelId: number) => {
+        if ([0, 1, 2, 3, 4, 5].includes(activityLevelId)) {
+            backRef.current = REGISTER_STEP.ACTIVITY_PER_WEEK
+        } else if (activityLevelId == 6) {
+            backRef.current = REGISTER_STEP.PAL
+        } else {
+            backRef.current = REGISTER_STEP.ACTIVITY_LEVEL
+        }
+    }, [backRef])
 
     useEffect(() => {
-        backRef.current = REGISTER_STEP.NUTRITION_TYPE
-        nextRef.current = REGISTER_STEP.CALORIE_RESTRICTION
-    }, [backRef, nextRef])
+        nextRef.current = REGISTER_STEP.CALCULATION_TYPE
+        updateRoutes(+registerForm.nutritionalData.activityLevelId)
+    }, [nextRef, updateRoutes, registerForm.nutritionalData.activityLevelId])
 
     const {
-        data: calculationTypes,
+        data: nutritionTypes,
         isLoading,
         isSuccess,
         isError,
         error,
-    } = useGetAllCalculationTypesQuery()
+    } = useGetAllNutritionTypesQuery()
 
     let content
     if (isLoading) {
@@ -32,12 +45,12 @@ export const CalculationTypeStepView = () => {
     } else if (isError) {
         content = <ApiErrorMessage apiErrorResponse={ error }/>
     } else if (isSuccess) {
-        const options = calculationTypes.map(type => (
+        const options = nutritionTypes.map(type => (
             { value: type.id, displayName: type.description }
         ))
 
         content = <div className="flex flex-col items-center gap-2 md:gap-3 w-full mt-4 text-lg font-medium text-gray-500">
-            <RadioField name="nutritionalData.calculationTypeId" options={ options }>
+            <RadioField name="nutritionalData.nutritionTypeId" options={ options }>
                 {
                     (option, field) => (
                         <div className="w-full items-center">
@@ -58,7 +71,7 @@ export const CalculationTypeStepView = () => {
 
     return (
         <>
-            <RegisterHeader title="How should we calculate your RMR?"/>
+            <RegisterHeader title="How should we distribute you macros?"/>
             { content }
         </>
     )

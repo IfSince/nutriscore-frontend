@@ -11,7 +11,7 @@ export const ApiErrorMessage = ({ apiErrorResponse }: { apiErrorResponse: ApiErr
     return (
         visible && apiError &&
         <div className="flex items-center p-4 mb-4 text-error-800 rounded-lg bg-error/40 border-2 border-error/50">
-            <div className="ml-3 text-base font-medium">{ apiError.data.message }</div>
+            <div className="ml-3 text-sm md:text-base font-medium">{ apiError.data.message }</div>
             <button onClick={ () => setVisible(false) }
                     type="button"
                     className="ml-auto -mx-1.5 -my-1.5 bg-error/10 text-error-800 rounded-lg inline-flex items-center justify-center h-8 w-8 p-1.5

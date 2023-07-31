@@ -8,7 +8,7 @@ import {
     DIARY_ROUTE,
     DIARY_SEARCH_ROUTE,
     HOME_ROUTE,
-    LOGIN_ROUTE,
+    LOGIN_ROUTE, NUTRITION_TYPE_ROUTE,
     PROFILE_ROUTE,
     REGISTER_ACTIVITY_LEVEL_ROUTE,
     REGISTER_ACTIVITY_PER_WEEK_ROUTE,
@@ -55,6 +55,7 @@ import { RootView } from './views/root.view.tsx';
 import { NotLoggedInRoute } from './common/not-logged-in-route.tsx';
 import { ProtectedRoute } from './common/protected-route.tsx';
 import { DiaryFoodItemView } from './features/diary/views/diary-food-item.view.tsx';
+import { NutritionTypeStepView } from './features/register/views/nutrition-type-step.view.tsx';
 
 export const router = createBrowserRouter([
     {
@@ -115,6 +116,11 @@ export const router = createBrowserRouter([
             {
                 path: REGISTER_PAL_ROUTE,
                 element: <PalStepView/>,
+            },
+
+            {
+                path: NUTRITION_TYPE_ROUTE,
+                element: <NutritionTypeStepView/>,
             },
             {
                 path: REGISTER_CALCULATION_TYPE_ROUTE,

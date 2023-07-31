@@ -2,11 +2,13 @@ import { RegisterHeader } from '../components/register-header.tsx';
 import { RegisterOutletContext } from '../models/register-outlet-context.ts';
 import { useOutletContext } from 'react-router-dom';
 import { useEffect } from 'react';
-import { REGISTER_STEP } from '../../../redux/slices/register-slice.ts';
-import { RegisterData } from '../../../redux/models/register/register-data.ts';
+import { REGISTER_STEP } from '../register-steps.ts';
+import { useFormikContext } from 'formik';
+import { RegisterForm } from '../models/register-form.ts';
 
 export const RegisterOverviewStepView = () => {
-    const [registerState, _, backRef, nextRef]: RegisterOutletContext = useOutletContext()
+    const [backRef, nextRef]: RegisterOutletContext = useOutletContext()
+    const { values: registerForm } = useFormikContext<RegisterForm>()
 
     useEffect(() => {
         backRef.current = REGISTER_STEP.PERSONAL
@@ -19,8 +21,8 @@ export const RegisterOverviewStepView = () => {
         <>
             <RegisterHeader title="Overview"/>
             {
-                Object.keys(registerState).map(key =>
-                    <div key={ key }>{ `${ key }: ${ registerState[key as keyof RegisterData] }` }</div>,
+                Object.keys(registerForm).map(key =>
+                    <div key={ key }>{ `${ key }: ${ JSON.stringify(registerForm[key as keyof RegisterForm]) }` }</div>,
                 )
             }
         </>

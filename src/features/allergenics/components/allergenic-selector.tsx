@@ -1,7 +1,7 @@
 import { useGetAllAllergenicsQuery } from '../allergenics-api-slice.ts';
 import { CenteredSpinner } from '../../../common/spinner/components/centered-spinner.tsx';
 import { ApiErrorMessage } from '../../../common/messages/api-error-message.tsx';
-import { CustomFieldArray } from '../../form/components/field-array/custom-field-array.tsx';
+import { CustomArrayField } from '../../form/components/array-field/custom-array-field.tsx';
 
 export const AllergenicSelector = ({ disabled }: { disabled?: boolean }) => {
     const {
@@ -22,7 +22,7 @@ export const AllergenicSelector = ({ disabled }: { disabled?: boolean }) => {
     } else if (isSuccess) {
         content =
             <div className="mb-5 flex h-fit flex-wrap gap-2">
-                <CustomFieldArray name="allergenics" values={ allergenics }>
+                <CustomArrayField name="allergenics" values={ allergenics }>
                     {
                         (value, isSelected, onSelect) => (
                             <button
@@ -41,7 +41,7 @@ export const AllergenicSelector = ({ disabled }: { disabled?: boolean }) => {
                             </button>
                         )
                     }
-                </CustomFieldArray>
+                </CustomArrayField>
             </div>
     }
 

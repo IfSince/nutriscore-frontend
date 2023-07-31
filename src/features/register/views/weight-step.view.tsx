@@ -1,55 +1,59 @@
 import { RegisterHeader } from '../components/register-header.tsx';
 import { useOutletContext } from 'react-router-dom';
-import { useEffect, useRef, useState } from 'react';
-import { SelectListField } from '../../form/components/select-list-field.tsx';
+import { useEffect } from 'react';
 import { ScalePickerField } from '../../form/components/scale-picker/scale-picker-field.tsx';
 import { RegisterOutletContext } from '../models/register-outlet-context.ts';
-import { REGISTER_STEP } from '../../../redux/slices/register-slice.ts';
+import { REGISTER_STEP } from '../register-steps.ts';
+import { RadioField } from '../../form/components/radio-field/radio-field.tsx';
+import { Field, FieldProps } from 'formik';
+import { Unit, UNIT_ABBREVIATIONS } from '../../unit.ts';
 
 export const WeightStepView = () => {
-    const [registerState, updateState, backRef, nextRef]: RegisterOutletContext = useOutletContext()
-
-    const [weightUnit, setWeightUnit] = useState(registerState.weightUnit)
-    const [weight, setWeight] = useState(registerState.weight)
-
-    const weightRef = useRef(registerState.weight)
-    const weightUnitRef = useRef(registerState.weightUnit)
+    const [backRef, nextRef]: RegisterOutletContext = useOutletContext()
 
     useEffect(() => {
         backRef.current = REGISTER_STEP.HEIGHT
         nextRef.current = REGISTER_STEP.ALLERGENIC
-        return () => updateState({ weight: weightRef.current, weightUnit: weightUnitRef.current })
     }, [backRef, nextRef])
 
-    const updateWeightUnit = (weightUnit: string) => {
-        setWeightUnit(weightUnit)
-        weightUnitRef.current = weightUnit
-    }
-
-    const updateWeight = (weight: number) => {
-        setWeight(weight)
-        weightRef.current = weight
-    }
-
     const options = [
-        { value: 'kg', displayName: 'kg' },
-        { value: 'lbs', displayName: 'lbs' },
+        { value: Unit.KILOGRAM, displayName: UNIT_ABBREVIATIONS[Unit.KILOGRAM] },
+        { value: Unit.POUND, displayName: UNIT_ABBREVIATIONS[Unit.POUND] },
     ]
 
     return (
         <>
             <RegisterHeader title="What is your current weight?"/>
-            <SelectListField name="gender"
-                             options={ options }
-                             onChange={ updateWeightUnit }
-                             value={ weightUnit }
-                             className="mb-6 flex flex-row justify-center md:mb-10"
-                             optionsClassName="max-w-xs grow w-full items-center justify-center !rounded-lg flex flex-col !py-3 !px-5"/>
-            <ScalePickerField minValue={ 0 }
-                              maxValue={ 200 }
-                              value={ weight }
-                              unit={ weightUnit }
-                              onChange={ updateWeight }/>
+            <div className="w-full max-w-sm flex flex-row justify-center gap-4 mt-4 text-lg font-medium text-gray-500 mb-14">
+                <RadioField name="user.selectedWeightUnit" options={ options }>
+                    {
+                        (option, field) => (
+                            <div className="w-full items-center">
+                                <input className="peer hidden" type="radio" id={ `${ option.value }` } { ...field }/>
+                                <label className="cursor-pointer w-full border text-gray-400 transition-colors text-lg xl:text-xl gap-6
+                                              peer-hover:border-cyan-200 peer-checked:bg-cyan-200 peer-checked:border-transparent peer-checked:text-gray-50
+                                              grow items-center justify-center rounded-lg flex flex-col py-3 px-5"
+                                       htmlFor={ `${ option.value }` }>
+                                    { option.icon && <span className="material-icons-round text-7xl lg:text-8xl">{ option.icon }</span> }
+                                    <span>{ option.displayName }</span>
+                                </label>
+                            </div>
+                        )
+                    }
+                </RadioField>
+            </div>
+
+            <Field name="weightRecording.weight">
+                {
+                    ({ field, form }: FieldProps) => (
+                        <ScalePickerField minValue={ 0 }
+                                          maxValue={ 200 }
+                                          value={ field.value }
+                                          unit={ form.values.user.selectedWeightUnit }
+                                          onChange={ (value) => form.setFieldValue('weightRecording.weight', value) }/>
+                    )
+                }
+            </Field>
         </>
     )
 }

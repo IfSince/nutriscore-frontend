@@ -10,7 +10,7 @@ export const SubmitButton = ({ text, disabled, isSubmitting }: { text: string, d
                        type="submit">
             {
                 isSubmitting ?
-                    <CenteredSpinner size="md" backgroundClr="text-gray-50" fill="fill-cyan-200"/> :
+                    <CenteredSpinner size="sm" backgroundClr="text-gray-50" fill="fill-cyan-200"/> :
                     <span className="font-medium whitespace-nowrap text-base">{ text }</span>
             }
         </PrimaryButton>

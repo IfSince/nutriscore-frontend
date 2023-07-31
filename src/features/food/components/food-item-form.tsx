@@ -2,7 +2,7 @@ import { DesktopPanel } from '../../../common/desktop-panel.tsx';
 import { FoodItem } from '../../../redux/models/food-item.ts';
 import { DefaultIconButton } from '../../../common/button/components/icon/default-icon-button.tsx';
 import { FormProps } from '../../form/models/form-props.ts';
-import { Field, FieldAttributes, Form, Formik } from 'formik';
+import { Field, FieldProps, Form, Formik } from 'formik';
 import { ReactNode } from 'react';
 import { CategorySelector } from '../../categories/components/category-selector.tsx';
 import { AllergenicSelector } from '../../allergenics/components/allergenic-selector.tsx';
@@ -50,7 +50,7 @@ export const FoodItemForm = ({ form, onSubmit, apiError, isLoading, children, ed
                                     {
                                         editable
                                             ? <Field name="description">
-                                                { ({ field }: FieldAttributes<any>) => (
+                                                { ({ field }: FieldProps) => (
                                                     <div>
                                                         <input className={ `h-12 rounded-md border transition-selection px-4 w-full peer lg:h-14 font-medium text-gray-600 border-gray-300 mb-4 text-2xl lg:text-3xl max-w-md
                                                                     hover:border-cyan-200 hover:ring-1 hover:ring-cyan-200 focus:border-cyan-300 focus:ring-1 focus:ring-cyan-300

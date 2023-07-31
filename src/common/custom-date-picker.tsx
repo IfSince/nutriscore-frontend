@@ -43,7 +43,7 @@ export const CustomDatePicker = ({
             icons: '',
             text: 'text-gray-500',
             disabledText: 'text-gray-300',
-            input: `${ inputStyles }`,
+            input: inputStyles,
             inputIcon: 'hidden',
             selected: 'bg-cyan-200',
         },

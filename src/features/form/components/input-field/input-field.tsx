@@ -6,7 +6,12 @@ import { getFieldErrors } from '../../../../api/error/api-error-utils.ts';
 export const InputField = ({ ...props }) => {
     const [field, meta] = useField(props.name)
     const [apiErrors, setApiErrors] = useState<string[]>(getFieldErrors(props.errors, field.name))
-    const isInvalid = (!!meta.error && meta.touched) || (props.errors?.length > 0 && apiErrors.length > 0)
+    const isInvalid = (
+            !!meta.error && meta.touched
+        ) ||
+        (
+            props.errors?.length > 0 && apiErrors.length > 0
+        )
 
     useEffect(() => setApiErrors(getFieldErrors(props.errors, field.name)), [field.name, props.errors])
 
@@ -18,18 +23,27 @@ export const InputField = ({ ...props }) => {
     return (
         <div className="flex flex-row-reverse gap-2.5 md:gap-3 lg:gap-4">
             <div className="w-full">
+                {
+                    props.displayname &&
+                    <label htmlFor={ field.name }
+                           className="block cursor-pointer pl-1 transition-colors mb-1.5 text-lg font-medium text-gray-500">
+                        { props.displayname }
+                    </label>
+                }
                 <input className={ `h-11 rounded-md border transition-selection px-4 w-full peer lg:h-12 text-base font-medium text-gray-500 placeholder-gray-400
                     ${ isInvalid ?
-                        'border-error hover:border-error hover:ring-1 hover:ring-error border-red' :
-                        'border-gray-300 hover:border-cyan-200 hover:ring-1 hover:ring-cyan-200'
+                    'border-error hover:border-error hover:ring-1 hover:ring-error border-red' :
+                    'border-gray-300 hover:border-cyan-200 hover:ring-1 hover:ring-cyan-200'
                 }
                     focus:border-cyan-300 focus:ring-1 focus:ring-cyan-300
                     disabled:text-gray-300 disabled:placeholder-gray-300 disabled:hover:border-gray-300 disabled:hover:ring-0 disabled:cursor-not-allowed` }
                        { ...field } { ...props }
                        id={ field.name }
-                       onBlur={e => onBlur(e)}
+                       onBlur={ e => onBlur(e) }
                 />
-                { (!!meta.error && meta.touched) && <FormValidationList errors={ [meta.error] || [] }/> }
+                { (
+                    !!meta.error && meta.touched
+                ) && <FormValidationList errors={ [meta.error] || [] }/> }
                 { apiErrors?.length > 0 && <FormValidationList errors={ [...apiErrors] || [] }/> }
             </div>
             {

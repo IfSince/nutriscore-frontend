@@ -2,13 +2,13 @@ import { FieldArray } from 'formik';
 import { ReactNode } from 'react';
 import { DescriptiveProps } from '../../../descriptive-entity.ts';
 
-interface CustomFieldArrayProps {
+interface CustomArrayFieldProps {
     name: string
-    values: { id: number, description: string }[]
+    values: DescriptiveProps[]
     children: (value: DescriptiveProps, isSelected: boolean, onSelect: () => void) => ReactNode
 }
 
-export const CustomFieldArray = ({ name, values, children }: CustomFieldArrayProps) => {
+export const CustomArrayField = ({ name, values, children }: CustomArrayFieldProps) => {
     return (
         <FieldArray name={ name }>
             {

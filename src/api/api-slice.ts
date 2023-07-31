@@ -15,6 +15,9 @@ export const FOOD_RECORDING_TAG = 'food-recording' as const
 export const MEAL_RECORDING_TAG = 'meal-recording' as const
 export const CATEGORIES_TAG = 'categories' as const
 export const ALLERGENICS_TAG = 'allergenics' as const
+export const NUTRITION_TYPE_TAG = 'nutrition-type' as const
+export const GENDER_TAG = 'gender' as const
+export const CALCULATION_TYPE_TAG = 'calculation-type' as const
 
 export const apiSlice = createApi({
     reducerPath: 'api',
@@ -28,6 +31,9 @@ export const apiSlice = createApi({
         MEAL_RECORDING_TAG,
         CATEGORIES_TAG,
         ALLERGENICS_TAG,
+        NUTRITION_TYPE_TAG,
+        GENDER_TAG,
+        CALCULATION_TYPE_TAG
     ],
     baseQuery: fetchBaseQuery({
         baseUrl: `${ BASE_URL }/api/`,
