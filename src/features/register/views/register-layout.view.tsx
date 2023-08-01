@@ -17,6 +17,7 @@ import { ApiErrorMessage } from '../../../common/messages/api-error-message.tsx'
 import { addSuccessMessage } from '../../messages/global-message-slice.ts';
 import { useAppDispatch } from '../../../redux/hooks.ts';
 import { Goal } from '../../goal.ts';
+import { array, date, mixed, number, object, ref, string } from 'yup';
 
 export const RegisterLayoutView = () => {
     const dispatch = useAppDispatch()
@@ -29,10 +30,53 @@ export const RegisterLayoutView = () => {
 
     useEffect(() => {
         if (isSuccess) {
-            console.log('Success Message')
             dispatch(addSuccessMessage('Registration was successful! You can now log in with your credentials.'))
             navigate(LOGIN_ROUTE)
         }
+    })
+
+    const RegisterValidationSchema = object().shape({
+        user: object().shape({
+            userTypeId: number().required(),
+            email: string().required().max(255).email(),
+            password: string().required().min(8),
+            confirmPassword: string().required().oneOf([ref('password')]),
+            firstName: string().required().min(2).max(255),
+            lastName: string().required().min(2).max(255),
+            genderId: number().required(),
+            dateOfBirth: date().required().max(new Date()),
+            height: number().required().min(0),
+            selectedWeightUnit: mixed<Unit>().required().oneOf(Object.values(Unit)),
+            selectedHeightUnit: mixed<Unit>().required().oneOf(Object.values(Unit)),
+        }),
+        weightRecording: object().shape({
+            weight: number().required().min(0).max(300),
+            dateOfRecording: date().required(),
+        }),
+        nutritionalData: object().shape({
+            nutritionTypeId: number().required(),
+            calculationTypeId: number().required(),
+            activityLevelId: number().required(),
+            physicalActivityLevelActivities: object()
+                .optional()
+                .shape({
+                    sleeping: number().required().min(0).max(24),
+                    onlySitting: number().required().min(0).max(24),
+                    occasionalActivities: number().required().min(0).max(24),
+                    mostlySittingOrStanding: number().required().min(0).max(24),
+                    mostlyWalkingOrStanding: number().required().min(0).max(24),
+                    physicallyDemanding: number().required().min(0).max(24),
+                }),
+            goal: mixed<Goal>().required().oneOf(Object.values(Goal)),
+            calorieRestriction: number().optional().min(-500).max(500),
+        }),
+        individualMacroDistribution: object().optional().shape({
+            protein: number().required().min(0).max(100),
+            carbohydrates: number().required().min(0).max(100),
+            fats: number().required().min(0).max(100),
+        }),
+        allergenicIds: array(),
+
     })
 
     const registerForm: RegisterForm = {
@@ -40,6 +84,8 @@ export const RegisterLayoutView = () => {
             id: NEW_ENTITY_ID,
             userTypeId: 1,
             email: '',
+            password: '',
+            confirmPassword: '',
             firstName: '',
             lastName: '',
             genderId: '1',
@@ -59,7 +105,7 @@ export const RegisterLayoutView = () => {
             userId: NEW_ENTITY_ID,
             nutritionTypeId: '1',
             calculationTypeId: '1',
-            activityLevelId: '0',
+            activityLevelId: '1',
             physicalActivityLevelActivities: {
                 sleeping: 0,
                 onlySitting: 0,
@@ -87,7 +133,11 @@ export const RegisterLayoutView = () => {
     const routeToStep = (step?: QuestStep) => step && navigate(step.route)
 
     return (
-        <Formik initialValues={ registerForm } onSubmit={ register }>
+        <Formik initialValues={ registerForm }
+                validationSchema={ RegisterValidationSchema }
+                validateOnBlur={ true }
+                validateOnChange={ false }
+                onSubmit={ register }>
             <Form>
                 <div className="flex min-h-screen justify-center lg:min-h-fit">
                     <div className="mb-10 flex w-full max-w-5xl flex-col justify-between px-5 pt-10 pb-0">
@@ -96,10 +146,13 @@ export const RegisterLayoutView = () => {
                                 <PrimaryIconButton icon="arrow_back" action={ () => routeToStep(backRouteRef.current) }/>
                                 <div className="w-full max-w-sm self-start justify-self-center">
                                     <ProgressLinear width={ 10 }
-                                                    valueObject={ { value: getCurrentStepSequence(), total: REGISTER_STEP.OVERVIEW.sequence } }
+                                                    valueObject={ {
+                                                        value: getCurrentStepSequence(),
+                                                        total: REGISTER_STEP.OVERVIEW.sequence,
+                                                    } }
                                                     animationStyle="ease-out duration-500"/>
                                 </div>
-                                <div className="w-12"></div>
+                                <PrimaryIconButton icon="arrow_forward" action={ () => routeToStep(REGISTER_STEP.OVERVIEW) }/>
                             </div>
 
                             <h4 className="mt-10 text-center font-medium uppercase text-cyan-300 lg:mt-14 lg:text-lg">
@@ -122,7 +175,8 @@ export const RegisterLayoutView = () => {
                             {
                                 isOverViewRoute()
                                     ? <SubmitButton text="Submit" isSubmitting={ isLoading }/>
-                                    : <PrimaryButton className="w-full max-w-md" action={ () => routeToStep(nextRouteRef.current) }>
+                                    : <PrimaryButton className="w-full max-w-md"
+                                                     action={ () => routeToStep(nextRouteRef.current) }>
                                         <span className="whitespace-nowrap text-base font-medium">Continue</span>
                                     </PrimaryButton>
                             }
@@ -137,6 +191,5 @@ export const RegisterLayoutView = () => {
                 </div>
             </Form>
         </Formik>
-
     )
 }

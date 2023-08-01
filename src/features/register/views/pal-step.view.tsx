@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { RegisterHeader } from '../components/register-header.tsx';
 import { REGISTER_STEP } from '../register-steps.ts';
 import { InputField } from '../../form/components/input-field/input-field.tsx';
+import { FieldError } from '../../form/components/field-error.tsx';
 
 export const PalStepView = () => {
     const [backRef, nextRef]: RegisterOutletContext = useOutletContext()
@@ -49,6 +50,9 @@ export const PalStepView = () => {
                 <InputField name="nutritionalData.physicalActivityLevelActivities.physicallyDemanding"
                             displayname="Physically demanding activities"
                             type="number"/>
+            </div>
+            <div className="w-full">
+                <FieldError name="nutritionalData.physicalActivityLevelActivities"/>
             </div>
         </>
     )

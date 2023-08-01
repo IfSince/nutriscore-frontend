@@ -18,8 +18,9 @@ export default {
                 cyan: {
                     50: '#F2FCF8',
                     100: '#DEF7EC',
-                    200: '#BCF0DA',
-                    300: '#9BE4C5',
+//                    200: '#BCF0DA',
+                    200: '#9BE4C5',
+                    300: '#7dccaa',
                     400: '#79d2b0',
                 },
                 green: '#CCDEC0',
@@ -39,7 +40,7 @@ export default {
                     600: '#1F2937',
                 },
                 error: {
-                    DEFAULT: '#FECACAFF',
+                    DEFAULT: '#e54747',
                     800: '#991B1BFF',
                 },
                 success: {

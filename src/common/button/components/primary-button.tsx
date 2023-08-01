@@ -6,6 +6,6 @@ export const PrimaryButton = ({ children, type = 'button', action, className = '
             action={ action }
             preventDefault={ preventDefault }
             disabled={ disabled }
-            className={ `text-gray-50 bg-cyan-200 hover:bg-cyan-300 disabled:bg-cyan-200/60 disabled:hover:bg-cyan-200/60 ${ className }` }>
+            className={ `text-gray-50 bg-cyan-200 hover:bg-cyan-300 disabled:bg-cyan-200/40 disabled:hover:bg-cyan-200/40 ${ className }` }>
         { children }
     </Button>

@@ -4,6 +4,8 @@ export interface User {
     id: number
     userTypeId: number
     email: string
+    password?: string
+    confirmPassword?: string
     firstName: string
     lastName: string
     image?: null

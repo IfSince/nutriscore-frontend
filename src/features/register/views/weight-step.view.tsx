@@ -7,6 +7,7 @@ import { REGISTER_STEP } from '../register-steps.ts';
 import { RadioField } from '../../form/components/radio-field/radio-field.tsx';
 import { Field, FieldProps } from 'formik';
 import { Unit, UNIT_ABBREVIATIONS } from '../../unit.ts';
+import { FieldError } from '../../form/components/field-error.tsx';
 
 export const WeightStepView = () => {
     const [backRef, nextRef]: RegisterOutletContext = useOutletContext()
@@ -47,13 +48,14 @@ export const WeightStepView = () => {
                 {
                     ({ field, form }: FieldProps) => (
                         <ScalePickerField minValue={ 0 }
-                                          maxValue={ 200 }
+                                          maxValue={ 300 }
                                           value={ field.value }
                                           unit={ form.values.user.selectedWeightUnit }
                                           onChange={ (value) => form.setFieldValue('weightRecording.weight', value) }/>
                     )
                 }
             </Field>
+            <FieldError name="weightRecording.weight"/>
         </>
     )
 }

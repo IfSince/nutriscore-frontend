@@ -28,7 +28,7 @@ export const LoginForm = ({ form, onSubmit, apiError, isLoading }: FormProps<Log
             validateOnBlur={ true }
             onSubmit={ ({ email, password }) => onSubmit({ email, password }) }>
             {
-                ({ isValid, handleBlur }) => (
+                ({ isValid }) => (
                     <Form className="flex min-h-screen justify-center lg:min-h-[750px]">
                         <div className="mb-10 flex w-full max-w-5xl flex-col justify-between">
                             <div className="relative flex h-24 w-full bg-cyan-200 rounded-b-6xl">
@@ -40,13 +40,14 @@ export const LoginForm = ({ form, onSubmit, apiError, isLoading }: FormProps<Log
                             <div className="flex flex-col items-center px-5">
                                 <h2 className="text-center text-3xl font-bold text-gray-600 mb-4 md:mb-6 lg:mb-16 xl:text-4xl">Welcome Back!</h2>
                                 <div className="flex w-full max-w-md flex-col items-center mt-6">
-                                    <GlobalMessages/>
-                                    <ApiErrorMessage apiErrorResponse={ apiError }/>
+                                    <div className="w-full">
+                                        <GlobalMessages/>
+                                        <ApiErrorMessage apiErrorResponse={ apiError }/>
+                                    </div>
                                     <div className="w-full">
                                         <InputField name="email"
                                                     type="text"
                                                     disabled={ isLoading }
-                                                    onBlur={ handleBlur }
                                                     placeholder="your@email.de"
                                                     errors={ apiError }
                                                     icon="email"/>
@@ -57,7 +58,6 @@ export const LoginForm = ({ form, onSubmit, apiError, isLoading }: FormProps<Log
                                                     type="password"
                                                     disabled={ isLoading }
                                                     placeholder="••••••••••••"
-                                                    onBlur={ handleBlur }
                                                     errors={ apiError }
                                                     icon="lock"/>
                                     </div>

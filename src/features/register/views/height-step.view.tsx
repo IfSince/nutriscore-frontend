@@ -7,6 +7,7 @@ import { REGISTER_STEP } from '../register-steps.ts';
 import { RadioField } from '../../form/components/radio-field/radio-field.tsx';
 import { Field, FieldProps } from 'formik';
 import { Unit } from '../../unit.ts';
+import { FieldError } from '../../form/components/field-error.tsx';
 
 export const HeightStepView = () => {
     const [backRef, nextRef]: RegisterOutletContext = useOutletContext()
@@ -24,17 +25,17 @@ export const HeightStepView = () => {
     return (
         <>
             <RegisterHeader title="How tall are you?"/>
-            <div className="w-full max-w-sm flex flex-row justify-center gap-4 mt-4 text-lg font-medium text-gray-500 mb-14">
+            <div className="mt-4 mb-14 flex w-full max-w-sm flex-row justify-center gap-4 text-lg font-medium text-gray-500">
                 <RadioField name="user.selectedHeightUnit" options={ options }>
                     {
                         (option, field) => (
                             <div className="w-full items-center">
-                                <input className="peer hidden" type="radio" id={ `${ option.value }` } { ...field }/>
+                                <input className="hidden peer" type="radio" id={ `${ option.value }` } { ...field }/>
                                 <label className="cursor-pointer w-full border text-gray-400 transition-colors text-lg xl:text-xl gap-6
                                               peer-hover:border-cyan-200 peer-checked:bg-cyan-200 peer-checked:border-transparent peer-checked:text-gray-50
                                               grow items-center justify-center rounded-lg flex flex-col py-3 px-5"
                                        htmlFor={ `${ option.value }` }>
-                                    { option.icon && <span className="material-icons-round text-7xl lg:text-8xl">{ option.icon }</span> }
+                                    { option.icon && <span className="text-7xl material-icons-round lg:text-8xl">{ option.icon }</span> }
                                     <span>{ option.displayName }</span>
                                 </label>
                             </div>
@@ -47,13 +48,14 @@ export const HeightStepView = () => {
                 {
                     ({ field, form }: FieldProps) => (
                         <ScalePickerField minValue={ 0 }
-                                          maxValue={ 200 }
+                                          maxValue={ 250 }
                                           value={ field.value }
                                           unit={ form.values.user.selectedHeightUnit }
                                           onChange={ (value) => form.setFieldValue('user.height', value) }/>
                     )
                 }
             </Field>
+            <FieldError name="user.height"/>
         </>
     )
 }
