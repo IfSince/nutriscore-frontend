@@ -27,7 +27,6 @@ import {
     REGISTER_WEIGHT_ROUTE,
     STATISTICS_ROUTE,
 } from './routes.ts';
-import { StatisticsView } from './views/statistics.view.tsx';
 import { ProfileView } from './views/profile.view.tsx';
 import { HomeView } from './features/home/views/home.view.tsx';
 import { DiaryView } from './features/diary/views/diary.view.tsx';
@@ -56,6 +55,7 @@ import { NotLoggedInRoute } from './common/not-logged-in-route.tsx';
 import { ProtectedRoute } from './common/protected-route.tsx';
 import { DiaryFoodItemView } from './features/diary/views/diary-food-item.view.tsx';
 import { NutritionTypeStepView } from './features/register/views/nutrition-type-step.view.tsx';
+import { StatisticsView } from './features/statistics/views/statistics.view.tsx';
 
 export const router = createBrowserRouter([
     {

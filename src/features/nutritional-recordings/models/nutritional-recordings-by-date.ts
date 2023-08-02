@@ -11,6 +11,9 @@ export interface NutritionalRecording {
     dateOfRecording: string
     amount: number
     calories: number
+    protein: number
+    carbohydrates: number
+    fats: number
     unit?: Unit
 }
 
