@@ -5,7 +5,7 @@ import { CenteredSpinner } from '../../../common/spinner/components/centered-spi
 
 export const WeeklyOverviewPanel = ({ weightRecordings, isLoading }: { weightRecordings?: WeightRecording[], isLoading?: boolean }) => {
     const data = weightRecordings?.map(weightRecording => (
-        { day: weightRecording.dateOfRecording, value: weightRecording.weight }
+        { day: new Date(weightRecording.dateOfRecording).toLocaleDateString(), value: weightRecording.weight }
     ))
     return (
         <div className="relative w-full grow min-h-[200px] md:min-h-[400px] md:min-w-[450px] md:w-auto">

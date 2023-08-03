@@ -8,7 +8,12 @@ import {
     DIARY_ROUTE,
     DIARY_SEARCH_ROUTE,
     HOME_ROUTE,
-    LOGIN_ROUTE, NUTRITION_TYPE_ROUTE,
+    LOGIN_ROUTE,
+    NUTRITION_TYPE_ROUTE,
+    PROFILE_ALLERGENICS_ROUTE,
+    PROFILE_NUTRITIONAL_DATA_ROUTE,
+    PROFILE_OVERVIEW_ROUTE,
+    PROFILE_PERSONAL_DATA_ROUTE,
     PROFILE_ROUTE,
     REGISTER_ACTIVITY_LEVEL_ROUTE,
     REGISTER_ACTIVITY_PER_WEEK_ROUTE,
@@ -27,7 +32,6 @@ import {
     REGISTER_WEIGHT_ROUTE,
     STATISTICS_ROUTE,
 } from './routes.ts';
-import { ProfileView } from './views/profile.view.tsx';
 import { HomeView } from './features/home/views/home.view.tsx';
 import { DiaryView } from './features/diary/views/diary.view.tsx';
 import { DiaryOverviewView } from './features/diary/views/diary-overview.view.tsx';
@@ -56,6 +60,11 @@ import { ProtectedRoute } from './common/protected-route.tsx';
 import { DiaryFoodItemView } from './features/diary/views/diary-food-item.view.tsx';
 import { NutritionTypeStepView } from './features/register/views/nutrition-type-step.view.tsx';
 import { StatisticsView } from './features/statistics/views/statistics.view.tsx';
+import { ProfileView } from './features/profile/views/profile.view.tsx';
+import { ProfileOverviewView } from './features/profile/views/profile-overview.view.tsx';
+import { ProfilePersonalDataView } from './features/profile/views/profile-personal-data.view.tsx';
+import { ProfileNutritionalDataView } from './features/profile/views/profile-nutritional-data.view.tsx';
+import { ProfileAllergenicsView } from './features/profile/views/profile-allergenics.view.tsx';
 
 export const router = createBrowserRouter([
     {
@@ -191,6 +200,24 @@ export const router = createBrowserRouter([
             {
                 path: PROFILE_ROUTE,
                 element: <ProfileView/>,
+                children: [
+                    {
+                        path: PROFILE_OVERVIEW_ROUTE,
+                        element: <ProfileOverviewView/>,
+                    },
+                    {
+                        path: PROFILE_PERSONAL_DATA_ROUTE,
+                        element: <ProfilePersonalDataView/>,
+                    },
+                    {
+                        path: PROFILE_NUTRITIONAL_DATA_ROUTE,
+                        element: <ProfileNutritionalDataView/>,
+                    },
+                    {
+                        path: PROFILE_ALLERGENICS_ROUTE,
+                        element: <ProfileAllergenicsView/>,
+                    },
+                ],
             },
         ],
     },
