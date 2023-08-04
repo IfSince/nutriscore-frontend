@@ -43,7 +43,6 @@ export const STATISTICS_ROUTE = '/statistics'
 
 // Profile
 export const PROFILE_ROUTE = '/profile'
-export const PROFILE_OVERVIEW_ROUTE = '/profile/overview'
 export const PROFILE_PERSONAL_DATA_ROUTE = '/profile/personal'
 export const PROFILE_NUTRITIONAL_DATA_ROUTE = '/profile/nutrition'
 export const PROFILE_ALLERGENICS_ROUTE = '/profile/allergenics'

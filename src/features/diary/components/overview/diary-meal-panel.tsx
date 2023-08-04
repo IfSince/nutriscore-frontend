@@ -1,11 +1,11 @@
 import { useNavigate } from 'react-router-dom';
 import { NutritionalRecordingsList } from './nutritional-recordings-list.tsx';
-import { Panel } from '../../../../common/panel.tsx';
 import { ProgressCircle } from '../../../../common/progress/components/progress-circle.tsx';
 import { PrimaryIconButton } from '../../../../common/button/components/icon/primary-icon-button.tsx';
 import { DIARY_SEARCH_ROUTE } from '../../../../routes.ts';
 import { ValueObject } from '../../../../redux/models/value-object.ts';
 import { NutritionalRecording } from '../../../nutritional-recordings/models/nutritional-recordings-by-date.ts';
+import { DesktopPanel } from '../../../../common/desktop-panel.tsx';
 
 export interface MealOverviewProps {
     name: string
@@ -18,7 +18,7 @@ export const DiaryMealPanel = ({ name, valueObject, items, isLoading }: MealOver
     const navigate = useNavigate()
 
     return (
-        <Panel className="flex flex-col gap-4 xl:gap-x-8 xl:gap-y-6">
+        <DesktopPanel className="flex flex-col gap-4 xl:gap-x-8 xl:gap-y-6">
             <div className="flex flex-row items-center justify-between">
                 <div className="flex items-center">
                     <ProgressCircle size={ 70 }
@@ -32,6 +32,6 @@ export const DiaryMealPanel = ({ name, valueObject, items, isLoading }: MealOver
             </div>
 
             <NutritionalRecordingsList items={ items } isLoading={ isLoading }/>
-        </Panel>
+        </DesktopPanel>
     )
 }

@@ -76,6 +76,10 @@ export default {
             screens: {
                 '1.5xl': '1450px',
             },
+            zIndex: {
+                '9000': '9000',
+                '9999': '9999'
+            }
         },
     },
     plugins: [

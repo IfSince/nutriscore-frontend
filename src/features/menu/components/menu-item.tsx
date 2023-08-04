@@ -30,8 +30,8 @@ export const MenuItem = (item: MenuItemInterface) => {
                     </Link>
                     {
                         item.children &&
-                        <button className={ `hidden material-icons-round lg:block text-4xl transition-transform delay-100
-                                             ${ isOpen ? 'hover:rotate-0 -rotate-90' : 'hover:-rotate-90' }` }
+                        <button className={ `hidden material-icons-round lg:block text-4xl transition-all delay-100
+                                             ${ isOpen ? 'hover:rotate-0 -rotate-90 text-gray-600' : 'hover:-rotate-90 text-gray-500 hover:text-gray-600' }` }
                                 onClick={ () => setIsOpen((curr) => !curr) }>arrow_left</button>
                     }
                 </div>

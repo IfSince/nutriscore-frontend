@@ -1,8 +1,8 @@
 import {
     DIARY_ROUTE,
-    HOME_ROUTE, PROFILE_ALLERGENICS_ROUTE,
+    HOME_ROUTE,
+    PROFILE_ALLERGENICS_ROUTE,
     PROFILE_NUTRITIONAL_DATA_ROUTE,
-    PROFILE_OVERVIEW_ROUTE,
     PROFILE_PERSONAL_DATA_ROUTE,
     PROFILE_ROUTE,
     STATISTICS_ROUTE,
@@ -24,11 +24,6 @@ export const MENU_ITEMS: MenuItemInterface[] = [
         link: PROFILE_ROUTE,
         icon: 'person',
         children: [
-            {
-                name: 'overview',
-                link: PROFILE_OVERVIEW_ROUTE,
-                icon: 'person',
-            },
             {
                 name: 'personal',
                 link: PROFILE_PERSONAL_DATA_ROUTE,

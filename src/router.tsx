@@ -12,7 +12,6 @@ import {
     NUTRITION_TYPE_ROUTE,
     PROFILE_ALLERGENICS_ROUTE,
     PROFILE_NUTRITIONAL_DATA_ROUTE,
-    PROFILE_OVERVIEW_ROUTE,
     PROFILE_PERSONAL_DATA_ROUTE,
     PROFILE_ROUTE,
     REGISTER_ACTIVITY_LEVEL_ROUTE,
@@ -61,10 +60,10 @@ import { DiaryFoodItemView } from './features/diary/views/diary-food-item.view.t
 import { NutritionTypeStepView } from './features/register/views/nutrition-type-step.view.tsx';
 import { StatisticsView } from './features/statistics/views/statistics.view.tsx';
 import { ProfileView } from './features/profile/views/profile.view.tsx';
-import { ProfileOverviewView } from './features/profile/views/profile-overview.view.tsx';
 import { ProfilePersonalDataView } from './features/profile/views/profile-personal-data.view.tsx';
 import { ProfileNutritionalDataView } from './features/profile/views/profile-nutritional-data.view.tsx';
 import { ProfileAllergenicsView } from './features/profile/views/profile-allergenics.view.tsx';
+import { ProfileOverviewView } from './features/profile/views/profile-overview.view.tsx';
 
 export const router = createBrowserRouter([
     {
@@ -202,7 +201,7 @@ export const router = createBrowserRouter([
                 element: <ProfileView/>,
                 children: [
                     {
-                        path: PROFILE_OVERVIEW_ROUTE,
+                        index: true,
                         element: <ProfileOverviewView/>,
                     },
                     {
