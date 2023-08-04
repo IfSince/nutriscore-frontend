@@ -1,6 +1,6 @@
 import { Panel } from '../../../common/panel.tsx';
 import { CenteredSpinner } from '../../../common/spinner/components/centered-spinner.tsx';
-import { Bar, BarChart, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import { Bar, BarChart, ReferenceLine, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import { ValueObject } from '../../../redux/models/value-object.ts';
 
 interface CalorieStatisticsPanelProps {
@@ -28,10 +28,9 @@ export const CalorieStatisticsPanel = ({ data, isLoading }: CalorieStatisticsPan
                         : <ResponsiveContainer>
                             <BarChart data={ chartData }>
                                 <Bar dataKey="value" fill="#BCF0DA" radius={[10, 10, 0, 0]}/>
-                                <ReferenceLine y={ data[0].valueObject.total } stroke="#BCF0DA" strokeDasharray="3 3"/>
+                                { data.length > 0 && <ReferenceLine y={ data[0].valueObject.total } stroke="#BCF0DA" strokeDasharray="3 3"/> }
                                 <XAxis dataKey="date"/>
                                 <YAxis/>
-                                <Tooltip/>
                             </BarChart>
                         </ResponsiveContainer>
                 }

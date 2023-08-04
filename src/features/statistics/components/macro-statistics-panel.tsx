@@ -1,6 +1,6 @@
 import { Panel } from '../../../common/panel.tsx';
 import { CenteredSpinner } from '../../../common/spinner/components/centered-spinner.tsx';
-import { Bar, BarChart, ReferenceLine, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
+import { Bar, BarChart, ReferenceLine, ResponsiveContainer, XAxis, YAxis } from 'recharts';
 import { ValueObject } from '../../../redux/models/value-object.ts';
 
 interface MacroStatisticsPanelProps {
@@ -20,9 +20,6 @@ export const MacroStatisticsPanel = ({ data, isLoading }: MacroStatisticsPanelPr
             protein: it.protein.value,
             carbohydrates: it.carbohydrates.value,
             fats: it.fats.value,
-            recommendedProtein: it.protein.total,
-            recommendedCarbohydrates: it.carbohydrates.total,
-            recommendedFats: it.fats.total,
         }
     ))
 
@@ -37,16 +34,19 @@ export const MacroStatisticsPanel = ({ data, isLoading }: MacroStatisticsPanelPr
                                            size="lg"/>
                         : <ResponsiveContainer>
                             <BarChart data={ chartData }>
-                                <Bar type="monotone" dataKey="protein" fill="#F6AB95" radius={[8, 8, 0, 0]}/>
-                                <Bar type="monotone" dataKey="carbohydrates" fill="#CCDEC0" radius={[8, 8, 0, 0]}/>
-                                <Bar type="monotone" dataKey="fats" fill="#FCC984" radius={[8, 8, 0, 0]}/>
-
-                                <ReferenceLine y={ data[0].protein.total } stroke="#F6AB95" strokeDasharray="3 3"/>
-                                <ReferenceLine y={ data[0].carbohydrates.total } stroke="#CCDEC0" strokeDasharray="3 3"/>
-                                <ReferenceLine y={ data[0].fats.total } stroke="#FCC984" strokeDasharray="3 3"/>
+                                <Bar type="monotone" dataKey="protein" fill="#F6AB95" radius={ [8, 8, 0, 0] }/>
+                                <Bar type="monotone" dataKey="carbohydrates" fill="#CCDEC0" radius={ [8, 8, 0, 0] }/>
+                                <Bar type="monotone" dataKey="fats" fill="#FCC984" radius={ [8, 8, 0, 0] }/>
+                                {
+                                    data.length > 0 &&
+                                    <>
+                                        <ReferenceLine y={ data[0].protein.total } stroke="#F6AB95" strokeDasharray="3 3"/>
+                                        <ReferenceLine y={ data[0].carbohydrates.total } stroke="#CCDEC0" strokeDasharray="3 3"/>
+                                        <ReferenceLine y={ data[0].fats.total } stroke="#FCC984" strokeDasharray="3 3"/>
+                                    </>
+                                }
                                 <XAxis dataKey="date"/>
                                 <YAxis/>
-                                <Tooltip/>
                             </BarChart>
                         </ResponsiveContainer>
                 }

@@ -15,13 +15,13 @@ export const InputField = ({ ...props }) => {
                 {
                     props.displayname &&
                     <label htmlFor={ field.name }
-                           className="block cursor-pointer pl-1 text-lg font-medium text-gray-500 transition-colors mb-1.5">
+                           className="block cursor-pointer pl-1 text-base md:text-lg font-medium text-gray-500 transition-colors mb-1.5">
                         { props.displayname }
                     </label>
                 }
                 <input className={ `h-11 rounded-md border transition-selection px-4 w-full peer lg:h-12 text-base font-medium text-gray-500 placeholder-gray-400
                     ${ isInvalid ?
-                    'border-error hover:border-error hover:ring-1 hover:ring-error border-red' :
+                    'border-error hover:border-error hover:ring-1 hover:ring-error' :
                     'border-gray-300 hover:border-cyan-200 hover:ring-1 hover:ring-cyan-200'
                 }
                     focus:border-cyan-300 focus:ring-1 focus:ring-cyan-300
