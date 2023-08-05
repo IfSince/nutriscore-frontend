@@ -1,5 +1,6 @@
-import { PhysicalActivityLevelActivities } from '../redux/models/register/physical-activity-level-activities.ts';
-import { Goal } from './goal.ts';
+import { Goal } from '../../goal.ts';
+import { PhysicalActivityLevelActivities } from '../../nutritional-recordings/models/physical-activity-level-activities.ts';
+
 
 export interface NutritionalData {
     id: number

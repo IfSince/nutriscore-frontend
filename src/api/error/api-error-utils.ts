@@ -7,5 +7,5 @@ export const getApiError = (error: FetchBaseQueryError | SerializedError | undef
 
 export const getFieldErrors = (error: FetchBaseQueryError | SerializedError | undefined, fieldName: string) => {
     const apiError = getApiError(error)
-    return apiError && apiError.data.errors ? apiError.data.errors[fieldName] : []
+    return (apiError && apiError.data.errors) ? apiError.data.errors[fieldName] : []
 }

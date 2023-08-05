@@ -1,11 +1,22 @@
-import { useGetAllAllergenicsQuery } from '../../allergenics/allergenics-api-slice.ts';
+import {
+    useGetAllAllergenicsQuery,
+    useGetAllergenicsByUserIdQuery,
+    useUpdateUserAllergenicsMutation,
+} from '../../allergenics/allergenics-api-slice.ts';
 import { CenteredSpinner } from '../../../common/spinner/components/centered-spinner.tsx';
 import { ApiErrorMessage } from '../../../common/messages/api-error-message.tsx';
 import { CustomArrayField } from '../../form/components/array-field/custom-array-field.tsx';
 import { Form, Formik } from 'formik';
+import { Panel } from '../../../common/panel.tsx';
+import { useAppDispatch } from '../../../redux/hooks.ts';
+import { useContext, useEffect } from 'react';
+import { UserIdContext } from '../../../views/root.view.tsx';
+import { SubmitButton } from '../../../common/button/components/submit-button.tsx';
+import { addSuccessMessage } from '../../messages/global-message-slice.ts';
 
 export const ProfileAllergenicsView = () => {
-    const userAllergenics = { allergenicIds: [] }
+    const dispatch = useAppDispatch()
+    const userId = useContext(UserIdContext)
 
     const {
         data: allergenics,
@@ -15,49 +26,71 @@ export const ProfileAllergenicsView = () => {
         error,
     } = useGetAllAllergenicsQuery()
 
+    const {
+        data: userAllergenicIds,
+        isLoading: userAllergenicsIsLoading,
+        isSuccess: userAllergenicsIsSuccess,
+        isError: userAllergenicsIsError,
+        error: userAllergenicsError,
+    } = useGetAllergenicsByUserIdQuery(userId)
+
+    const [update, result] = useUpdateUserAllergenicsMutation()
+
+    useEffect(() => {
+        if (result.isSuccess) {
+            dispatch(addSuccessMessage('Allergies updated successfully!'))
+        }
+    })
+
     let content
-    if (isLoading) {
+    if (isLoading || userAllergenicsIsLoading) {
         content = <CenteredSpinner backgroundClr="text-gray-100"
                                    fill="fill-cyan-300"
                                    size="lg"/>
-    } else if (isError) {
-        content = <ApiErrorMessage apiErrorResponse={ error }/>
-    } else if (isSuccess) {
+    } else if (isError || userAllergenicsIsError) {
         content =
             <>
-                <div className="grid grid-cols-3 gap-5">
-                    <CustomArrayField name="allergenicIds" values={ allergenics }>
-                        {
-                            (value, isSelected, onSelect) => (
-                                <button type="button"
-                                        key={ value.id }
-                                        className={ `flex flex-col items-center group cursor-pointer ${ isSelected ?
-                                            'text-gray-50' :
-                                            'text-gray-400' }` }
-                                        onClick={ onSelect }>
-                                    <div className={ `flex aspect-square items-center transition-colors justify-center rounded-md p-5 border group-hover:border-cyan-200
-                              ${ isSelected && 'bg-cyan-200 border-cyan-200' }` }>
-                                        <span className="text-4xl material-icons-round">image</span>
-                                    </div>
-                                    <span
-                                        className={ `mt-2 font-medium transition-colors ${ isSelected &&
-                                        'text-cyan-300' }` }>{ value.description }</span>
-                                </button>
-                            )
-                        }
-                    </CustomArrayField>
-                </div>
+                { error && <ApiErrorMessage apiErrorResponse={ error }/> }
+                { userAllergenicsError && <ApiErrorMessage apiErrorResponse={ userAllergenicsError }/> }
             </>
+    } else if (isSuccess && userAllergenicsIsSuccess) {
+        content =
+            <>
+                <ApiErrorMessage apiErrorResponse={ result.error }/>
+                <Formik initialValues={ { allergenicIds: userAllergenicIds } }
+                        onSubmit={ data => { update([userId, data]) } }>
+                    <Form>
+                        <div className="grid grid-cols-2 gap-5 sm:grid-cols-3">
+                            <CustomArrayField name="allergenicIds" values={ allergenics }>
+                                {
+                                    (value, isSelected, onSelect) => (
+                                        <button type="button"
+                                                key={ value.id }
+                                                onClick={ onSelect }>
+                                            <Panel title={ value.description }
+                                                   className={ `text-left transition-colors
+                                                        ${ isSelected
+                                                       ? '!bg-cyan-200 !border-cyan-200 !text-gray-50'
+                                                       : 'group-hover:border-cyan-200'
+                                                   }` }>
+                                                <span className="w-full py-4 text-center text-4xl material-icons-round sm:py-8">image</span>
+                                            </Panel>
+                                        </button>
+                                    )
+                                }
+                            </CustomArrayField>
+                        </div>
+                        <SubmitButton text="Submit" isSubmitting={ result.isLoading }/>
+                    </Form>
+                </Formik>
+            </>
+
     }
 
     return (
         <>
             <h3 className="mb-8 text-2xl font-medium text-gray-600 lg:hidden">Food allergies</h3>
-            <Formik initialValues={ userAllergenics } onSubmit={ console.log }>
-                <Form>
-                    { content }
-                </Form>
-            </Formik>
+            { content }
         </>
     )
 }

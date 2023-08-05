@@ -7,7 +7,10 @@ export const InputField = ({ ...props }) => {
     const [field, meta, helpers] = useField(props.name)
     const isInvalid = !!meta.error && meta.touched
 
-    useEffect(() => props.errors && helpers.setError(getFieldErrors(props.errors, field.name)[0]), [field.name, helpers, props.errors])
+    useEffect(() => {
+        const errors = getFieldErrors(props.errors, field.name) || []
+        errors.length > 0 && helpers.setError(errors[0])
+    }, [field.name, helpers, props.errors])
 
     return (
         <div className="flex flex-row-reverse gap-2.5 md:gap-3 lg:gap-4">
@@ -15,7 +18,7 @@ export const InputField = ({ ...props }) => {
                 {
                     props.displayname &&
                     <label htmlFor={ field.name }
-                           className="block cursor-pointer pl-1 text-base md:text-lg font-medium text-gray-500 transition-colors mb-1.5">
+                           className="block cursor-pointer pl-1 text-base font-medium text-gray-500 transition-colors mb-1.5 md:text-lg">
                         { props.displayname }
                     </label>
                 }
@@ -27,6 +30,7 @@ export const InputField = ({ ...props }) => {
                     focus:border-cyan-300 focus:ring-1 focus:ring-cyan-300
                     disabled:text-gray-300 disabled:placeholder-gray-300 disabled:hover:border-gray-300 disabled:hover:ring-0 disabled:cursor-not-allowed` }
                        { ...field } { ...props }
+                       autoComplete="off"
                        id={ field.name }/>
                 <FieldError name={ field.name }/>
             </div>

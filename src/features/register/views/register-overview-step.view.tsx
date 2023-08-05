@@ -8,7 +8,6 @@ import { RegisterForm } from '../models/register-form.ts';
 import { FieldError } from '../../form/components/field-error.tsx';
 import { UNIT_ABBREVIATIONS } from '../../unit.ts';
 import { Accordion } from 'flowbite-react';
-import { determinePal } from '../../../redux/models/register/physical-activity-level-activities.ts';
 import {
     NUTRITION_TYPE_ROUTE,
     REGISTER_ACTIVITY_LEVEL_ROUTE,
@@ -23,6 +22,7 @@ import {
     REGISTER_PERSONAL_ROUTE,
     REGISTER_WEIGHT_ROUTE,
 } from '../../../routes.ts';
+import { determinePal } from '../../nutritional-recordings/models/physical-activity-level-activities.ts';
 
 export const OverviewField = ({ displayName, name, value, link }: { displayName: string, name: string, value: unknown, link: string }) => {
     return (
