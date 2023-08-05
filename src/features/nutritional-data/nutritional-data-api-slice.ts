@@ -6,7 +6,7 @@ export const nutritionalDataApiSlice = apiSlice.injectEndpoints({
         {
             getNutritionalDataByUserId: builder.query<NutritionalData, number>({
                 query: userId => `users/${ userId }/nutrition`,
-                providesTags: (result, _error, arg) => [{ type: NUTRITIONAL_DATA_TAG, id: arg }],
+                providesTags: (_result, _error, arg) => [{ type: NUTRITIONAL_DATA_TAG, id: arg }],
             }),
             updateNutritionalData: builder.mutation<NutritionalData, NutritionalData>({
                 query: nutritionalData => (
