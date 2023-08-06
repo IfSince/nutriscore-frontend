@@ -3,7 +3,6 @@ import { MENU_ITEMS } from '../features/menu/model/menu-items.ts';
 import { Menu } from '../features/menu/components/menu.tsx';
 import { PrimaryIconButton } from '../common/button/components/icon/primary-icon-button.tsx';
 import { GlobalDatePicker } from '../common/date-picker/global-date-picker.tsx';
-import { GlobalMessages } from '../features/messages/components/global-messages.tsx';
 import { createContext, useState } from 'react';
 import { ProfileMenu } from '../features/profile/components/menu/profile-menu.tsx';
 
@@ -55,7 +54,6 @@ export const RootView = () => {
             <div className="flex w-full grow flex-col lg:flex-row">
                 <Menu items={ MENU_ITEMS }/>
                 <main className="mb-32 flex h-fit w-full grow flex-col lg:mb-10 lg:ml-10">
-                    <GlobalMessages/>
                     <UserIdContext.Provider value={ userId }>
                         <Outlet/>
                     </UserIdContext.Provider>

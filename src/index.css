@@ -14,7 +14,7 @@
 
 @layer utilities {
   .flex-layout-row {
-    @apply flex w-full gap-5 lg:gap-10 flex-wrap;
+    @apply flex w-full flex-wrap gap-5 lg:gap-10;
   }
 
   .no-scrollbar::-webkit-scrollbar {

@@ -14,7 +14,7 @@ export const foodItemsApiSlice = apiSlice.injectEndpoints({
                 ],
             }),
             getFoodItemById: builder.query<FoodItem, number>({
-                query: (id: number) => `foods/${ id }`,
+                query: id => `foods/${ id }`,
                 providesTags: (_result, _error, arg) => [{ type: FOOD_TAG, id: arg }],
             }),
             addNewFoodItem: builder.mutation<FoodItem, FoodItem>({
@@ -31,7 +31,7 @@ export const foodItemsApiSlice = apiSlice.injectEndpoints({
                 ],
             }),
             editFoodItem: builder.mutation<FoodItem, FoodItem>({
-                query: (foodItem: FoodItem) => (
+                query: foodItem => (
                     {
                         url: `foods/${ foodItem.id }`,
                         method: 'PUT',

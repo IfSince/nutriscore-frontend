@@ -7,7 +7,6 @@ import { SubmitButton } from '../../../common/button/components/submit-button.ts
 import { object, string } from 'yup';
 import { FormProps } from '../../form/models/form-props.ts';
 import LogoDark from '/logo_icon_dark.svg'
-import { GlobalMessages } from '../../messages/components/global-messages.tsx';
 
 export const LoginForm = ({ form, onSubmit, apiError, isLoading }: FormProps<LoginData>) => {
     const LoginValidationSchema = object().shape({
@@ -41,7 +40,6 @@ export const LoginForm = ({ form, onSubmit, apiError, isLoading }: FormProps<Log
                                 <h2 className="text-center text-3xl font-bold text-gray-600 mb-4 md:mb-6 lg:mb-16 xl:text-4xl">Welcome Back!</h2>
                                 <div className="flex w-full max-w-md flex-col items-center mt-6">
                                     <div className="w-full">
-                                        <GlobalMessages/>
                                         <ApiErrorMessage apiErrorResponse={ apiError }/>
                                     </div>
                                     <div className="w-full">

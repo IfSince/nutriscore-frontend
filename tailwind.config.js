@@ -8,6 +8,8 @@ export default {
         './index.html',
         './src/**/*.{js,ts,jsx,tsx}',
         './node_modules/tailwind-datepicker-react/dist/**/*.js',
+        './node_modules/flowbite/**/*.js',
+        './node_modules/flowbite-react/**/*.{js,jsx,ts,tsx}',
     ],
     theme: {
         extend: {
@@ -78,7 +80,16 @@ export default {
             },
             zIndex: {
                 '9000': '9000',
-                '9999': '9999'
+                '9999': '9999',
+            },
+            keyframes: {
+                'fadeout': {
+                    '0%': { opacity: 100 },
+                    '100%': { opacity: 0 },
+                },
+            },
+            animation: {
+                'fade-out': 'fadeout 0.75s cubic-bezier(0.4, 0, 0.6, 1) 1s forwards'
             }
         },
     },
