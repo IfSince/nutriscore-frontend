@@ -1,4 +1,4 @@
-import { CustomDatePicker } from '../../../common/custom-date-picker.tsx';
+import { CustomDatePicker } from '../../custom-date-picker.tsx';
 import { Field, FieldProps } from 'formik';
 import { FieldError } from './field-error.tsx';
 import { getFormattedDate } from '../../../utils/format-date.ts';
