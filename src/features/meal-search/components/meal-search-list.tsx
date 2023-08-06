@@ -1,9 +1,9 @@
 import { MealItem } from '../../meal/models/meal-item.ts';
 import { SEARCH_FAVORITES, SEARCH_POPULAR, SEARCH_YOUR_MEALS } from '../meal-search-categories.ts';
 import { useContext } from 'react';
-import { UserIdContext } from '../../../views/root.view.tsx';
-import { SearchCategory } from '../../form/components/search-input/models/search-category.ts';
 import { MealSearchListItem } from './meal-search-list-item.tsx';
+import { UserIdContext } from '../../../pages/root.view.tsx';
+import { SearchCategory } from '../../../common/form/components/search-input/models/search-category.ts';
 
 export const MealSearchList = ({ items, filterText, filterCategory }: { items: MealItem[], filterText: string, filterCategory: SearchCategory }) => {
     const userId = useContext(UserIdContext)

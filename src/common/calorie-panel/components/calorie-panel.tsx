@@ -1,7 +1,7 @@
 import { Panel } from '../../panel.tsx';
 import { ProgressCircle } from '../../progress/components/progress-circle.tsx';
-import { ValueObject } from '../../../redux/models/value-object.ts';
 import { CenteredSpinner } from '../../spinner/components/centered-spinner.tsx';
+import { ValueObject } from '../../value-object.ts';
 
 export const CaloriePanel = ({ valueObject, isLoading }: { valueObject: ValueObject, isLoading: boolean }) =>
     <Panel className="grow" title="Calories" highlighted>

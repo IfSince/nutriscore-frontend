@@ -1,5 +1,5 @@
-import { TimeOfDay } from '../../recordings/models/type-of-day.enum.ts';
 import { MealItem } from '../../meal/models/meal-item.ts';
+import { TimeOfDay } from '../../type-of-day.enum.ts';
 
 export interface MealRecording {
     id: number

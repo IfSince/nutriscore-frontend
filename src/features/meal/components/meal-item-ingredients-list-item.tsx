@@ -1,6 +1,6 @@
-import { FoodItem } from '../../../redux/models/food-item.ts';
+import { FoodItem } from '../../food/models/food-item.ts';
+import { AmountSelector } from '../../../common/form/components/amount-selector/amount-selector.tsx';
 import { DeleteIconButton } from '../../../common/button/components/icon/delete-icon-button.tsx';
-import { AmountSelector } from '../../form/components/amount-selector/amount-selector.tsx';
 
 interface MealItemIngredientsListItemProps {
     name: string

@@ -1,5 +1,5 @@
 import { Goal } from '../../goal.ts';
-import { PhysicalActivityLevelActivities } from '../../nutritional-recordings/models/physical-activity-level-activities.ts';
+import { PhysicalActivityLevelActivities } from './physical-activity-level-activities.ts';
 
 
 export interface NutritionalData {

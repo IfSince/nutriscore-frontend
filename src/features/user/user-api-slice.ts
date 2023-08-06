@@ -1,5 +1,5 @@
 import { apiSlice, USER_TAG } from '../../api/api-slice.ts';
-import { User } from '../../redux/models/user.ts';
+import { User } from './models/user.ts';
 
 export const userApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => (

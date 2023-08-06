@@ -1,9 +1,9 @@
 import { Panel } from '../../panel.tsx';
 import { ProgressLinearLabeled } from '../../progress/components/progress-linear-labeled.tsx';
-import { ValueObject } from '../../../redux/models/value-object.ts';
 import { CenteredSpinner } from '../../spinner/components/centered-spinner.tsx';
 import { Macro } from '../../../features/macro.ts';
 import { recordObjectKeys } from '../../../utils/object.ts';
+import { ValueObject } from '../../value-object.ts';
 
 export const MacroPanelGroup = ({ data, isLoading }: { data: Record<Macro, ValueObject>, isLoading?: boolean }) => {
     const styles: Record<Macro, string> = {

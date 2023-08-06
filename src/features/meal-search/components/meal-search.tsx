@@ -1,12 +1,12 @@
 import { useGetAllMealItemsQuery } from '../../meal/meal-items-api-slice.ts';
 import { CenteredSpinner } from '../../../common/spinner/components/centered-spinner.tsx';
 import { ApiErrorMessage } from '../../../common/messages/api-error-message.tsx';
-import { SearchCategoryFilter } from '../../form/components/search-input/search-category-filter.tsx';
 import { useState } from 'react';
-import { SearchInput } from '../../form/components/search-input/search-input.tsx';
 import { PrimaryButton } from '../../../common/button/components/primary-button.tsx';
 import { MEAL_SEARCH_CATEGORIES, SEARCH_YOUR_MEALS } from '../meal-search-categories.ts';
 import { MealSearchList } from './meal-search-list.tsx';
+import { SearchInput } from '../../../common/form/components/search-input/search-input.tsx';
+import { SearchCategoryFilter } from '../../../common/form/components/search-input/search-category-filter.tsx';
 
 export const MealSearch = () => {
     const [filterText, onFilterTextChange] = useState('')

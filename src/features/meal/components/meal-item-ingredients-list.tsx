@@ -1,6 +1,6 @@
-import { FoodItem } from '../../../redux/models/food-item.ts';
+import { CustomArrayField } from '../../../common/form/components/array-field/custom-array-field.tsx';
+import { FoodItem } from '../../food/models/food-item.ts';
 import { MealItemIngredientsListItem } from './meal-item-ingredients-list-item.tsx';
-import { CustomArrayField } from '../../form/components/array-field/custom-array-field.tsx';
 
 export const MealItemIngredientsList = ({ foodItems, disabled }: { foodItems: FoodItem[], disabled: boolean }) => {
     return (

@@ -1,5 +1,5 @@
-import { TimeOfDay } from '../../recordings/models/type-of-day.enum.ts';
-import { FoodItem } from '../../../redux/models/food-item.ts';
+import { TimeOfDay } from '../../type-of-day.enum.ts';
+import { FoodItem } from '../../food/models/food-item.ts';
 
 export interface FoodRecording {
     id: number

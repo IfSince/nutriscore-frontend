@@ -2,8 +2,8 @@ import { RouterProvider } from 'react-router-dom';
 import React from 'react';
 import { router } from './router.tsx';
 import { Provider } from 'react-redux';
-import { store } from './redux/store.ts';
-import { GlobalMessages } from './features/messages/components/global-messages.tsx';
+import { store } from './store.ts';
+import { GlobalMessages } from './common/messages/components/global-messages.tsx';
 
 export const App = () =>
     <React.StrictMode>

@@ -1,16 +1,16 @@
 import { DesktopPanel } from '../../../common/desktop-panel.tsx';
-import { FoodItem } from '../../../redux/models/food-item.ts';
 import { DefaultIconButton } from '../../../common/button/components/icon/default-icon-button.tsx';
-import { FormProps } from '../../form/models/form-props.ts';
 import { Field, FieldProps, Form, Formik } from 'formik';
 import { ReactNode } from 'react';
 import { CategorySelector } from '../../categories/components/category-selector.tsx';
 import { AllergenicSelector } from '../../allergenics/components/allergenic-selector.tsx';
-import { MacroValuePicker } from './macro-value-picker.tsx';
 import { ApiErrorMessage } from '../../../common/messages/api-error-message.tsx';
-import { AmountSelector } from '../../form/components/amount-selector/amount-selector.tsx';
 import { SubmitButton } from '../../../common/button/components/submit-button.tsx';
 import { Badge } from '../../../common/badge.tsx';
+import { FormProps } from '../../../common/form/models/form-props.ts';
+import { FoodItem } from '../models/food-item.ts';
+import { MacroValuePicker } from '../../macro-value-picker.tsx';
+import { AmountSelector } from '../../../common/form/components/amount-selector/amount-selector.tsx';
 
 export const FoodItemForm = ({ form, onSubmit, apiError, isLoading, children, editable }: FormProps<FoodItem> & {
     children?: ReactNode,

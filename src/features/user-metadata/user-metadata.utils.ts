@@ -1,8 +1,8 @@
 import { RecordingMetadataValueKeys, UserNutritionalMetadata } from './models/user-nutritional-metadata.ts';
 import { RecordingMetadata } from '../recordings/models/recording-metadata.ts';
 import { Macro } from '../macro.ts';
-import { TimeOfDay } from '../recordings/models/type-of-day.enum.ts';
-import { ValueObject } from '../../redux/models/value-object.ts';
+import { ValueObject } from '../../common/value-object.ts';
+import { TimeOfDay } from '../type-of-day.enum.ts';
 
 interface UserNutritionalDataValueObjects {
     calorieData: ValueObject

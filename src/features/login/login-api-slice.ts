@@ -1,6 +1,6 @@
 import { apiSlice } from '../../api/api-slice.ts';
-import { User } from '../../redux/models/user.ts';
 import { LoginData } from './models/login-data.ts';
+import { User } from '../user/models/user.ts';
 
 export const loginApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => ({

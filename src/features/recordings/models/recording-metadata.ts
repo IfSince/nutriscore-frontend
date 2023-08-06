@@ -1,4 +1,4 @@
-import { TimeOfDay } from './type-of-day.enum.ts';
+import { TimeOfDay } from '../../type-of-day.enum.ts';
 
 export interface RecordingMetadata {
     dateOfRecording: string

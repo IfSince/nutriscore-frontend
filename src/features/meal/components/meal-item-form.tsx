@@ -1,4 +1,3 @@
-import { FormProps } from '../../form/models/form-props.ts';
 import { ReactNode } from 'react';
 import { getAllergenics, MealItem } from '../models/meal-item.ts';
 import { DesktopPanel } from '../../../common/desktop-panel.tsx';
@@ -6,11 +5,12 @@ import { Field, FieldProps, Form, Formik } from 'formik';
 import { ApiErrorMessage } from '../../../common/messages/api-error-message.tsx';
 import { CategorySelector } from '../../categories/components/category-selector.tsx';
 import { DefaultIconButton } from '../../../common/button/components/icon/default-icon-button.tsx';
-import { MacroValuePicker } from '../../food/components/macro-value-picker.tsx';
 import { Badge } from '../../../common/badge.tsx';
 import { MealItemIngredientsList } from './meal-item-ingredients-list.tsx';
 import { SubmitButton } from '../../../common/button/components/submit-button.tsx';
-import { NEW_ENTITY_ID } from '../../../redux/constants.ts';
+import { FormProps } from '../../../common/form/models/form-props.ts';
+import { MacroValuePicker } from '../../macro-value-picker.tsx';
+import { NEW_ENTITY_ID } from '../../../common/constants.ts';
 
 export const MealItemForm = ({ form, onSubmit, apiError, isLoading, children, editable }: FormProps<MealItem> & {
     children?: ReactNode,

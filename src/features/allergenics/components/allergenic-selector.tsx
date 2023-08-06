@@ -1,7 +1,7 @@
 import { useGetAllAllergenicsQuery } from '../allergenics-api-slice.ts';
 import { CenteredSpinner } from '../../../common/spinner/components/centered-spinner.tsx';
 import { ApiErrorMessage } from '../../../common/messages/api-error-message.tsx';
-import { CustomArrayField } from '../../form/components/array-field/custom-array-field.tsx';
+import { CustomArrayField } from '../../../common/form/components/array-field/custom-array-field.tsx';
 
 export const AllergenicSelector = ({ disabled }: { disabled?: boolean }) => {
     const {

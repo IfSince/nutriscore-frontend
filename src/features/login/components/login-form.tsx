@@ -1,12 +1,12 @@
 import { LoginData } from '../models/login-data.ts';
 import { Form, Formik } from 'formik';
 import { ApiErrorMessage } from '../../../common/messages/api-error-message.tsx';
-import { InputField } from '../../form/components/input-field/input-field.tsx';
 import { CustomLink } from '../../../common/link/CustomLink.tsx';
 import { SubmitButton } from '../../../common/button/components/submit-button.tsx';
 import { object, string } from 'yup';
-import { FormProps } from '../../form/models/form-props.ts';
 import LogoDark from '/logo_icon_dark.svg'
+import { FormProps } from '../../../common/form/models/form-props.ts';
+import { InputField } from '../../../common/form/components/input-field/input-field.tsx';
 
 export const LoginForm = ({ form, onSubmit, apiError, isLoading }: FormProps<LoginData>) => {
     const LoginValidationSchema = object().shape({

@@ -1,7 +1,7 @@
 import { useGetAllCategoriesQuery } from '../categories-api-slice.ts';
 import { ApiErrorMessage } from '../../../common/messages/api-error-message.tsx';
 import { CenteredSpinner } from '../../../common/spinner/components/centered-spinner.tsx';
-import { CustomArrayField } from '../../form/components/array-field/custom-array-field.tsx';
+import { CustomArrayField } from '../../../common/form/components/array-field/custom-array-field.tsx';
 
 export const CategorySelector = ({ disabled }: { disabled?: boolean }) => {
     const {

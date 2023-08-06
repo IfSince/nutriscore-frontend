@@ -1,4 +1,4 @@
-import { FormFieldValueTypes } from '../features/form/models/form-field-data.tsx';
+import { FormFieldValueTypes } from '../common/form/models/form-field-data.tsx';
 
 export const convertToFormFieldType = <T extends FormFieldValueTypes>(formFieldValue: string, value: T): T => {
     // @ts-ignore

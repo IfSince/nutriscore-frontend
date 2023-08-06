@@ -1,5 +1,4 @@
 import { createBrowserRouter, Navigate } from 'react-router-dom';
-import { NotFoundView } from './views/error.view.tsx';
 import {
     DIARY_ADD_FOOD_ITEM_ROUTE,
     DIARY_ADD_MEAL_ITEM_ROUTE,
@@ -37,43 +36,44 @@ import {
     REGISTER_WEIGHT_ROUTE,
     STATISTICS_ROUTE,
 } from './routes.ts';
-import { HomeView } from './features/home/views/home.view.tsx';
-import { DiaryView } from './features/diary/views/diary.view.tsx';
-import { DiaryOverviewView } from './features/diary/views/diary-overview.view.tsx';
-import { DiarySearchView } from './features/diary/views/diary-search.view.tsx';
-import { DiaryAddFoodItemView } from './features/diary/views/diary-add-food-item.view.tsx';
-import { DiaryNewFoodItemView } from './features/diary/views/diary-new-food-item.view.tsx';
-import { GoalStepView } from './features/register/views/goal-step.view.tsx';
-import { GenderStepView } from './features/register/views/gender-step.view.tsx';
-import { DateOfBirthStepView } from './features/register/views/date-of-birth-step.view.tsx';
-import { HeightStepView } from './features/register/views/height-step.view.tsx';
-import { WeightStepView } from './features/register/views/weight-step.view.tsx';
-import { AllergenicStepView } from './features/register/views/allergenic-step.view.tsx';
-import { NutritionIntroStepView } from './features/register/views/nutrition-intro-step.view.tsx';
-import { ActivityLevelStepView } from './features/register/views/activity-level-step.view.tsx';
-import { RegisterLayoutView } from './features/register/views/register-layout.view.tsx';
-import { CalculationTypeStepView } from './features/register/views/calculation-type-step.view.tsx';
-import { CalorieRestrictionStepView } from './features/register/views/calorie-restriction-step.view.tsx';
-import { PersonalStepView } from './features/register/views/personal-step.view.tsx';
-import { RegisterOverviewStepView } from './features/register/views/register-overview-step.view.tsx';
-import { ActivityPerWeekStepView } from './features/register/views/activity-per-week-step.view.tsx';
-import { PalStepView } from './features/register/views/pal-step.view.tsx';
-import { LoginView } from './features/login/views/login.view.tsx';
-import { RootView } from './views/root.view.tsx';
 import { NotLoggedInRoute } from './common/not-logged-in-route.tsx';
 import { ProtectedRoute } from './common/protected-route.tsx';
-import { DiaryFoodItemView } from './features/diary/views/diary-food-item.view.tsx';
-import { NutritionTypeStepView } from './features/register/views/nutrition-type-step.view.tsx';
-import { StatisticsView } from './features/statistics/views/statistics.view.tsx';
-import { ProfileView } from './features/profile/views/profile.view.tsx';
-import { ProfilePersonalDataView } from './features/profile/views/profile-personal-data.view.tsx';
-import { ProfileNutritionalDataView } from './features/profile/views/profile-nutritional-data.view.tsx';
-import { ProfileAllergenicsView } from './features/profile/views/profile-allergenics.view.tsx';
-import { ProfileOverviewView } from './features/profile/views/profile-overview.view.tsx';
-import { DiaryMealItemView } from './features/diary/views/meal-item/diary-meal-item.view.tsx';
-import { DiaryAddMealItemView } from './features/diary/views/meal-item/diary-add-meal-item.view.tsx';
-import { ProfileMealSearchView } from './features/profile/views/profile-meal-search.view.tsx';
-import { ProfileMealItemView } from './features/profile/views/profile-meal-item.view.tsx';
+import { HomeView } from './pages/home/views/home.view';
+import { DiaryView } from './pages/diary/views/diary.view.tsx';
+import { DiaryOverviewView } from './pages/diary/views/diary-overview.view.tsx';
+import { DiarySearchView } from './pages/diary/views/diary-search.view.tsx';
+import { DiaryFoodItemView } from './pages/diary/views/diary-food-item.view.tsx';
+import { DiaryAddFoodItemView } from './pages/diary/views/diary-add-food-item.view.tsx';
+import { DiaryNewFoodItemView } from './pages/diary/views/diary-new-food-item.view.tsx';
+import { DiaryMealItemView } from './pages/diary/views/meal-item/diary-meal-item.view.tsx';
+import { DiaryAddMealItemView } from './pages/diary/views/meal-item/diary-add-meal-item.view.tsx';
+import { LoginView } from './pages/login/login.view.tsx';
+import { RegisterLayoutView } from './pages/register/views/register-layout.view.tsx';
+import { NotFoundView } from './pages/error.view.tsx';
+import { GoalStepView } from './pages/register/views/goal-step.view.tsx';
+import { GenderStepView } from './pages/register/views/gender-step.view.tsx';
+import { DateOfBirthStepView } from './pages/register/views/date-of-birth-step.view.tsx';
+import { HeightStepView } from './pages/register/views/height-step.view.tsx';
+import { WeightStepView } from './pages/register/views/weight-step.view.tsx';
+import { AllergenicStepView } from './pages/register/views/allergenic-step.view.tsx';
+import { NutritionIntroStepView } from './pages/register/views/nutrition-intro-step.view.tsx';
+import { ActivityLevelStepView } from './pages/register/views/activity-level-step.view.tsx';
+import { ActivityPerWeekStepView } from './pages/register/views/activity-per-week-step.view.tsx';
+import { PalStepView } from './pages/register/views/pal-step.view.tsx';
+import { NutritionTypeStepView } from './pages/register/views/nutrition-type-step.view.tsx';
+import { CalculationTypeStepView } from './pages/register/views/calculation-type-step.view.tsx';
+import { CalorieRestrictionStepView } from './pages/register/views/calorie-restriction-step.view.tsx';
+import { PersonalStepView } from './pages/register/views/personal-step.view.tsx';
+import { RegisterOverviewStepView } from './pages/register/views/register-overview-step.view.tsx';
+import { RootView } from './pages/root.view.tsx';
+import { StatisticsView } from './pages/statistics/views/statistics.view.tsx';
+import { ProfileView } from './pages/profile/views/profile.view.tsx';
+import { ProfileOverviewView } from './pages/profile/views/profile-overview.view.tsx';
+import { ProfilePersonalDataView } from './pages/profile/views/profile-personal-data.view.tsx';
+import { ProfileNutritionalDataView } from './pages/profile/views/profile-nutritional-data.view.tsx';
+import { ProfileAllergenicsView } from './pages/profile/views/profile-allergenics.view.tsx';
+import { ProfileMealSearchView } from './pages/profile/views/profile-meal-search.view.tsx';
+import { ProfileMealItemView } from './pages/profile/views/profile-meal-item.view.tsx';
 
 export const router = createBrowserRouter([
     {

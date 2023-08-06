@@ -1,6 +1,6 @@
-import { useAppDispatch, useAppSelector } from '../../redux/hooks.ts';
-import { selectDate, update } from '../../redux/slices/date-slice.ts';
 import { CustomDatePicker } from '../custom-date-picker.tsx';
+import { useAppDispatch, useAppSelector } from '../../hooks.ts';
+import { selectDate, update } from './date-slice.ts';
 
 export const GlobalDatePicker = () => {
     const date = useAppSelector(selectDate)

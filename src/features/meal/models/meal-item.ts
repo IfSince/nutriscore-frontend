@@ -1,5 +1,5 @@
-import { FoodItem } from '../../../redux/models/food-item.ts';
 import { Category } from '../../categories/models/category.ts';
+import { FoodItem } from '../../food/models/food-item.ts';
 
 export interface MealItem {
     id: number

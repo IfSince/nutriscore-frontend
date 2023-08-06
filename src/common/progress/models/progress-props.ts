@@ -1,4 +1,4 @@
-import { ValueObject } from '../../../redux/models/value-object.ts';
+import { ValueObject } from '../../value-object.ts';
 
 export interface ProgressProps {
     width: number

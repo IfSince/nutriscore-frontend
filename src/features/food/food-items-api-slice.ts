@@ -1,5 +1,5 @@
 import { apiSlice, FOOD_TAG, NUTRITIONAL_RECORDINGS_SEARCH_TAG, NUTRITIONAL_RECORDINGS_TAG, USER_METADATA_TAG } from '../../api/api-slice.ts';
-import { FoodItem } from '../../redux/models/food-item.ts';
+import { FoodItem } from './models/food-item.ts';
 
 export const foodItemsApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => (
