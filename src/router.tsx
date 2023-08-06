@@ -2,8 +2,11 @@ import { createBrowserRouter, Navigate } from 'react-router-dom';
 import { NotFoundView } from './views/error.view.tsx';
 import {
     DIARY_ADD_FOOD_ITEM_ROUTE,
+    DIARY_ADD_MEAL_ITEM_ROUTE,
     DIARY_FOOD_ITEM_ROUTE,
     DIARY_FOOD_PREFIX_ROUTE,
+    DIARY_MEAL_ITEM_ROUTE,
+    DIARY_MEAL_PREFIX_ROUTE,
     DIARY_NEW_FOOD_ITEM_ROUTE,
     DIARY_ROUTE,
     DIARY_SEARCH_ROUTE,
@@ -64,6 +67,8 @@ import { ProfilePersonalDataView } from './features/profile/views/profile-person
 import { ProfileNutritionalDataView } from './features/profile/views/profile-nutritional-data.view.tsx';
 import { ProfileAllergenicsView } from './features/profile/views/profile-allergenics.view.tsx';
 import { ProfileOverviewView } from './features/profile/views/profile-overview.view.tsx';
+import { DiaryMealItemView } from './features/diary/views/meal-item/diary-meal-item.view.tsx';
+import { DiaryAddMealItemView } from './features/diary/views/meal-item/diary-add-meal-item.view.tsx';
 
 export const router = createBrowserRouter([
     {
@@ -187,6 +192,19 @@ export const router = createBrowserRouter([
                             {
                                 path: DIARY_NEW_FOOD_ITEM_ROUTE,
                                 element: <DiaryNewFoodItemView/>,
+                            },
+                        ],
+                    },
+                    {
+                        path: DIARY_MEAL_PREFIX_ROUTE,
+                        children: [
+                            {
+                                path: DIARY_MEAL_ITEM_ROUTE,
+                                element: <DiaryMealItemView/>,
+                            },
+                            {
+                                path: DIARY_ADD_MEAL_ITEM_ROUTE,
+                                element: <DiaryAddMealItemView/>,
                             },
                         ],
                     },

@@ -1,18 +1,20 @@
-import { DesktopPanel } from '../../../common/desktop-panel.tsx';
-import { FoodItem } from '../../../redux/models/food-item.ts';
-import { DefaultIconButton } from '../../../common/button/components/icon/default-icon-button.tsx';
 import { FormProps } from '../../form/models/form-props.ts';
-import { Field, FieldProps, Form, Formik } from 'formik';
 import { ReactNode } from 'react';
-import { CategorySelector } from '../../categories/components/category-selector.tsx';
-import { AllergenicSelector } from '../../allergenics/components/allergenic-selector.tsx';
-import { MacroValuePicker } from './macro-value-picker.tsx';
+import { getAllergenics, MealItem } from '../models/meal-item.ts';
+import { DesktopPanel } from '../../../common/desktop-panel.tsx';
+import { Field, FieldProps, Form, Formik } from 'formik';
 import { ApiErrorMessage } from '../../../common/messages/api-error-message.tsx';
+import { CategorySelector } from '../../categories/components/category-selector.tsx';
+import { DefaultIconButton } from '../../../common/button/components/icon/default-icon-button.tsx';
+import { MacroValuePicker } from '../../food/components/macro-value-picker.tsx';
+import { AllergenicSelector } from '../../allergenics/components/allergenic-selector.tsx';
 import { AmountSelector } from '../../form/components/amount-selector/amount-selector.tsx';
 import { SubmitButton } from '../../../common/button/components/submit-button.tsx';
 import { Badge } from '../../../common/badge.tsx';
+import { Unit } from '../../unit.ts';
+import { MealItemIngredientsList } from './meal-item-ingredients-list.tsx';
 
-export const FoodItemForm = ({ form, onSubmit, apiError, isLoading, children, editable }: FormProps<FoodItem> & {
+export const MealItemForm = ({ form, onSubmit, apiError, isLoading, children, editable }: FormProps<MealItem> & {
     children?: ReactNode,
     editable: boolean
 }) =>
@@ -29,7 +31,6 @@ export const FoodItemForm = ({ form, onSubmit, apiError, isLoading, children, ed
                         {
                             () => (
                                 <Form>
-                                    <ApiErrorMessage apiErrorResponse={ apiError }/>
                                     <div className="flex flex-row justify-between">
                                         <div className="max-w-2xl">
                                             {
@@ -53,8 +54,8 @@ export const FoodItemForm = ({ form, onSubmit, apiError, isLoading, children, ed
                                                 { ({ field }: FieldProps) => (
                                                     <div>
                                                         <input className={ `h-12 rounded-md border transition-selection px-4 w-full peer lg:h-14 font-medium text-gray-600 border-gray-300 mb-4 text-2xl lg:text-3xl max-w-md
-                                                                    hover:border-cyan-200 hover:ring-1 hover:ring-cyan-200 focus:border-cyan-300 focus:ring-1 focus:ring-cyan-300
-                                                                    disabled:text-gray-300 disabled:placeholder-gray-300 disabled:hover:border-gray-300 disabled:hover:ring-0 disabled:cursor-not-allowed` }
+                                                                        hover:border-cyan-200 hover:ring-1 hover:ring-cyan-200 focus:border-cyan-300 focus:ring-1 focus:ring-cyan-300
+                                                                        disabled:text-gray-300 disabled:placeholder-gray-300 disabled:hover:border-gray-300 disabled:hover:ring-0 disabled:cursor-not-allowed` }
                                                                type="text"
                                                                id="description"
                                                                disabled={ isLoading }
@@ -64,6 +65,7 @@ export const FoodItemForm = ({ form, onSubmit, apiError, isLoading, children, ed
                                             </Field>
                                             : <h3 className="mb-4 text-2xl font-medium text-gray-600 lg:text-3xl">{ form.description }</h3>
                                     }
+                                    <ApiErrorMessage apiErrorResponse={ apiError }/>
 
                                     <div
                                         className="my-8 grid max-w-lg 1.5xl:max-w-3xl grid-cols-2 1.5xl:grid-cols-4 gap-4 1.5xl:gap-6 md:max-w-2xl md:grid-cols-4 lg:max-w-lg lg:grid-cols-2">
@@ -92,6 +94,10 @@ export const FoodItemForm = ({ form, onSubmit, apiError, isLoading, children, ed
                                                           disabled={ isLoading || !editable }/>
                                     </div>
 
+                                    <h4 className="mb-4 text-xl font-medium text-gray-600">Ingredients</h4>
+                                    <div className="mb-8">
+                                        <MealItemIngredientsList foodItems={ form.foodItems } disabled={ isLoading || !editable }/>
+                                    </div>
 
                                     <h4 className="mb-4 text-xl font-medium text-gray-600">Allergenics</h4>
                                     <div className="max-w-xl">
@@ -100,8 +106,9 @@ export const FoodItemForm = ({ form, onSubmit, apiError, isLoading, children, ed
                                                 ? <AllergenicSelector disabled={ isLoading }/>
                                                 : <div className="mb-8 flex gap-2">
                                                     {
-                                                        form.allergenics.map(allergenic => <Badge key={ allergenic.id }
-                                                                                                  description={ allergenic.description }/>)
+                                                        getAllergenics(form.foodItems)?.map(allergenic => (
+                                                            <Badge key={ allergenic.id } description={ allergenic.description }/>
+                                                        ))
                                                     }
                                                 </div>
                                         }
@@ -110,7 +117,7 @@ export const FoodItemForm = ({ form, onSubmit, apiError, isLoading, children, ed
                                         editable &&
                                         <>
                                             <div className="mt-8 mb-4">
-                                                <AmountSelector name="amount" unit={ form.unit } disabled={ isLoading }/>
+                                                <AmountSelector name="amount" unit={ Unit.AMOUNT } disabled={ isLoading }/>
                                             </div>
                                             <div className="my-4 border-t-2 border-gray-100 lg:my-6"></div>
                                             <div className="flex flex-row justify-between">

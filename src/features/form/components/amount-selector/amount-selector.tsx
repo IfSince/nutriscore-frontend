@@ -3,7 +3,7 @@ import { DefaultIconButton } from '../../../../common/button/components/icon/def
 import { useField } from 'formik';
 
 export const AmountSelector = ({ ...props }) => {
-    const FACTOR = 10
+    const FACTOR = props.factor ?? 10
     const [field, _, helpers] = useField(props.name)
 
     const onRemove = () => {

@@ -15,4 +15,5 @@ export interface FoodItem {
     file?: number
     categories: Category[]
     allergenics: Allergenic[]
+    selectedAmount?: number
 }

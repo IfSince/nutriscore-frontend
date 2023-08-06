@@ -8,7 +8,7 @@ import { GlobalMessages } from './features/messages/components/global-messages.t
 export const App = () =>
     <React.StrictMode>
         <Provider store={ store }>
-            <div className="fixed h-20 w-full z-9999 top-[20%] flex justify-center px-4">
+            <div className="fixed w-full z-9999 top-[20%] flex justify-center px-4">
                 <div className="max-w-3xl w-full">
                     <GlobalMessages/>
                 </div>

@@ -2,10 +2,10 @@ import { IconButtonProps } from '../../models/icon-button-props.ts';
 import { DeleteButton } from '../delete-button.tsx';
 import { CenteredSpinner } from '../../../spinner/components/centered-spinner.tsx';
 
-export const DeleteIconButton = ({ type, icon, action, className = '', isSubmitting }: IconButtonProps) =>
+export const DeleteIconButton = ({ type, icon, action, className = '', disabled, isSubmitting }: IconButtonProps) =>
     <DeleteButton type={ type }
                   action={ action }
-                  disabled={ isSubmitting }
+                  disabled={ isSubmitting || disabled }
                   className={ `aspect-square group ${ className }` }>
         {
             isSubmitting ?

@@ -56,7 +56,6 @@ export const DiaryAddFoodItemView = () => {
     } else if (isError) {
         content = <ApiErrorMessage apiErrorResponse={ error }/>
     } else if (isSuccess) {
-
         const initialFoodRecording: FoodRecording = {
             id: NEW_ENTITY_ID,
             userId,
@@ -74,7 +73,7 @@ export const DiaryAddFoodItemView = () => {
                         <ApiErrorMessage apiErrorResponse={ foodRecordingError }/>
                         <div className="flex flex-row justify-between">
                             <AmountSelector name="amount" unit={ foodItem.unit }/>
-                            <SubmitButton text="Update" isSubmitting={ foodRecordingIsLoading }/>
+                            <SubmitButton text="Add recording" isSubmitting={ foodRecordingIsLoading }/>
                         </div>
                     </Form>
                 </Formik>

@@ -4,12 +4,8 @@ import { FoodRecording } from './models/food-recording.ts';
 export const foodRecordingApiSlice = apiSlice.injectEndpoints({
     endpoints: builder => (
         {
-            getFoodRecordingAndItemByFoodRecordingId: builder.query<FoodRecording, number>({
-                query: (id: number) => (
-                    {
-                        url: `food-recordings/${ id }`,
-                    }
-                ),
+            getFoodRecordingById: builder.query<FoodRecording, number>({
+                query: id => `food-recordings/${ id }`,
                 providesTags: (_result, _error, args) => [{ type: FOOD_RECORDING_TAG, id: args }],
             }),
             updateFoodRecording: builder.mutation<FoodRecording, FoodRecording>({
@@ -28,7 +24,7 @@ export const foodRecordingApiSlice = apiSlice.injectEndpoints({
                     ],
             }),
             addNewFoodRecording: builder.mutation<void, FoodRecording>({
-                query: (foodRecording: FoodRecording) => (
+                query: foodRecording => (
                     {
                         url: `users/${ foodRecording.userId }/food-recordings`,
                         method: 'POST',
@@ -60,7 +56,7 @@ export const foodRecordingApiSlice = apiSlice.injectEndpoints({
 })
 
 export const {
-    useGetFoodRecordingAndItemByFoodRecordingIdQuery,
+    useGetFoodRecordingByIdQuery,
     useUpdateFoodRecordingMutation,
     useAddNewFoodRecordingMutation,
     useDeleteFoodRecordingMutation,

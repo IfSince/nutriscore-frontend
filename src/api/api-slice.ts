@@ -8,6 +8,7 @@ export type ApiErrorResponse = FetchBaseQueryError | SerializedError | undefined
 
 export const USER_TAG = 'user' as const
 export const FOOD_TAG = 'food' as const
+export const MEAL_TAG = 'meal' as const
 export const USER_METADATA_TAG = 'user-metadata' as const
 export const NUTRITIONAL_RECORDINGS_TAG = 'nutritional-recordings' as const
 export const NUTRITIONAL_RECORDINGS_SEARCH_TAG = 'nutritional-recordings-search' as const
@@ -27,6 +28,7 @@ export const apiSlice = createApi({
         USER_TAG,
         USER_METADATA_TAG,
         FOOD_TAG,
+        MEAL_TAG,
         NUTRITIONAL_RECORDINGS_TAG,
         NUTRITIONAL_RECORDINGS_SEARCH_TAG,
         FOOD_RECORDING_TAG,

@@ -8,6 +8,7 @@ import { UserIdContext } from '../../../../views/root.view.tsx';
 import { useAppDispatch } from '../../../../redux/hooks.ts';
 import { addSuccessMessage } from '../../../messages/global-message-slice.ts';
 import { ApiErrorMessage } from '../../../../common/messages/api-error-message.tsx';
+import { useDeleteMealRecordingMutation } from '../../../meal-recording/meal-recording-api-slice.ts';
 
 export const NutritionalRecordingsListItem = ({ id, description, amount, type, calories, unit }: NutritionalRecording) => {
     const dispatch = useAppDispatch()
@@ -15,15 +16,16 @@ export const NutritionalRecordingsListItem = ({ id, description, amount, type, c
 
     const [
         deleteFoodRecording,
-        {
-            isLoading,
-            isSuccess,
-            error,
-        },
+        foodRecordingRequest,
     ] = useDeleteFoodRecordingMutation()
 
+    const [
+        deleteMealRecording,
+        mealRecordingRequest,
+    ] = useDeleteMealRecordingMutation()
+
     useEffect(() => {
-        if (isSuccess) {
+        if (foodRecordingRequest.isSuccess || mealRecordingRequest.isSuccess) {
             dispatch(addSuccessMessage('Recording deleted successfully!'))
         }
     })
@@ -34,12 +36,12 @@ export const NutritionalRecordingsListItem = ({ id, description, amount, type, c
     }
     const actions = {
         ['FOOD']: () => deleteFoodRecording({ userId, foodRecordingId: id }),
-        ['MEAL']: () => console.log({ userId, mealRecordingId: id }),
+        ['MEAL']: () => deleteMealRecording({ userId, mealRecordingId: id }),
     }
 
     return (
         <>
-            <ApiErrorMessage apiErrorResponse={ error }/>
+            <ApiErrorMessage apiErrorResponse={ foodRecordingRequest.error || mealRecordingRequest.error }/>
             <Link className="flex w-full cursor-pointer items-center justify-between rounded-lg px-2 py-2 hover:bg-gray-50 lg:px-4 lg:text-lg"
                   to={ routes[type] }>
                 <span className="ml-2 font-bold md:ml-6 lg:ml-8">{ description }</span>
@@ -50,7 +52,9 @@ export const NutritionalRecordingsListItem = ({ id, description, amount, type, c
                 </div>
 
                 <div className="flex gap-2">
-                    <DeleteIconButton icon="clear" action={ actions[type] } isSubmitting={ isLoading }/>
+                    <DeleteIconButton icon="clear"
+                                      action={ actions[type] }
+                                      isSubmitting={ foodRecordingRequest.isLoading || mealRecordingRequest.isLoading }/>
                 </div>
             </Link>
         </>

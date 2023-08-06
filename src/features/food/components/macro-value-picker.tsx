@@ -1,6 +1,6 @@
 import { useField } from 'formik';
 
-export const FoodItemValuePicker = ({ ...props }) => {
+export const MacroValuePicker = ({ ...props }) => {
     const [field] = useField(props.name)
     return (
         <label className={ `grow rounded-2xl border border-gray-200 p-4 transition-colors
