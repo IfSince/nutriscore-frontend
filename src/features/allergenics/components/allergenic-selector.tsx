@@ -24,7 +24,7 @@ export const AllergenicSelector = ({ disabled }: { disabled?: boolean }) => {
             <div className="mb-5 flex h-fit flex-wrap gap-2">
                 <CustomArrayField name="allergenics" values={ allergenics }>
                     {
-                        (value, isSelected, onSelect) => (
+                        ({ value, isSelected, onSelect }) => (
                             <button
                                 className={ `rounded-md px-4 text-xs font-medium leading-4 tracking-wide py-1.5 transition-colors
                                              md:tracking-normal md:py-2 md:text-sm md:leading-4 md:px-5

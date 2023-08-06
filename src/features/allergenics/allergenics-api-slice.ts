@@ -8,12 +8,11 @@ export const allergenicsApiSlice = apiSlice.injectEndpoints({
                 query: () => 'allergenics',
                 providesTags: () => [{ type: ALLERGENICS_TAG, id: 'LIST' }],
             }),
-            getAllergenicsByUserId: builder.query<number[], number>({
+            getAllergenicsByUserId: builder.query<Allergenic[], number>({
                 query: userId => `users/${ userId }/allergenics`,
-                transformResponse: (result: Allergenic[]) => result.map(allergenic => allergenic.id),
                 providesTags: () => [{ type: USER_ALLERGENICS_TAG, id: 'LIST' }],
             }),
-            updateUserAllergenics: builder.mutation<number[], [number, { allergenicIds: number[] }]>({
+            updateUserAllergenics: builder.mutation<number[], [number, { allergenics: Allergenic[] }]>({
                 query: ([userId, data]) => (
                     {
                         url: `users/${ userId }/allergenics`,

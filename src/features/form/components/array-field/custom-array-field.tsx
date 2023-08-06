@@ -1,26 +1,35 @@
 import { FieldArray } from 'formik';
 import { ReactNode } from 'react';
-import { DescriptiveProps } from '../../../descriptive-entity.ts';
 import { FieldError } from '../field-error.tsx';
 
-interface CustomArrayFieldProps {
-    name: string
-    values: DescriptiveProps[]
-    children: (value: DescriptiveProps, isSelected: boolean, onSelect: () => void) => ReactNode
+interface CustomArrayFieldMetadata<T extends { id: number }> {
+    value: T
+    isSelected: boolean,
+    onSelect: () => void,
+    onRemove: () => void,
+    index: number
 }
 
-export const CustomArrayField = ({ name, values, children }: CustomArrayFieldProps) => {
+interface CustomArrayFieldProps<T extends { id: number }> {
+    name: string
+    values: T[]
+    children: (metadata: CustomArrayFieldMetadata<T>) => ReactNode
+}
+
+export const CustomArrayField = <T extends { id: number }, >({ name, values, children }: CustomArrayFieldProps<T>) => {
     return (
         <>
             <FieldArray name={ name }>
                 {
                     (helpers) => {
-                        return values.map(value => {
-                            const isSelected = helpers.form.values[name].includes(value.id)
-                            const index = helpers.form.values[name].indexOf(value.id)
-                            const onSelect = () => isSelected ? helpers.remove(index) : helpers.push(value.id)
+                        return values.map((value, index) => {
+                            const isSelected = helpers.form.values[name].some((it: T) => it.id === value.id)
+                            const indexInValues = helpers.form.values[name].findIndex((it: T) => it.id === value.id)
 
-                            return children(value, isSelected, onSelect)
+                            const onSelect = () => isSelected ? helpers.remove(indexInValues) : helpers.push(value)
+                            const onRemove = () => helpers.remove(indexInValues)
+
+                            return children({ value, isSelected, index, onSelect, onRemove })
                         })
                     }
                 }

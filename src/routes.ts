@@ -44,4 +44,9 @@ export const STATISTICS_ROUTE = '/statistics'
 export const PROFILE_ROUTE = '/profile'
 export const PROFILE_PERSONAL_DATA_ROUTE = '/profile/personal'
 export const PROFILE_NUTRITIONAL_DATA_ROUTE = '/profile/nutrition'
-export const PROFILE_ALLERGENICS_ROUTE = '/profile/allergenics'
+export const PROFILE_ALLERGENICS_ROUTE = '/profile/allergies'
+
+// Profile Meal
+export const PROFILE_MEAL_PREFIX_ROUTE = '/profile/meals'
+export const PROFILE_MEAL_SEARCH_ROUTE = '/profile/meals/search'
+export const PROFILE_MEAL_DETAIL_ROUTE = '/profile/meals/:id'

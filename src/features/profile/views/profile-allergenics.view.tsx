@@ -27,7 +27,7 @@ export const ProfileAllergenicsView = () => {
     } = useGetAllAllergenicsQuery()
 
     const {
-        data: userAllergenicIds,
+        data: userAllergenics,
         isLoading: userAllergenicsIsLoading,
         isSuccess: userAllergenicsIsSuccess,
         isError: userAllergenicsIsError,
@@ -57,13 +57,13 @@ export const ProfileAllergenicsView = () => {
         content =
             <>
                 <ApiErrorMessage apiErrorResponse={ result.error }/>
-                <Formik initialValues={ { allergenicIds: userAllergenicIds } }
+                <Formik initialValues={ { allergenics: userAllergenics } }
                         onSubmit={ data => { update([userId, data]) } }>
                     <Form>
                         <div className="grid grid-cols-2 gap-5 sm:grid-cols-3">
-                            <CustomArrayField name="allergenicIds" values={ allergenics }>
+                            <CustomArrayField name="allergenics" values={ allergenics }>
                                 {
-                                    (value, isSelected, onSelect) => (
+                                    ({ value, isSelected, onSelect }) => (
                                         <button type="button"
                                                 key={ value.id }
                                                 onClick={ onSelect }>

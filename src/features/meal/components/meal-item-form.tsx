@@ -7,12 +7,10 @@ import { ApiErrorMessage } from '../../../common/messages/api-error-message.tsx'
 import { CategorySelector } from '../../categories/components/category-selector.tsx';
 import { DefaultIconButton } from '../../../common/button/components/icon/default-icon-button.tsx';
 import { MacroValuePicker } from '../../food/components/macro-value-picker.tsx';
-import { AllergenicSelector } from '../../allergenics/components/allergenic-selector.tsx';
-import { AmountSelector } from '../../form/components/amount-selector/amount-selector.tsx';
-import { SubmitButton } from '../../../common/button/components/submit-button.tsx';
 import { Badge } from '../../../common/badge.tsx';
-import { Unit } from '../../unit.ts';
 import { MealItemIngredientsList } from './meal-item-ingredients-list.tsx';
+import { SubmitButton } from '../../../common/button/components/submit-button.tsx';
+import { NEW_ENTITY_ID } from '../../../redux/constants.ts';
 
 export const MealItemForm = ({ form, onSubmit, apiError, isLoading, children, editable }: FormProps<MealItem> & {
     children?: ReactNode,
@@ -29,7 +27,7 @@ export const MealItemForm = ({ form, onSubmit, apiError, isLoading, children, ed
                 <div className="-mr-5 -ml-5 grow rounded-2xl bg-white px-5 py-10 lg:py-0">
                     <Formik initialValues={ form } onSubmit={ onSubmit }>
                         {
-                            () => (
+                            ({ values }) => (
                                 <Form>
                                     <div className="flex flex-row justify-between">
                                         <div className="max-w-2xl">
@@ -73,55 +71,51 @@ export const MealItemForm = ({ form, onSubmit, apiError, isLoading, children, ed
                                                           description="Calories"
                                                           unit="kcal"
                                                           color="bg-cyan-200"
-                                                          disabled={ isLoading || !editable }/>
+                                                          disabled={ true }/>
 
                                         <MacroValuePicker name="protein"
                                                           description="Protein"
                                                           unit="grams"
                                                           color="bg-red"
-                                                          disabled={ isLoading || !editable }/>
+                                                          disabled={ true }/>
 
                                         <MacroValuePicker name="carbohydrates"
                                                           description="Carbs"
                                                           unit="grams"
                                                           color="bg-green"
-                                                          disabled={ isLoading || !editable }/>
+                                                          disabled={ true }/>
 
                                         <MacroValuePicker name="fats"
                                                           description="Fats"
                                                           unit="grams"
                                                           color="bg-yellow"
-                                                          disabled={ isLoading || !editable }/>
+                                                          disabled={ true }/>
                                     </div>
 
                                     <h4 className="mb-4 text-xl font-medium text-gray-600">Ingredients</h4>
                                     <div className="mb-8">
-                                        <MealItemIngredientsList foodItems={ form.foodItems } disabled={ isLoading || !editable }/>
+                                        <MealItemIngredientsList foodItems={ values.foodItems } disabled={ isLoading || !editable }/>
                                     </div>
 
                                     <h4 className="mb-4 text-xl font-medium text-gray-600">Allergenics</h4>
                                     <div className="max-w-xl">
                                         {
-                                            editable
-                                                ? <AllergenicSelector disabled={ isLoading }/>
-                                                : <div className="mb-8 flex gap-2">
-                                                    {
-                                                        getAllergenics(form.foodItems)?.map(allergenic => (
-                                                            <Badge key={ allergenic.id } description={ allergenic.description }/>
-                                                        ))
-                                                    }
-                                                </div>
+                                            <div className="mb-8 flex gap-2">
+                                                {
+                                                    getAllergenics(form.foodItems)?.map(allergenic => (
+                                                        <Badge key={ allergenic.id } description={ allergenic.description }/>
+                                                    ))
+                                                }
+                                            </div>
                                         }
                                     </div>
                                     {
                                         editable &&
                                         <>
-                                            <div className="mt-8 mb-4">
-                                                <AmountSelector name="amount" unit={ Unit.AMOUNT } disabled={ isLoading }/>
-                                            </div>
                                             <div className="my-4 border-t-2 border-gray-100 lg:my-6"></div>
                                             <div className="flex flex-row justify-between">
-                                                <SubmitButton text="Create" isSubmitting={ isLoading }/>
+                                                <SubmitButton text={ `${ form.id === NEW_ENTITY_ID ? 'Create meal item' : 'Update meal item' }` }
+                                                              isSubmitting={ isLoading }/>
                                             </div>
                                         </>
                                     }

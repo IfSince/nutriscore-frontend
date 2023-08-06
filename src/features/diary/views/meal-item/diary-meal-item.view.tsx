@@ -4,7 +4,6 @@ import { useGetMealRecordingByIdQuery, useUpdateMealRecordingMutation } from '..
 import { useEffect } from 'react';
 import { addSuccessMessage } from '../../../messages/global-message-slice.ts';
 import { DIARY_ROUTE } from '../../../../routes.ts';
-import { MealRecording } from '../../../meal-recording/models/meal-recording.ts';
 import { CenteredSpinner } from '../../../../common/spinner/components/centered-spinner.tsx';
 import { ApiErrorMessage } from '../../../../common/messages/api-error-message.tsx';
 import { Form, Formik } from 'formik';
@@ -37,8 +36,6 @@ export const DiaryMealItemView = () => {
         }
     }, [dispatch, updateIsSuccess, navigate])
 
-    const onSubmit = (mealRecording: MealRecording) => updateFoodRecording(mealRecording)
-
     if (isLoading) {
         return <CenteredSpinner/>
     } else if (isError) {
@@ -49,7 +46,7 @@ export const DiaryMealItemView = () => {
         return (
             <MealItemForm form={ mealItem } onSubmit={ () => null } apiError={ error } isLoading={ updateIsLoading } editable={ false }>
                 <div className="my-4 border-t-2 border-gray-100 lg:my-6"></div>
-                <Formik initialValues={ mealRecording } onSubmit={ onSubmit }>
+                <Formik initialValues={ mealRecording } onSubmit={ updateFoodRecording }>
                     <Form>
                         <ApiErrorMessage apiErrorResponse={ updateError }/>
                         <div className="flex flex-row justify-between">

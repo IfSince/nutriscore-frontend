@@ -1,5 +1,11 @@
 import { ProfileMenuItem } from './profile-menu-item.tsx';
-import { PROFILE_ALLERGENICS_ROUTE, PROFILE_NUTRITIONAL_DATA_ROUTE, PROFILE_PERSONAL_DATA_ROUTE, PROFILE_ROUTE } from '../../../../routes.ts';
+import {
+    PROFILE_ALLERGENICS_ROUTE,
+    PROFILE_MEAL_SEARCH_ROUTE,
+    PROFILE_NUTRITIONAL_DATA_ROUTE,
+    PROFILE_PERSONAL_DATA_ROUTE,
+    PROFILE_ROUTE,
+} from '../../../../routes.ts';
 
 export const ProfileMenu = ({ opened, toggleOpened }: { opened: boolean, toggleOpened: (value: boolean) => void }) => {
     return (
@@ -15,6 +21,7 @@ export const ProfileMenu = ({ opened, toggleOpened }: { opened: boolean, toggleO
                     <ProfileMenuItem link={ PROFILE_PERSONAL_DATA_ROUTE } description="Personal Data" toggleOpened={ toggleOpened }/>
                     <ProfileMenuItem link={ PROFILE_NUTRITIONAL_DATA_ROUTE } description="Nutritional Data" toggleOpened={ toggleOpened }/>
                     <ProfileMenuItem link={ PROFILE_ALLERGENICS_ROUTE } description="Allergies" toggleOpened={ toggleOpened }/>
+                    <ProfileMenuItem link={ PROFILE_MEAL_SEARCH_ROUTE } description="Meals" toggleOpened={ toggleOpened }/>
                 </ul>
                 <ul className="flex flex-col text-xl font-medium">
                     <li>

@@ -9,7 +9,6 @@ import { ApiErrorMessage } from '../../../common/messages/api-error-message.tsx'
 import { Form, Formik } from 'formik';
 import { AmountSelector } from '../../form/components/amount-selector/amount-selector.tsx';
 import { SubmitButton } from '../../../common/button/components/submit-button.tsx';
-import { FoodRecording } from '../../food-recording/models/food-recording.ts';
 import { FoodItemForm } from '../../food/components/food-item-form.tsx';
 
 export const DiaryFoodItemView = () => {
@@ -17,7 +16,13 @@ export const DiaryFoodItemView = () => {
     const navigate = useNavigate()
     const { id } = useParams()
 
-    const { data: foodRecording, isLoading, isSuccess, isError, error } =
+    const {
+        data: foodRecording,
+        isLoading,
+        isSuccess,
+        isError,
+        error,
+    } =
         useGetFoodRecordingByIdQuery(Number(id))
 
     const [
@@ -36,8 +41,6 @@ export const DiaryFoodItemView = () => {
         }
     }, [dispatch, updateIsSuccess, navigate])
 
-    const onSubmit = (foodRecording: FoodRecording) => updateFoodRecording(foodRecording)
-
     let content
     if (isLoading) {
         content = <CenteredSpinner/>
@@ -49,7 +52,7 @@ export const DiaryFoodItemView = () => {
         content =
             <FoodItemForm form={ foodItem } onSubmit={ () => null } apiError={ error } isLoading={ updateIsLoading } editable={ false }>
                 <div className="my-4 border-t-2 border-gray-100 lg:my-6"></div>
-                <Formik initialValues={ foodRecording } onSubmit={ onSubmit }>
+                <Formik initialValues={ foodRecording } onSubmit={ updateFoodRecording }>
                     <Form>
                         <ApiErrorMessage apiErrorResponse={ updateError }/>
                         <div className="flex flex-row justify-between">

@@ -14,6 +14,9 @@ import {
     LOGIN_ROUTE,
     NUTRITION_TYPE_ROUTE,
     PROFILE_ALLERGENICS_ROUTE,
+    PROFILE_MEAL_DETAIL_ROUTE,
+    PROFILE_MEAL_PREFIX_ROUTE,
+    PROFILE_MEAL_SEARCH_ROUTE,
     PROFILE_NUTRITIONAL_DATA_ROUTE,
     PROFILE_PERSONAL_DATA_ROUTE,
     PROFILE_ROUTE,
@@ -69,6 +72,8 @@ import { ProfileAllergenicsView } from './features/profile/views/profile-allerge
 import { ProfileOverviewView } from './features/profile/views/profile-overview.view.tsx';
 import { DiaryMealItemView } from './features/diary/views/meal-item/diary-meal-item.view.tsx';
 import { DiaryAddMealItemView } from './features/diary/views/meal-item/diary-add-meal-item.view.tsx';
+import { ProfileMealSearchView } from './features/profile/views/profile-meal-search.view.tsx';
+import { ProfileMealItemView } from './features/profile/views/profile-meal-item.view.tsx';
 
 export const router = createBrowserRouter([
     {
@@ -233,6 +238,23 @@ export const router = createBrowserRouter([
                     {
                         path: PROFILE_ALLERGENICS_ROUTE,
                         element: <ProfileAllergenicsView/>,
+                    },
+                    {
+                        path: PROFILE_MEAL_PREFIX_ROUTE,
+                        children: [
+                            {
+                                index: true,
+                                element: <Navigate to={ PROFILE_MEAL_SEARCH_ROUTE } replace/>,
+                            },
+                            {
+                                path: PROFILE_MEAL_SEARCH_ROUTE,
+                                element: <ProfileMealSearchView/>,
+                            },
+                            {
+                                path: PROFILE_MEAL_DETAIL_ROUTE,
+                                element: <ProfileMealItemView/>,
+                            },
+                        ],
                     },
                 ],
             },

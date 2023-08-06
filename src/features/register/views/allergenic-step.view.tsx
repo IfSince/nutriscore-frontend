@@ -36,7 +36,7 @@ export const AllergenicStepView = () => {
             <div className="grid grid-cols-3 gap-5">
                 <CustomArrayField name="allergenicIds" values={ allergenics }>
                     {
-                        (value, isSelected, onSelect) => (
+                        ({ value, isSelected, onSelect }) => (
                             <button type="button"
                                     key={ value.id }
                                     className={ `flex flex-col items-center group cursor-pointer ${ isSelected ? 'text-gray-50' : 'text-gray-400' }` }

@@ -76,6 +76,7 @@ export default {
                 'selection': 'box-shadow, color, border-color',
             },
             screens: {
+                'xs': '500px',
                 '1.5xl': '1450px',
             },
             zIndex: {

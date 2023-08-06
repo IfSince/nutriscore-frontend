@@ -2,6 +2,7 @@ import {
     DIARY_ROUTE,
     HOME_ROUTE,
     PROFILE_ALLERGENICS_ROUTE,
+    PROFILE_MEAL_PREFIX_ROUTE,
     PROFILE_NUTRITIONAL_DATA_ROUTE,
     PROFILE_PERSONAL_DATA_ROUTE,
     PROFILE_ROUTE,
@@ -35,8 +36,13 @@ export const MENU_ITEMS: MenuItemInterface[] = [
                 icon: 'person',
             },
             {
-                name: 'allergenics',
+                name: 'allergies',
                 link: PROFILE_ALLERGENICS_ROUTE,
+                icon: 'person',
+            },
+            {
+                name: 'meals',
+                link: PROFILE_MEAL_PREFIX_ROUTE,
                 icon: 'person',
             },
         ],
