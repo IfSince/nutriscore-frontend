@@ -26,8 +26,8 @@ export const AmountSelector = ({ ...props }) => {
 
                 { props.unit !== Unit.AMOUNT &&
                     <span>
-                    <span className="text-sm ml-0.5">{ props.unit }</span>
-                </span>
+                        <span className="text-sm ml-0.5">{ props.unit }</span>
+                    </span>
                 }
             </div>
             <DefaultIconButton icon="add" action={ onAdd } disabled={ props.disabled }/>

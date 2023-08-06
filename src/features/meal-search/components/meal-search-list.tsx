@@ -15,7 +15,7 @@ export const MealSearchList = ({ items, filterText, filterCategory }: { items: M
     }
 
     return (
-        <ul className="flex flex-col">
+        <ul className="flex flex-col gap-2">
             {
                 items
                     .filter(categoryFilterFunctions[filterCategory.description])

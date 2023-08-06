@@ -6,7 +6,7 @@ export interface NutritionalRecordingSearchEntry {
     type: NutritionalRecordingType
     description: string
     amount?: number
-    unit?: Unit
+    unit: Unit
     calories: number
     protein: number
     carbohydrates: number

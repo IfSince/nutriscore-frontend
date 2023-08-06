@@ -7,6 +7,10 @@ interface NutritionalRecordingSearchListProps {
 }
 
 export const NutritionalRecordingSearchList = ({ searchEntries, filterText }: NutritionalRecordingSearchListProps) =>
-    searchEntries
-        .filter(item => item.description.toLowerCase().indexOf(filterText.toLowerCase()) !== -1)
-        .map(item => <NutritionalRecordingSearchListItem key={ `${ item.id }${ item.type }` }{ ...item }/>)
+    <ul className="flex flex-col gap-2">
+        {
+            searchEntries
+                .filter(item => item.description.toLowerCase().indexOf(filterText.toLowerCase()) !== -1)
+                .map(item => <NutritionalRecordingSearchListItem key={ `${ item.id }${ item.type }` }{ ...item }/>)
+        }
+    </ul>
