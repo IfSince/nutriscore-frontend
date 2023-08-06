@@ -47,7 +47,7 @@ export const LoginForm = ({ form, onSubmit, apiError, isLoading }: FormProps<Log
                                                     type="text"
                                                     disabled={ isLoading }
                                                     placeholder="your@email.de"
-                                                    errors={ apiError }
+                                                    apiError={ apiError }
                                                     icon="email"/>
                                     </div>
 
@@ -56,11 +56,11 @@ export const LoginForm = ({ form, onSubmit, apiError, isLoading }: FormProps<Log
                                                     type="password"
                                                     disabled={ isLoading }
                                                     placeholder="••••••••••••"
-                                                    errors={ apiError }
+                                                    apiError={ apiError }
                                                     icon="lock"/>
                                     </div>
                                     <div className="mr-1 flex w-full justify-end mt-3">
-                                        <CustomLink to="/register/goal" text="Forgot password?" className="text-right"/>
+                                        <CustomLink to="" text="Forgot password?" className="text-right"/>
                                     </div>
                                 </div>
 

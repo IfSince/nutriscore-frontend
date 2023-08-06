@@ -10,6 +10,9 @@ import { UserIdContext } from '../../root.view.tsx';
 import { useGetUserByIdQuery, useUpdateUserMutation } from '../../../features/user/user-api-slice.ts';
 import { addSuccessMessage } from '../../../common/messages/global-message-slice.ts';
 import { InputField } from '../../../common/form/components/input-field/input-field.tsx';
+import { SelectableEnum } from '../../../common/form/components/dropdown-field/selectable-enum.ts';
+import { EnumDropdownField } from '../../../common/form/components/dropdown-field/enum-dropdown-field.tsx';
+import { SelectDateField } from '../../../common/form/components/select-date-field.tsx';
 
 export const ProfilePersonalDataView = () => {
     const dispatch = useAppDispatch()
@@ -29,7 +32,7 @@ export const ProfilePersonalDataView = () => {
         if (result.isSuccess) {
             dispatch(addSuccessMessage('Personal data updated successfully!'))
         }
-    }, )
+    })
 
     let content
     if (isLoading) {
@@ -65,9 +68,9 @@ export const ProfilePersonalDataView = () => {
 
 
                             <div className="col-span-2 mb-10 flex flex-col gap-6 lg:col-span-1">
-                                <InputField name="firstName" displayname="First name" type="text" errors={ result.error }/>
-                                <InputField name="lastName" displayname="Last name" type="text" errors={ result.error }/>
-                                <InputField name="email" displayname="E-Mail" type="text" errors={ result.error }/>
+                                <InputField name="firstName" displayName="First name" type="text" apiError={ result.error }/>
+                                <InputField name="lastName" displayName="Last name" type="text" apiError={ result.error }/>
+                                <InputField name="email" displayName="E-Mail" type="text" apiError={ result.error }/>
                             </div>
                         </div>
                     </DesktopPanel>
@@ -86,9 +89,13 @@ export const ProfilePersonalDataView = () => {
 
 
                             <div className="col-span-2 mb-10 flex flex-col gap-6 lg:col-span-1">
-                                <InputField name="genderId" displayname="Gender" type="text" errors={ result.error }/>
-                                <InputField name="dateOfBirth" displayname="Date of birth" type="text" errors={ result.error }/>
-                                <InputField name="height" displayname="Height" type="text" errors={ result.error }/>
+                                <EnumDropdownField name="genderId"
+                                                   enum={ SelectableEnum.GENDER }
+                                                   displayName="Gender"
+                                                   type="number"
+                                                   apiError={ result.error }/>
+                                <SelectDateField name="dateOfBirth" displayname="Date of birth"/>
+                                <InputField name="height" displayName="Height" type="text" apiError={ result.error }/>
                             </div>
                         </div>
                     </DesktopPanel>
@@ -97,8 +104,5 @@ export const ProfilePersonalDataView = () => {
             </Formik>
     }
 
-
-    return (
-        content
-    )
+    return content
 }

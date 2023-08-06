@@ -16,25 +16,22 @@ interface CustomArrayFieldProps<T extends { id: number }> {
     children: (metadata: CustomArrayFieldMetadata<T>) => ReactNode
 }
 
-export const CustomArrayField = <T extends { id: number }, >({ name, values, children }: CustomArrayFieldProps<T>) => {
-    return (
-        <>
-            <FieldArray name={ name }>
-                {
-                    (helpers) => {
-                        return values.map((value, index) => {
-                            const isSelected = helpers.form.values[name].some((it: T) => it.id === value.id)
-                            const indexInValues = helpers.form.values[name].findIndex((it: T) => it.id === value.id)
+export const CustomArrayField = <T extends { id: number }>({ name, values, children }: CustomArrayFieldProps<T>) =>
+    <>
+        <FieldArray name={ name }>
+            {
+                (helpers) => {
+                    return values.map((value, index) => {
+                        const isSelected = helpers.form.values[name].some((it: T) => it.id === value.id)
+                        const indexInValues = helpers.form.values[name].findIndex((it: T) => it.id === value.id)
 
-                            const onSelect = () => isSelected ? helpers.remove(indexInValues) : helpers.push(value)
-                            const onRemove = () => helpers.remove(indexInValues)
+                        const onSelect = () => isSelected ? helpers.remove(indexInValues) : helpers.push(value)
+                        const onRemove = () => helpers.remove(indexInValues)
 
-                            return children({ value, isSelected, index, onSelect, onRemove })
-                        })
-                    }
+                        return children({ value, isSelected, index, onSelect, onRemove })
+                    })
                 }
-            </FieldArray>
-            <FieldError name={ name }/>
-        </>
-    )
-}
+            }
+        </FieldArray>
+        <FieldError name={ name }/>
+    </>

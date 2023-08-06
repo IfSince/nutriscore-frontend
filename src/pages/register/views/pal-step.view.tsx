@@ -19,36 +19,36 @@ export const PalStepView = () => {
             <RegisterHeader title="Lets determine your physical activity level"/>
             <div className="mt-4 w-full">
                 <InputField name="nutritionalData.physicalActivityLevelActivities.sleeping"
-                            displayname="Sleeping"
+                            displayName="Sleeping"
                             type="number"/>
             </div>
             <div className="mt-4 w-full">
                 <InputField name="nutritionalData.physicalActivityLevelActivities.onlySitting"
-                            displayname="Only sitting"
+                            displayName="Only sitting"
                             type="number"/>
             </div>
 
             <div className="mt-4 w-full">
                 <InputField name="nutritionalData.physicalActivityLevelActivities.occasionalActivities"
-                            displayname="Mostly sitting with occasional activities"
+                            displayName="Mostly sitting with occasional activities"
                             type="number"/>
             </div>
 
             <div className="mt-4 w-full">
                 <InputField name="nutritionalData.physicalActivityLevelActivities.mostlySittingOrStanding"
-                            displayname="Mostly sitting or standing"
+                            displayName="Mostly sitting or standing"
                             type="number"/>
             </div>
 
             <div className="mt-4 w-full">
                 <InputField name="nutritionalData.physicalActivityLevelActivities.mostlyWalkingOrStanding"
-                            displayname="Mostly walking or standing"
+                            displayName="Mostly walking or standing"
                             type="number"/>
             </div>
 
             <div className="mt-4 w-full">
                 <InputField name="nutritionalData.physicalActivityLevelActivities.physicallyDemanding"
-                            displayname="Physically demanding activities"
+                            displayName="Physically demanding activities"
                             type="number"/>
             </div>
             <div className="w-full">

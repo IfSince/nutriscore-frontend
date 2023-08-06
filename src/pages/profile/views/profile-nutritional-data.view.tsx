@@ -7,12 +7,11 @@ import { ApiErrorMessage } from '../../../common/messages/api-error-message.tsx'
 import { SubmitButton } from '../../../common/button/components/submit-button.tsx';
 import { useAppDispatch } from '../../../hooks.ts';
 import { UserIdContext } from '../../root.view.tsx';
-import {
-    useGetNutritionalDataByUserIdQuery,
-    useUpdateNutritionalDataMutation,
-} from '../../../features/nutritional-data/nutritional-data-api-slice.ts';
+import { useGetNutritionalDataByUserIdQuery, useUpdateNutritionalDataMutation } from '../../../features/nutritional-data/nutritional-data-api-slice.ts';
 import { addSuccessMessage } from '../../../common/messages/global-message-slice.ts';
 import { InputField } from '../../../common/form/components/input-field/input-field.tsx';
+import { EnumDropdownField } from '../../../common/form/components/dropdown-field/enum-dropdown-field.tsx';
+import { SelectableEnum } from '../../../common/form/components/dropdown-field/selectable-enum.ts';
 
 export const ProfileNutritionalDataView = () => {
     const dispatch = useAppDispatch()
@@ -36,7 +35,6 @@ export const ProfileNutritionalDataView = () => {
 
     let content
     if (isLoading) {
-
         content =
             <DesktopPanel>
                 <h3 className="mb-12 text-2xl font-medium lg:hidden">Nutritional Data</h3>
@@ -69,12 +67,24 @@ export const ProfileNutritionalDataView = () => {
 
 
                             <div className="col-span-2 mb-10 flex flex-col gap-6 lg:col-span-1">
-                                <InputField name="nutritionTypeId" displayname="Nutrition type" type="number" errors={ result.error }/>
-                                <InputField name="calculationTypeId" displayname="Calculation type id" type="number" errors={ result.error }/>
-                                <InputField name="activityLevelId" displayname="Activity level" type="number" errors={ result.error }/>
-                                <InputField name="phyiscalActivityLevel" displayname="Phyiscal Activity Level" type="number" errors={ result.error }/>
-                                <InputField name="goal" displayname="Goal" type="text" errors={ result.error }/>
-                                <InputField name="calorieRestriction" displayname="Calorie Restriction" type="number" errors={ result.error }/>
+                                <EnumDropdownField name="nutritionTypeId"
+                                                   enum={ SelectableEnum.NUTRITION_TYPE }
+                                                   displayName="Nutrition type"
+                                                   type="number"
+                                                   apiError={ result.error }/>
+                                <EnumDropdownField name="calculationTypeId"
+                                                   enum={ SelectableEnum.CALCULATION_TYPE }
+                                                   displayName="Calculation type"
+                                                   type="number"
+                                                   apiError={ result.error }/>
+                                <EnumDropdownField name="activityLevelId"
+                                                   enum={ SelectableEnum.ACTIVITY_LEVEL }
+                                                   displayName="Activity level"
+                                                   type="number"
+                                                   apiError={ result.error }/>
+                                <InputField name="phyiscalActivityLevel" displayName="Phyiscal Activity Level" type="number" apiError={ result.error }/>
+                                <InputField name="goal" displayName="Goal" type="text" apiError={ result.error }/>
+                                <InputField name="calorieRestriction" displayName="Calorie Restriction" type="number" apiError={ result.error }/>
                             </div>
                         </div>
                     </DesktopPanel>

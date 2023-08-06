@@ -18,28 +18,28 @@ export const PersonalStepView = () => {
             <RegisterHeader title="Personal information"/>
             <div className="mt-4 w-full">
                 <InputField name="user.firstName"
-                            displayname="First name"
+                            displayName="First name"
                             type="text"/>
             </div>
             <div className="mt-4 w-full">
                 <InputField name="user.lastName"
-                            displayname="Last name"
+                            displayName="Last name"
                             type="text"/>
             </div>
             <div className="mt-4 w-full">
                 <InputField name="user.email"
-                            displayname="Email"
+                            displayName="Email"
                             type="text"/>
             </div>
             <div className="mt-4 w-full">
                 <InputField name="user.password"
-                            displayname="Password"
+                            displayName="Password"
                             autoComplete="off"
                             type="password"/>
             </div>
             <div className="mt-4 w-full">
                 <InputField name="user.confirmPassword"
-                            displayname="Confirm password"
+                            displayName="Confirm password"
                             type="password"/>
             </div>
         </>
