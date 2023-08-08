@@ -38,7 +38,10 @@ export const StatisticsView = () => {
 
 
     return (
-        <div className="w-full">
+        <>
+            <header className="mb-8 lg:mb-10 flex w-full flex-col sm:flex-row">
+                <h2 className="text-2xl font-medium">Statistics</h2>
+            </header>
             <ApiErrorMessage apiErrorResponse={ error }/>
             <div className="relative flex flex-wrap lg:flex-row">
                 <BlurOverlay visible={ isLoading || isError }/>
@@ -50,6 +53,6 @@ export const StatisticsView = () => {
                     <MacroStatisticsPanel data={ macroIntakeData } isLoading={ isLoading }/>
                 </div>
             </div>
-        </div>
+        </>
     );
 }

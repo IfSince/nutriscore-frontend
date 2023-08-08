@@ -56,6 +56,7 @@ export default {
             maxWidth: {
                 'sm': '20rem',
                 'xs': '12rem',
+                '1.5xs': '10rem',
                 'xxs': '8rem',
                 'screen-3xl': '1680px',
             },

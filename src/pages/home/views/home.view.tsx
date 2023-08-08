@@ -11,6 +11,7 @@ import { getNutritionalMetadataValueObjects } from '../../../features/user-metad
 import { useAppSelector } from '../../../hooks.ts';
 import { selectDate } from '../../../common/date-picker/date-slice.ts';
 import { UserIdContext } from '../../root.view.tsx';
+import { GlobalDatePicker } from '../../../common/date-picker/global-date-picker.tsx';
 
 export const HomeView = () => {
     const date = new Date(useAppSelector(selectDate))
@@ -31,8 +32,21 @@ export const HomeView = () => {
     } = getNutritionalMetadataValueObjects(recordings, nutritionalMetaData)
 
     return (
-        <div className="w-full">
+        <>
+            <header className="mb-8 lg:mb-10 flex w-full flex-col sm:flex-row">
+                <h2 className="text-2xl font-medium max-w-1.5xs xs:max-w-none">
+                    <span className="">Hi Leon!</span><br/>
+                    <span className="">Here's your daily overview</span>
+                </h2>
+                <div className="flex grow justify-end mt-6 sm:mt-0">
+                    <div className="w-full sm:w-auto">
+                        <GlobalDatePicker/>
+                    </div>
+                </div>
+            </header>
+
             <ApiErrorMessage apiErrorResponse={ error }/>
+
             <div className="relative flex flex-wrap lg:flex-row">
                 <BlurOverlay visible={ isLoading || isError }/>
                 <div className="flex-layout-row">
@@ -44,6 +58,6 @@ export const HomeView = () => {
                     <MealPanelList data={ mealData } isLoading={ isLoading }/>
                 </div>
             </div>
-        </div>
+        </>
     )
 }

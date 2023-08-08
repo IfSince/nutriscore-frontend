@@ -5,7 +5,9 @@ import { Panel } from '../../../common/panel.tsx';
 export const ProfileOverviewView = () => {
     return (
         <>
-            <h3 className="mb-8 text-2xl font-medium lg:hidden">Hi Leon! <br/> Your board <br/> looks so good!</h3>
+            <header className="mb-8 lg:mb-10 flex w-full flex-col sm:flex-row">
+                <h2 className="text-2xl font-medium">Your profile</h2>
+            </header>
             <div className="w-full">
                 {/*<ApiErrorMessage apiErrorResponse={ error }/>*/ }
                 <div className="relative flex flex-wrap lg:flex-row">

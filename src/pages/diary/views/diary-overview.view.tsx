@@ -9,11 +9,10 @@ import { useAppSelector } from '../../../hooks.ts';
 import { selectDate } from '../../../common/date-picker/date-slice.ts';
 import { UserIdContext } from '../../root.view.tsx';
 import { useGetNutritionalMetadataByUserIdQuery } from '../../../features/user-metadata/user-metadata-api-slice.ts';
-import {
-    useGetNutritionalRecordingsByUserIdQuery
-} from '../../../features/nutritional-recordings/nutritional-recordings-api-slice.ts';
+import { useGetNutritionalRecordingsByUserIdQuery } from '../../../features/nutritional-recordings/nutritional-recordings-api-slice.ts';
 import { getNutritionalMetadataValueObjects } from '../../../features/user-metadata/user-metadata.utils.ts';
 import { TimeOfDay } from '../../../features/type-of-day.enum.ts';
+import { GlobalDatePicker } from '../../../common/date-picker/global-date-picker.tsx';
 
 export const DiaryOverviewView = () => {
     const date = new Date(useAppSelector(selectDate))
@@ -28,9 +27,19 @@ export const DiaryOverviewView = () => {
     const recordings = nutritionalRecordingsRequest?.data ? nutritionalRecordingsRequest.data[getFormattedDate(date)] : null
 
     return (
-        <div className="w-full">
+        <>
+            <header className="mb-8 lg:mb-10 flex w-full flex-col sm:flex-row">
+                <h2 className="text-2xl font-medium">Diary Overview</h2>
+                <div className="flex grow justify-end mt-6 sm:mt-0">
+                    <div className="w-full sm:w-auto">
+                        <GlobalDatePicker/>
+                    </div>
+                </div>
+            </header>
+
             <ApiErrorMessage apiErrorResponse={ nutritionalMetadataRequest.error }/>
             <ApiErrorMessage apiErrorResponse={ nutritionalRecordingsRequest.error }/>
+            
             <div className="relative flex flex-wrap lg:flex-row">
                 <BlurOverlay visible={ nutritionalMetadataRequest.isLoading || nutritionalMetadataRequest.isError }/>
                 <div className="flex-layout-row">
@@ -67,6 +76,6 @@ export const DiaryOverviewView = () => {
                 </div>
             </div>
 
-        </div>
+        </>
     )
 }

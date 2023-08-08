@@ -4,12 +4,8 @@ import { useState } from 'react';
 import { CenteredSpinner } from '../../../common/spinner/components/centered-spinner.tsx';
 import { ApiErrorMessage } from '../../../common/messages/api-error-message.tsx';
 import { BlurOverlay } from '../../../common/blur-overlay.tsx';
-import {
-    useGetNutritionalRecordingSearchEntriesQuery
-} from '../../../features/nutritional-recordings-search/nutritional-recordings-search-api-slice.ts';
-import {
-    NutritionalRecordingSearchList
-} from '../../../features/nutritional-recordings-search/components/nutritional-recording-search-list.tsx';
+import { useGetNutritionalRecordingSearchEntriesQuery } from '../../../features/nutritional-recordings-search/nutritional-recordings-search-api-slice.ts';
+import { NutritionalRecordingSearchList } from '../../../features/nutritional-recordings-search/components/nutritional-recording-search-list.tsx';
 
 export const DiarySearchView = () => {
     const [filterText, setFilterText] = useState('')
