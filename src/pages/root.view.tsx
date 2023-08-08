@@ -40,14 +40,19 @@ export const RootView = () => {
     return <div className="flex justify-center text-gray-600 lg:min-h-screen">
         <ProfileMenu opened={ profileMenuOpened } toggleOpened={ setProfileMenuOpened }/>
         <div className="flex w-full flex-col px-5 pt-16 pb-0 max-w-screen-3xl md:pt-10 lg:px-10">
-            <header className="mb-8 flex w-full flex-col lg:mb-16 lg:flex-row">
+            <header className="mb-8 flex w-full flex-col lg:mb-16 sm:flex-row">
                 <div className="flex h-10 w-80 items-center lg:mb-0 lg:h-12">
                     {
                         renderHeaderOrButtons()
                     }
                 </div>
-                <div className="box-border flex grow lg:justify-end">
-                    { !isDiarySubSite && !isStatisticsSite && !isProfileSite && <div className="mt-8 lg:mt-0"><GlobalDatePicker/></div> }
+                <div className="flex grow justify-end">
+                    {
+                        !isDiarySubSite &&
+                        !isStatisticsSite &&
+                        !isProfileSite &&
+                        <div className="w-full sm:w-auto mt-6 sm:mt-0"><GlobalDatePicker/></div>
+                    }
                 </div>
             </header>
 
