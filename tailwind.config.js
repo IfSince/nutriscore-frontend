@@ -42,12 +42,13 @@ export default {
                     600: '#1F2937',
                 },
                 error: {
-                    DEFAULT: '#e54747',
+                    100: '#f2dede',
+                    DEFAULT: '#d9534f',
                     800: '#991B1BFF',
                 },
                 success: {
-                    DEFAULT: '#BBF7D0FF',
-                    800: '#166534FF',
+                    100: '#dff0d8',
+                    DEFAULT: '#3c763d',
                 },
             },
             height: {
@@ -62,6 +63,9 @@ export default {
             },
             flexGrow: {
                 9999: '9999',
+            },
+            borderWidth: {
+                '6': '6px',
             },
             borderRadius: {
                 '4xl': '2rem',
@@ -91,16 +95,12 @@ export default {
                 },
             },
             animation: {
-                'fade-out': 'fadeout 0.75s cubic-bezier(0.4, 0, 0.6, 1) 1s forwards'
-            }
+                'fade-out': 'fadeout 0.75s cubic-bezier(0.4, 0, 0.6, 1) 1s forwards',
+            },
         },
     },
     plugins: [
         require('flowbite/plugin'),
-        plugin(function ({ addVariant }) {
-            addVariant('group-form-loading', ':merge(.form-group).loading &') // custom CSS
-            addVariant('group-form-enabled', ':merge(.form-group):not(.loading) &')
-        }),
     ],
 }
 

@@ -9,9 +9,7 @@ export const App = () =>
     <React.StrictMode>
         <Provider store={ store }>
             <div className="fixed w-full z-9999 top-[20%] flex justify-center px-4">
-                <div className="max-w-3xl w-full">
-                    <GlobalMessages/>
-                </div>
+                <GlobalMessages/>
             </div>
             <RouterProvider router={ router }/>
         </Provider>

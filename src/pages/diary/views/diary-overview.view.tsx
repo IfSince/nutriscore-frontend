@@ -28,6 +28,7 @@ export const DiaryOverviewView = () => {
 
     return (
         <>
+            <ApiErrorMessage apiErrorResponse={ nutritionalMetadataRequest.error || nutritionalRecordingsRequest.error }/>
             <header className="mb-8 lg:mb-10 flex w-full flex-col sm:flex-row">
                 <h2 className="text-2xl font-medium">Diary Overview</h2>
                 <div className="flex grow justify-end mt-6 sm:mt-0">
@@ -37,9 +38,6 @@ export const DiaryOverviewView = () => {
                 </div>
             </header>
 
-            <ApiErrorMessage apiErrorResponse={ nutritionalMetadataRequest.error }/>
-            <ApiErrorMessage apiErrorResponse={ nutritionalRecordingsRequest.error }/>
-            
             <div className="relative flex flex-wrap lg:flex-row">
                 <BlurOverlay visible={ nutritionalMetadataRequest.isLoading || nutritionalMetadataRequest.isError }/>
                 <div className="flex-layout-row">

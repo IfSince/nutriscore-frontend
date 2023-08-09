@@ -9,13 +9,12 @@ export const ApiErrorMessage = ({ apiErrorResponse }: { apiErrorResponse: ApiErr
     useEffect(() => setVisible(true), [apiErrorResponse])
 
     return (
-        visible && apiError && apiError.data.message &&
-        <div className="flex items-center p-4 mb-4 text-error-800 rounded-lg bg-error/40 border-2 border-error/50">
-            <div className="ml-3 text-sm md:text-base font-medium">{ apiError.data.message }</div>
-            <button onClick={ () => setVisible(false) }
+        visible && apiError && apiError.data.message && apiError.status !== 422 &&
+        <div className="flex items-center p-4 mb-6 text-error rounded-lg bg-error-100 border border-error">
+            <div className="ml-3 text-sm md:text-base font-medium">{ `${ apiError.status } - ${ apiError.data.message }` }</div>
+            <button className="ml-auto -mx-1.5 -my-1.5 rounded-lg inline-flex items-center justify-center h-8 w-8 p-1.5 hover:text-error-800 transition-colors"
                     type="button"
-                    className="ml-auto -mx-1.5 -my-1.5 bg-error/10 text-error-800 rounded-lg inline-flex items-center justify-center h-8 w-8 p-1.5
-                                           focus:ring-2 focus:ring-error hover:bg-error/50">
+                    onClick={ () => setVisible(false) }>
                 <span className="material-icons-round">close</span>
             </button>
         </div>

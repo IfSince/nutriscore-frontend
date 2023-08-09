@@ -18,20 +18,25 @@ export const globalMessageSlice = createSlice({
         addSuccessMessage: (state, action: PayloadAction<string>) => {
             state.success = action.payload
         },
-        clearErrorMessage: (state, action: PayloadAction<string>) => {
-            state.errors = state.errors.filter(error => error !== action.payload)
-        },
         clearSuccessMessage: (state) => {
             state.success = null
+        },
+        addErrorMessage: (state, action: PayloadAction<string>) => {
+            state.errors.push(action.payload)
+        },
+        clearErrorMessage: (state, action: PayloadAction<string>) => {
+            state.errors = state.errors.filter(error => error !== action.payload)
         },
     },
 })
 
 export const {
     addSuccessMessage,
-    clearErrorMessage,
     clearSuccessMessage,
+    addErrorMessage,
+    clearErrorMessage,
 } = globalMessageSlice.actions
+
 export const selectGlobalMessages = (state: RootState) => state.messages
 
 export default globalMessageSlice.reducer
