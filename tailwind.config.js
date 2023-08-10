@@ -16,6 +16,9 @@ export default {
             fontFamily: {
                 'sans': ['Roboto', ...defaultTheme.fontFamily.sans],
             },
+            fontSize: {
+              '2.5xl': '1.75rem',
+            },
             colors: {
                 cyan: {
                     50: '#F2FCF8',

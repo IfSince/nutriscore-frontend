@@ -30,8 +30,8 @@ export const DiaryOverviewView = () => {
         <>
             <ApiErrorMessage apiErrorResponse={ nutritionalMetadataRequest.error || nutritionalRecordingsRequest.error }/>
             <header className="mb-8 lg:mb-10 flex w-full flex-col sm:flex-row">
-                <h2 className="text-2xl font-medium">Diary Overview</h2>
-                <div className="flex grow justify-end mt-6 sm:mt-0">
+                <h2 className="text-2.5xl font-bold">Your Diary</h2>
+                <div className="grow justify-end mt-6 sm:mt-0 hidden lg:flex">
                     <div className="w-full sm:w-auto">
                         <GlobalDatePicker/>
                     </div>
@@ -40,33 +40,33 @@ export const DiaryOverviewView = () => {
 
             <div className="relative flex flex-wrap lg:flex-row">
                 <BlurOverlay visible={ nutritionalMetadataRequest.isLoading || nutritionalMetadataRequest.isError }/>
-                <div className="flex-layout-row">
+                <div className="hidden w-full flex-wrap gap-5 lg:gap-10 lg:flex mb-10">
                     <CaloriePanel valueObject={ calorieData } isLoading={ nutritionalMetadataRequest.isLoading }/>
                     <MacroPanelGroup data={ macroData } isLoading={ nutritionalMetadataRequest.isLoading }/>
                 </div>
 
-                <div className="flex-layout-row mt-10">
+                <div className="flex-layout-row">
                     <DiaryMealPanel name="Breakfast"
                                     valueObject={ mealData[TimeOfDay.BREAKFAST] }
                                     items={ recordings?.filter(it => it.timeOfDay === TimeOfDay.BREAKFAST) || [] }
                                     isLoading={ nutritionalRecordingsRequest.isLoading }/>
                 </div>
 
-                <div className="flex-layout-row mt-10">
+                <div className="flex-layout-row">
                     <DiaryMealPanel name="Lunch"
                                     valueObject={ mealData[TimeOfDay.LUNCH] }
                                     items={ recordings?.filter(it => it.timeOfDay === TimeOfDay.LUNCH) || [] }
                                     isLoading={ nutritionalRecordingsRequest.isLoading }/>
                 </div>
 
-                <div className="flex-layout-row mt-10">
+                <div className="flex-layout-row">
                     <DiaryMealPanel name="Dinner"
                                     valueObject={ mealData[TimeOfDay.DINNER] }
                                     items={ recordings?.filter(it => it.timeOfDay === TimeOfDay.DINNER) || [] }
                                     isLoading={ nutritionalRecordingsRequest.isLoading }/>
                 </div>
 
-                <div className="flex-layout-row mt-10">
+                <div className="flex-layout-row">
                     <DiaryMealPanel name="Lunch"
                                     valueObject={ mealData[TimeOfDay.LUNCH] }
                                     items={ recordings?.filter(it => it.timeOfDay === TimeOfDay.LUNCH) || [] }

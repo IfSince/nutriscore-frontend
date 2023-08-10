@@ -2,7 +2,7 @@ import { IconButtonProps } from '../../models/icon-button-props.ts';
 import { DeleteButton } from '../delete-button.tsx';
 import { CenteredSpinner } from '../../../spinner/components/centered-spinner.tsx';
 
-export const DeleteIconButton = ({ type, icon, action, className = '', disabled, isSubmitting }: IconButtonProps) =>
+export const DeleteIconButton = ({ type, icon, action, className = '', iconStyles = '', disabled, isSubmitting }: IconButtonProps) =>
     <DeleteButton type={ type }
                   action={ action }
                   disabled={ isSubmitting || disabled }
@@ -10,6 +10,6 @@ export const DeleteIconButton = ({ type, icon, action, className = '', disabled,
         {
             isSubmitting ?
                 <CenteredSpinner size="sm" backgroundClr="text-gray-50" fill="fill-gray-500"/> :
-                <span className="text-xl material-icons-round">{ icon }</span>
+                <span className={ `material-icons-round ${ iconStyles || 'text-xl' }` }>{ icon }</span>
         }
     </DeleteButton>

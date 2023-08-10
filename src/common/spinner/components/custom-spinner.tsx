@@ -1,13 +1,13 @@
-import { FlowbiteSize } from '../../flowbite-size.ts';
+import { ElementSizes } from '../../element-sizes.ts';
 
 export interface SpinnerProps {
-    size?: FlowbiteSize,
+    size?: ElementSizes,
     fill?: string
     backgroundClr?: string
 }
 
 export const CustomSpinner = ({ size = 'lg', fill = 'fill-cyan-300', backgroundClr = 'text-gray-300' }: SpinnerProps) => {
-    const sizes: Record<FlowbiteSize, string> = {
+    const sizes: Record<ElementSizes, string> = {
         'xs': 'w-4 h-4',
         'sm': 'w-6 h-6',
         'md': 'w-8 h-8',
