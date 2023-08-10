@@ -39,7 +39,6 @@ import {
 import { NotLoggedInRoute } from './common/not-logged-in-route.tsx';
 import { ProtectedRoute } from './common/protected-route.tsx';
 import { HomeView } from './pages/home/views/home.view';
-import { DiaryView } from './pages/diary/views/diary.view.tsx';
 import { DiaryOverviewView } from './pages/diary/views/diary-overview.view.tsx';
 import { DiarySearchView } from './pages/diary/views/diary-search.view.tsx';
 import { DiaryFoodItemView } from './pages/diary/views/diary-food-item.view.tsx';
@@ -173,7 +172,6 @@ export const router = createBrowserRouter([
             },
             {
                 path: DIARY_ROUTE,
-                element: <DiaryView/>,
                 children: [
                     {
                         index: true,

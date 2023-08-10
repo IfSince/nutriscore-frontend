@@ -13,7 +13,7 @@ export const DiarySearchInput = ({ filterText, onFilterTextChange }: DiarySearch
     const navigate = useNavigate()
 
     return (
-        <div className="flex w-full items-center pt-6">
+        <div className="flex w-full items-center">
             <SearchInput filterText={ filterText } onFilterTextChange={ onFilterTextChange }/>
 
             <DefaultButton className="ml-2 aspect-square text-gray-50 md:ml-4 md:aspect-auto md:px-4"

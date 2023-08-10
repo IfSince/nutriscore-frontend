@@ -77,7 +77,7 @@ export const DiaryAddFoodItemView = () => {
                                 <AmountSelector name="amount" unit={ foodItem.unit } factor={ 1 }/>
                                 <TimeOfDaySelector name="timeOfDay"/>
                             </div>
-                            <SubmitButton text="Add Recording" isSubmitting={ foodRecordingIsLoading } kind="grow" size="md:max-w-sm"/>
+                            <SubmitButton text="Add Recording" isSubmitting={ foodRecordingIsLoading } kind="grow"/>
                         </div>
                     </Form>
                 </Formik>

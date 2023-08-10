@@ -13,6 +13,7 @@ import { InputField } from '../../../common/form/components/input-field/input-fi
 import { EnumDropdownField } from '../../../common/form/components/dropdown-field/enum-dropdown-field.tsx';
 import { SelectableEnum } from '../../../common/form/components/dropdown-field/selectable-enum.ts';
 import { NutritionalDataUpdateValidationSchema } from '../validations/nutritional-data-validation-schema.ts';
+import { Header } from '../../../common/header.tsx';
 
 export const ProfileNutritionalDataView = () => {
     const dispatch = useAppDispatch()
@@ -51,51 +52,53 @@ export const ProfileNutritionalDataView = () => {
             </DesktopPanel>
     } else if (isSuccess) {
         content =
-            <Formik initialValues={ nutritionalData } onSubmit={ update } validationSchema={ NutritionalDataUpdateValidationSchema }>
-                <Form>
-                    <h3 className="mb-12 text-2xl font-medium">Your Nutritional Data</h3>
-                    <DesktopPanel>
-                        <ApiErrorMessage apiErrorResponse={ result.error }/>
-                        <div className="grid grid-rows-1 gap-x-8 gap-y-6 grid-cols-[min-content_auto]">
-                            <PrimaryIconButton icon="show_chart"/>
-                            <div className="flex items-center justify-between">
-                                <h4 className="text-xl font-medium lg:text-2xl lg:font-bold">Nutrition</h4>
-                            </div>
+            <>
+                <Header title="Your Nutritional Data"/>
+                <Formik initialValues={ nutritionalData } onSubmit={ update } validationSchema={ NutritionalDataUpdateValidationSchema }>
+                    <Form>
+                        <DesktopPanel>
+                            <ApiErrorMessage apiErrorResponse={ result.error }/>
+                            <div className="grid grid-rows-1 gap-x-8 gap-y-6 grid-cols-[min-content_auto]">
+                                <PrimaryIconButton icon="show_chart"/>
+                                <div className="flex items-center justify-between">
+                                    <h4 className="text-xl font-medium lg:text-2xl lg:font-bold">Nutrition</h4>
+                                </div>
 
-                            <div className="hidden justify-center lg:flex">
-                                <span className="flex justify-center bg-gray-300 w-0.5"></span>
-                            </div>
+                                <div className="hidden justify-center lg:flex">
+                                    <span className="flex justify-center bg-gray-300 w-0.5"></span>
+                                </div>
 
 
-                            <div className="col-span-2 gap-y-6 gap-x-10 lg:col-span-1 grid grid-cols-1 lg:grid-cols-2">
-                                <EnumDropdownField name="nutritionTypeId"
-                                                   enum={ SelectableEnum.NUTRITION_TYPE }
-                                                   displayName="Nutrition type"
-                                                   type="number"
-                                                   apiError={ result.error }/>
-                                <EnumDropdownField name="calculationTypeId"
-                                                   enum={ SelectableEnum.CALCULATION_TYPE }
-                                                   displayName="Calculation type"
-                                                   type="number"
-                                                   apiError={ result.error }/>
-                                <EnumDropdownField name="activityLevelId"
-                                                   enum={ SelectableEnum.ACTIVITY_LEVEL }
-                                                   displayName="Activity level"
-                                                   type="number"
-                                                   apiError={ result.error }/>
-                                <InputField name="phyiscalActivityLevel" displayName="Phyiscal Activity Level" type="number" apiError={ result.error }/>
-                                <InputField name="goal" displayName="Goal" type="text" apiError={ result.error }/>
-                                <InputField name="calorieRestriction" displayName="Calorie Restriction" type="number" apiError={ result.error }/>
+                                <div className="col-span-2 gap-y-6 gap-x-10 lg:col-span-1 grid grid-cols-1 lg:grid-cols-2">
+                                    <EnumDropdownField name="nutritionTypeId"
+                                                       enum={ SelectableEnum.NUTRITION_TYPE }
+                                                       displayName="Nutrition type"
+                                                       type="number"
+                                                       apiError={ result.error }/>
+                                    <EnumDropdownField name="calculationTypeId"
+                                                       enum={ SelectableEnum.CALCULATION_TYPE }
+                                                       displayName="Calculation type"
+                                                       type="number"
+                                                       apiError={ result.error }/>
+                                    <EnumDropdownField name="activityLevelId"
+                                                       enum={ SelectableEnum.ACTIVITY_LEVEL }
+                                                       displayName="Activity level"
+                                                       type="number"
+                                                       apiError={ result.error }/>
+                                    <InputField name="phyiscalActivityLevel" displayName="Phyiscal Activity Level" type="number" apiError={ result.error }/>
+                                    <InputField name="goal" displayName="Goal" type="text" apiError={ result.error }/>
+                                    <InputField name="calorieRestriction" displayName="Calorie Restriction" type="number" apiError={ result.error }/>
 
-                                <div className="mt-4 md:mt-8 md:mb-2 border-t-2 border-gray-100 col-span-1 lg:col-span-2"></div>
-                                <div className="col-span-1 lg:col-span-2 flex justify-end">
-                                    <SubmitButton text="Save" isSubmitting={ result.isLoading }/>
+                                    <div className="mt-4 md:mt-8 md:mb-2 border-t-2 border-gray-100 col-span-1 lg:col-span-2"></div>
+                                    <div className="col-span-1 lg:col-span-2 flex justify-end">
+                                        <SubmitButton text="Save" isSubmitting={ result.isLoading }/>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </DesktopPanel>
-                </Form>
-            </Formik>
+                        </DesktopPanel>
+                    </Form>
+                </Formik>
+            </>
     }
 
 

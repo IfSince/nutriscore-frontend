@@ -6,6 +6,7 @@ import { ApiErrorMessage } from '../../../common/messages/api-error-message.tsx'
 import { BlurOverlay } from '../../../common/blur-overlay.tsx';
 import { useGetNutritionalRecordingSearchEntriesQuery } from '../../../features/nutritional-recordings-search/nutritional-recordings-search-api-slice.ts';
 import { NutritionalRecordingSearchList } from '../../../features/nutritional-recordings-search/components/nutritional-recording-search-list.tsx';
+import { Header } from '../../../common/header.tsx';
 
 export const DiarySearchView = () => {
     const [filterText, setFilterText] = useState('')
@@ -31,18 +32,21 @@ export const DiarySearchView = () => {
     }
 
     return (
-        <DesktopPanel title="Search">
-            <div className="relative">
-                <BlurOverlay visible={ isLoading }/>
-                <DiarySearchInput filterText={ filterText } onFilterTextChange={ setFilterText }/>
+        <>
+            <Header title="Search Item"/>
+            <DesktopPanel>
+                <div className="relative">
+                    <BlurOverlay visible={ isLoading }/>
+                    <DiarySearchInput filterText={ filterText } onFilterTextChange={ setFilterText }/>
 
-                <div className="mb-4 border-t-2 border-gray-100 mt-3.5 sm:mt-4 sm:mb-5 lg:mt-5 lg:mb-6"></div>
+                    <div className="mb-4 border-t-2 border-gray-100 mt-3.5 sm:mt-4 sm:mb-5 lg:mt-5 lg:mb-6"></div>
 
-                <div className="flex flex-col gap-y-2 pb-6 sm:pb-10 xl:pb-14">
-                    { content }
+                    <div className="flex flex-col gap-y-2 pb-6 sm:pb-10 xl:pb-14">
+                        { content }
+                    </div>
                 </div>
-            </div>
-        </DesktopPanel>
+            </DesktopPanel>
+        </>
     )
 }
 

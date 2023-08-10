@@ -1,8 +1,11 @@
 import { DesktopPanel } from '../../../common/desktop-panel.tsx';
 import { MealSearch } from '../../../features/meal-search/components/meal-search.tsx';
+import { Header } from '../../../common/header.tsx';
 
 export const ProfileMealSearchView = () =>
-    <DesktopPanel>
-        <h3 className="mb-8 text-2xl font-medium text-gray-600">Meals</h3>
-        <MealSearch/>
-    </DesktopPanel>
+    <>
+        <Header title="Meal Search"/>
+        <DesktopPanel>
+            <MealSearch/>
+        </DesktopPanel>
+    </>

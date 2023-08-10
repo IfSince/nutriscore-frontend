@@ -1,4 +1,3 @@
-import { ApiErrorMessage } from '../../../common/messages/api-error-message.tsx';
 import { CaloriePanel } from '../../../common/calorie-panel/components/calorie-panel.tsx';
 import { WeeklyOverviewPanel } from '../components/weekly-overview-panel.tsx';
 import { getFormattedDate } from '../../../utils/format-date.ts';
@@ -11,6 +10,7 @@ import { getNutritionalMetadataValueObjects } from '../../../features/user-metad
 import { useAppSelector } from '../../../hooks.ts';
 import { selectDate } from '../../../common/date-picker/date-slice.ts';
 import { UserIdContext } from '../../root.view.tsx';
+import { Header } from '../../../common/header.tsx';
 import { GlobalDatePicker } from '../../../common/date-picker/global-date-picker.tsx';
 
 export const HomeView = () => {
@@ -33,19 +33,9 @@ export const HomeView = () => {
 
     return (
         <>
-            <header className="mb-8 lg:mb-10 flex w-full flex-col sm:flex-row">
-                <h2 className="text-2xl font-medium max-w-1.5xs xs:max-w-none">
-                    <span className="">Hi Leon!</span><br/>
-                    <span className="">Here's your daily overview</span>
-                </h2>
-                <div className="flex grow justify-end mt-6 sm:mt-0">
-                    <div className="w-full sm:w-auto">
-                        <GlobalDatePicker/>
-                    </div>
-                </div>
-            </header>
-
-            <ApiErrorMessage apiErrorResponse={ error }/>
+            <Header title="Your Daily Overview"
+                    additional={ <GlobalDatePicker/> }
+                    apiErrorResponse={ error }/>
 
             <div className="relative flex flex-wrap lg:flex-row">
                 <BlurOverlay visible={ isLoading || isError }/>

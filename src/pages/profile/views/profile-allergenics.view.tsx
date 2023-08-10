@@ -13,6 +13,7 @@ import {
 } from '../../../features/allergenics/allergenics-api-slice.ts';
 import { addSuccessMessage } from '../../../common/messages/global-message-slice.ts';
 import { CustomArrayField } from '../../../common/form/components/array-field/custom-array-field.tsx';
+import { Header } from '../../../common/header.tsx';
 
 export const ProfileAllergenicsView = () => {
     const dispatch = useAppDispatch()
@@ -56,7 +57,8 @@ export const ProfileAllergenicsView = () => {
     } else if (isSuccess && userAllergenicsIsSuccess) {
         content =
             <>
-                <ApiErrorMessage apiErrorResponse={ result.error }/>
+                <Header title="Allergenics"
+                        apiErrorResponse={ result.error }/>
                 <Formik initialValues={ { allergenics: userAllergenics } }
                         onSubmit={ data => { update([userId, data]) } }>
                     <Form>

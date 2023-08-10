@@ -1,5 +1,4 @@
 import { useContext } from 'react';
-import { ApiErrorMessage } from '../../../common/messages/api-error-message.tsx';
 import { WeightStatisticsPanel } from '../components/weight-statistics-panel.tsx';
 import { CalorieStatisticsPanel } from '../components/calorie-statistics-panel.tsx';
 import { MacroStatisticsPanel } from '../components/macro-statistics-panel.tsx';
@@ -7,6 +6,7 @@ import { BlurOverlay } from '../../../common/blur-overlay.tsx';
 import { UserIdContext } from '../../root.view.tsx';
 import { useGetNutritionalMetadataByUserIdQuery } from '../../../features/user-metadata/user-metadata-api-slice.ts';
 import { getNutritionalMetadataValueObjects } from '../../../features/user-metadata/user-metadata.utils.ts';
+import { Header } from '../../../common/header.tsx';
 
 
 export const StatisticsView = () => {
@@ -39,10 +39,8 @@ export const StatisticsView = () => {
 
     return (
         <>
-            <header className="mb-8 lg:mb-10 flex w-full flex-col sm:flex-row">
-                <h2 className="text-2xl font-medium">Statistics</h2>
-            </header>
-            <ApiErrorMessage apiErrorResponse={ error }/>
+            <Header title="Statistics"
+                    apiErrorResponse={ error }/>
             <div className="relative flex flex-wrap lg:flex-row">
                 <BlurOverlay visible={ isLoading || isError }/>
                 <div className="flex-layout-row">

@@ -1,13 +1,12 @@
 import { BmiPanel } from '../components/bmi-panel.tsx';
 import { RmrPanel } from '../components/rmr-panel.tsx';
 import { Panel } from '../../../common/panel.tsx';
+import { Header } from '../../../common/header.tsx';
 
 export const ProfileOverviewView = () => {
     return (
         <>
-            <header className="mb-8 lg:mb-10 flex w-full flex-col sm:flex-row">
-                <h2 className="text-2xl font-medium">Your profile</h2>
-            </header>
+            <Header title="Your Profile"/>
             <div className="w-full">
                 {/*<ApiErrorMessage apiErrorResponse={ error }/>*/ }
                 <div className="relative flex flex-wrap lg:flex-row">

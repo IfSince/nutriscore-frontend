@@ -14,6 +14,7 @@ import { SelectableEnum } from '../../../common/form/components/dropdown-field/s
 import { EnumDropdownField } from '../../../common/form/components/dropdown-field/enum-dropdown-field.tsx';
 import { SelectDateField } from '../../../common/form/components/select-date-field.tsx';
 import { UserUpdateValidationSchema } from '../validations/user-validation-schema.ts';
+import { Header } from '../../../common/header.tsx';
 
 export const ProfilePersonalDataView = () => {
     const dispatch = useAppDispatch()
@@ -52,59 +53,61 @@ export const ProfilePersonalDataView = () => {
             </DesktopPanel>
     } else if (isSuccess) {
         content =
-            <Formik initialValues={ user } onSubmit={ update } validationSchema={ UserUpdateValidationSchema }>
-                <Form>
-                    <h3 className="mb-12 text-2xl font-medium">Your Personal Data</h3>
-                    <DesktopPanel>
-                        <ApiErrorMessage apiErrorResponse={ result.error }/>
+            <>
+                <Header title="Your Personal Data"/>
+                <Formik initialValues={ user } onSubmit={ update } validationSchema={ UserUpdateValidationSchema }>
+                    <Form>
+                        <DesktopPanel>
+                            <ApiErrorMessage apiErrorResponse={ result.error }/>
 
-                        <div className="mb-6 grid grid-rows-1 gap-x-8 gap-y-6 grid-cols-[min-content_auto]">
-                            <PrimaryIconButton icon="manage_accounts"/>
-                            <div className="flex items-center justify-between">
-                                <h4 className="text-xl font-medium lg:text-2xl lg:font-bold">Account</h4>
+                            <div className="mb-6 grid grid-rows-1 gap-x-8 gap-y-6 grid-cols-[min-content_auto]">
+                                <PrimaryIconButton icon="manage_accounts"/>
+                                <div className="flex items-center justify-between">
+                                    <h4 className="text-xl font-medium lg:text-2xl lg:font-bold">Account</h4>
+                                </div>
+
+                                <div className="hidden justify-center lg:flex">
+                                    <span className="flex justify-center bg-gray-300 w-0.5"></span>
+                                </div>
+
+
+                                <div className="col-span-2 mb-10 flex flex-col gap-6 lg:col-span-1">
+                                    <InputField name="firstName" displayName="First name" type="text" apiError={ result.error }/>
+                                    <InputField name="lastName" displayName="Last name" type="text" apiError={ result.error }/>
+                                    <InputField name="email" displayName="E-Mail" type="text" apiError={ result.error }/>
+                                </div>
                             </div>
 
-                            <div className="hidden justify-center lg:flex">
-                                <span className="flex justify-center bg-gray-300 w-0.5"></span>
+                            <div className="grid grid-rows-1 gap-x-8 gap-y-6 grid-cols-[min-content_auto]">
+                                <PrimaryIconButton icon="person"/>
+                                <div className="flex items-center justify-between">
+                                    <h4 className="text-xl font-medium lg:text-2xl lg:font-bold">Personal</h4>
+                                </div>
+
+                                <div className="hidden justify-center lg:flex">
+                                    <span className="flex justify-center bg-gray-300 w-0.5"></span>
+                                </div>
+
+
+                                <div className="col-span-2 mb-10 flex flex-col gap-6 lg:col-span-1">
+                                    <EnumDropdownField name="genderId"
+                                                       enum={ SelectableEnum.GENDER }
+                                                       displayName="Gender"
+                                                       type="number"
+                                                       apiError={ result.error }/>
+                                    <SelectDateField name="dateOfBirth" displayname="Date of birth"/>
+                                    <InputField name="height" displayName="Height" type="text" apiError={ result.error }/>
+                                </div>
+
+                                <div className="mt-4 md:mt-8 md:mb-2 border-t-2 border-gray-100 col-span-1 lg:col-span-2"></div>
+                                <div className="col-span-1 lg:col-span-2 flex justify-end">
+                                    <SubmitButton text="Save" isSubmitting={ result.isLoading }/>
+                                </div>
                             </div>
-
-
-                            <div className="col-span-2 mb-10 flex flex-col gap-6 lg:col-span-1">
-                                <InputField name="firstName" displayName="First name" type="text" apiError={ result.error }/>
-                                <InputField name="lastName" displayName="Last name" type="text" apiError={ result.error }/>
-                                <InputField name="email" displayName="E-Mail" type="text" apiError={ result.error }/>
-                            </div>
-                        </div>
-
-                        <div className="grid grid-rows-1 gap-x-8 gap-y-6 grid-cols-[min-content_auto]">
-                            <PrimaryIconButton icon="person"/>
-                            <div className="flex items-center justify-between">
-                                <h4 className="text-xl font-medium lg:text-2xl lg:font-bold">Personal</h4>
-                            </div>
-
-                            <div className="hidden justify-center lg:flex">
-                                <span className="flex justify-center bg-gray-300 w-0.5"></span>
-                            </div>
-
-
-                            <div className="col-span-2 mb-10 flex flex-col gap-6 lg:col-span-1">
-                                <EnumDropdownField name="genderId"
-                                                   enum={ SelectableEnum.GENDER }
-                                                   displayName="Gender"
-                                                   type="number"
-                                                   apiError={ result.error }/>
-                                <SelectDateField name="dateOfBirth" displayname="Date of birth"/>
-                                <InputField name="height" displayName="Height" type="text" apiError={ result.error }/>
-                            </div>
-
-                            <div className="mt-4 md:mt-8 md:mb-2 border-t-2 border-gray-100 col-span-1 lg:col-span-2"></div>
-                            <div className="col-span-1 lg:col-span-2 flex justify-end">
-                                <SubmitButton text="Save" isSubmitting={ result.isLoading }/>
-                            </div>
-                        </div>
-                    </DesktopPanel>
-                </Form>
-            </Formik>
+                        </DesktopPanel>
+                    </Form>
+                </Formik>
+            </>
     }
 
     return content

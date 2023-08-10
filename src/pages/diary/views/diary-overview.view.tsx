@@ -1,5 +1,4 @@
 import { getFormattedDate } from '../../../utils/format-date.ts';
-import { ApiErrorMessage } from '../../../common/messages/api-error-message.tsx';
 import { BlurOverlay } from '../../../common/blur-overlay.tsx';
 import { DiaryMealPanel } from '../components/overview/diary-meal-panel.tsx';
 import { useContext } from 'react';
@@ -15,6 +14,7 @@ import { PrimaryIconButton } from '../../../common/button/components/icon/primar
 import { ProgressLinear } from '../../../common/progress/components/progress-linear.tsx';
 import { useNavigate } from 'react-router-dom';
 import { DIARY_SEARCH_ROUTE } from '../../../routes.ts';
+import { Header } from '../../../common/header.tsx';
 
 export const DiaryOverviewView = () => {
     const navigate = useNavigate()
@@ -47,15 +47,9 @@ export const DiaryOverviewView = () => {
                 <PrimaryIconButton icon="add" action={ () => navigate(DIARY_SEARCH_ROUTE) }/>
             </div>
 
-            <ApiErrorMessage apiErrorResponse={ nutritionalMetadataRequest.error || nutritionalRecordingsRequest.error }/>
-            <header className="mb-8 lg:mb-10 flex w-full flex-col sm:flex-row">
-                <h2 className="text-2.5xl font-bold">Your Diary</h2>
-                <div className="grow justify-end mt-6 sm:mt-0 hidden lg:flex">
-                    <div className="w-full sm:w-auto">
-                        <GlobalDatePicker/>
-                    </div>
-                </div>
-            </header>
+            <Header title="Your Diary"
+                    additional={ <GlobalDatePicker/> }
+                    apiErrorResponse={ nutritionalMetadataRequest.error || nutritionalRecordingsRequest.error }/>
 
             <div className="relative flex flex-wrap lg:flex-row">
                 <BlurOverlay visible={ nutritionalMetadataRequest.isLoading || nutritionalMetadataRequest.isError }/>
