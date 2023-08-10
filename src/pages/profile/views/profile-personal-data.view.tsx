@@ -13,6 +13,7 @@ import { InputField } from '../../../common/form/components/input-field/input-fi
 import { SelectableEnum } from '../../../common/form/components/dropdown-field/selectable-enum.ts';
 import { EnumDropdownField } from '../../../common/form/components/dropdown-field/enum-dropdown-field.tsx';
 import { SelectDateField } from '../../../common/form/components/select-date-field.tsx';
+import { UserUpdateValidationSchema } from '../validations/user-validation-schema.ts';
 
 export const ProfilePersonalDataView = () => {
     const dispatch = useAppDispatch()
@@ -51,10 +52,10 @@ export const ProfilePersonalDataView = () => {
             </DesktopPanel>
     } else if (isSuccess) {
         content =
-            <Formik initialValues={ user } onSubmit={ update }>
+            <Formik initialValues={ user } onSubmit={ update } validationSchema={ UserUpdateValidationSchema }>
                 <Form>
+                    <h3 className="mb-12 text-2xl font-medium">Your Personal Data</h3>
                     <DesktopPanel>
-                        <h3 className="mb-12 text-2xl font-medium lg:hidden">Personal Data</h3>
                         <ApiErrorMessage apiErrorResponse={ result.error }/>
 
                         <div className="mb-6 grid grid-rows-1 gap-x-8 gap-y-6 grid-cols-[min-content_auto]">
@@ -98,7 +99,7 @@ export const ProfilePersonalDataView = () => {
 
                             <div className="mt-4 md:mt-8 md:mb-2 border-t-2 border-gray-100 col-span-1 lg:col-span-2"></div>
                             <div className="col-span-1 lg:col-span-2 flex justify-end">
-                                <SubmitButton text="Save" isSubmitting={ result.isLoading } size="md:max-w-sm"/>
+                                <SubmitButton text="Save" isSubmitting={ result.isLoading }/>
                             </div>
                         </div>
                     </DesktopPanel>

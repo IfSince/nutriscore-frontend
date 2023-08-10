@@ -9,7 +9,7 @@ import { SubmitButton } from '../../../common/button/components/submit-button.ts
 import { REGISTER_STEP } from '../register-steps.ts';
 import { getFormattedDate } from '../../../utils/format-date.ts';
 import { ApiErrorMessage } from '../../../common/messages/api-error-message.tsx';
-import { array, date, mixed, number, object, ref, string } from 'yup';
+import { array, date, number, object } from 'yup';
 import { QuestStep } from '../../../common/quest-step.ts';
 import { useAppDispatch } from '../../../hooks.ts';
 import { useRegisterMutation } from '../../../features/register/register-api-slice.ts';
@@ -18,6 +18,8 @@ import { Unit } from '../../../features/unit.ts';
 import { Goal } from '../../../features/goal.ts';
 import { RegisterForm } from '../../../features/register/models/register-form.ts';
 import { NEW_ENTITY_ID } from '../../../common/constants.ts';
+import { UserCreationValidationSchema } from '../../profile/validations/user-validation-schema.ts';
+import { NutritionalDataCreationValidationSchema } from '../../profile/validations/nutritional-data-validation-schema.ts';
 
 export const RegisterLayoutView = () => {
     const dispatch = useAppDispatch()
@@ -36,40 +38,12 @@ export const RegisterLayoutView = () => {
     })
 
     const RegisterValidationSchema = object().shape({
-        user: object().shape({
-            userTypeId: number().required(),
-            email: string().required().max(255).email(),
-            password: string().required().min(8),
-            confirmPassword: string().required().oneOf([ref('password')]),
-            firstName: string().required().min(2).max(255),
-            lastName: string().required().min(2).max(255),
-            genderId: number().required(),
-            dateOfBirth: date().required().max(new Date()),
-            height: number().required().min(0),
-            selectedWeightUnit: mixed<Unit>().required().oneOf(Object.values(Unit)),
-            selectedHeightUnit: mixed<Unit>().required().oneOf(Object.values(Unit)),
-        }),
+        user: UserCreationValidationSchema,
         weightRecording: object().shape({
             weight: number().required().min(0).max(300),
             dateOfRecording: date().required(),
         }),
-        nutritionalData: object().shape({
-            nutritionTypeId: number().required(),
-            calculationTypeId: number().required(),
-            activityLevelId: number().required(),
-            physicalActivityLevelActivities: object()
-                .optional()
-                .shape({
-                    sleeping: number().required().min(0).max(24),
-                    onlySitting: number().required().min(0).max(24),
-                    occasionalActivities: number().required().min(0).max(24),
-                    mostlySittingOrStanding: number().required().min(0).max(24),
-                    mostlyWalkingOrStanding: number().required().min(0).max(24),
-                    physicallyDemanding: number().required().min(0).max(24),
-                }),
-            goal: mixed<Goal>().required().oneOf(Object.values(Goal)),
-            calorieRestriction: number().optional().min(-500).max(500),
-        }),
+        nutritionalData: NutritionalDataCreationValidationSchema,
         individualMacroDistribution: object().optional().shape({
             protein: number().required().min(0).max(100),
             carbohydrates: number().required().min(0).max(100),

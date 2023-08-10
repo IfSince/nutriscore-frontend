@@ -6,12 +6,11 @@ interface SubmitButtonProps {
     disabled?: boolean
     isSubmitting: boolean
     kind?: 'w-full' | 'grow'
-    size?: 'md:max-w-sm' | 'md:max-w-md'
 }
 
-export const SubmitButton = ({ text, disabled, isSubmitting, kind = 'w-full', size = 'md:max-w-md' }: SubmitButtonProps) => {
+export const SubmitButton = ({ text, disabled, isSubmitting, kind = 'w-full' }: SubmitButtonProps) => {
     return (
-        <PrimaryButton className={ `${ size } ${ kind }` }
+        <PrimaryButton className={ `max-w-md ${ kind }` }
                        text={ text }
                        preventDefault={ false }
                        disabled={ disabled || isSubmitting }

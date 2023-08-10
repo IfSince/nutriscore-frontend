@@ -12,6 +12,7 @@ import { addSuccessMessage } from '../../../common/messages/global-message-slice
 import { InputField } from '../../../common/form/components/input-field/input-field.tsx';
 import { EnumDropdownField } from '../../../common/form/components/dropdown-field/enum-dropdown-field.tsx';
 import { SelectableEnum } from '../../../common/form/components/dropdown-field/selectable-enum.ts';
+import { NutritionalDataUpdateValidationSchema } from '../validations/nutritional-data-validation-schema.ts';
 
 export const ProfileNutritionalDataView = () => {
     const dispatch = useAppDispatch()
@@ -50,10 +51,10 @@ export const ProfileNutritionalDataView = () => {
             </DesktopPanel>
     } else if (isSuccess) {
         content =
-            <Formik initialValues={ nutritionalData } onSubmit={ update }>
+            <Formik initialValues={ nutritionalData } onSubmit={ update } validationSchema={ NutritionalDataUpdateValidationSchema }>
                 <Form>
+                    <h3 className="mb-12 text-2xl font-medium">Your Nutritional Data</h3>
                     <DesktopPanel>
-                        <h3 className="mb-12 text-2xl font-medium lg:hidden">Nutritional Data</h3>
                         <ApiErrorMessage apiErrorResponse={ result.error }/>
                         <div className="grid grid-rows-1 gap-x-8 gap-y-6 grid-cols-[min-content_auto]">
                             <PrimaryIconButton icon="show_chart"/>
@@ -88,7 +89,7 @@ export const ProfileNutritionalDataView = () => {
 
                                 <div className="mt-4 md:mt-8 md:mb-2 border-t-2 border-gray-100 col-span-1 lg:col-span-2"></div>
                                 <div className="col-span-1 lg:col-span-2 flex justify-end">
-                                    <SubmitButton text="Save" isSubmitting={ result.isLoading } size="md:max-w-sm"/>
+                                    <SubmitButton text="Save" isSubmitting={ result.isLoading }/>
                                 </div>
                             </div>
                         </div>
@@ -98,7 +99,5 @@ export const ProfileNutritionalDataView = () => {
     }
 
 
-    return (
-        content
-    )
+    return content
 }
