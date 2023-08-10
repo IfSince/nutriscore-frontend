@@ -17,6 +17,7 @@ import { addSuccessMessage } from '../../../../common/messages/global-message-sl
 import { NEW_ENTITY_ID } from '../../../../common/constants.ts';
 import { TimeOfDay } from '../../../../features/type-of-day.enum.ts';
 import { AmountSelector } from '../../../../common/form/components/amount-selector/amount-selector.tsx';
+import { TimeOfDaySelector } from '../../../../common/form/components/time-of-day-selector/time-of-day-selector.tsx';
 
 export const DiaryAddMealItemView = () => {
     const dispatch = useAppDispatch()
@@ -70,8 +71,11 @@ export const DiaryAddMealItemView = () => {
                 <Formik initialValues={ initialMealRecording } onSubmit={ addNewMealRecording }>
                     <Form>
                         <ApiErrorMessage apiErrorResponse={ mealRecordingError }/>
-                        <div className="flex flex-row justify-between">
-                            <AmountSelector name="amount" unit={ Unit.AMOUNT } factor={ 1 }/>
+                        <div className="flex justify-between flex-col gap-x-8 gap-y-4 xs:flex-row lg:flex-col xl:flex-row">
+                            <div className="flex justify-between items-center gap-6">
+                                <AmountSelector name="amount" unit={ Unit.AMOUNT } factor={ 1 }/>
+                                <TimeOfDaySelector name="timeOfDay"/>
+                            </div>
                             <SubmitButton text="Add recording" isSubmitting={ mealRecordingIsLoading }/>
                         </div>
                     </Form>

@@ -88,7 +88,6 @@ export const DiaryOverviewView = () => {
                                     isLoading={ nutritionalRecordingsRequest.isLoading }/>
                 </div>
             </div>
-
         </>
     )
 }

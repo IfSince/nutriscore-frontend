@@ -18,7 +18,7 @@ export const AmountSelector = ({ ...props }) => {
     }
 
     return (
-        <div className="flex flex-row items-center gap-4">
+        <div className={ `flex flex-row items-center gap-2 ${ props.className }` }>
             <DefaultIconButton icon="remove" action={ onRemove } disabled={ field.value === 1 || props.disabled }/>
             <div>
                 <input className="text-center text-xl font-medium text-gray-500 w-11 disabled:bg-white"

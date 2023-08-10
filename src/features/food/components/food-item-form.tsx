@@ -11,6 +11,8 @@ import { FormProps } from '../../../common/form/models/form-props.ts';
 import { FoodItem } from '../models/food-item.ts';
 import { MacroValuePicker } from '../../macro-value-picker.tsx';
 import { AmountSelector } from '../../../common/form/components/amount-selector/amount-selector.tsx';
+import { UnitSelector } from '../../../common/form/components/unit-selector/unit-selector.tsx';
+import { UnitFilter } from '../../../common/form/components/unit-selector/unit-filter.ts';
 
 export const FoodItemForm = ({ form, onSubmit, apiError, isLoading, children, editable }: FormProps<FoodItem> & {
     children?: ReactNode,
@@ -110,7 +112,11 @@ export const FoodItemForm = ({ form, onSubmit, apiError, isLoading, children, ed
                                         editable &&
                                         <>
                                             <div className="mt-8 mb-4">
-                                                <AmountSelector name="amount" unit={ form.unit } disabled={ isLoading }/>
+                                                <h4 className="mb-4 text-xl font-medium text-gray-600">Amount</h4>
+                                                <div className="flex justify-between items-center gap-6">
+                                                    <AmountSelector name="amount" unit={ form.unit } disabled={ isLoading }/>
+                                                    <UnitSelector name="unit" filter={ UnitFilter.AMOUNT_UNITS }/>
+                                                </div>
                                             </div>
                                             <div className="my-4 border-t-2 border-gray-100 lg:my-6"></div>
                                             <div className="flex flex-row justify-between">

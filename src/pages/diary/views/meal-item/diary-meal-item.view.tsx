@@ -5,15 +5,13 @@ import { CenteredSpinner } from '../../../../common/spinner/components/centered-
 import { ApiErrorMessage } from '../../../../common/messages/api-error-message.tsx';
 import { Form, Formik } from 'formik';
 import { SubmitButton } from '../../../../common/button/components/submit-button.tsx';
-import {
-    useGetMealRecordingByIdQuery,
-    useUpdateMealRecordingMutation,
-} from '../../../../features/meal-recording/meal-recording-api-slice.ts';
+import { useGetMealRecordingByIdQuery, useUpdateMealRecordingMutation } from '../../../../features/meal-recording/meal-recording-api-slice.ts';
 import { MealItemForm } from '../../../../features/meal/components/meal-item-form.tsx';
 import { Unit } from '../../../../features/unit.ts';
 import { addSuccessMessage } from '../../../../common/messages/global-message-slice.ts';
 import { useAppDispatch } from '../../../../hooks.ts';
 import { AmountSelector } from '../../../../common/form/components/amount-selector/amount-selector.tsx';
+import { TimeOfDaySelector } from '../../../../common/form/components/time-of-day-selector/time-of-day-selector.tsx';
 
 export const DiaryMealItemView = () => {
     const dispatch = useAppDispatch()
@@ -52,8 +50,11 @@ export const DiaryMealItemView = () => {
                 <Formik initialValues={ mealRecording } onSubmit={ updateFoodRecording }>
                     <Form>
                         <ApiErrorMessage apiErrorResponse={ updateError }/>
-                        <div className="flex flex-row justify-between">
-                            <AmountSelector name="amount" unit={ Unit.AMOUNT } factor={ 1 }/>
+                        <div className="flex justify-between flex-col gap-x-8 gap-y-4 xs:flex-row lg:flex-col xl:flex-row">
+                            <div className="flex justify-between items-center gap-6">
+                                <AmountSelector name="amount" unit={ Unit.AMOUNT }/>
+                                <TimeOfDaySelector name="timeOfDay"/>
+                            </div>
                             <SubmitButton text="Update" isSubmitting={ updateIsLoading }/>
                         </div>
                     </Form>
