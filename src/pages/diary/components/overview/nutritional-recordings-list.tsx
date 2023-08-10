@@ -26,7 +26,7 @@ export const NutritionalRecordingsList = ({ items, isLoading }: { items: Nutriti
                             items.map(item => <NutritionalRecordingsListItem key={ `${ item.id }${ item.type }` } { ...item }/>)
                         }
                     </>
-                    : !isLoading && <div className="text-center text-sm md:text-base text-gray-400 bg-white">No entries recorded</div>
+                    : !isLoading && <div className="-ml-8 text-center text-sm md:text-base text-gray-400 bg-white">No entries recorded</div>
 
             }
         </div>

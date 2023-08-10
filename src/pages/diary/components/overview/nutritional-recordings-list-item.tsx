@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { DIARY_FOOD_ITEM_ROUTE, DIARY_MEAL_ITEM_ROUTE } from '../../../../routes.ts';
 import { useContext, useEffect } from 'react';
 import { ApiErrorMessage } from '../../../../common/messages/api-error-message.tsx';
@@ -10,6 +10,7 @@ import { useDeleteMealRecordingMutation } from '../../../../features/meal-record
 import { addSuccessMessage } from '../../../../common/messages/global-message-slice.ts';
 import { Unit, UNIT_ABBREVIATIONS } from '../../../../features/unit.ts';
 import { DeleteIconButton } from '../../../../common/button/components/icon/delete-icon-button.tsx';
+import { DefaultIconButton } from '../../../../common/button/components/icon/default-icon-button.tsx';
 
 export const NutritionalRecordingsListItem = ({
     id,
@@ -22,6 +23,7 @@ export const NutritionalRecordingsListItem = ({
     carbohydrates,
     fats,
 }: NutritionalRecording) => {
+    const navigate = useNavigate()
     const dispatch = useAppDispatch()
     const userId = useContext(UserIdContext)
 
@@ -53,26 +55,23 @@ export const NutritionalRecordingsListItem = ({
     return (
         <>
             <ApiErrorMessage apiErrorResponse={ foodRecordingRequest.error || mealRecordingRequest.error }/>
-            <Link
-                className="py-2 transition-colors w-full grid grid-cols-[auto_min-content] xs:grid-cols-4 md:grid-cols-7 bg-white items-center font-medium hover:text-gray-600 group"
-                to={ routes[type] }>
+            <div className="py-2 transition-colors w-full grid grid-cols-[auto_min-content] xs:grid-cols-4 md:grid-cols-7 bg-white items-center font-medium">
 
                 <div className="flex xs:col-span-2">
                     <div
-                        className="flex aspect-square h-12 items-center justify-center rounded-xl bg-gray-200 text-gray-400 mr-6 lg:mr-8 transition-colors
-                                   group-hover:bg-gray-300 group-hover:text-gray-500">
+                        className="flex aspect-square h-12 items-center justify-center rounded-xl bg-gray-200 text-gray-400 mr-6 lg:mr-8 transition-colors">
                         <span className="material-icons-round text-xl">image</span>
                     </div>
 
                     <div className="flex flex-col justify-center">
                         <span className="font-bold text-gray-600 tracking-tight lg:text-xl">{ description }</span>
                         <span
-                            className="text-sm lg:text-base text-gray-400 group-hover:text-gray-500 transition-colors">{ amount } { UNIT_ABBREVIATIONS[unit] }</span>
+                            className="text-sm lg:text-base text-gray-400">{ amount } { UNIT_ABBREVIATIONS[unit] }</span>
                     </div>
                 </div>
 
                 <span className="hidden flex-col xs:flex">
-                    <span className="font-bold lg:text-lg text-gray-500 group-hover:text-gray-600 transition-colors">{ calories } kcal</span>
+                    <span className="font-bold lg:text-lg text-gray-500">{ calories } kcal</span>
                 </span>
 
                 <span className="hidden flex-col md:flex">
@@ -87,12 +86,18 @@ export const NutritionalRecordingsListItem = ({
                     <span className="font-bold lg:text-lg text-gray-500">{ fats } g</span>
                 </span>
 
+                <div className="justify-self-end flex gap-2">
+                    <DefaultIconButton className="h-8 lg:h-10"
+                                       icon="edit"
+                                       iconStyles="text-sm lg:text-lg"
+                                       action={ () => navigate(routes[type]) }/>
 
-                <DeleteIconButton className="h-8 lg:h-10 text-xs justify-self-end"
-                                  icon="close"
-                                  iconStyles="text-xs lg:text-base"
-                                  action={ deleteActions[type] }/>
-            </Link>
+                    <DeleteIconButton className="h-8 lg:h-10"
+                                      icon="close"
+                                      iconStyles="text-xs lg:text-base"
+                                      action={ deleteActions[type] }/>
+                </div>
+            </div>
         </>
 
     );

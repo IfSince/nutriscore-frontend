@@ -1,12 +1,9 @@
-import { Outlet, useNavigate } from 'react-router-dom';
-import { PrimaryIconButton } from '../../../common/button/components/icon/primary-icon-button.tsx';
+import { Outlet } from 'react-router-dom';
 
 export const DiaryView = () => {
-    const navigate = useNavigate()
-
     return (
         <>
-            <PrimaryIconButton className="lg:hidden mb-10" icon="arrow_back" action={ () => navigate(-1) }/>
+            {/*<PrimaryIconButton className="lg:hidden mb-10" icon="arrow_back" action={ () => navigate(-1) }/>*/}
             <Outlet/>
         </>
     )
