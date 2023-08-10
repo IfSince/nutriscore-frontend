@@ -5,7 +5,7 @@ import { ValueObject } from '../../value-object.ts';
 
 export const CaloriePanel = ({ valueObject, isLoading }: { valueObject: ValueObject, isLoading: boolean }) =>
     <Panel className="grow" title="Calories" highlighted>
-        <div className="px-9 pt-4 pb-1 relative">
+        <div className="px-9 lg:pt-4 pb-1 relative">
             {
                 isLoading && <CenteredSpinner className="absolute top-1/2 left-0 -translate-y-1/2"
                                               backgroundClr="text-gray-50/80"

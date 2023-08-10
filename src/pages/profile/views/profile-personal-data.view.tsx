@@ -56,7 +56,8 @@ export const ProfilePersonalDataView = () => {
                     <DesktopPanel>
                         <h3 className="mb-12 text-2xl font-medium lg:hidden">Personal Data</h3>
                         <ApiErrorMessage apiErrorResponse={ result.error }/>
-                        <div className="grid grid-rows-1 gap-x-8 gap-y-6 grid-cols-[min-content_auto]">
+
+                        <div className="mb-6 grid grid-rows-1 gap-x-8 gap-y-6 grid-cols-[min-content_auto]">
                             <PrimaryIconButton icon="manage_accounts"/>
                             <div className="flex items-center justify-between">
                                 <h4 className="text-xl font-medium lg:text-2xl lg:font-bold">Account</h4>
@@ -73,12 +74,9 @@ export const ProfilePersonalDataView = () => {
                                 <InputField name="email" displayName="E-Mail" type="text" apiError={ result.error }/>
                             </div>
                         </div>
-                    </DesktopPanel>
 
-
-                    <DesktopPanel className="mt-10">
                         <div className="grid grid-rows-1 gap-x-8 gap-y-6 grid-cols-[min-content_auto]">
-                            <PrimaryIconButton icon="manage_accounts"/>
+                            <PrimaryIconButton icon="person"/>
                             <div className="flex items-center justify-between">
                                 <h4 className="text-xl font-medium lg:text-2xl lg:font-bold">Personal</h4>
                             </div>
@@ -97,9 +95,13 @@ export const ProfilePersonalDataView = () => {
                                 <SelectDateField name="dateOfBirth" displayname="Date of birth"/>
                                 <InputField name="height" displayName="Height" type="text" apiError={ result.error }/>
                             </div>
+
+                            <div className="mt-4 md:mt-8 md:mb-2 border-t-2 border-gray-100 col-span-1 lg:col-span-2"></div>
+                            <div className="col-span-1 lg:col-span-2 flex justify-end">
+                                <SubmitButton text="Save" isSubmitting={ result.isLoading } size="md:max-w-sm"/>
+                            </div>
                         </div>
                     </DesktopPanel>
-                    <SubmitButton text="Submit" isSubmitting={ result.isLoading }/>
                 </Form>
             </Formik>
     }

@@ -28,22 +28,22 @@ export const MENU_ITEMS: MenuItemInterface[] = [
             {
                 name: 'personal',
                 link: PROFILE_PERSONAL_DATA_ROUTE,
-                icon: 'person',
+                icon: 'manage_accounts',
             },
             {
                 name: 'nutrition',
                 link: PROFILE_NUTRITIONAL_DATA_ROUTE,
-                icon: 'person',
+                icon: 'show_chart',
             },
             {
                 name: 'allergies',
                 link: PROFILE_ALLERGENICS_ROUTE,
-                icon: 'person',
+                icon: 'view_list',
             },
             {
                 name: 'meals',
                 link: PROFILE_MEAL_PREFIX_ROUTE,
-                icon: 'person',
+                icon: 'menu_book',
             },
         ],
     },

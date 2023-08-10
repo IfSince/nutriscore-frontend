@@ -56,7 +56,7 @@ export const ProfileNutritionalDataView = () => {
                         <h3 className="mb-12 text-2xl font-medium lg:hidden">Nutritional Data</h3>
                         <ApiErrorMessage apiErrorResponse={ result.error }/>
                         <div className="grid grid-rows-1 gap-x-8 gap-y-6 grid-cols-[min-content_auto]">
-                            <PrimaryIconButton icon="manage_accounts"/>
+                            <PrimaryIconButton icon="show_chart"/>
                             <div className="flex items-center justify-between">
                                 <h4 className="text-xl font-medium lg:text-2xl lg:font-bold">Nutrition</h4>
                             </div>
@@ -66,7 +66,7 @@ export const ProfileNutritionalDataView = () => {
                             </div>
 
 
-                            <div className="col-span-2 mb-10 flex flex-col gap-6 lg:col-span-1">
+                            <div className="col-span-2 gap-y-6 gap-x-10 lg:col-span-1 grid grid-cols-1 lg:grid-cols-2">
                                 <EnumDropdownField name="nutritionTypeId"
                                                    enum={ SelectableEnum.NUTRITION_TYPE }
                                                    displayName="Nutrition type"
@@ -85,10 +85,14 @@ export const ProfileNutritionalDataView = () => {
                                 <InputField name="phyiscalActivityLevel" displayName="Phyiscal Activity Level" type="number" apiError={ result.error }/>
                                 <InputField name="goal" displayName="Goal" type="text" apiError={ result.error }/>
                                 <InputField name="calorieRestriction" displayName="Calorie Restriction" type="number" apiError={ result.error }/>
+
+                                <div className="mt-4 md:mt-8 md:mb-2 border-t-2 border-gray-100 col-span-1 lg:col-span-2"></div>
+                                <div className="col-span-1 lg:col-span-2 flex justify-end">
+                                    <SubmitButton text="Save" isSubmitting={ result.isLoading } size="md:max-w-sm"/>
+                                </div>
                             </div>
                         </div>
                     </DesktopPanel>
-                    <SubmitButton text="Submit" isSubmitting={ result.isLoading }/>
                 </Form>
             </Formik>
     }

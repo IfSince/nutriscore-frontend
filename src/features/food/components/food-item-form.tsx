@@ -120,7 +120,7 @@ export const FoodItemForm = ({ form, onSubmit, apiError, isLoading, children, ed
                                             </div>
                                             <div className="my-4 border-t-2 border-gray-100 lg:my-6"></div>
                                             <div className="flex flex-row justify-between">
-                                                <SubmitButton text="Create" isSubmitting={ isLoading }/>
+                                                <SubmitButton text="Create" isSubmitting={ isLoading } kind="grow" size="md:max-w-sm"/>
                                             </div>
                                         </>
                                     }

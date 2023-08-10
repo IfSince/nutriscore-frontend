@@ -58,10 +58,10 @@ export const DiaryFoodItemView = () => {
                         <ApiErrorMessage apiErrorResponse={ updateError }/>
                         <div className="flex justify-between flex-col gap-x-8 gap-y-4 xs:flex-row lg:flex-col xl:flex-row">
                             <div className="flex justify-between items-center gap-6">
-                                <AmountSelector name="amount" unit={ foodItem.unit }/>
+                                <AmountSelector name="amount" unit={ foodItem.unit } factor={ 1 }/>
                                 <TimeOfDaySelector name="timeOfDay"/>
                             </div>
-                            <SubmitButton text="Update" isSubmitting={ updateIsLoading }/>
+                            <SubmitButton text="Update" isSubmitting={ updateIsLoading } kind="grow" size="md:max-w-sm"/>
                         </div>
                     </Form>
                 </Formik>

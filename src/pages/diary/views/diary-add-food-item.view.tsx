@@ -74,10 +74,10 @@ export const DiaryAddFoodItemView = () => {
                         <ApiErrorMessage apiErrorResponse={ foodRecordingError }/>
                         <div className="flex justify-between flex-col gap-x-8 gap-y-4 xs:flex-row lg:flex-col xl:flex-row">
                             <div className="flex justify-between items-center gap-6">
-                                <AmountSelector name="amount" unit={ foodItem.unit }/>
+                                <AmountSelector name="amount" unit={ foodItem.unit } factor={ 1 }/>
                                 <TimeOfDaySelector name="timeOfDay"/>
                             </div>
-                            <SubmitButton text="Add Recording" isSubmitting={ foodRecordingIsLoading }/>
+                            <SubmitButton text="Add Recording" isSubmitting={ foodRecordingIsLoading } kind="grow" size="md:max-w-sm"/>
                         </div>
                     </Form>
                 </Formik>

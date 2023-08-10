@@ -31,7 +31,7 @@ export const DiaryOverviewView = () => {
 
     return (
         <>
-            <div className="fixed z-10 bottom-16 left-0 w-full bg-cyan-50 p-4 pb-6 flex justify-between rounded-t-lg lg:hidden">
+            <div className="fixed z-[60] bottom-16 left-0 w-full bg-cyan-50 p-4 pb-6 flex justify-between rounded-t-lg lg:hidden">
                 <div className="flex w-full flex-col justify-between pb-0.5 pr-10">
                     <span className="flex justify-between items-end">
                         <span className="font-medium text-gray-600">Remaining</span>
@@ -82,7 +82,7 @@ export const DiaryOverviewView = () => {
                 </div>
 
                 <div className="flex-layout-row">
-                    <DiaryMealPanel name="Lunch"
+                    <DiaryMealPanel name="Snacks"
                                     valueObject={ mealData[TimeOfDay.SNACKS] }
                                     items={ recordings?.filter(it => it.timeOfDay === TimeOfDay.SNACKS) || [] }
                                     isLoading={ nutritionalRecordingsRequest.isLoading }/>
