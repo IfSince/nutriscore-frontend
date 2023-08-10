@@ -10,19 +10,21 @@ import { useGetFoodItemByIdQuery } from '../../../features/food/food-items-api-s
 import { useAddNewFoodRecordingMutation } from '../../../features/food-recording/food-recording-api-slice.ts';
 import { FoodRecording } from '../../../features/food-recording/models/food-recording.ts';
 import { FoodItemForm } from '../../../features/food/components/food-item-form.tsx';
-import { useAppDispatch } from '../../../hooks.ts';
+import { useAppDispatch, useAppSelector } from '../../../hooks.ts';
 import { UserIdContext } from '../../root.view.tsx';
 import { addSuccessMessage } from '../../../common/messages/global-message-slice.ts';
 import { NEW_ENTITY_ID } from '../../../common/constants.ts';
 import { TimeOfDay } from '../../../features/type-of-day.enum.ts';
 import { AmountSelector } from '../../../common/form/components/amount-selector/amount-selector.tsx';
 import { TimeOfDaySelector } from '../../../common/form/components/time-of-day-selector/time-of-day-selector.tsx';
+import { selectDate } from '../../../common/date-picker/date-slice.ts';
 
 export const DiaryAddFoodItemView = () => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
     const { id } = useParams()
 
+    const date = new Date(useAppSelector(selectDate))
     const userId = useContext(UserIdContext)
 
     const {
@@ -59,7 +61,7 @@ export const DiaryAddFoodItemView = () => {
         const initialFoodRecording: FoodRecording = {
             id: NEW_ENTITY_ID,
             userId,
-            dateOfRecording: getFormattedDate(new Date()),
+            dateOfRecording: getFormattedDate(date),
             timeOfDay: TimeOfDay.BREAKFAST,
             amount: foodItem.amount,
             foodItem: foodItem,

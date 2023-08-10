@@ -67,9 +67,8 @@ export const ProfilePersonalDataView = () => {
                                 </div>
 
                                 <div className="hidden justify-center lg:flex">
-                                    <span className="flex justify-center bg-gray-300 w-0.5"></span>
+                                    <span className="flex justify-center bg-gray-100 w-0.5"></span>
                                 </div>
-
 
                                 <div className="col-span-2 mb-10 flex flex-col gap-6 lg:col-span-1">
                                     <InputField name="firstName" displayName="First name" type="text" apiError={ result.error }/>
@@ -85,7 +84,7 @@ export const ProfilePersonalDataView = () => {
                                 </div>
 
                                 <div className="hidden justify-center lg:flex">
-                                    <span className="flex justify-center bg-gray-300 w-0.5"></span>
+                                    <span className="flex justify-center bg-gray-100 w-0.5"></span>
                                 </div>
 
 

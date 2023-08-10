@@ -65,9 +65,8 @@ export const ProfileNutritionalDataView = () => {
                                 </div>
 
                                 <div className="hidden justify-center lg:flex">
-                                    <span className="flex justify-center bg-gray-300 w-0.5"></span>
+                                    <span className="flex justify-center bg-gray-100 w-0.5"></span>
                                 </div>
-
 
                                 <div className="col-span-2 gap-y-6 gap-x-10 lg:col-span-1 grid grid-cols-1 lg:grid-cols-2">
                                     <EnumDropdownField name="nutritionTypeId"
