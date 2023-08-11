@@ -8,5 +8,5 @@ export interface RegisterForm {
     weightRecording: WeightRecording
     nutritionalData: NutritionalData
     individualMacroDistribution: IndividualMacroDistribution | null
-    allergenicIds: number[]
+    allergenics: number[]
 }

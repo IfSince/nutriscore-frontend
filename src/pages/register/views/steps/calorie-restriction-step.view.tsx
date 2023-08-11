@@ -8,7 +8,7 @@ import { RegisterHeader } from '../../components/register-header.tsx';
 import { InputField } from '../../../../common/form/components/input-field/input-field.tsx';
 
 export const CalorieRestrictionStepView = () => {
-    const [backRef, nextRef, validateCurrentStep]: RegisterOutletContext = useOutletContext()
+    const [backRef, nextRef, validateCurrentStep, apiError]: RegisterOutletContext = useOutletContext()
     const form = useFormikContext<RegisterForm>()
 
     useEffect(() => {
@@ -27,6 +27,7 @@ export const CalorieRestrictionStepView = () => {
             <div className="mt-4 w-full">
                 <InputField name="nutritionalData.calorieRestriction"
                             type="number"
+                            apiError={apiError}
                             disabled={ false }/>
             </div>
         </>

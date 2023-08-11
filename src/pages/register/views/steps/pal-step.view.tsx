@@ -9,7 +9,7 @@ import { InputField } from '../../../../common/form/components/input-field/input
 import { FieldError } from '../../../../common/form/components/field-error.tsx';
 
 export const PalStepView = () => {
-    const [backRef, nextRef, validateCurrentStep]: RegisterOutletContext = useOutletContext()
+    const [backRef, nextRef, validateCurrentStep, apiError]: RegisterOutletContext = useOutletContext()
     const form = useFormikContext<RegisterForm>()
 
     useEffect(() => {
@@ -33,35 +33,41 @@ export const PalStepView = () => {
             <div className="mt-4 w-full">
                 <InputField name="nutritionalData.physicalActivityLevelActivities.sleeping"
                             displayName="Sleeping"
+                            apiError={apiError}
                             type="number"/>
             </div>
             <div className="mt-4 w-full">
                 <InputField name="nutritionalData.physicalActivityLevelActivities.onlySitting"
                             displayName="Only sitting"
+                            apiError={apiError}
                             type="number"/>
             </div>
 
             <div className="mt-4 w-full">
                 <InputField name="nutritionalData.physicalActivityLevelActivities.occasionalActivities"
                             displayName="Mostly sitting with occasional activities"
+                            apiError={apiError}
                             type="number"/>
             </div>
 
             <div className="mt-4 w-full">
                 <InputField name="nutritionalData.physicalActivityLevelActivities.mostlySittingOrStanding"
                             displayName="Mostly sitting or standing"
+                            apiError={apiError}
                             type="number"/>
             </div>
 
             <div className="mt-4 w-full">
                 <InputField name="nutritionalData.physicalActivityLevelActivities.mostlyWalkingOrStanding"
                             displayName="Mostly walking or standing"
+                            apiError={apiError}
                             type="number"/>
             </div>
 
             <div className="mt-4 w-full">
                 <InputField name="nutritionalData.physicalActivityLevelActivities.physicallyDemanding"
                             displayName="Physically demanding activities"
+                            apiError={apiError}
                             type="number"/>
             </div>
             <div className="w-full">

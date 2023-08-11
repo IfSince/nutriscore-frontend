@@ -44,7 +44,7 @@ export const CalculationTypeStepView = () => {
         ))
 
         content = <div className="flex flex-col items-center gap-2 md:gap-3 w-full mt-4 text-lg font-medium text-gray-500">
-            <RadioField name="nutritionalData.calculationTypeId" options={ options }>
+            <RadioField name="nutritionalData.calculationTypeId" options={ options } >
                 {
                     (option, field) => (
                         <div className="w-full items-center">

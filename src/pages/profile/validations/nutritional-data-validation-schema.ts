@@ -7,6 +7,7 @@ export const NutritionalDataCreationValidationSchema = object().shape({
     activityLevelId: number().required(),
     physicalActivityLevelActivities: object()
         .optional()
+        .nullable()
         .shape({
             sleeping: number().required().min(0).max(24),
             onlySitting: number().required().min(0).max(24),

@@ -13,7 +13,7 @@ import { UnitFilter } from '../../../../common/form/components/unit-selector/uni
 import { UnitSelector } from '../../../../common/form/components/unit-selector/unit-selector.tsx';
 
 export const PersonalStepView = () => {
-    const [backRef, nextRef, validateCurrentStep]: RegisterOutletContext = useOutletContext()
+    const [backRef, nextRef, validateCurrentStep, apiError]: RegisterOutletContext = useOutletContext()
     const form = useFormikContext<RegisterForm>()
 
     useEffect(() => {
@@ -23,6 +23,9 @@ export const PersonalStepView = () => {
             form.setFieldTouched('user.dateOfBirth', true, true)
             form.setFieldTouched('user.genderId', true, true)
             form.setFieldTouched('user.height', true, true)
+            form.setFieldTouched('user.selectedHeightUnit', true, true)
+            form.setFieldTouched('user.weight', true, true)
+            form.setFieldTouched('user.selectedWeightUnit', true, true)
         }
 
         backRef.current = null
@@ -36,12 +39,14 @@ export const PersonalStepView = () => {
             <div className="mt-4 w-full">
                 <InputField name="user.firstName"
                             displayName="First name"
+                            apiError={ apiError }
                             type="text"/>
             </div>
 
             <div className="mt-4 w-full">
                 <InputField name="user.lastName"
                             displayName="Last name"
+                            apiError={ apiError }
                             type="text"/>
             </div>
 
@@ -53,27 +58,31 @@ export const PersonalStepView = () => {
                 <EnumDropdownField name="user.genderId"
                                    enum={ SelectableEnum.GENDER }
                                    displayName="Gender"
+                                   apiError={ apiError }
                                    type="number"/>
             </div>
 
-            <div className="mt-4 w-full">
+            <div className="mt-4 w-full flex gap-4">
                 <InputField name="user.height"
                             displayName="Height"
+                            apiError={ apiError }
                             type="number"/>
+
+                <UnitSelector name="user.selectedHeightUnit"
+                              filter={ UnitFilter.HEIGHT_UNITS } displayName="Unit"
+                              apiError={ apiError }/>
             </div>
 
-            <div className="mt-4 w-full">
-                <UnitSelector name="user.selectedHeightUnit" filter={ UnitFilter.HEIGHT_UNITS } displayName="Height Unit"/>
-            </div>
-
-            <div className="mt-4 w-full">
+            <div className="mt-4 w-full flex gap-4">
                 <InputField name="weightRecording.weight"
                             displayName="Weight"
+                            apiError={ apiError }
                             type="number"/>
-            </div>
 
-            <div className="mt-4 w-full">
-                <UnitSelector name="user.selectedWeightUnit" filter={ UnitFilter.WEIGHT_UNITS } displayName="Weight Unit"/>
+                <UnitSelector name="user.selectedWeightUnit"
+                              filter={ UnitFilter.WEIGHT_UNITS }
+                              displayName="Unit"
+                              apiError={ apiError }/>
             </div>
         </>
     )

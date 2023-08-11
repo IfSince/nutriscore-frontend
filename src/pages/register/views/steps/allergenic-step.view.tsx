@@ -16,7 +16,7 @@ export const AllergenicStepView = () => {
 
     useEffect(() => {
         const validateCalculationTypeStep = () => {
-            setFieldTouched('allergenicIds', true, true)
+            setFieldTouched('allergenics', true, true)
         }
 
         if (touched.nutritionalData?.activityLevelId ||
@@ -50,7 +50,7 @@ export const AllergenicStepView = () => {
     } else if (isSuccess) {
         content =
             <div className="grid grid-cols-3 gap-5">
-                <CustomArrayField name="allergenicIds" values={ allergenics }>
+                <CustomArrayField name="allergenics" values={ allergenics }>
                     {
                         ({ value, isSelected, onSelect }) => (
                             <button type="button"

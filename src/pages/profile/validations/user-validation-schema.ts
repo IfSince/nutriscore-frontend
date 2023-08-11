@@ -22,6 +22,4 @@ export const UserUpdateValidationSchema = object().shape({
     genderId: number().required(),
     dateOfBirth: date().required().max(new Date()),
     height: number().required().min(0),
-    // selectedWeightUnit: mixed<Unit>().required().oneOf(Object.values(Unit)),
-    // selectedHeightUnit: mixed<Unit>().required().oneOf(Object.values(Unit)),
 })

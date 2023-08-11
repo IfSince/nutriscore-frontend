@@ -8,7 +8,7 @@ import { RegisterHeader } from '../../components/register-header.tsx';
 import { InputField } from '../../../../common/form/components/input-field/input-field.tsx';
 
 export const AccountStepView = () => {
-    const [backRef, nextRef, validateCurrentStep]: RegisterOutletContext = useOutletContext()
+    const [backRef, nextRef, validateCurrentStep, apiError]: RegisterOutletContext = useOutletContext()
     const form = useFormikContext<RegisterForm>()
 
     useEffect(() => {
@@ -29,18 +29,21 @@ export const AccountStepView = () => {
             <div className="mt-4 w-full">
                 <InputField name="user.email"
                             displayName="E-Mail"
+                            apiError={apiError}
                             type="text"/>
             </div>
 
             <div className="mt-4 w-full">
                 <InputField name="user.password"
                             displayName="Password"
+                            apiError={apiError}
                             type="text"/>
             </div>
 
             <div className="mt-4 w-full">
                 <InputField name="user.confirmPassword"
                             displayName="Confirm Password"
+                            apiError={apiError}
                             type="text"/>
             </div>
         </>

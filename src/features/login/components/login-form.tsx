@@ -7,6 +7,7 @@ import { object, string } from 'yup';
 import LogoDark from '/logo_icon_dark.svg'
 import { FormProps } from '../../../common/form/models/form-props.ts';
 import { InputField } from '../../../common/form/components/input-field/input-field.tsx';
+import { REGISTER_ROUTE } from '../../../routes.ts';
 
 export const LoginForm = ({ form, onSubmit, apiError, isLoading }: FormProps<LoginData>) => {
     const LoginValidationSchema = object().shape({
@@ -69,7 +70,7 @@ export const LoginForm = ({ form, onSubmit, apiError, isLoading }: FormProps<Log
                                 <SubmitButton text="Log in" disabled={ !isValid } isSubmitting={ isLoading }/>
                                 <span className="mt-6 font-medium text-gray-500">
                                     Dont have an account yet?
-                                    <CustomLink to="/register/goal" text="Sign up" className="ml-1"/>
+                                    <CustomLink to={REGISTER_ROUTE} text="Sign up" className="ml-1"/>
                                 </span>
                             </div>
                         </div>
