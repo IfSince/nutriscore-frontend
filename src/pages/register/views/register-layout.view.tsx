@@ -1,8 +1,8 @@
 import { PrimaryIconButton } from '../../../common/button/components/icon/primary-icon-button.tsx';
 import { ProgressLinear } from '../../../common/progress/components/progress-linear.tsx';
 import { PrimaryButton } from '../../../common/button/components/primary-button.tsx';
-import { Link, Outlet, useMatches, useNavigate } from 'react-router-dom';
-import { LOGIN_ROUTE, REGISTER_NUTRITION_INTRO_ROUTE, REGISTER_OVERVIEW_ROUTE, REGISTER_PERSONAL_ROUTE } from '../../../routes.ts';
+import { Outlet, useMatches, useNavigate } from 'react-router-dom';
+import { LOGIN_ROUTE, REGISTER_ACCOUNT_ROUTE, REGISTER_NUTRITION_INTRO_ROUTE } from '../../../routes.ts';
 import { useEffect, useRef } from 'react';
 import { Form, Formik } from 'formik';
 import { SubmitButton } from '../../../common/button/components/submit-button.tsx';
@@ -27,6 +27,7 @@ export const RegisterLayoutView = () => {
     const matches = useMatches().map(it => it.pathname)
     const nextRouteRef = useRef<QuestStep>()
     const backRouteRef = useRef<QuestStep>()
+    const validateCurrentStep = useRef<() => void>()
 
     const [register, { isLoading, isSuccess, error }] = useRegisterMutation()
 
@@ -102,15 +103,25 @@ export const RegisterLayoutView = () => {
     }
 
     const isNutritionIntroRoute = () => matches.includes(REGISTER_NUTRITION_INTRO_ROUTE)
-    const isOverViewRoute = () => matches.includes(REGISTER_OVERVIEW_ROUTE)
-    const getCurrentStepSequence = () => Object.values(REGISTER_STEP).find(it => matches.includes(it.route))?.sequence || REGISTER_STEP.GOAL.sequence
+    const isAccountRoute = () => matches.includes(REGISTER_ACCOUNT_ROUTE)
+    const getCurrentStepSequence = () => Object.values(REGISTER_STEP).find(it => matches.includes(it.route))?.sequence || REGISTER_STEP.PERSONAL.sequence
     const routeToStep = (step?: QuestStep) => step && navigate(step.route)
+
+    const validateAndContinue = () => {
+        validateCurrentStep.current && validateCurrentStep.current()
+        routeToStep(nextRouteRef.current)
+    }
+
+    const setDefaultNutritionalProfile = () => {
+        validateCurrentStep.current && validateCurrentStep.current()
+        routeToStep(REGISTER_STEP.ALLERGENIC)
+    }
 
     return (
         <Formik initialValues={ registerForm }
                 validationSchema={ RegisterValidationSchema }
-                validateOnBlur={ true }
-                validateOnChange={ false }
+                validateOnBlur={ false }
+                validateOnChange={ true }
                 onSubmit={ register }>
             <Form>
                 <div className="flex min-h-screen justify-center lg:min-h-fit">
@@ -122,17 +133,17 @@ export const RegisterLayoutView = () => {
                                     <ProgressLinear width={ 10 }
                                                     valueObject={ {
                                                         value: getCurrentStepSequence(),
-                                                        total: REGISTER_STEP.OVERVIEW.sequence,
+                                                        total: REGISTER_STEP.ACCOUNT.sequence,
                                                     } }
                                                     animationStyle="ease-out duration-500"/>
                                 </div>
-                                <PrimaryIconButton icon="arrow_forward" action={ () => routeToStep(REGISTER_STEP.OVERVIEW) }/>
+                                <div className="w-11 lg:w-12"></div>
                             </div>
 
                             <h4 className="mt-10 text-center font-medium uppercase text-cyan-300 lg:mt-14 lg:text-lg">
                                 Step <span className="tracking-wide">
                         {
-                            `${ getCurrentStepSequence() }/${ REGISTER_STEP.OVERVIEW.sequence }`
+                            `${ getCurrentStepSequence() }/${ REGISTER_STEP.ACCOUNT.sequence }`
                         }
                         </span>
                             </h4>
@@ -140,25 +151,24 @@ export const RegisterLayoutView = () => {
                             <div className="mt-2 flex flex-col items-center lg:mt-4">
                                 <div className="flex w-full max-w-xl flex-col items-center">
                                     <ApiErrorMessage apiErrorResponse={ error }/>
-                                    <Outlet context={ [backRouteRef, nextRouteRef] }/>
+                                    <Outlet context={ [backRouteRef, nextRouteRef, validateCurrentStep] }/>
                                 </div>
                             </div>
                         </div>
 
                         <div className="mt-10 flex w-full flex-col items-center justify-center lg:mt-14 xl:mt-20">
                             {
-                                isOverViewRoute()
+                                isAccountRoute()
                                     ? <SubmitButton text="Submit" isSubmitting={ isLoading }/>
-                                    : <PrimaryButton className="w-full max-w-md"
-                                                     action={ () => routeToStep(nextRouteRef.current) }>
+                                    : <PrimaryButton className="w-full max-w-md" action={ validateAndContinue }>
                                         <span className="whitespace-nowrap text-base font-medium">Continue</span>
                                     </PrimaryButton>
                             }
                             {
                                 isNutritionIntroRoute() &&
-                                <Link className="mt-6 text-cyan-300 transition-colors hover:text-cyan-400" to={ REGISTER_PERSONAL_ROUTE }>
+                                <button className="mt-6 text-cyan-200 transition-colors hover:text-cyan-300" onClick={setDefaultNutritionalProfile}>
                                     No thanks
-                                </Link>
+                                </button>
                             }
                         </div>
                     </div>

@@ -17,7 +17,8 @@ export const NUTRITION_TYPE_ROUTE = '/register/nutrition-type'
 export const REGISTER_CALCULATION_TYPE_ROUTE = '/register/rmr'
 export const REGISTER_CALORIE_RESTRICTION_ROUTE = '/register/calorie-restriction'
 export const REGISTER_PERSONAL_ROUTE = '/register/personal'
-export const REGISTER_OVERVIEW_ROUTE = '/register/overview'
+
+export const REGISTER_ACCOUNT_ROUTE = '/register/account'
 
 // Home
 export const HOME_ROUTE = '/home'

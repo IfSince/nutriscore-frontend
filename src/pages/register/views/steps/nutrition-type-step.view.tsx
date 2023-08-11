@@ -1,32 +1,34 @@
-import { RegisterOutletContext } from '../models/register-outlet-context.ts';
 import { useOutletContext } from 'react-router-dom';
-import { useCallback, useEffect } from 'react';
-import { REGISTER_STEP } from '../register-steps.ts';
-import { RegisterHeader } from '../components/register-header.tsx';
+import { RegisterOutletContext } from '../../models/register-outlet-context.ts';
 import { useFormikContext } from 'formik';
-import { CenteredSpinner } from '../../../common/spinner/components/centered-spinner.tsx';
-import { ApiErrorMessage } from '../../../common/messages/api-error-message.tsx';
-import { RegisterForm } from '../../../features/register/models/register-form.ts';
-import { useGetAllNutritionTypesQuery } from '../../../features/nutrition-type/nutrition-type-api-slice.ts';
-import { RadioField } from '../../../common/form/components/radio-field/radio-field.tsx';
+import { RegisterForm } from '../../../../features/register/models/register-form.ts';
+import { useCallback, useEffect } from 'react';
+import { ACTIVITY_PER_WEEK_IDS, PA_LEVEL_ID } from '../../../../features/activity-level/models/activity-level.ts';
+import { REGISTER_STEP } from '../../register-steps.ts';
+import { useGetAllNutritionTypesQuery } from '../../../../features/nutrition-type/nutrition-type-api-slice.ts';
+import { CenteredSpinner } from '../../../../common/spinner/components/centered-spinner.tsx';
+import { ApiErrorMessage } from '../../../../common/messages/api-error-message.tsx';
+import { RadioField } from '../../../../common/form/components/radio-field/radio-field.tsx';
+import { RegisterHeader } from '../../components/register-header.tsx';
 
 export const NutritionTypeStepView = () => {
-    const [backRef, nextRef]: RegisterOutletContext = useOutletContext()
-    const { values: registerForm } = useFormikContext<RegisterForm>()
+    const [backRef, nextRef, validateCurrentStep]: RegisterOutletContext = useOutletContext()
+    const { values: registerForm, setFieldTouched } = useFormikContext<RegisterForm>()
 
     const updateRoutes = useCallback((activityLevelId: number) => {
-        if ([0, 1, 2, 3, 4, 5].includes(activityLevelId)) {
-            backRef.current = REGISTER_STEP.ACTIVITY_PER_WEEK
-        } else if (activityLevelId == 6) {
-            backRef.current = REGISTER_STEP.PAL
-        } else {
-            backRef.current = REGISTER_STEP.ACTIVITY_LEVEL
-        }
+        if (ACTIVITY_PER_WEEK_IDS.includes(activityLevelId)) backRef.current = REGISTER_STEP.ACTIVITY_PER_WEEK
+        else if (activityLevelId == PA_LEVEL_ID) backRef.current = REGISTER_STEP.PAL
+        else backRef.current = REGISTER_STEP.ACTIVITY_LEVEL
     }, [backRef])
 
     useEffect(() => {
+        const validateNutritionTypeStep = () => {
+            setFieldTouched('nutritionalData.nutritionTypeId', true, true)
+        }
+
         nextRef.current = REGISTER_STEP.CALCULATION_TYPE
         updateRoutes(+registerForm.nutritionalData.activityLevelId)
+        validateCurrentStep.current = validateNutritionTypeStep
     }, [nextRef, updateRoutes, registerForm.nutritionalData.activityLevelId])
 
     const {

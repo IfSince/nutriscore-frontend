@@ -1,19 +1,27 @@
+import { RegisterOutletContext } from '../../models/register-outlet-context.ts';
 import { useOutletContext } from 'react-router-dom';
-import { RegisterHeader } from '../components/register-header.tsx';
 import { useEffect } from 'react';
-import { RegisterOutletContext } from '../models/register-outlet-context.ts';
-import { REGISTER_STEP } from '../register-steps.ts';
-import { Goal } from '../../../features/goal.ts';
-import { RadioField } from '../../../common/form/components/radio-field/radio-field.tsx';
+import { REGISTER_STEP } from '../../register-steps.ts';
+import { Goal } from '../../../../features/goal.ts';
+import { RegisterHeader } from '../../components/register-header.tsx';
+import { RadioField } from '../../../../common/form/components/radio-field/radio-field.tsx';
+import { useFormikContext } from 'formik';
+import { RegisterForm } from '../../../../features/register/models/register-form.ts';
 
 
 export const GoalStepView = () => {
-    const [backRef, nextRef]: RegisterOutletContext = useOutletContext()
+    const [backRef, nextRef, validateCurrentStep]: RegisterOutletContext = useOutletContext()
+    const form = useFormikContext<RegisterForm>()
 
     useEffect(() => {
-        backRef.current = null
-        nextRef.current = REGISTER_STEP.GENDER
-    }, [backRef, nextRef])
+        const validateGoalField = () => {
+            form.setFieldTouched('nutritionalData.goal', true, true)
+        }
+        
+        backRef.current = REGISTER_STEP.PERSONAL
+        nextRef.current = REGISTER_STEP.NUTRITION_INTRO
+        validateCurrentStep.current = validateGoalField
+    }, [backRef, form, nextRef, validateCurrentStep])
 
     const options = [
         { value: Goal.LOOSE, displayName: 'Loose weight', icon: 'trending_down' },

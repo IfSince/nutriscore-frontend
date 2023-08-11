@@ -1,30 +1,32 @@
 import { useOutletContext } from 'react-router-dom';
-import { RegisterHeader } from '../components/register-header.tsx';
-import { ChangeEvent, useCallback, useEffect } from 'react';
-import { RegisterOutletContext } from '../models/register-outlet-context.ts';
+import { RegisterOutletContext } from '../../models/register-outlet-context.ts';
 import { useFormikContext } from 'formik';
-import { REGISTER_STEP } from '../register-steps.ts';
-import { RegisterForm } from '../../../features/register/models/register-form.ts';
-import { RadioField } from '../../../common/form/components/radio-field/radio-field.tsx';
+import { RegisterForm } from '../../../../features/register/models/register-form.ts';
+import { ChangeEvent, useCallback, useEffect } from 'react';
+import { ACTIVITY_PER_WEEK_ID, PA_LEVEL_ID } from '../../../../features/activity-level/models/activity-level.ts';
+import { REGISTER_STEP } from '../../register-steps.ts';
+import { RegisterHeader } from '../../components/register-header.tsx';
+import { RadioField } from '../../../../common/form/components/radio-field/radio-field.tsx';
 
 export const ActivityLevelStepView = () => {
-    const [backRef, nextRef]: RegisterOutletContext = useOutletContext()
-    const { values: registerForm } = useFormikContext<RegisterForm>()
+    const [backRef, nextRef, validateCurrentStep]: RegisterOutletContext = useOutletContext()
+    const { values: registerForm, setFieldTouched } = useFormikContext<RegisterForm>()
 
     const updateRoutes = useCallback((activityLevelId: number) => {
-        if (activityLevelId == 0) {
-            nextRef.current = REGISTER_STEP.ACTIVITY_PER_WEEK
-        } else if (activityLevelId == 6) {
-            nextRef.current = REGISTER_STEP.PAL
-        } else {
-            nextRef.current = REGISTER_STEP.NUTRITION_TYPE
-        }
+        if (activityLevelId == ACTIVITY_PER_WEEK_ID) nextRef.current = REGISTER_STEP.ACTIVITY_PER_WEEK
+        else if (activityLevelId == PA_LEVEL_ID) nextRef.current = REGISTER_STEP.PAL
+        else nextRef.current = REGISTER_STEP.NUTRITION_TYPE
     }, [nextRef])
 
     useEffect(() => {
+        const validateActivityLevelStep = () => {
+            setFieldTouched('nutritionalData.activityLevelId', true, true)
+        }
+        
         backRef.current = REGISTER_STEP.NUTRITION_INTRO
         updateRoutes(+registerForm.nutritionalData.activityLevelId)
-    }, [backRef, updateRoutes, registerForm.nutritionalData.activityLevelId])
+        validateCurrentStep.current = validateActivityLevelStep
+    }, [backRef, updateRoutes, registerForm.nutritionalData.activityLevelId, validateCurrentStep, setFieldTouched])
 
     const options = [
         { value: 0, displayName: 'Activity per week', icon: 'image' },

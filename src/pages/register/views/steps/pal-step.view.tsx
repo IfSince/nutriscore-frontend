@@ -1,18 +1,31 @@
-import { RegisterOutletContext } from '../models/register-outlet-context.ts';
+import { RegisterOutletContext } from '../../models/register-outlet-context.ts';
 import { useOutletContext } from 'react-router-dom';
+import { useFormikContext } from 'formik';
+import { RegisterForm } from '../../../../features/register/models/register-form.ts';
 import { useEffect } from 'react';
-import { RegisterHeader } from '../components/register-header.tsx';
-import { REGISTER_STEP } from '../register-steps.ts';
-import { InputField } from '../../../common/form/components/input-field/input-field.tsx';
-import { FieldError } from '../../../common/form/components/field-error.tsx';
+import { REGISTER_STEP } from '../../register-steps.ts';
+import { RegisterHeader } from '../../components/register-header.tsx';
+import { InputField } from '../../../../common/form/components/input-field/input-field.tsx';
+import { FieldError } from '../../../../common/form/components/field-error.tsx';
 
 export const PalStepView = () => {
-    const [backRef, nextRef]: RegisterOutletContext = useOutletContext()
+    const [backRef, nextRef, validateCurrentStep]: RegisterOutletContext = useOutletContext()
+    const form = useFormikContext<RegisterForm>()
 
     useEffect(() => {
+        const validatePalStep = () => {
+            form.setFieldTouched('nutritionalData.activityLevelId', true, true)
+            form.setFieldTouched('nutritionalData.physicalActivityLevelActivities.sleeping', true, true)
+            form.setFieldTouched('nutritionalData.physicalActivityLevelActivities.onlySitting', true, true)
+            form.setFieldTouched('nutritionalData.physicalActivityLevelActivities.occasionalActivities', true, true)
+            form.setFieldTouched('nutritionalData.physicalActivityLevelActivities.mostlySittingOrStanding', true, true)
+            form.setFieldTouched('nutritionalData.physicalActivityLevelActivities.mostlyWalkingOrStanding', true, true)
+            form.setFieldTouched('nutritionalData.physicalActivityLevelActivities.physicallyDemanding', true, true)
+        }
         backRef.current = REGISTER_STEP.ACTIVITY_LEVEL
         nextRef.current = REGISTER_STEP.NUTRITION_TYPE
-    }, [backRef, nextRef])
+        validateCurrentStep.current = validatePalStep
+    }, [backRef, form, nextRef, validateCurrentStep])
 
     return (
         <>

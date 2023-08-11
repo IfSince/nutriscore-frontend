@@ -1,20 +1,27 @@
+import { RegisterOutletContext } from '../../models/register-outlet-context.ts';
 import { useOutletContext } from 'react-router-dom';
-import { RegisterHeader } from '../components/register-header.tsx';
-import { RegisterOutletContext } from '../models/register-outlet-context.ts';
+import { useFormikContext } from 'formik';
+import { RegisterForm } from '../../../../features/register/models/register-form.ts';
 import { useEffect } from 'react';
-import { REGISTER_STEP } from '../register-steps.ts';
-import { CenteredSpinner } from '../../../common/spinner/components/centered-spinner.tsx';
-import { ApiErrorMessage } from '../../../common/messages/api-error-message.tsx';
-import { useGetAllCalculationTypesQuery } from '../../../features/calculation-type/calculation-type-api-slice.ts';
-import { RadioField } from '../../../common/form/components/radio-field/radio-field.tsx';
+import { REGISTER_STEP } from '../../register-steps.ts';
+import { useGetAllCalculationTypesQuery } from '../../../../features/calculation-type/calculation-type-api-slice.ts';
+import { CenteredSpinner } from '../../../../common/spinner/components/centered-spinner.tsx';
+import { ApiErrorMessage } from '../../../../common/messages/api-error-message.tsx';
+import { RadioField } from '../../../../common/form/components/radio-field/radio-field.tsx';
+import { RegisterHeader } from '../../components/register-header.tsx';
 
 export const CalculationTypeStepView = () => {
-    const [backRef, nextRef]: RegisterOutletContext = useOutletContext()
+    const [backRef, nextRef, validateCurrentStep]: RegisterOutletContext = useOutletContext()
+    const form = useFormikContext<RegisterForm>()
 
     useEffect(() => {
+        const validateCalculationTypeStep = () => {
+            form.setFieldTouched('nutritionalData.calculationTypeId', true, true)
+        }
         backRef.current = REGISTER_STEP.NUTRITION_TYPE
         nextRef.current = REGISTER_STEP.CALORIE_RESTRICTION
-    }, [backRef, nextRef])
+        validateCurrentStep.current = validateCalculationTypeStep
+    }, [backRef, form, nextRef, validateCurrentStep])
 
     const {
         data: calculationTypes,

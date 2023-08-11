@@ -1,20 +1,36 @@
-import { RegisterHeader } from '../components/register-header.tsx';
+import { RegisterOutletContext } from '../../models/register-outlet-context.ts';
 import { useOutletContext } from 'react-router-dom';
-import { RegisterOutletContext } from '../models/register-outlet-context.ts';
+import { useFormikContext } from 'formik';
+import { RegisterForm } from '../../../../features/register/models/register-form.ts';
 import { useEffect } from 'react';
-import { REGISTER_STEP } from '../register-steps.ts';
-import { CenteredSpinner } from '../../../common/spinner/components/centered-spinner.tsx';
-import { ApiErrorMessage } from '../../../common/messages/api-error-message.tsx';
-import { useGetAllAllergenicsQuery } from '../../../features/allergenics/allergenics-api-slice.ts';
-import { CustomArrayField } from '../../../common/form/components/array-field/custom-array-field.tsx';
+import { REGISTER_STEP } from '../../register-steps.ts';
+import { useGetAllAllergenicsQuery } from '../../../../features/allergenics/allergenics-api-slice.ts';
+import { CenteredSpinner } from '../../../../common/spinner/components/centered-spinner.tsx';
+import { ApiErrorMessage } from '../../../../common/messages/api-error-message.tsx';
+import { CustomArrayField } from '../../../../common/form/components/array-field/custom-array-field.tsx';
+import { RegisterHeader } from '../../components/register-header.tsx';
 
 export const AllergenicStepView = () => {
-    const [backRef, nextRef]: RegisterOutletContext = useOutletContext()
+    const [backRef, nextRef, validateCurrentStep]: RegisterOutletContext = useOutletContext()
+    const { touched, setFieldTouched } = useFormikContext<RegisterForm>()
 
     useEffect(() => {
-        backRef.current = REGISTER_STEP.WEIGHT
-        nextRef.current = REGISTER_STEP.NUTRITION_INTRO
-    }, [backRef, nextRef])
+        const validateCalculationTypeStep = () => {
+            setFieldTouched('allergenicIds', true, true)
+        }
+
+        if (touched.nutritionalData?.activityLevelId ||
+            touched.nutritionalData?.nutritionTypeId ||
+            touched.nutritionalData?.calculationTypeId ||
+            touched.nutritionalData?.calorieRestriction) {
+            backRef.current = REGISTER_STEP.CALORIE_RESTRICTION
+        } else {
+            backRef.current = REGISTER_STEP.NUTRITION_INTRO
+        }
+
+        nextRef.current = REGISTER_STEP.ACCOUNT
+        validateCurrentStep.current = validateCalculationTypeStep
+    }, [backRef, touched, nextRef, setFieldTouched, validateCurrentStep])
 
     const {
         data: allergenics,

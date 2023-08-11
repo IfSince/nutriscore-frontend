@@ -19,21 +19,17 @@ import {
     PROFILE_NUTRITIONAL_DATA_ROUTE,
     PROFILE_PERSONAL_DATA_ROUTE,
     PROFILE_ROUTE,
+    REGISTER_ACCOUNT_ROUTE,
     REGISTER_ACTIVITY_LEVEL_ROUTE,
     REGISTER_ACTIVITY_PER_WEEK_ROUTE,
     REGISTER_ALLERGENIC_ROUTE,
     REGISTER_CALCULATION_TYPE_ROUTE,
     REGISTER_CALORIE_RESTRICTION_ROUTE,
-    REGISTER_DATE_OF_BIRTH_ROUTE,
-    REGISTER_GENDER_ROUTE,
     REGISTER_GOAL_ROUTE,
-    REGISTER_HEIGHT_ROUTE,
     REGISTER_NUTRITION_INTRO_ROUTE,
-    REGISTER_OVERVIEW_ROUTE,
     REGISTER_PAL_ROUTE,
     REGISTER_PERSONAL_ROUTE,
     REGISTER_ROUTE,
-    REGISTER_WEIGHT_ROUTE,
     STATISTICS_ROUTE,
 } from './routes.ts';
 import { NotLoggedInRoute } from './common/not-logged-in-route.tsx';
@@ -49,21 +45,6 @@ import { DiaryAddMealItemView } from './pages/diary/views/meal-item/diary-add-me
 import { LoginView } from './pages/login/login.view.tsx';
 import { RegisterLayoutView } from './pages/register/views/register-layout.view.tsx';
 import { NotFoundView } from './pages/error.view.tsx';
-import { GoalStepView } from './pages/register/views/goal-step.view.tsx';
-import { GenderStepView } from './pages/register/views/gender-step.view.tsx';
-import { DateOfBirthStepView } from './pages/register/views/date-of-birth-step.view.tsx';
-import { HeightStepView } from './pages/register/views/height-step.view.tsx';
-import { WeightStepView } from './pages/register/views/weight-step.view.tsx';
-import { AllergenicStepView } from './pages/register/views/allergenic-step.view.tsx';
-import { NutritionIntroStepView } from './pages/register/views/nutrition-intro-step.view.tsx';
-import { ActivityLevelStepView } from './pages/register/views/activity-level-step.view.tsx';
-import { ActivityPerWeekStepView } from './pages/register/views/activity-per-week-step.view.tsx';
-import { PalStepView } from './pages/register/views/pal-step.view.tsx';
-import { NutritionTypeStepView } from './pages/register/views/nutrition-type-step.view.tsx';
-import { CalculationTypeStepView } from './pages/register/views/calculation-type-step.view.tsx';
-import { CalorieRestrictionStepView } from './pages/register/views/calorie-restriction-step.view.tsx';
-import { PersonalStepView } from './pages/register/views/personal-step.view.tsx';
-import { RegisterOverviewStepView } from './pages/register/views/register-overview-step.view.tsx';
 import { RootView } from './pages/root.view.tsx';
 import { StatisticsView } from './pages/statistics/views/statistics.view.tsx';
 import { ProfileView } from './pages/profile/views/profile.view.tsx';
@@ -73,6 +54,17 @@ import { ProfileNutritionalDataView } from './pages/profile/views/profile-nutrit
 import { ProfileAllergenicsView } from './pages/profile/views/profile-allergenics.view.tsx';
 import { ProfileMealSearchView } from './pages/profile/views/profile-meal-search.view.tsx';
 import { ProfileMealItemView } from './pages/profile/views/profile-meal-item.view.tsx';
+import { GoalStepView } from './pages/register/views/steps/goal-step.view.tsx';
+import { AccountStepView } from './pages/register/views/steps/account-step.view.tsx';
+import { PersonalStepView } from './pages/register/views/steps/personal-step.view.tsx';
+import { NutritionIntroStepView } from './pages/register/views/steps/nutrition-intro-step.view.tsx';
+import { ActivityLevelStepView } from './pages/register/views/steps/activity-level-step.view.tsx';
+import { ActivityPerWeekStepView } from './pages/register/views/steps/activity-per-week-step.view.tsx';
+import { PalStepView } from './pages/register/views/steps/pal-step.view.tsx';
+import { NutritionTypeStepView } from './pages/register/views/steps/nutrition-type-step.view.tsx';
+import { CalculationTypeStepView } from './pages/register/views/steps/calculation-type-step.view.tsx';
+import { CalorieRestrictionStepView } from './pages/register/views/steps/calorie-restriction-step.view.tsx';
+import { AllergenicStepView } from './pages/register/views/steps/allergenic-step.view.tsx';
 
 export const router = createBrowserRouter([
     {
@@ -92,31 +84,15 @@ export const router = createBrowserRouter([
         children: [
             {
                 index: true,
-                element: <Navigate to={ REGISTER_GOAL_ROUTE } replace/>,
+                element: <Navigate to={ REGISTER_PERSONAL_ROUTE } replace/>,
+            },
+            {
+                path: REGISTER_PERSONAL_ROUTE,
+                element: <PersonalStepView/>,
             },
             {
                 path: REGISTER_GOAL_ROUTE,
                 element: <GoalStepView/>,
-            },
-            {
-                path: REGISTER_GENDER_ROUTE,
-                element: <GenderStepView/>,
-            },
-            {
-                path: REGISTER_DATE_OF_BIRTH_ROUTE,
-                element: <DateOfBirthStepView/>,
-            },
-            {
-                path: REGISTER_HEIGHT_ROUTE,
-                element: <HeightStepView/>,
-            },
-            {
-                path: REGISTER_WEIGHT_ROUTE,
-                element: <WeightStepView/>,
-            },
-            {
-                path: REGISTER_ALLERGENIC_ROUTE,
-                element: <AllergenicStepView/>,
             },
             {
                 path: REGISTER_NUTRITION_INTRO_ROUTE,
@@ -134,7 +110,6 @@ export const router = createBrowserRouter([
                 path: REGISTER_PAL_ROUTE,
                 element: <PalStepView/>,
             },
-
             {
                 path: NUTRITION_TYPE_ROUTE,
                 element: <NutritionTypeStepView/>,
@@ -148,12 +123,12 @@ export const router = createBrowserRouter([
                 element: <CalorieRestrictionStepView/>,
             },
             {
-                path: REGISTER_PERSONAL_ROUTE,
-                element: <PersonalStepView/>,
+                path: REGISTER_ACCOUNT_ROUTE,
+                element: <AccountStepView/>,
             },
             {
-                path: REGISTER_OVERVIEW_ROUTE,
-                element: <RegisterOverviewStepView/>,
+                path: REGISTER_ALLERGENIC_ROUTE,
+                element: <AllergenicStepView/>,
             },
         ],
     },

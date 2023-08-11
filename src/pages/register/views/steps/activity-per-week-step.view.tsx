@@ -1,17 +1,24 @@
-import { RegisterOutletContext } from '../models/register-outlet-context.ts';
+import { RegisterOutletContext } from '../../models/register-outlet-context.ts';
 import { useOutletContext } from 'react-router-dom';
+import { useFormikContext } from 'formik';
+import { RegisterForm } from '../../../../features/register/models/register-form.ts';
 import { useEffect } from 'react';
-import { RegisterHeader } from '../components/register-header.tsx';
-import { REGISTER_STEP } from '../register-steps.ts';
-import { RadioField } from '../../../common/form/components/radio-field/radio-field.tsx';
+import { REGISTER_STEP } from '../../register-steps.ts';
+import { RegisterHeader } from '../../components/register-header.tsx';
+import { RadioField } from '../../../../common/form/components/radio-field/radio-field.tsx';
 
 export const ActivityPerWeekStepView = () => {
-    const [backRef, nextRef]: RegisterOutletContext = useOutletContext()
+    const [backRef, nextRef, validateCurrentStep]: RegisterOutletContext = useOutletContext()
+    const form = useFormikContext<RegisterForm>()
 
     useEffect(() => {
+        const validateActivityLevelStep = () => {
+            form.setFieldTouched('nutritionalData.activityLevelId', true, true)
+        }
         backRef.current = REGISTER_STEP.ACTIVITY_LEVEL
         nextRef.current = REGISTER_STEP.NUTRITION_TYPE
-    }, [backRef, nextRef])
+        validateCurrentStep.current = validateActivityLevelStep
+    }, [backRef, form, nextRef, validateCurrentStep])
 
     const options = [
         { value: 1, displayName: 'No sports' },
