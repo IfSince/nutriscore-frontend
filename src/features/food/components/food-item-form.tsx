@@ -67,6 +67,17 @@ export const FoodItemForm = ({ form, onSubmit, apiError, isLoading, children, ed
                                             : <h3 className="mb-4 text-2xl font-medium text-gray-600 lg:text-3xl">{ form.description }</h3>
                                     }
 
+                                    {
+                                        editable &&
+                                        <div className="mt-2 mb-8">
+                                            <h4 className="mb-4 text-xl font-medium text-gray-600">Amount</h4>
+                                            <div className="flex justify-between items-center gap-6">
+                                                <AmountSelector name="amount" unit={ form.unit } disabled={ isLoading }/>
+                                                <UnitSelector name="unit" filter={ UnitFilter.AMOUNT_UNITS }/>
+                                            </div>
+                                        </div>
+                                    }
+
                                     <div
                                         className="my-8 grid max-w-lg 1.5xl:max-w-3xl grid-cols-2 1.5xl:grid-cols-4 gap-4 1.5xl:gap-6 md:max-w-2xl md:grid-cols-4 lg:max-w-lg lg:grid-cols-2">
                                         <MacroValuePicker name="calories"
@@ -111,13 +122,6 @@ export const FoodItemForm = ({ form, onSubmit, apiError, isLoading, children, ed
                                     {
                                         editable &&
                                         <>
-                                            <div className="mt-8 mb-4">
-                                                <h4 className="mb-4 text-xl font-medium text-gray-600">Amount</h4>
-                                                <div className="flex justify-between items-center gap-6">
-                                                    <AmountSelector name="amount" unit={ form.unit } disabled={ isLoading }/>
-                                                    <UnitSelector name="unit" filter={ UnitFilter.AMOUNT_UNITS }/>
-                                                </div>
-                                            </div>
                                             <div className="my-4 border-t-2 border-gray-100 lg:my-6"></div>
                                             <div className="flex flex-row justify-between">
                                                 <SubmitButton text="Create" isSubmitting={ isLoading } kind="grow"/>

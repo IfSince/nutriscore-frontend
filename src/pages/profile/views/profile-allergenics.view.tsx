@@ -14,6 +14,8 @@ import {
 import { addSuccessMessage } from '../../../common/messages/global-message-slice.ts';
 import { CustomArrayField } from '../../../common/form/components/array-field/custom-array-field.tsx';
 import { Header } from '../../../common/header.tsx';
+import { DesktopPanel } from '../../../common/desktop-panel.tsx';
+import { PrimaryIconButton } from '../../../common/button/components/icon/primary-icon-button.tsx';
 
 export const ProfileAllergenicsView = () => {
     const dispatch = useAppDispatch()
@@ -62,37 +64,51 @@ export const ProfileAllergenicsView = () => {
                 <Formik initialValues={ { allergenics: userAllergenics } }
                         onSubmit={ data => { update([userId, data]) } }>
                     <Form>
-                        <div className="grid grid-cols-2 gap-5 sm:grid-cols-3">
-                            <CustomArrayField name="allergenics" values={ allergenics }>
-                                {
-                                    ({ value, isSelected, onSelect }) => (
-                                        <button type="button"
-                                                key={ value.id }
-                                                onClick={ onSelect }>
-                                            <Panel title={ value.description }
-                                                   className={ `text-left transition-colors
+                        <DesktopPanel>
+                            <ApiErrorMessage apiErrorResponse={ result.error }/>
+                            <div className="grid grid-rows-1 gap-x-8 gap-y-6 grid-cols-[min-content_auto]">
+                                <PrimaryIconButton icon="show_chart"/>
+                                <div className="flex items-center justify-between">
+                                    <h4 className="text-xl font-medium lg:text-2xl lg:font-bold">Select allergenics</h4>
+                                </div>
+
+                                <div className="hidden justify-center lg:flex">
+                                    <span className="flex justify-center bg-gray-100 w-0.5"></span>
+                                </div>
+
+                                <div className="col-span-2 grid grid-cols-2 lg:col-span-1 gap-5 sm:grid-cols-3 max-w-2xl">
+                                    <CustomArrayField name="allergenics" values={ allergenics }>
+                                        {
+                                            ({ value, isSelected, onSelect }) => (
+                                                <button type="button"
+                                                        key={ value.id }
+                                                        onClick={ onSelect }>
+                                                    <Panel title={ value.description }
+                                                           className={ `text-left transition-colors max-h-40
                                                         ${ isSelected
-                                                       ? '!bg-cyan-200 !border-cyan-200 !text-gray-50'
-                                                       : 'group-hover:border-cyan-200'
-                                                   }` }>
-                                                <span className="w-full py-4 text-center text-4xl material-icons-round sm:py-8">image</span>
-                                            </Panel>
-                                        </button>
-                                    )
-                                }
-                            </CustomArrayField>
-                        </div>
-                        <SubmitButton text="Submit" isSubmitting={ result.isLoading }/>
+                                                               ? '!bg-cyan-200 !border-cyan-200 !text-gray-50'
+                                                               : 'group-hover:border-cyan-200'
+                                                           }` }>
+                                                        <span className="w-full py-4 text-center text-4xl material-icons-round sm:py-8">image</span>
+                                                    </Panel>
+                                                </button>
+                                            )
+                                        }
+                                    </CustomArrayField>
+                                </div>
+                            </div>
+                            <div className="mt-10 mb-6 md:mt-8 md:mb-8 border-t-2 border-gray-100 col-span-1 lg:col-span-2"></div>
+                            <div className="col-span-1 lg:col-span-2 flex justify-end">
+                                <SubmitButton text="Save" isSubmitting={ result.isLoading }/>
+                            </div>
+
+
+                        </DesktopPanel>
                     </Form>
                 </Formik>
             </>
 
     }
 
-    return (
-        <>
-            <h3 className="mb-8 text-2xl font-medium text-gray-600 lg:hidden">Food allergies</h3>
-            { content }
-        </>
-    )
+    return content
 }

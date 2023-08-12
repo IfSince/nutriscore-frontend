@@ -10,7 +10,7 @@ export const WeightStatisticsPanel = ({ weightRecordings, isLoading }: { weightR
 
     return (
         <div className="relative w-full grow min-h-[200px] md:min-h-[400px] md:min-w-[450px] md:w-auto">
-            <Panel className="absolute h-full w-full" title="Weight">
+            <Panel className="absolute h-full w-full pb-6" title="Weight">
                 {
                     isLoading
                         ? <CenteredSpinner className="absolute top-1/2 left-0 -translate-y-1/2"

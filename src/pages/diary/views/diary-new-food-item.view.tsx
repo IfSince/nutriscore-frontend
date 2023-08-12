@@ -1,6 +1,6 @@
 import { useContext, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { DIARY_ROUTE } from '../../../routes.ts';
+import { DIARY_ADD_FOOD_ITEM_ROUTE } from '../../../routes.ts';
 import { useAppDispatch } from '../../../hooks.ts';
 import { UserIdContext } from '../../root.view.tsx';
 import { useAddNewFoodItemMutation } from '../../../features/food/food-items-api-slice.ts';
@@ -16,14 +16,14 @@ export const DiaryNewFoodItemView = () => {
 
     const userId = useContext(UserIdContext)
 
-    const [addNewFoodItem, { isLoading, isSuccess, error }] = useAddNewFoodItemMutation()
+    const [addNewFoodItem, { data: foodItem, isLoading, isSuccess, error }] = useAddNewFoodItemMutation()
 
     useEffect(() => {
-        if (isSuccess) {
+        if (isSuccess && foodItem) {
             dispatch(addSuccessMessage('Food item created successfully!'))
-            navigate(DIARY_ROUTE)
+            navigate(DIARY_ADD_FOOD_ITEM_ROUTE.replace(':id', foodItem.id.toString()))
         }
-    }, [dispatch, isSuccess, navigate])
+    }, [dispatch, foodItem, isSuccess, navigate])
 
     const initialFoodItem: FoodItem = {
         id: NEW_ENTITY_ID,
