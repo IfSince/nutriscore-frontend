@@ -1,5 +1,5 @@
 import { MealItem } from '../../meal/models/meal-item.ts';
-import { SEARCH_FAVORITES, SEARCH_POPULAR, SEARCH_YOUR_MEALS } from '../meal-search-categories.ts';
+import { SEARCH_ALL_MEALS, SEARCH_FAVORITES, SEARCH_POPULAR, SEARCH_YOUR_MEALS } from '../meal-search-categories.ts';
 import { useContext } from 'react';
 import { MealSearchListItem } from './meal-search-list-item.tsx';
 import { UserIdContext } from '../../../pages/root.view.tsx';
@@ -9,6 +9,7 @@ export const MealSearchList = ({ items, filterText, filterCategory }: { items: M
     const userId = useContext(UserIdContext)
 
     const categoryFilterFunctions = {
+        [SEARCH_ALL_MEALS.description]: (item: MealItem) => item,
         [SEARCH_YOUR_MEALS.description]: (item: MealItem) => item.userId === userId,
         [SEARCH_FAVORITES.description]: (item: MealItem) => item,
         [SEARCH_POPULAR.description]: (item: MealItem) => item,

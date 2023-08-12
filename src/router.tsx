@@ -16,6 +16,7 @@ import {
     PROFILE_MEAL_DETAIL_ROUTE,
     PROFILE_MEAL_PREFIX_ROUTE,
     PROFILE_MEAL_SEARCH_ROUTE,
+    PROFILE_NEW_MEAL_DETAIL_ROUTE,
     PROFILE_NUTRITIONAL_DATA_ROUTE,
     PROFILE_PERSONAL_DATA_ROUTE,
     PROFILE_ROUTE,
@@ -65,6 +66,7 @@ import { NutritionTypeStepView } from './pages/register/views/steps/nutrition-ty
 import { CalculationTypeStepView } from './pages/register/views/steps/calculation-type-step.view.tsx';
 import { CalorieRestrictionStepView } from './pages/register/views/steps/calorie-restriction-step.view.tsx';
 import { AllergenicStepView } from './pages/register/views/steps/allergenic-step.view.tsx';
+import { ProfileNewMealItemView } from './pages/profile/views/profile-new-meal-item.view.tsx';
 
 export const router = createBrowserRouter([
     {
@@ -226,6 +228,10 @@ export const router = createBrowserRouter([
                             {
                                 path: PROFILE_MEAL_DETAIL_ROUTE,
                                 element: <ProfileMealItemView/>,
+                            },
+                            {
+                                path: PROFILE_NEW_MEAL_DETAIL_ROUTE,
+                                element: <ProfileNewMealItemView/>,
                             },
                         ],
                     },

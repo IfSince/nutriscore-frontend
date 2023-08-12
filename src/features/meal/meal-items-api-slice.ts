@@ -15,7 +15,7 @@ export const mealItemsApiSlice = apiSlice.injectEndpoints({
             addNewMealItem: builder.mutation<MealItem, MealItem>({
                 query: mealItem => (
                     {
-                        url: 'meals',
+                        url: `users/${ mealItem.userId }/meals`,
                         method: 'POST',
                         body: mealItem,
                     }
