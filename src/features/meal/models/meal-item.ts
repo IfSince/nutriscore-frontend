@@ -4,6 +4,7 @@ import { FoodItem } from '../../food/models/food-item.ts';
 export interface MealItem {
     id: number
     userId: number
+    userName?: string
     description: string
     file?: string
     calories: number
