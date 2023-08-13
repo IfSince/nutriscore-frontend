@@ -1,4 +1,4 @@
-import { clearErrorMessage } from '../global-message-slice.ts';
+import { clearErrorMessage, clearSuccessMessage } from '../global-message-slice.ts';
 import { useAppDispatch } from '../../../hooks.ts';
 import { MessageType } from '../models/message-type.ts';
 
@@ -10,9 +10,17 @@ export const Message = ({ message, type }: { message: string, type: MessageType 
         [MessageType.ERROR]: 'text-error bg-error-100 border-error',
     }
 
+    const clear = (message: string, type: MessageType) => {
+        const clearFunctions: Record<MessageType, () => void> = {
+            [MessageType.SUCCESS]: () => dispatch(clearSuccessMessage()),
+            [MessageType.ERROR]: () => dispatch(clearErrorMessage(message)),
+        }
+        clearFunctions[type]()
+    }
+
     return (
         <div className={ `mb-4 flex items-center rounded-md p-4 lg:py-6 border-l-[6px] font-medium animate-fade-out ${ styles[type] }` }
-             onAnimationEnd={ () => dispatch(clearErrorMessage(message)) }>
+             onAnimationEnd={ () => clear(message, type) }>
             <span className="material-icons-round mr-4 text-2xl leading-none font-bold">{ type === MessageType.SUCCESS ? 'check' : 'close' }</span>
             <span className="text-sm md:text-base">{ message }</span>
         </div>

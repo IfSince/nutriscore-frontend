@@ -16,7 +16,7 @@ export const DiarySearchInput = ({ filterText, onFilterTextChange }: DiarySearch
         <div className="flex w-full items-center">
             <SearchInput filterText={ filterText } onFilterTextChange={ onFilterTextChange }/>
 
-            <DefaultButton className="ml-2 aspect-square text-gray-50 md:ml-4 md:aspect-auto md:px-4"
+            <DefaultButton className="ml-2 aspect-square md:ml-4 md:aspect-auto md:px-4"
                            action={ () => navigate(DIARY_NEW_FOOD_ITEM_ROUTE) }>
                 <span className="text-2xl material-icons-round">add</span>
                 <span className="hidden whitespace-nowrap px-2 text-base font-medium tracking-wide md:inline">New entry</span>

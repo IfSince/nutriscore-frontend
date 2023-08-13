@@ -11,16 +11,31 @@ import {
 import { useNavigate } from 'react-router-dom';
 import { useAppDispatch } from '../../../../hooks.ts';
 import { addSuccessMessage } from '../../../../common/messages/global-message-slice.ts';
+import { useDeleteUserMutation } from '../../../../features/user/user-api-slice.ts';
+import { UserIdContext } from '../../../root.view.tsx';
+import { useContext, useEffect } from 'react';
+import { CustomSpinner } from '../../../../common/spinner/components/custom-spinner.tsx';
+import { ApiErrorMessage } from '../../../../common/messages/api-error-message.tsx';
 
 export const ProfileMenu = ({ opened, toggleOpened }: { opened: boolean, toggleOpened: (value: boolean) => void }) => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
+    const userId = useContext(UserIdContext)
+    const [deleteUser, { isLoading, isSuccess, error }] = useDeleteUserMutation()
 
     const logout = () => {
         dispatch(addSuccessMessage('You\'ve signed out successfully!'))
         navigate(LOGIN_ROUTE)
         localStorage.removeItem('userId')
     }
+
+    useEffect(() => {
+        if (isSuccess) {
+            dispatch(addSuccessMessage('You\'re account was deleted successfully!'))
+            navigate(LOGIN_ROUTE)
+            localStorage.removeItem('userId')
+        }
+    }, [dispatch, isSuccess, navigate]);
 
     return (
         <div className={ `h-screen w-screen fixed left-0 top-0 bg-cyan-50 z-9000 transition-transform duration-500 overflow-hidden
@@ -45,8 +60,13 @@ export const ProfileMenu = ({ opened, toggleOpened }: { opened: boolean, toggleO
                         </button>
                     </li>
                     <li>
-                        <button className="flex items-center py-2 pr-6 text-error hover:font-bold" onClick={ console.log }>
-                            <span className="mr-2 material-icons-round">delete</span> Delete Account
+                        <ApiErrorMessage apiErrorResponse={ error }/>
+                        <button className="flex items-center py-2 pr-6 text-error hover:font-bold disabled:text-error/50"
+                                onClick={ () => deleteUser(userId) }
+                                disabled={ isLoading }>
+                            <span className="mr-2 material-icons-round">delete</span>
+                            <span className="mr-4">Delete Account</span>
+                            { isLoading && <CustomSpinner size="sm" fill="fill-error" backgroundClr="text-error/30"/> }
                         </button>
                     </li>
                 </ul>

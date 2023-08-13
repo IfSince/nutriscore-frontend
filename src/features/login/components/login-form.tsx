@@ -36,7 +36,7 @@ export const LoginForm = ({ form, onSubmit, apiError, isLoading }: FormProps<Log
                                 <h2 className="text-center text-3xl font-bold text-gray-600 mb-4 md:mb-6 lg:mb-16 xl:text-4xl">Welcome Back!</h2>
                                 <div className="flex w-full max-w-md flex-col items-center mt-6">
                                     <div className="w-full">
-                                        <ApiErrorMessage apiErrorResponse={ apiError }/>
+                                        <ApiErrorMessage apiErrorResponse={ apiError } hideValidationMessage={ false }/>
                                     </div>
                                     <div className="w-full">
                                         <InputField name="email"
@@ -65,7 +65,7 @@ export const LoginForm = ({ form, onSubmit, apiError, isLoading }: FormProps<Log
                                 <SubmitButton text="Log in" disabled={ !isValid } isSubmitting={ isLoading }/>
                                 <span className="mt-6 font-medium text-gray-500">
                                     Dont have an account yet?
-                                    <CustomLink to={REGISTER_ROUTE} text="Sign up" className="ml-1"/>
+                                    <CustomLink to={ REGISTER_ROUTE } text="Sign up" className="ml-1"/>
                                 </span>
                             </div>
                         </div>

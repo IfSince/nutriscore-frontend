@@ -20,7 +20,7 @@ export const ProfileNewMealItemView = () => {
     useEffect(() => {
         if (isSuccess && mealItem) {
             dispatch(addSuccessMessage('Meal item created successfully!'))
-            navigate(PROFILE_MEAL_DETAIL_ROUTE.replace(':id', mealItem.id.toString()))
+            navigate(PROFILE_MEAL_DETAIL_ROUTE.replace(':id', mealItem.id.toString()), { replace: true })
         }
     }, [dispatch, mealItem, isSuccess, navigate])
 

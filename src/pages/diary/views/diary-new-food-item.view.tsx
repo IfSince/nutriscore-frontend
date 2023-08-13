@@ -23,7 +23,7 @@ export const DiaryNewFoodItemView = () => {
     useEffect(() => {
         if (isSuccess && foodItem) {
             dispatch(addSuccessMessage('Food item created successfully!'))
-            navigate(DIARY_ADD_FOOD_ITEM_ROUTE.replace(':id', foodItem.id.toString()))
+            navigate(DIARY_ADD_FOOD_ITEM_ROUTE.replace(':id', foodItem.id.toString()), { replace: true })
         }
     }, [dispatch, foodItem, isSuccess, navigate])
 

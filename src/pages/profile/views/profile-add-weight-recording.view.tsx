@@ -22,7 +22,7 @@ export const ProfileAddWeightRecordingView = () => {
     useEffect(() => {
         if (isSuccess && weightRecording) {
             dispatch(addSuccessMessage('Weight Recording updated successfully!'))
-            navigate(PROFILE_EDIT_WEIGHT_RECORDING_ROUTE.replace(':id', weightRecording.id.toString()))
+            navigate(PROFILE_EDIT_WEIGHT_RECORDING_ROUTE.replace(':id', weightRecording.id.toString()), { replace: true })
         }
     }, [dispatch, weightRecording, isSuccess, navigate])
 

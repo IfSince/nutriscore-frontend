@@ -1,4 +1,4 @@
-import { DIARY_SEARCH_ROUTE, PROFILE_ADD_WEIGHT_RECORDING_ROUTE } from '../../../routes.ts';
+import { DIARY_NEW_FOOD_ITEM_ROUTE, DIARY_SEARCH_ROUTE, PROFILE_ADD_WEIGHT_RECORDING_ROUTE, PROFILE_NEW_MEAL_DETAIL_ROUTE } from '../../../routes.ts';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { QuickActionsItem } from './quick-actions-item.tsx';
@@ -12,6 +12,8 @@ export const QuickActions = () => {
             <div className={ `flex-col items-center mb-4 space-y-2 ${ actionsOpened ? 'flex' : 'hidden' }` }>
                 <QuickActionsItem description="Weight" action={ () => navigate(PROFILE_ADD_WEIGHT_RECORDING_ROUTE) } icon="add"/>
                 <QuickActionsItem description="Recording" action={ () => navigate(DIARY_SEARCH_ROUTE) } icon="add"/>
+                <QuickActionsItem description="Meal" action={ () => navigate(PROFILE_NEW_MEAL_DETAIL_ROUTE) } icon="add"/>
+                <QuickActionsItem description="Food" action={ () => navigate(DIARY_NEW_FOOD_ITEM_ROUTE) } icon="add"/>
             </div>
 
             <button
