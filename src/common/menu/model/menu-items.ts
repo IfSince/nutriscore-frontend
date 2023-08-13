@@ -1,6 +1,7 @@
 import {
     DIARY_ROUTE,
     HOME_ROUTE,
+    PROFILE_ADD_WEIGHT_RECORDING_ROUTE,
     PROFILE_ALLERGENICS_ROUTE,
     PROFILE_MEAL_PREFIX_ROUTE,
     PROFILE_NUTRITIONAL_DATA_ROUTE,
@@ -45,6 +46,11 @@ export const MENU_ITEMS: MenuItemInterface[] = [
                 link: PROFILE_MEAL_PREFIX_ROUTE,
                 icon: 'menu_book',
             },
+            {
+                name: 'Add weight recordings',
+                link: PROFILE_ADD_WEIGHT_RECORDING_ROUTE,
+                icon: 'monitor_weight'
+            }
         ],
     },
 ]

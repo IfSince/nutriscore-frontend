@@ -23,7 +23,7 @@ export const ProfileMenu = ({ opened, toggleOpened }: { opened: boolean, toggleO
                     <ProfileMenuItem link={ PROFILE_NUTRITIONAL_DATA_ROUTE } description="Nutritional Data" toggleOpened={ toggleOpened }/>
                     <ProfileMenuItem link={ PROFILE_ALLERGENICS_ROUTE } description="Allergies" toggleOpened={ toggleOpened }/>
                     <ProfileMenuItem link={ PROFILE_MEAL_SEARCH_ROUTE } description="Meals" toggleOpened={ toggleOpened }/>
-                    <ProfileMenuItem link={ PROFILE_ADD_WEIGHT_RECORDING_ROUTE } description="Weight recording" toggleOpened={ toggleOpened }/>
+                    <ProfileMenuItem link={ PROFILE_ADD_WEIGHT_RECORDING_ROUTE } description="New Weight recording" toggleOpened={ toggleOpened }/>
                 </ul>
                 <ul className="flex flex-col text-xl font-medium">
                     <li>

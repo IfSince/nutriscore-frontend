@@ -19,6 +19,7 @@ export const WeightRecordingForm = ({ form, onSubmit, apiError, isLoading, child
                         <InputField name="weight" displayName="Weight" type="number" apiError={ apiError } disabled={ isLoading }/>
                     </div>
 
+                    <div className="mt-10 mb-6 md:mt-8 md:mb-8 border-t-2 border-gray-100 col-span-1 lg:col-span-2"></div>
                     <div className="mt-10 w-full flex justify-between gap-x-6 sm:gap-x-10">
                         { children }
                     </div>
