@@ -9,9 +9,12 @@ import { NEW_ENTITY_ID } from '../../../common/constants.ts';
 import { getFormattedDate } from '../../../utils/format-date.ts';
 import { Header } from '../../../common/header.tsx';
 import { SubmitButton } from '../../../common/button/components/submit-button.tsx';
+import { useNavigate } from 'react-router-dom';
+import { PROFILE_EDIT_WEIGHT_RECORDING_ROUTE } from '../../../routes.ts';
 
 export const ProfileAddWeightRecordingView = () => {
     const dispatch = useAppDispatch()
+    const navigate = useNavigate()
     const userId = useContext(UserIdContext)
 
     const [addWeightRecording, { data: weightRecording, isLoading, isSuccess, error }] = useAddNewWeightRecordingMutation()
@@ -19,8 +22,9 @@ export const ProfileAddWeightRecordingView = () => {
     useEffect(() => {
         if (isSuccess && weightRecording) {
             dispatch(addSuccessMessage('Weight Recording updated successfully!'))
+            navigate(PROFILE_EDIT_WEIGHT_RECORDING_ROUTE.replace(':id', weightRecording.id.toString()))
         }
-    }, [dispatch, weightRecording, isSuccess])
+    }, [dispatch, weightRecording, isSuccess, navigate])
 
     const initialWeightRecording: WeightRecording = {
         id: NEW_ENTITY_ID,

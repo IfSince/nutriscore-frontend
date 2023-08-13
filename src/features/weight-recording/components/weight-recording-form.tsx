@@ -14,15 +14,12 @@ export const WeightRecordingForm = ({ form, onSubmit, apiError, isLoading, child
                 <Form>
                     <ApiErrorMessage apiErrorResponse={ apiError }/>
 
-                    <div className="mt-4 w-full">
+                    <div className="flex flex-col sm:flex-row gap-y-6 gap-x-10">
                         <SelectDateField name="dateOfRecording" displayname="Date of birth"/>
-                    </div>
-
-                    <div className="mt-4 w-full">
                         <InputField name="weight" displayName="Weight" type="number" apiError={ apiError } disabled={ isLoading }/>
                     </div>
 
-                    <div className="mt-10 w-full">
+                    <div className="mt-10 w-full flex justify-between gap-x-6 sm:gap-x-10">
                         { children }
                     </div>
                 </Form>

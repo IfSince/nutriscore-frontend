@@ -34,6 +34,18 @@ export const weightRecordingApiSlice = apiSlice.injectEndpoints({
                     { type: USER_METADATA_TAG, id: userId },
                 ],
             }),
+            deleteWeightRecording: builder.mutation<void, { userId: number, weightRecordingId: number }>({
+                query: ({ weightRecordingId }) => (
+                    {
+                        url: `weight-recordings/${ weightRecordingId }`,
+                        method: 'DELETE',
+                    }
+                ),
+                invalidatesTags: (_result, _error, { userId, weightRecordingId }) => [
+                    { type: WEIGHT_RECORDING_TAG, id: weightRecordingId },
+                    { type: USER_METADATA_TAG, id: userId },
+                ],
+            }),
         }
     ),
 })
@@ -42,4 +54,5 @@ export const {
     useGetWeightRecordingByIdQuery,
     useAddNewWeightRecordingMutation,
     useEditWeightRecordingMutation,
+    useDeleteWeightRecordingMutation,
 } = weightRecordingApiSlice
