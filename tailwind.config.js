@@ -98,7 +98,7 @@ export default {
                 },
             },
             animation: {
-                'fade-out': 'fadeout 0.75s cubic-bezier(0.4, 0, 0.6, 1) 1s forwards',
+                'fade-out': 'fadeout 0.5s cubic-bezier(0.4, 0, 0.6, 1) 1.5s forwards',
             },
         },
     },
