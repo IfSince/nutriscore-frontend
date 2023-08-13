@@ -4,19 +4,19 @@ import { ApiErrorMessage } from '../../../src/common/messages/api-error-message'
 import { ApiErrorResponse } from '../../../src/api/api-slice';
 
 describe('ApiErrorMessage', () => {
+    const message = 'Hello world'
+
     it('displays error message if apiError is defined includes message', () => {
-        const message = 'Hello world';
         const apiErrorResponse: ApiErrorResponse = {
             status: 404,
-            data: { message: message },
+            data: { message },
         }
 
         const { queryByText } = render(<ApiErrorMessage apiErrorResponse={ apiErrorResponse }/>)
-        expect(queryByText(message)).toBeTruthy()
+        expect(queryByText(`${ apiErrorResponse.status } - ${ message }`)).toBeTruthy()
     })
 
     it('is not rendered anymore if button pressed', () => {
-        const message = 'Hello world'
         const apiErrorResponse: ApiErrorResponse = {
             status: 404,
             data: { message },
@@ -41,6 +41,17 @@ describe('ApiErrorMessage', () => {
         const apiErrorResponse: ApiErrorResponse = {
             status: 404,
             data: {},
+        }
+
+        const { container } = render(<ApiErrorMessage apiErrorResponse={ apiErrorResponse }/>)
+
+        expect(container.innerHTML).toBe('')
+    })
+
+    it('is not rendered if apiErrorResponse status is 422', () => {
+        const apiErrorResponse: ApiErrorResponse = {
+            status: 422,
+            data: { message },
         }
 
         const { container } = render(<ApiErrorMessage apiErrorResponse={ apiErrorResponse }/>)
