@@ -11,13 +11,8 @@ import { REGISTER_ROUTE } from '../../../routes.ts';
 
 export const LoginForm = ({ form, onSubmit, apiError, isLoading }: FormProps<LoginData>) => {
     const LoginValidationSchema = object().shape({
-        email: string()
-            .min(2, 'Too short!')
-            .max(50, 'Too long')
-            .email('Invalid email address'),
-        password: string()
-            .min(2, 'Too short!')
-            .max(50, 'Too long'),
+        email: string().required(),
+        password: string().required(),
     })
 
     return (

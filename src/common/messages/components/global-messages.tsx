@@ -8,7 +8,7 @@ export const GlobalMessages = () => {
 
     return (
         <div className="max-w-4xl w-full">
-            { errors.map(error => <Message message={ error } type={ MessageType.ERROR }/>) }
+            { errors.map(error => <Message key={ error } message={ error } type={ MessageType.ERROR }/>) }
             { success && <Message message={ success } type={ MessageType.SUCCESS }/> }
         </div>
     )

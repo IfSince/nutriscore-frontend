@@ -1,4 +1,4 @@
-import { clearSuccessMessage } from '../global-message-slice.ts';
+import { clearErrorMessage } from '../global-message-slice.ts';
 import { useAppDispatch } from '../../../hooks.ts';
 import { MessageType } from '../models/message-type.ts';
 
@@ -12,7 +12,7 @@ export const Message = ({ message, type }: { message: string, type: MessageType 
 
     return (
         <div className={ `mb-4 flex items-center rounded-md p-4 lg:py-6 border-l-[6px] font-medium animate-fade-out ${ styles[type] }` }
-             onAnimationEnd={ () => dispatch(clearSuccessMessage()) }>
+             onAnimationEnd={ () => dispatch(clearErrorMessage(message)) }>
             <span className="material-icons-round mr-4 text-2xl leading-none font-bold">{ type === MessageType.SUCCESS ? 'check' : 'close' }</span>
             <span className="text-sm md:text-base">{ message }</span>
         </div>

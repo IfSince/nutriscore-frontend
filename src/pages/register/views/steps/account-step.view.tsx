@@ -37,14 +37,14 @@ export const AccountStepView = () => {
                 <InputField name="user.password"
                             displayName="Password"
                             apiError={apiError}
-                            type="text"/>
+                            type="password"/>
             </div>
 
             <div className="mt-4 w-full">
                 <InputField name="user.confirmPassword"
                             displayName="Confirm Password"
                             apiError={apiError}
-                            type="text"/>
+                            type="password"/>
             </div>
         </>
     )
