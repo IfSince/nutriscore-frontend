@@ -4,6 +4,8 @@ import { useContext } from 'react';
 import { MealSearchListItem } from './meal-search-list-item.tsx';
 import { UserIdContext } from '../../../pages/root.view.tsx';
 import { SearchCategory } from '../../../common/form/components/search-input/models/search-category.ts';
+import { PROFILE_NEW_MEAL_DETAIL_ROUTE } from '../../../routes.ts';
+import { CustomLink } from '../../../common/link/CustomLink.tsx';
 
 export const MealSearchList = ({ items, filterText, filterCategory }: { items: MealItem[], filterText: string, filterCategory: SearchCategory }) => {
     const userId = useContext(UserIdContext)
@@ -15,13 +17,20 @@ export const MealSearchList = ({ items, filterText, filterCategory }: { items: M
         [SEARCH_POPULAR.description]: (item: MealItem) => item,
     }
 
+    const filteredItems = items
+        .filter(categoryFilterFunctions[filterCategory.description])
+        .filter(item => item.description.toLowerCase().indexOf(filterText.toLowerCase()) !== -1)
+
     return (
         <ul className="flex flex-col gap-2">
             {
-                items
-                    .filter(categoryFilterFunctions[filterCategory.description])
-                    .filter(item => item.description.toLowerCase().indexOf(filterText.toLowerCase()) !== -1)
-                    .map(mealItem => <MealSearchListItem key={ mealItem.id } mealItem={ mealItem }/>)
+                filteredItems.length
+                    ? filteredItems
+                        .map(mealItem => <MealSearchListItem key={ mealItem.id } mealItem={ mealItem }/>)
+                    : <span className="w-full text-center text-sm font-medium">
+                        Not found what you're looking for? Create a new meal
+                        <CustomLink to={ PROFILE_NEW_MEAL_DETAIL_ROUTE } text="here."></CustomLink>
+                      </span>
             }
         </ul>
     )
