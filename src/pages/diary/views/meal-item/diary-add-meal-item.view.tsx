@@ -19,6 +19,8 @@ import { TimeOfDay } from '../../../../features/type-of-day.enum.ts';
 import { AmountSelector } from '../../../../common/form/components/amount-selector/amount-selector.tsx';
 import { TimeOfDaySelector } from '../../../../common/form/components/time-of-day-selector/time-of-day-selector.tsx';
 import { selectDate } from '../../../../common/date-picker/date-slice.ts';
+import { PrimaryIconButton } from '../../../../common/button/components/icon/primary-icon-button.tsx';
+import { Header } from '../../../../common/header.tsx';
 
 export const DiaryAddMealItemView = () => {
     const dispatch = useAppDispatch()
@@ -68,22 +70,29 @@ export const DiaryAddMealItemView = () => {
         }
 
         content =
-            <MealItemForm form={ mealItem } onSubmit={ () => null } apiError={ error }
-                          isLoading={ mealRecordingIsLoading } editable={ false }>
-                <div className="my-4 border-t-2 border-gray-100 lg:my-6"></div>
-                <Formik initialValues={ initialMealRecording } onSubmit={ addNewMealRecording }>
-                    <Form>
-                        <ApiErrorMessage apiErrorResponse={ mealRecordingError }/>
-                        <div className="flex justify-between flex-col gap-x-8 gap-y-4 xs:flex-row lg:flex-col xl:flex-row">
-                            <div className="flex justify-between items-center gap-6">
-                                <AmountSelector name="amount" unit={ Unit.AMOUNT } factor={ 1 }/>
-                                <TimeOfDaySelector name="timeOfDay"/>
+            <>
+                <Header backButton={ <PrimaryIconButton className="lg:hidden z-9999"
+                                                        icon={ 'arrow_back' }
+                                                        action={ () => navigate(-1) }/> }/>
+
+                <MealItemForm form={ mealItem } onSubmit={ () => null } apiError={ error }
+                              isLoading={ mealRecordingIsLoading } editable={ false }>
+                    <div className="my-4 border-t-2 border-gray-100 lg:my-6"></div>
+                    <Formik initialValues={ initialMealRecording } onSubmit={ addNewMealRecording }>
+                        <Form>
+                            <ApiErrorMessage apiErrorResponse={ mealRecordingError }/>
+                            <div className="flex justify-between flex-col gap-x-8 gap-y-4 xs:flex-row lg:flex-col xl:flex-row">
+                                <div className="flex justify-between items-center gap-6 mb-4">
+                                    <AmountSelector name="amount" unit={ Unit.AMOUNT } factor={ 1 }/>
+                                    <TimeOfDaySelector name="timeOfDay"/>
+                                </div>
+                                <SubmitButton text="Add recording" isSubmitting={ mealRecordingIsLoading } kind="grow"/>
                             </div>
-                            <SubmitButton text="Add recording" isSubmitting={ mealRecordingIsLoading } kind="grow"/>
-                        </div>
-                    </Form>
-                </Formik>
-            </MealItemForm>
+                        </Form>
+                    </Formik>
+                </MealItemForm>
+            </>
+
     }
 
     return content

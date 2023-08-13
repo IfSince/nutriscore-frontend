@@ -7,8 +7,11 @@ import { BlurOverlay } from '../../../common/blur-overlay.tsx';
 import { useGetNutritionalRecordingSearchEntriesQuery } from '../../../features/nutritional-recordings-search/nutritional-recordings-search-api-slice.ts';
 import { NutritionalRecordingSearchList } from '../../../features/nutritional-recordings-search/components/nutritional-recording-search-list.tsx';
 import { Header } from '../../../common/header.tsx';
+import { PrimaryIconButton } from '../../../common/button/components/icon/primary-icon-button.tsx';
+import { useNavigate } from 'react-router-dom';
 
 export const DiarySearchView = () => {
+    const navigate = useNavigate()
     const [filterText, setFilterText] = useState('')
 
     const {
@@ -33,7 +36,10 @@ export const DiarySearchView = () => {
 
     return (
         <>
-            <Header title="Search Item"/>
+            <Header title="Search Item"
+                    backButton={ <PrimaryIconButton className="lg:hidden mb-10 z-9999"
+                                                    icon={ 'arrow_back' }
+                                                    action={ () => navigate(-1) }/> }/>
             <DesktopPanel>
                 <div className="relative">
                     <BlurOverlay visible={ isLoading }/>

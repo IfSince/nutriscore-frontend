@@ -42,7 +42,6 @@ export const ProfileMealItemView = () => {
     } else if (isError) {
         return <ApiErrorMessage apiErrorResponse={ error }/>
     } else if (isSuccess) {
-        console.log(userId, mealItem)
         return <MealItemForm form={ mealItem }
                              onSubmit={ editMealItem }
                              isLoading={ isLoading || editRequest.isLoading }

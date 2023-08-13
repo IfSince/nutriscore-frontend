@@ -9,6 +9,8 @@ import { FoodItem } from '../../../features/food/models/food-item.ts';
 import { NEW_ENTITY_ID } from '../../../common/constants.ts';
 import { Unit } from '../../../features/unit.ts';
 import { FoodItemForm } from '../../../features/food/components/food-item-form.tsx';
+import { Header } from '../../../common/header.tsx';
+import { PrimaryIconButton } from '../../../common/button/components/icon/primary-icon-button.tsx';
 
 export const DiaryNewFoodItemView = () => {
     const dispatch = useAppDispatch()
@@ -40,10 +42,15 @@ export const DiaryNewFoodItemView = () => {
     }
 
     return (
-        <FoodItemForm form={ initialFoodItem }
-                      onSubmit={ addNewFoodItem }
-                      isLoading={ isLoading }
-                      apiError={ error }
-                      editable={ true }/>
+        <>
+            <Header backButton={ <PrimaryIconButton className="lg:hidden z-9999"
+                                                    icon={ 'arrow_back' }
+                                                    action={ () => navigate(-1) }/> }/>
+            <FoodItemForm form={ initialFoodItem }
+                          onSubmit={ addNewFoodItem }
+                          isLoading={ isLoading }
+                          apiError={ error }
+                          editable={ true }/>
+        </>
     )
 }
