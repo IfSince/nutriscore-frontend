@@ -25,8 +25,7 @@ export const DiaryFoodItemView = () => {
         isSuccess,
         isError,
         error,
-    } =
-        useGetFoodRecordingByIdQuery(Number(id))
+    } = useGetFoodRecordingByIdQuery(Number(id))
 
     const [
         updateFoodRecording,

@@ -9,9 +9,8 @@ export const ProfileView = () => {
     const [profileMenuOpened, setProfileMenuOpened] = useState(false)
     const { id } = useParams()
     const isNewMealView = !!useMatch(PROFILE_NEW_MEAL_DETAIL_ROUTE)
-
-
-    const isMealView = !!id || isNewMealView
+    const isWeightRecordingView = !!useMatch('/profile/weight-recordings/*')
+    const isMealView = !!id || isNewMealView || isWeightRecordingView
 
     const onClick = () => {
         isMealView

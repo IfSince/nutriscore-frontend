@@ -47,3 +47,8 @@ export const PROFILE_MEAL_PREFIX_ROUTE = '/profile/meals'
 export const PROFILE_MEAL_SEARCH_ROUTE = '/profile/meals/search'
 export const PROFILE_MEAL_DETAIL_ROUTE = '/profile/meals/:id'
 export const PROFILE_NEW_MEAL_DETAIL_ROUTE = '/profile/meals/new'
+
+// Profile Weight Recording
+export const PROFILE_WEIGHT_RECORDING_PREFIX_ROUTE = '/profile/weight-recordings'
+export const PROFILE_ADD_WEIGHT_RECORDING_ROUTE = '/profile/weight-recordings/new'
+export const PROFILE_EDIT_WEIGHT_RECORDING_ROUTE = '/profile/weight-recordings/:id'

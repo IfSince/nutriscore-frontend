@@ -1,4 +1,4 @@
-import { DIARY_SEARCH_ROUTE } from '../../../routes.ts';
+import { DIARY_SEARCH_ROUTE, PROFILE_ADD_WEIGHT_RECORDING_ROUTE } from '../../../routes.ts';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
 import { QuickActionsItem } from './quick-actions-item.tsx';
@@ -10,7 +10,7 @@ export const QuickActions = () => {
     return (
         <div className="fixed right-4 bottom-24 z-[100] lg:hidden">
             <div className={ `flex-col items-center mb-4 space-y-2 ${ actionsOpened ? 'flex' : 'hidden' }` }>
-                <QuickActionsItem description="Weight" action={ () => navigate('') } icon="add"/>
+                <QuickActionsItem description="Weight" action={ () => navigate(PROFILE_ADD_WEIGHT_RECORDING_ROUTE) } icon="add"/>
                 <QuickActionsItem description="Recording" action={ () => navigate(DIARY_SEARCH_ROUTE) } icon="add"/>
             </div>
 

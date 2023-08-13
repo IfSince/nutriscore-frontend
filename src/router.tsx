@@ -12,7 +12,9 @@ import {
     HOME_ROUTE,
     LOGIN_ROUTE,
     NUTRITION_TYPE_ROUTE,
+    PROFILE_ADD_WEIGHT_RECORDING_ROUTE,
     PROFILE_ALLERGENICS_ROUTE,
+    PROFILE_EDIT_WEIGHT_RECORDING_ROUTE,
     PROFILE_MEAL_DETAIL_ROUTE,
     PROFILE_MEAL_PREFIX_ROUTE,
     PROFILE_MEAL_SEARCH_ROUTE,
@@ -20,6 +22,7 @@ import {
     PROFILE_NUTRITIONAL_DATA_ROUTE,
     PROFILE_PERSONAL_DATA_ROUTE,
     PROFILE_ROUTE,
+    PROFILE_WEIGHT_RECORDING_PREFIX_ROUTE,
     REGISTER_ACCOUNT_ROUTE,
     REGISTER_ACTIVITY_LEVEL_ROUTE,
     REGISTER_ACTIVITY_PER_WEEK_ROUTE,
@@ -67,6 +70,8 @@ import { CalculationTypeStepView } from './pages/register/views/steps/calculatio
 import { CalorieRestrictionStepView } from './pages/register/views/steps/calorie-restriction-step.view.tsx';
 import { AllergenicStepView } from './pages/register/views/steps/allergenic-step.view.tsx';
 import { ProfileNewMealItemView } from './pages/profile/views/profile-new-meal-item.view.tsx';
+import { ProfileAddWeightRecordingView } from './pages/profile/views/profile-add-weight-recording.view.tsx';
+import { ProfileEditWeightRecordingView } from './pages/profile/views/profile-edit-weight-recording.view.tsx';
 
 export const router = createBrowserRouter([
     {
@@ -232,6 +237,19 @@ export const router = createBrowserRouter([
                             {
                                 path: PROFILE_NEW_MEAL_DETAIL_ROUTE,
                                 element: <ProfileNewMealItemView/>,
+                            },
+                        ],
+                    },
+                    {
+                        path: PROFILE_WEIGHT_RECORDING_PREFIX_ROUTE,
+                        children: [
+                            {
+                                path: PROFILE_EDIT_WEIGHT_RECORDING_ROUTE,
+                                element: <ProfileEditWeightRecordingView/>,
+                            },
+                            {
+                                path: PROFILE_ADD_WEIGHT_RECORDING_ROUTE,
+                                element: <ProfileAddWeightRecordingView/>,
                             },
                         ],
                     },
