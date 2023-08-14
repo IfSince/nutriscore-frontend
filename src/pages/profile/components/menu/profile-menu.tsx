@@ -16,26 +16,28 @@ import { UserIdContext } from '../../../root.view.tsx';
 import { useContext, useEffect } from 'react';
 import { CustomSpinner } from '../../../../common/spinner/components/custom-spinner.tsx';
 import { ApiErrorMessage } from '../../../../common/messages/api-error-message.tsx';
+import { useLogoutMutation } from '../../../../features/login/login-api-slice.ts';
 
 export const ProfileMenu = ({ opened, toggleOpened }: { opened: boolean, toggleOpened: (value: boolean) => void }) => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
     const userId = useContext(UserIdContext)
-    const [deleteUser, { isLoading, isSuccess, error }] = useDeleteUserMutation()
-
-    const logout = () => {
-        dispatch(addSuccessMessage('You\'ve signed out successfully!'))
-        navigate(LOGIN_ROUTE)
-        localStorage.removeItem('userId')
-    }
+    const [logout, logoutRequest] = useLogoutMutation()
+    const [deleteUser, deleteRequest] = useDeleteUserMutation()
 
     useEffect(() => {
-        if (isSuccess) {
+        if (deleteRequest.isSuccess) {
             dispatch(addSuccessMessage('You\'re account was deleted successfully!'))
             navigate(LOGIN_ROUTE)
             localStorage.removeItem('userId')
         }
-    }, [dispatch, isSuccess, navigate]);
+
+        if (logoutRequest.isSuccess) {
+            dispatch(addSuccessMessage('You\'ve signed out successfully!'))
+            navigate(LOGIN_ROUTE)
+            localStorage.removeItem('userId')
+        }
+    }, [dispatch, deleteRequest.isSuccess, navigate, logoutRequest.isSuccess]);
 
     return (
         <div className={ `h-screen w-screen fixed left-0 top-0 bg-cyan-50 z-9000 transition-transform duration-500 overflow-hidden
@@ -55,18 +57,18 @@ export const ProfileMenu = ({ opened, toggleOpened }: { opened: boolean, toggleO
                 </ul>
                 <ul className="flex flex-col text-xl font-medium">
                     <li>
-                        <button className="flex items-center py-2 pr-6 hover:font-bold" onClick={ logout }>
+                        <button className="flex items-center py-2 pr-6 hover:font-bold" onClick={ () => logout() }>
                             <span className="mr-2 material-icons-round">logout</span> Sign out
                         </button>
                     </li>
                     <li>
-                        <ApiErrorMessage apiErrorResponse={ error }/>
+                        <ApiErrorMessage apiErrorResponse={ deleteRequest.error }/>
                         <button className="flex items-center py-2 pr-6 text-error hover:font-bold disabled:text-error/50"
                                 onClick={ () => deleteUser(userId) }
-                                disabled={ isLoading }>
+                                disabled={ deleteRequest.isLoading }>
                             <span className="mr-2 material-icons-round">delete</span>
                             <span className="mr-4">Delete Account</span>
-                            { isLoading && <CustomSpinner size="sm" fill="fill-error" backgroundClr="text-error/30"/> }
+                            { deleteRequest.isLoading && <CustomSpinner size="sm" fill="fill-error" backgroundClr="text-error/30"/> }
                         </button>
                     </li>
                 </ul>
