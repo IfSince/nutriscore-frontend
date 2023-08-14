@@ -2,7 +2,7 @@
 Um das Projekt lokal klonen zu können ist git auf dem Rechner zu installieren. Ebenfalls notwendig sind [NodeJS](https://nodejs.org/en/) und [npm](https://www.npmjs.com/) (normalerweise im NodeJS enthalten).
 
 # Setup 
-Das Frontend muss zunächst als versioniertes Projekt über git geklont werden. Anschließend müssen die Frontend Dependencies installier werden:
+Das Frontend muss zunächst als versioniertes Projekt über git geklont werden. Anschließend müssen die Frontend Dependencies installiert werden:
 
 ```
 npm install
