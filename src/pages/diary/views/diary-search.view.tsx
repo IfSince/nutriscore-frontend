@@ -1,38 +1,14 @@
 import { DesktopPanel } from '../../../common/desktop-panel.tsx';
 import { DiarySearchInput } from '../components/search/diary-search-input.tsx';
 import { useState } from 'react';
-import { CenteredSpinner } from '../../../common/spinner/components/centered-spinner.tsx';
-import { ApiErrorMessage } from '../../../common/messages/api-error-message.tsx';
-import { BlurOverlay } from '../../../common/blur-overlay.tsx';
-import { useGetNutritionalRecordingSearchEntriesQuery } from '../../../features/nutritional-recordings-search/nutritional-recordings-search-api-slice.ts';
-import { NutritionalRecordingSearchList } from '../../../features/nutritional-recordings-search/components/nutritional-recording-search-list.tsx';
 import { Header } from '../../../common/header.tsx';
 import { PrimaryIconButton } from '../../../common/button/components/icon/primary-icon-button.tsx';
 import { useNavigate } from 'react-router-dom';
+import { NutritionalRecordingsSearch } from '../../../features/nutritional-recordings-search/components/nutritional-recordings-search.tsx';
 
 export const DiarySearchView = () => {
     const navigate = useNavigate()
     const [filterText, setFilterText] = useState('')
-
-    const {
-        data: searchEntries,
-        isLoading,
-        isSuccess,
-        isError,
-        error,
-    } = useGetNutritionalRecordingSearchEntriesQuery()
-
-    let content
-    if (isLoading) {
-        content = <CenteredSpinner className=""
-                                   backgroundClr="text-gray-100"
-                                   fill="fill-cyan-300"
-                                   size="lg"/>
-    } else if (isError) {
-        content = <ApiErrorMessage apiErrorResponse={ error }/>
-    } else if (isSuccess) {
-        content = <NutritionalRecordingSearchList searchEntries={ searchEntries } filterText={ filterText }/>
-    }
 
     return (
         <>
@@ -42,13 +18,12 @@ export const DiarySearchView = () => {
                                                     action={ () => navigate(-1) }/> }/>
             <DesktopPanel>
                 <div className="relative">
-                    <BlurOverlay visible={ isLoading }/>
                     <DiarySearchInput filterText={ filterText } onFilterTextChange={ setFilterText }/>
 
                     <div className="mb-4 border-t-2 border-gray-100 mt-3.5 sm:mt-4 sm:mb-5 lg:mt-5 lg:mb-6"></div>
 
                     <div className="flex flex-col gap-y-2 pb-6 sm:pb-10 xl:pb-14">
-                        { content }
+                        <NutritionalRecordingsSearch filterText={ filterText }/>
                     </div>
                 </div>
             </DesktopPanel>
