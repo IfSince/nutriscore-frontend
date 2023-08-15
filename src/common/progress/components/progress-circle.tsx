@@ -1,12 +1,12 @@
 import { ReactNode, useEffect, useState } from 'react';
 import { ProgressProps } from '../models/progress-props.ts';
 
-interface ProgressCircleProps extends ProgressProps {
+export interface ProgressCircleProps extends ProgressProps {
     size: number
     children?: ReactNode
 }
 
-export const ProgressCircle = ({
+const ProgressCircle = ({
     size,
     valueObject,
     width,
@@ -53,3 +53,5 @@ export const ProgressCircle = ({
         </div>
     )
 }
+
+export default ProgressCircle

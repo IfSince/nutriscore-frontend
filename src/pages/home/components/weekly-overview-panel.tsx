@@ -3,7 +3,7 @@ import { Panel } from '../../../common/panel.tsx';
 import { CenteredSpinner } from '../../../common/spinner/components/centered-spinner.tsx';
 import { WeightRecording } from '../../../features/weight-recording/models/weight-recording.ts';
 
-export const WeeklyOverviewPanel = ({ weightRecordings, isLoading }: { weightRecordings?: WeightRecording[], isLoading?: boolean }) => {
+const WeeklyOverviewPanel = ({ weightRecordings, isLoading }: { weightRecordings?: WeightRecording[], isLoading?: boolean }) => {
     const data = weightRecordings?.map(weightRecording => (
         { day: new Date(weightRecording.dateOfRecording).toLocaleDateString(), value: weightRecording.weight }
     ))
@@ -29,3 +29,5 @@ export const WeeklyOverviewPanel = ({ weightRecordings, isLoading }: { weightRec
         </div>
     )
 }
+
+export default WeeklyOverviewPanel

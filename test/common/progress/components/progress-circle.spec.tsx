@@ -1,6 +1,6 @@
-import { ProgressCircle } from '../../../../src/common/progress/components/progress-circle';
 import { describe, expect, it } from '@jest/globals';
 import { render } from '@testing-library/react';
+import ProgressCircle from '../../../../src/common/progress/components/progress-circle';
 
 
 describe('ProgressCircle', () => {

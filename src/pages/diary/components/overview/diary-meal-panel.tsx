@@ -1,11 +1,11 @@
 import { NutritionalRecordingsList } from './nutritional-recordings-list.tsx';
-import { ProgressCircle } from '../../../../common/progress/components/progress-circle.tsx';
 import { DesktopPanel } from '../../../../common/desktop-panel.tsx';
 import { ValueObject } from '../../../../common/value-object.ts';
 import { NutritionalRecording } from '../../../../features/nutritional-recordings/models/nutritional-recordings-by-date.ts';
 import { PrimaryIconButton } from '../../../../common/button/components/icon/primary-icon-button.tsx';
 import { useNavigate } from 'react-router-dom';
 import { DIARY_SEARCH_ROUTE } from '../../../../routes.ts';
+import ProgressCircle from '../../../../common/progress/components/progress-circle.tsx';
 
 export interface MealOverviewProps {
     name: string

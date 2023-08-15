@@ -11,13 +11,13 @@ jest.mock('../../../src/hooks')
 
 describe('LoginView', () => {
     it('routes to home if request is successful', () => {
-        const loginFn = () => {}
+        const loginMock = () => {}
         const returnVal = { data: { id: 1 } as User, isSuccess: true };
 
         (useAppDispatch as jest.Mock).mockReturnValue(() => {})
 
         // @ts-ignore
-        jest.spyOn(loginApiSlice, 'useLoginMutation').mockReturnValue([loginFn, returnVal])
+        jest.spyOn(loginApiSlice, 'useLoginMutation').mockReturnValue([loginMock, returnVal])
 
         const result = render(<LoginView/>)
 

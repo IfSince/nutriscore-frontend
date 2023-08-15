@@ -1,7 +1,7 @@
 import { Panel } from '../../panel.tsx';
-import { ProgressCircle } from '../../progress/components/progress-circle.tsx';
-import { CenteredSpinner } from '../../spinner/components/centered-spinner.tsx';
 import { ValueObject } from '../../value-object.ts';
+import ProgressCircle from '../../progress/components/progress-circle.tsx';
+import { CenteredSpinner } from '../../spinner/components/centered-spinner.tsx';
 
 export const CaloriePanel = ({ valueObject, isLoading }: { valueObject: ValueObject, isLoading: boolean }) =>
     <Panel className="grow" title="Calories" highlighted>

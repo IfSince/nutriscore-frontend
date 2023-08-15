@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
-import { ProgressCircle } from '../../../common/progress/components/progress-circle.tsx';
 import { DefaultIconButton } from '../../../common/button/components/icon/default-icon-button.tsx';
 import { ValueObject } from '../../../common/value-object.ts';
+import ProgressCircle from '../../../common/progress/components/progress-circle.tsx';
 
 interface MealPanelListItemProps {
     name: string

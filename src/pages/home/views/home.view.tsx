@@ -1,5 +1,4 @@
 import { CaloriePanel } from '../../../common/calorie-panel/components/calorie-panel.tsx';
-import { WeeklyOverviewPanel } from '../components/weekly-overview-panel.tsx';
 import { getFormattedDate } from '../../../utils/format-date.ts';
 import { MacroPanelGroup } from '../../../common/macro-panel/components/macro-panel-group.tsx';
 import { MealPanelList } from '../components/meal-panel-list.tsx';
@@ -13,6 +12,7 @@ import { UserIdContext } from '../../root.view.tsx';
 import { Header } from '../../../common/header.tsx';
 import { GlobalDatePicker } from '../../../common/date-picker/global-date-picker.tsx';
 import { QuickActions } from '../components/quick-actions.tsx';
+import WeeklyOverviewPanel from '../components/weekly-overview-panel.tsx';
 
 export const HomeView = () => {
     const date = new Date(useAppSelector(selectDate))
