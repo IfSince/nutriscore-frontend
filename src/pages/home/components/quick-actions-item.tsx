@@ -9,5 +9,5 @@ export const QuickActionsItem = ({ action, icon, description }: QuickActionsItem
             type="button"
             onClick={ action }>
         <span className="material-icons-round text-xl md:text-3xl">{ icon }</span>
-        <span className="absolute text-base font-medium -translate-y-1/2 left-0 top-1/2 -translate-x-full pr-4 md:pr-6">{ description }</span>
+        <span className="absolute text-base font-medium -translate-y-1/2 left-0 top-1/2 -translate-x-full pr-4 md:pr-6 whitespace-nowrap">{ description }</span>
     </button>

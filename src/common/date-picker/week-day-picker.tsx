@@ -18,7 +18,7 @@ const getWeekDates = (startDate: Date) => {
 export const WeekDayPicker = ({ date, className = '' }: { date: Date, className?: string }) =>
     <>
         <div className="h-0 sm:hidden">
-            <span className="block -translate-y-full font-medium">{ date.toLocaleString('default', { month: 'long' }) }</span>
+            <span className="block -translate-y-full font-medium w-fit">{ date.toLocaleString('default', { month: 'long' }) }</span>
         </div>
         <div className={ `w-full flex justify-between gap-1.5 ${ className }` }>
             {
