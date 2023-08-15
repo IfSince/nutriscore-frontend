@@ -9,14 +9,15 @@ import { Badge } from '../../../common/badge.tsx';
 import { MealItemIngredientsList } from './meal-item-ingredients-list.tsx';
 import { SubmitButton } from '../../../common/button/components/submit-button.tsx';
 import { FormProps } from '../../../common/form/models/form-props.ts';
-import { MacroValuePicker } from '../../macro-value-picker.tsx';
 import { NEW_ENTITY_ID } from '../../../common/constants.ts';
+import { MacroValue } from '../../macro-value.tsx';
 
 export const MealItemForm = ({ form, onSubmit, apiError, isLoading, children, editable }: FormProps<MealItem> & {
     children?: ReactNode,
     editable: boolean
-}) =>
-    (
+}) => {
+
+    return (
         <DesktopPanel>
             <div className="mt-16 mb-24 flex flex-col gap-x-12 md:mt-24 md:flex-row lg:mt-0 lg:mb-0">
                 <div
@@ -27,7 +28,7 @@ export const MealItemForm = ({ form, onSubmit, apiError, isLoading, children, ed
                 <div className="-mr-5 -ml-5 grow rounded-2xl bg-white px-5 py-10 lg:py-0">
                     <Formik initialValues={ form } onSubmit={ onSubmit }>
                         {
-                            ({ values }) => (
+                            ({ values: mealItem }) => (
                                 <Form>
                                     <div className="flex flex-row justify-between">
                                         <div className="max-w-2xl">
@@ -67,44 +68,45 @@ export const MealItemForm = ({ form, onSubmit, apiError, isLoading, children, ed
 
                                     <div
                                         className="my-8 grid max-w-lg 1.5xl:max-w-3xl grid-cols-2 1.5xl:grid-cols-4 gap-4 1.5xl:gap-6 md:max-w-2xl md:grid-cols-4 lg:max-w-lg lg:grid-cols-2">
-                                        <MacroValuePicker name="calories"
-                                                          description="Calories"
-                                                          unit="kcal"
-                                                          color="bg-cyan-200"
-                                                          disabled={ true }/>
+                                        <MacroValue name="calories"
+                                                    description="Calories"
+                                                    unit="kcal"
+                                                    color="bg-cyan-200"
+                                                    value={ mealItem.foodItems.reduce((prev, curr) => prev + curr.calories * (curr.selectedAmount ?? 0) / curr.amount, 0) }/>
+                                        <MacroValue name="protein"
+                                                    description="Protein"
+                                                    unit="grams"
+                                                    color="bg-red"
+                                                    value={ mealItem.foodItems.reduce((prev, curr) => prev + curr.protein * (curr.selectedAmount ?? 0) / curr.amount, 0) }/>
 
-                                        <MacroValuePicker name="protein"
-                                                          description="Protein"
-                                                          unit="grams"
-                                                          color="bg-red"
-                                                          disabled={ true }/>
+                                        <MacroValue name="carbohydrates"
+                                                    description="Carbs"
+                                                    unit="grams"
+                                                    color="bg-green"
+                                                    value={ mealItem.foodItems.reduce((prev, curr) => prev + curr.carbohydrates * (curr.selectedAmount ?? 0) / curr.amount, 0) }/>
 
-                                        <MacroValuePicker name="carbohydrates"
-                                                          description="Carbs"
-                                                          unit="grams"
-                                                          color="bg-green"
-                                                          disabled={ true }/>
-
-                                        <MacroValuePicker name="fats"
-                                                          description="Fats"
-                                                          unit="grams"
-                                                          color="bg-yellow"
-                                                          disabled={ true }/>
+                                        <MacroValue name="fats"
+                                                    description="Fats"
+                                                    unit="grams"
+                                                    color="bg-yellow"
+                                                    value={ mealItem.foodItems.reduce((prev, curr) => prev + curr.fats * (curr.selectedAmount ?? 0) / curr.amount, 0) }/>
                                     </div>
 
                                     <h4 className="mb-4 text-xl font-medium text-gray-600">Ingredients</h4>
                                     <div className="mb-8">
-                                        <MealItemIngredientsList foodItems={ values.foodItems } disabled={ isLoading || !editable }/>
+                                        <MealItemIngredientsList foodItems={ mealItem.foodItems } disabled={ isLoading || !editable }/>
                                     </div>
 
                                     <h4 className="mb-4 text-xl font-medium text-gray-600">Allergenics</h4>
-                                    <div className="max-w-xl">
+                                    <div>
                                         {
                                             <div className="mb-8 flex gap-2">
                                                 {
-                                                    getAllergenics(form.foodItems)?.map(allergenic => (
-                                                        <Badge key={ allergenic.id } description={ allergenic.description }/>
-                                                    ))
+                                                    mealItem.foodItems.length
+                                                        ? getAllergenics(mealItem.foodItems)?.map(allergenic => (
+                                                            <Badge key={ allergenic.id } description={ allergenic.description }/>
+                                                          ))
+                                                        : <span className="mt-4 w-full text-center text-sm font-medium">The allergenics are determined by the selected ingredients.</span>
                                                 }
                                             </div>
                                         }
@@ -127,4 +129,5 @@ export const MealItemForm = ({ form, onSubmit, apiError, isLoading, children, ed
                 </div>
             </div>
         </DesktopPanel>
-    )
+    );
+}

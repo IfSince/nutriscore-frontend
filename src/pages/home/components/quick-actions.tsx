@@ -9,8 +9,8 @@ export const QuickActions = () => {
 
     return (
         <>
-            { actionsOpened && <div className="fixed opacity-70 bg-white top-0 right-0 w-screen h-screen z-50"></div> }
-            <div className="fixed right-4 bottom-24 z-[100] lg:hidden">
+            { actionsOpened && <div className="fixed opacity-70 lg:opacity-80 bg-white top-0 right-0 w-screen h-screen z-50"></div> }
+            <div className="fixed right-4 bottom-24 z-[100] lg:right-10">
                 <div className={ `flex-col items-center mb-4 space-y-2 ${ actionsOpened ? 'flex' : 'hidden' }` }>
                     <QuickActionsItem description="Weight Recording" action={ () => navigate(PROFILE_ADD_WEIGHT_RECORDING_ROUTE) } icon="add"/>
                     <QuickActionsItem description="Nutritional Recording" action={ () => navigate(DIARY_SEARCH_ROUTE) } icon="add"/>
