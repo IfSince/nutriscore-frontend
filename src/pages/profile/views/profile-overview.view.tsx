@@ -1,6 +1,5 @@
 import { BmiPanel } from '../components/bmi-panel.tsx';
 import { RmrPanel } from '../components/rmr-panel.tsx';
-import { Panel } from '../../../common/panel.tsx';
 import { Header } from '../../../common/header.tsx';
 import { addSuccessMessage } from '../../../common/messages/global-message-slice.ts';
 import { LOGIN_ROUTE } from '../../../routes.ts';
@@ -9,6 +8,8 @@ import { useNavigate } from 'react-router-dom';
 import { DefaultButton } from '../../../common/button/components/default-button.tsx';
 import { useLogoutMutation } from '../../../features/login/login-api-slice.ts';
 import { useEffect } from 'react';
+import { AgePanel } from '../components/age-panel.tsx';
+import { CurrentWeightPanel } from '../components/current-weight-panel.tsx';
 
 export const ProfileOverviewView = () => {
     const dispatch = useAppDispatch()
@@ -40,11 +41,11 @@ export const ProfileOverviewView = () => {
                     <div className="flex-layout-row">
                         <BmiPanel isLoading={ false }/>
                         <RmrPanel isLoading={ false }/>
-                    </div>
-                    <div className="mt-5 flex-layout-row lg:mt-10">
-                        <Panel className="grow">
-                            <div>test</div>
-                        </Panel>
+
+                        <div className="flex gap-5 lg:gap-10 grow">
+                            <AgePanel isLoading={ false }/>
+                            <CurrentWeightPanel isLoading={ false }/>
+                        </div>
                     </div>
                 </div>
             </div>

@@ -98,8 +98,8 @@ export const ProfilePersonalDataView = () => {
                                     <InputField name="height" displayName="Height" type="text" apiError={ result.error }/>
                                 </div>
 
-                                <div className="mt-4 md:mt-8 md:mb-2 border-t-2 border-gray-100 col-span-1 lg:col-span-2"></div>
-                                <div className="col-span-1 lg:col-span-2 flex justify-end">
+                                <div className="mt-4 md:mt-8 md:mb-2 border-t-2 border-gray-100 col-span-2"></div>
+                                <div className="col-span-2 flex justify-end">
                                     <SubmitButton text="Save" isSubmitting={ result.isLoading }/>
                                 </div>
                             </div>
