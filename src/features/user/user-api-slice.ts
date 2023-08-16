@@ -1,4 +1,4 @@
-import { apiSlice, USER_TAG } from '../../api/api-slice.ts';
+import { apiSlice, USER_METADATA_TAG, USER_TAG } from '../../api/api-slice.ts';
 import { User } from './models/user.ts';
 
 export const userApiSlice = apiSlice.injectEndpoints({
@@ -16,7 +16,10 @@ export const userApiSlice = apiSlice.injectEndpoints({
                         body: user,
                     }
                 ),
-                invalidatesTags: (_result, _error, { id }) => [{ type: USER_TAG, id }],
+                invalidatesTags: (_result, _error, { id }) => [
+                    { type: USER_TAG, id },
+                    { type: USER_METADATA_TAG, id: id },
+                ],
             }),
             deleteUser: builder.mutation<void, number>({
                 query: id => (

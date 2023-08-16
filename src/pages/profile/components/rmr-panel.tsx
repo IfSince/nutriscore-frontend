@@ -2,7 +2,7 @@ import { Panel } from '../../../common/panel.tsx';
 import { CenteredSpinner } from '../../../common/spinner/components/centered-spinner.tsx';
 import { Line, LineChart, ResponsiveContainer } from 'recharts';
 
-export const RmrPanel = ({ isLoading }: { isLoading: boolean }) => {
+export const RmrPanel = ({ isLoading, rmr }: { isLoading: boolean, rmr: number }) => {
     const data = [
         { value: 25 },
         { value: 16 },
@@ -13,33 +13,35 @@ export const RmrPanel = ({ isLoading }: { isLoading: boolean }) => {
         { value: 25.46 },
     ]
     return (
-        <Panel className="w-full grow !p-0 md:w-auto lg:!p-0">
+        <Panel className="relative w-full grow !p-0 md:w-auto lg:!p-0">
             {
                 isLoading && <CenteredSpinner className="absolute top-1/2 left-0 -translate-y-1/2"
                                               backgroundClr="text-gray-50/80"
                                               fill="fill-gray-600/80"
-                                              size="lg"/>
+                                              size="sm"/>
             }
             <div className="flex flex-row lg:flex-col min-h-[100px]">
                 <div className="flex w-fit flex-row p-4 pr-0 lg:px-11 lg:py-12">
-                    <span className="text-4xl font-bold lg:text-6xl">2075</span>
+                    <span className="text-4xl font-bold lg:text-6xl">{ rmr }</span>
                     <span className="pl-2 font-medium pb-0.5 lg:pl-3 lg:text-xl">RMR</span>
                 </div>
-                <div className="relative h-[100px] w-full grow border-red">
-                    <div className="absolute h-[60px] w-full left-0 bottom-0 lg:top-0">
-                        <ResponsiveContainer>
-                            <LineChart data={ data }>
-                                <Line type="natural"
-                                      dataKey="value"
-                                      dot={{ fill: '#1F2937' }}
-                                      stroke="#1F2937"
-                                      strokeWidth={ 3 }/>
-                            </LineChart>
-                        </ResponsiveContainer>
+                {
+                    !isLoading &&
+                    <div className="relative h-[100px] w-full grow border-red">
+                        <div className="absolute h-[60px] w-full left-0 bottom-0 lg:top-0">
+                            <ResponsiveContainer>
+                                <LineChart data={ data }>
+                                    <Line type="natural"
+                                          dataKey="value"
+                                          dot={ { fill: '#1F2937' } }
+                                          stroke="#1F2937"
+                                          strokeWidth={ 3 }/>
+                                </LineChart>
+                            </ResponsiveContainer>
+                        </div>
                     </div>
-                </div>
+                }
             </div>
-
         </Panel>
     )
 }

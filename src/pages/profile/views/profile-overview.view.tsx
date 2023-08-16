@@ -7,15 +7,22 @@ import { useAppDispatch } from '../../../hooks.ts';
 import { useNavigate } from 'react-router-dom';
 import { DefaultButton } from '../../../common/button/components/default-button.tsx';
 import { useLogoutMutation } from '../../../features/login/login-api-slice.ts';
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import { AgePanel } from '../components/age-panel.tsx';
 import { CurrentWeightPanel } from '../components/current-weight-panel.tsx';
+import { UserIdContext } from '../../root.view.tsx';
+import { useGetProfileMetadataByUserIdQuery } from '../../../features/user-metadata/user-metadata-api-slice.ts';
+import { ApiErrorMessage } from '../../../common/messages/api-error-message.tsx';
+import { BlurOverlay } from '../../../common/blur-overlay.tsx';
 
 export const ProfileOverviewView = () => {
     const dispatch = useAppDispatch()
     const navigate = useNavigate()
+    const userId = useContext(UserIdContext)
 
     const [logout, logoutRequest] = useLogoutMutation()
+
+    const { data: profileMetadata, isLoading, isError, error } = useGetProfileMetadataByUserIdQuery(userId)
 
     useEffect(() => {
         if (logoutRequest.isSuccess) {
@@ -35,16 +42,16 @@ export const ProfileOverviewView = () => {
         <>
             <Header title="Your Profile" additional={ logoutPanel } wrap={ false }/>
             <div className="w-full">
-                {/*<ApiErrorMessage apiErrorResponse={ error }/>*/ }
+                <ApiErrorMessage apiErrorResponse={ error }/>
                 <div className="relative flex flex-wrap lg:flex-row">
-                    {/*<BlurOverlay visible={ isLoading || isError }/>*/ }
+                    <BlurOverlay visible={ isLoading || isError }/>
                     <div className="flex-layout-row">
-                        <BmiPanel isLoading={ false }/>
-                        <RmrPanel isLoading={ false }/>
+                        <BmiPanel isLoading={ isLoading } bmi={ profileMetadata?.bmi ?? 0 }/>
+                        <RmrPanel isLoading={ isLoading } rmr={ profileMetadata?.rmr ?? 0 }/>
 
                         <div className="flex gap-5 lg:gap-10 grow">
-                            <AgePanel isLoading={ false }/>
-                            <CurrentWeightPanel isLoading={ false }/>
+                            <AgePanel isLoading={ isLoading } age={ profileMetadata?.age ?? 0 }/>
+                            <CurrentWeightPanel isLoading={ isLoading } weight={ profileMetadata?.currentWeight ?? 0 }/>
                         </div>
                     </div>
                 </div>

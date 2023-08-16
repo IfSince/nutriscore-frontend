@@ -1,4 +1,4 @@
-import { apiSlice, NUTRITIONAL_DATA_TAG } from '../../api/api-slice.ts';
+import { apiSlice, NUTRITIONAL_DATA_TAG, USER_METADATA_TAG } from '../../api/api-slice.ts';
 import { NutritionalData } from './models/nutritional-data.ts';
 
 export const nutritionalDataApiSlice = apiSlice.injectEndpoints({
@@ -16,7 +16,10 @@ export const nutritionalDataApiSlice = apiSlice.injectEndpoints({
                         body: nutritionalData,
                     }
                 ),
-                invalidatesTags: (_result, _error, { userId }) => [{ type: NUTRITIONAL_DATA_TAG, id: userId }],
+                invalidatesTags: (_result, _error, { userId }) => [
+                    { type: NUTRITIONAL_DATA_TAG, id: userId },
+                    { type: USER_METADATA_TAG, id: userId },
+                ],
             }),
         }
     ),
